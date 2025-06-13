@@ -6,13 +6,14 @@
 .▀  ▀ ▀█▄▀▪▀▀ █▪ ▀█▄▀▪·▀▀▀ 
 
 <h1 align="center">⚡ ELITE SUPPORT ENGINEER ⚡</h1>
-
 <p align="center">
-  <img src="https://img.shields.io/badge/Cloud-Azure-blue?style=flat-square&logo=microsoftazure" />
-  <img src="https://img.shields.io/badge/Security-Defender%20EDR-green?style=flat-square&logo=microsoftdefender" />
-  <img src="https://img.shields.io/badge/Linux-Debian%2FKali-critical?style=flat-square&logo=linux" />
-  <img src="https://img.shields.io/badge/Support-Legendary-purple?style=flat-square&logo=helpdesk" />
+  <img src="https://img.shields.io/badge/Cloud-Azure-blue?style=flat-square&logo=microsoftazure" alt="Azure" />
+  <img src="https://img.shields.io/badge/Security-Microsoft%20Defender-green?style=flat-square&logo=microsoft" alt="Defender" />
+  <img src="https://img.shields.io/badge/Linux-Debian-orange?style=flat-square&logo=debian" alt="Debian" />
+  <img src="https://img.shields.io/badge/Linux-Kali-black?style=flat-square&logo=kali-linux" alt="Kali Linux" />
+  <img src="https://img.shields.io/badge/Support-24/7-blueviolet?style=flat-square&logo=chat" alt="Support" />
 </p>
+
 
 ---
 
