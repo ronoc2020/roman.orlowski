@@ -1240,33 +1240,7 @@
         contactForm.reset();
       });
       
-      // Secure contact info
-    
-      const linkedIn = "https://linkedin.com";
-      const github = "https://github.com/ronoc2020";
-      
-      document.getElementById('secure-contact').innerHTML = `
-        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-          <i class="fas fa-envelope" style="color: var(--primary);"></i>
-          <a href="mailto:${email}" style="color: var(--light); text-decoration: none;">${email}</a>
-        </div>
-        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-          <i class="fas fa-phone" style="color: var(--primary);"></i>
-          <span>${phone}</span>
-        </div>
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="${linkedIn}" class="cyber-button" style="background: #0077b5;">
-            <i class="fab fa-linkedin"></i> LinkedIn
-          </a>
-          <a href="${github}" class="cyber-button" style="background: #333;">
-            <i class="fab fa-github"></i> GitHub
-          </a>
-          <a href="https://github.com/ronoc2020?tab=repositories" class="cyber-button" style="background: linear-gradient(90deg, var(--accent), #ff6bff);">
-            <i class="fas fa-archive"></i> All Repos
-          </a>
-        </div>
-      `;
-      
+            
       // Typewriter effect for terminal
       const terminalLines = document.querySelectorAll('.terminal-line');
       terminalLines.forEach((line, index) => {
