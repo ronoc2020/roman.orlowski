@@ -456,28 +456,37 @@
 </section>
 
 
-      <section id="contact" class="section">
-        <h2><i class="fas fa-envelope"></i> Secure Connection</h2>
-        <div style="margin-top: 1.5rem;">
-          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-            <i class="fas fa-envelope" style="color: var(--primary);"></i>
-            <a href="mailto:ro-noc2020@protonmail.com" style="color: var(--light); text-decoration: none;">ro-noc2020@protonmail.com</a>
-          </div>
-          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-            <i class="fas fa-phone" style="color: var(--primary);"></i>
-            <span>+48 695 295 641</span>
-          </div>
-          
-          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-            <a href="#" class="cyber-button" style="background: #0077b5;">
-              <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-            <a href="#" class="cyber-button" style="background: #333;">
-              <i class="fab fa-github"></i> GitHub
-            </a>
-          </div>
-        </div>
-      </section>
+     <section id="contact" class="section">
+  <h2><i class="fas fa-envelope"></i> Secure Connection</h2>
+  <div id="secure-contact" style="margin-top: 1.5rem;"></div>
+</section>
+
+<script>
+  const email = atob("cm8tbm9jMjAyMEBwcm90b25tYWlsLmNvbQ==");
+  const phone = atob("KzQ4IDY5NSAyOTUgNjQx");
+  const linkedIn = "#";
+  const github = "#";
+
+  document.getElementById('secure-contact').innerHTML = `
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+      <i class="fas fa-envelope" style="color: var(--primary);"></i>
+      <a href="mailto:${email}" style="color: var(--light); text-decoration: none;">${email}</a>
+    </div>
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+      <i class="fas fa-phone" style="color: var(--primary);"></i>
+      <span>${phone}</span>
+    </div>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <a href="${linkedIn}" class="cyber-button" style="background: #0077b5;">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+      <a href="${github}" class="cyber-button" style="background: #333;">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+    </div>
+  `;
+</script>
+
     </main>
   </div>
 
