@@ -779,7 +779,6 @@
       <div class="nav-item" data-section="skills">Skills</div>
       <div class="nav-item" data-section="experience">Experience</div>
       <div class="nav-item" data-section="repositories">Repositories</div>
-      <div class="nav-item" data-section="contact">Contact</div>
     </nav>
 
     <main>
@@ -806,9 +805,6 @@
         <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
           <a href="https://drive.google.com/file/d/1GnioItEUBuB99Ee4jprSGxGQpwptl_2s/view?usp=sharing" class="cyber-button" download>
             <i class="fas fa-file-download"></i> Download Resume
-          </a>
-          <a href="#contact" class="cyber-button" style="background: linear-gradient(90deg, var(--accent), #ff6bff);">
-            <i class="fas fa-paper-plane"></i> Contact Me
           </a>
         </div>
       </section>
@@ -948,32 +944,6 @@
           </div>
         </div>
       </section>
-
-      <section id="contact" class="section">
-        <h2><i class="fas fa-envelope"></i> Secure Connection</h2>
-        <div id="secure-contact" style="margin-top: 1.5rem;"></div>
-        
-        <div style="margin-top: 2rem;">
-          <h3 style="color: var(--secondary); margin-bottom: 1rem;">Send Encrypted Message</h3>
-          <form id="contact-form" style="display: grid; gap: 1rem;">
-            <div style="display: grid; gap: 0.5rem;">
-              <label for="name" style="color: var(--light);">Name</label>
-              <input type="text" id="name" required style="background: rgba(30, 30, 40, 0.7); border: 1px solid rgba(0, 247, 255, 0.2); padding: 0.8rem; border-radius: 8px; color: var(--light); font-family: 'Cyber', sans-serif;">
-            </div>
-            <div style="display: grid; gap: 0.5rem;">
-              <label for="email" style="color: var(--light);">Email</label>
-              <input type="email" id="email" required style="background: rgba(30, 30, 40, 0.7); border: 1px solid rgba(0, 247, 255, 0.2); padding: 0.8rem; border-radius: 8px; color: var(--light); font-family: 'Cyber', sans-serif;">
-            </div>
-            <div style="display: grid; gap: 0.5rem;">
-              <label for="message" style="color: var(--light);">Message</label>
-              <textarea id="message" rows="5" required style="background: rgba(30, 30, 40, 0.7); border: 1px solid rgba(0, 247, 255, 0.2); padding: 0.8rem; border-radius: 8px; color: var(--light); font-family: 'Cyber', sans-serif;"></textarea>
-            </div>
-            <button type="submit" class="cyber-button" style="justify-self: start; margin-top: 0.5rem;">
-              <i class="fas fa-lock"></i> Send Securely
-            </button>
-          </form>
-        </div>
-      </section>
     </main>
   </div>
 
@@ -986,7 +956,6 @@
           <li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li>
           <li><a href="#experience"><i class="fas fa-chevron-right"></i> Experience</a></li>
           <li><a href="#repositories"><i class="fas fa-chevron-right"></i> Repositories</a></li>
-          <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
         </ul>
       </div>
       
@@ -1223,24 +1192,6 @@
         showRepo(nextRepo);
       }, 5000);
       
-      // Contact form
-      const contactForm = document.getElementById('contact-form');
-      contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
-        
-        // Here you would typically send the data to a server
-        console.log('Form submitted:', { name, email, message });
-        
-        // Show success message
-        alert('Message sent securely! I will get back to you soon.');
-        contactForm.reset();
-      });
-      
-            
       // Typewriter effect for terminal
       const terminalLines = document.querySelectorAll('.terminal-line');
       terminalLines.forEach((line, index) => {
