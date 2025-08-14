@@ -29,6 +29,11 @@
       --light: #f0f0ff;
       --glow: 0 0 15px currentColor;
       --section-delay: 0.3s;
+      --critical: #ff5555;
+      --high: #ff9966;
+      --medium: #ffcc33;
+      --low: #55ff55;
+      --info: #5555ff;
     }
 
     @font-face {
@@ -699,7 +704,8 @@
       background: radial-gradient(circle, var(--primary), transparent);
       animation-delay: 3s;
     }
-     .terminal-input {
+    
+    .terminal-input {
       display: flex;
       align-items: center;
       margin-top: 1rem;
@@ -728,15 +734,439 @@
     }
     
     .error {
-      color: #ff5555;
+      color: var(--critical);
     }
     
     .success {
-      color: #55ff55;
+      color: var(--low);
     }
     
     .info {
-      color: #5555ff;
+      color: var(--info);
+    }
+    
+    .warning {
+      color: var(--medium);
+    }
+    
+    /* Security Framework Visualizations */
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .framework-card {
+      background: rgba(30, 30, 40, 0.7);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .framework-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 247, 255, 0.1);
+      border-color: var(--primary);
+    }
+    
+    .framework-card h3 {
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .framework-card ul {
+      list-style: none;
+      margin-top: 1rem;
+    }
+    
+    .framework-card li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    
+    .framework-card li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+    
+    /* Security Architecture Diagram */
+    .architecture {
+      margin-top: 2rem;
+      background: rgba(20, 20, 30, 0.7);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      position: relative;
+    }
+    
+    .architecture::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(135deg, transparent 0%, rgba(0, 247, 255, 0.03) 50%, transparent 100%);
+      pointer-events: none;
+    }
+    
+    .architecture-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .architecture-item {
+      background: rgba(40, 40, 50, 0.5);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .architecture-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 247, 255, 0.1);
+      border-color: var(--secondary);
+    }
+    
+    .architecture-item i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    
+    .architecture-item h4 {
+      color: var(--light);
+      margin-bottom: 0.5rem;
+    }
+    
+    .architecture-item p {
+      color: rgba(240, 240, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    
+    .architecture-connector {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      z-index: -1;
+    }
+    
+    /* Threat Matrix */
+    .threat-matrix {
+      margin-top: 2rem;
+      background: rgba(20, 20, 30, 0.7);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(0, 247, 255, 0.1);
+    }
+    
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .matrix-header {
+      text-align: center;
+      font-weight: bold;
+      padding: 0.5rem;
+      color: var(--light);
+      background: rgba(0, 247, 255, 0.1);
+      border-radius: 4px;
+    }
+    
+    .matrix-cell {
+      padding: 0.5rem;
+      text-align: center;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    
+    .matrix-cell:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px currentColor;
+    }
+    
+    .critical {
+      background-color: rgba(255, 85, 85, 0.2);
+      color: var(--critical);
+      border: 1px solid var(--critical);
+    }
+    
+    .high {
+      background-color: rgba(255, 153, 102, 0.2);
+      color: var(--high);
+      border: 1px solid var(--high);
+    }
+    
+    .medium {
+      background-color: rgba(255, 204, 51, 0.2);
+      color: var(--medium);
+      border: 1px solid var(--medium);
+    }
+    
+    .low {
+      background-color: rgba(85, 255, 85, 0.2);
+      color: var(--low);
+      border: 1px solid var(--low);
+    }
+    
+    /* Zero Day Response Flow */
+    .response-flow {
+      margin-top: 2rem;
+      position: relative;
+    }
+    
+    .flow-step {
+      background: rgba(30, 30, 40, 0.7);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--primary);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .flow-step:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(0, 247, 255, 0.1);
+    }
+    
+    .flow-step h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .flow-step p {
+      color: rgba(240, 240, 255, 0.8);
+    }
+    
+    .flow-step::after {
+      content: '↓';
+      position: absolute;
+      bottom: -1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--secondary);
+      font-size: 1.5rem;
+    }
+    
+    .flow-step:last-child::after {
+      display: none;
+    }
+    
+    /* Checklist */
+    .checklist {
+      margin-top: 2rem;
+    }
+    
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      background: rgba(30, 30, 40, 0.5);
+      padding: 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .checklist-item:hover {
+      background: rgba(40, 40, 50, 0.7);
+      transform: translateY(-3px);
+    }
+    
+    .checklist-checkbox {
+      margin-right: 1rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    
+    .checklist-content {
+      flex-grow: 1;
+    }
+    
+    .checklist-title {
+      color: var(--light);
+      margin-bottom: 0.3rem;
+    }
+    
+    .checklist-desc {
+      color: rgba(240, 240, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: help;
+    }
+    
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: rgba(10, 10, 20, 0.9);
+      color: var(--light);
+      text-align: center;
+      border-radius: 6px;
+      padding: 0.5rem;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      border: 1px solid var(--primary);
+      font-size: 0.9rem;
+    }
+    
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+    }
+    
+    .tab {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      color: rgba(240, 240, 255, 0.7);
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .tab.active {
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    /* Accordion */
+    .accordion {
+      margin-top: 1rem;
+    }
+    
+    .accordion-item {
+      margin-bottom: 0.5rem;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    
+    .accordion-header {
+      background: rgba(40, 40, 50, 0.7);
+      padding: 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .accordion-header:hover {
+      background: rgba(50, 50, 60, 0.7);
+    }
+    
+    .accordion-content {
+      background: rgba(30, 30, 40, 0.5);
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    .accordion-content-inner {
+      padding: 1rem;
+    }
+    
+    .accordion-item.active .accordion-content {
+      max-height: 500px;
+    }
+    
+    /* Status Indicators */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.9rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 50px;
+    }
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    .status-critical {
+      color: var(--critical);
+      background: rgba(255, 85, 85, 0.1);
+    }
+    
+    .status-critical .status-dot {
+      background: var(--critical);
+    }
+    
+    .status-high {
+      color: var(--high);
+      background: rgba(255, 153, 102, 0.1);
+    }
+    
+    .status-high .status-dot {
+      background: var(--high);
+    }
+    
+    .status-medium {
+      color: var(--medium);
+      background: rgba(255, 204, 51, 0.1);
+    }
+    
+    .status-medium .status-dot {
+      background: var(--medium);
+    }
+    
+    .status-low {
+      color: var(--low);
+      background: rgba(85, 255, 85, 0.1);
+    }
+    
+    .status-low .status-dot {
+      background: var(--low);
     }
   </style>
 </head>
@@ -757,6 +1187,7 @@
     <nav class="nav">
       <div class="nav-item active" data-section="about">About</div>
       <div class="nav-item" data-section="skills">Skills</div>
+      <div class="nav-item" data-section="solutions">Solutions</div>
       <div class="nav-item" data-section="experience">Experience</div>
       <div class="nav-item" data-section="contact">Contact</div>
     </nav>
@@ -783,7 +1214,7 @@
         </div>
         
         <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://drive.google.com/file/d/1Shhw96IB_LfPHUgh2e_P4f9vfIkOmmpB/view?usp=sharing" class="cyber-button" download>
+          <a href="https://drive.google.com/file/d/1GnioItEUBuB99Ee4jprSGxGQpwptl_2s/view?usp=sharing" class="cyber-button" download>
             <i class="fas fa-file-download"></i> Download Resume
           </a>
           <a href="#contact" class="cyber-button">
@@ -810,6 +1241,186 @@
           <div class="skill-card">
             <h3><i class="fas fa-lock"></i> Compliance</h3>
             <p>ISO 27001, NIST frameworks, GDPR, and industry-specific regulations</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="solutions" class="section">
+        <h2><i class="fas fa-shield-virus"></i> Enterprise Security Solutions</h2>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">1. Hybrid Infrastructure Protection</h3>
+        
+        <div class="architecture">
+          <div class="architecture-grid">
+            <div class="architecture-item">
+              <i class="fas fa-network-wired"></i>
+              <h4>Network</h4>
+              <p>Zero Trust Segmentation</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Azure Network Security Groups, Cisco ISE, Microsegmentation</span>
+              </div>
+            </div>
+            <div class="architecture-item">
+              <i class="fas fa-laptop"></i>
+              <h4>Endpoints</h4>
+              <p>Unified EDR/XDR</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Microsoft Defender, CrowdStrike, SentinelOne</span>
+              </div>
+            </div>
+            <div class="architecture-item">
+              <i class="fas fa-cloud"></i>
+              <h4>Cloud</h4>
+              <p>CASB + CSPM</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Microsoft Defender for Cloud, Prisma Cloud, AWS Security Hub</span>
+              </div>
+            </div>
+            <div class="architecture-item">
+              <i class="fas fa-user-shield"></i>
+              <h4>Identity</h4>
+              <p>Conditional Access</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Azure AD, Okta, MFA, PIM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">2. Zero-Day Response Protocol</h3>
+        
+        <div class="response-flow">
+          <div class="flow-step">
+            <h4><i class="fas fa-search"></i> Detection</h4>
+            <p>SIEM alerts, EDR telemetry, and threat intelligence feeds</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-flag"></i> Triage</h4>
+            <p>Initial assessment using MITRE ATT&CK framework</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-fire-extinguisher"></i> Containment</h4>
+            <p>Network segmentation, endpoint isolation, credential rotation</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-bug"></i> Eradication</h4>
+            <p>Patch deployment, malware removal, system hardening</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-undo"></i> Recovery</h4>
+            <p>System restoration from clean backups, validation testing</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-book"></i> Lessons Learned</h4>
+            <p>Post-incident review and process improvement</p>
+          </div>
+        </div>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">3. Security Frameworks</h3>
+        
+        <div class="framework-grid">
+          <div class="framework-card">
+            <h3><i class="fas fa-chess-board"></i> MITRE ATT&CK</h3>
+            <p>Adversary tactics and techniques framework for threat modeling</p>
+            <ul>
+              <li>Threat intelligence integration</li>
+              <li>Detection rule development</li>
+              <li>Red team exercises</li>
+            </ul>
+          </div>
+          <div class="framework-card">
+            <h3><i class="fas fa-shield-alt"></i> NIST CSF</h3>
+            <p>Identify, Protect, Detect, Respond, Recover framework</p>
+            <ul>
+              <li>Risk assessment methodology</li>
+              <li>Security controls mapping</li>
+              <li>Maturity benchmarking</li>
+            </ul>
+          </div>
+          <div class="framework-card">
+            <h3><i class="fas fa-lock"></i> CIS Controls</h3>
+            <p>Prioritized set of actions for cyber defense</p>
+            <ul>
+              <li>Implementation Groups</li>
+              <li>Configuration benchmarks</li>
+              <li>Hardening guidelines</li>
+            </ul>
+          </div>
+        </div>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">4. Threat Risk Matrix</h3>
+        
+        <div class="threat-matrix">
+          <div class="matrix-grid">
+            <div class="matrix-header">Threat</div>
+            <div class="matrix-header">Likelihood</div>
+            <div class="matrix-header">Impact</div>
+            <div class="matrix-header">Risk Level</div>
+            <div class="matrix-header">Mitigation</div>
+            
+            <div class="matrix-cell">Phishing</div>
+            <div class="matrix-cell">High</div>
+            <div class="matrix-cell">Medium</div>
+            <div class="matrix-cell high">High</div>
+            <div class="matrix-cell">User training, Email filtering</div>
+            
+            <div class="matrix-cell">Ransomware</div>
+            <div class="matrix-cell">Medium</div>
+            <div class="matrix-cell">Critical</div>
+            <div class="matrix-cell critical">Critical</div>
+            <div class="matrix-cell">Backups, EDR, Patch management</div>
+            
+            <div class="matrix-cell">Insider Threat</div>
+            <div class="matrix-cell">Low</div>
+            <div class="matrix-cell">High</div>
+            <div class="matrix-cell medium">Medium</div>
+            <div class="matrix-cell">DLP, User monitoring, Least privilege</div>
+            
+            <div class="matrix-cell">DDoS</div>
+            <div class="matrix-cell">Low</div>
+            <div class="matrix-cell">Medium</div>
+            <div class="matrix-cell low">Low</div>
+            <div class="matrix-cell">Cloudflare, Rate limiting</div>
+          </div>
+        </div>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">5. For 100 Users & 2000 Devices</h3>
+        
+        <div class="checklist">
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Automate patch management</div>
+              <div class="checklist-desc">WSUS + Intune for Windows, Ansible for Linux</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Segment networks</div>
+              <div class="checklist-desc">VLANs for departments/IoT, microsegmentation for critical assets</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Monitor with 24/7 SOC</div>
+              <div class="checklist-desc">Microsoft Sentinel + MDE with playbooks for common scenarios</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Train users</div>
+              <div class="checklist-desc">Quarterly simulated phishing + interactive security training</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Backup strategy</div>
+              <div class="checklist-desc">3-2-1 rule with immutable backups (Veeam + Azure Blob)</div>
+            </div>
           </div>
         </div>
       </section>
@@ -859,29 +1470,30 @@
           </div>
         </div>
       </section>
-<section id="terminal" class="section">
-    <h2><i class="fas fa-terminal"></i> Interactive Terminal</h2>
-    <p>Try some Kali/Parrot OS commands (simulated):</p>
-    
-    <div class="terminal">
-      <div class="terminal-header">
-        <div class="terminal-btn red"></div>
-        <div class="terminal-btn yellow"></div>
-        <div class="terminal-btn green"></div>
-      </div>
-      <div class="terminal-body" id="terminal-output">
-        <div class="terminal-line">Kali Linux Terminal Simulator<span class="terminal-cursor"></span></div>
-        <div class="terminal-line">Type 'help' for available commands<span class="terminal-cursor"></span></div>
-        <div class="terminal-line">Try: nmap, msfconsole, searchsploit, whoami<span class="terminal-cursor"></span></div>
-      </div>
-      <div class="terminal-input">
-        <span class="terminal-prompt">$</span>
-        <input type="text" id="terminal-command" autocomplete="off" placeholder="Type command...">
-      </div>
-    </div>
-    
-    <div class="command-output" id="command-result"></div>
-  </section>
+
+      <section id="terminal" class="section">
+        <h2><i class="fas fa-terminal"></i> Interactive Terminal</h2>
+        <p>Try some Kali/Parrot OS commands (simulated):</p>
+        
+        <div class="terminal">
+          <div class="terminal-header">
+            <div class="terminal-btn red"></div>
+            <div class="terminal-btn yellow"></div>
+            <div class="terminal-btn green"></div>
+          </div>
+          <div class="terminal-body" id="terminal-output">
+            <div class="terminal-line">Kali Linux Terminal Simulator<span class="terminal-cursor"></span></div>
+            <div class="terminal-line">Type 'help' for available commands<span class="terminal-cursor"></span></div>
+            <div class="terminal-line">Try: nmap, msfconsole, searchsploit, whoami<span class="terminal-cursor"></span></div>
+          </div>
+          <div class="terminal-input">
+            <span class="terminal-prompt">$</span>
+            <input type="text" id="terminal-command" autocomplete="off" placeholder="Type command...">
+          </div>
+        </div>
+        
+        <div class="command-output" id="command-result"></div>
+      </section>
       
       <section id="contact" class="section">
         <h2><i class="fas fa-envelope"></i> Contact</h2>
@@ -903,6 +1515,7 @@
         <ul class="footer-links">
           <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
           <li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li>
+          <li><a href="#solutions"><i class="fas fa-chevron-right"></i> Solutions</a></li>
           <li><a href="#experience"><i class="fas fa-chevron-right"></i> Experience</a></li>
           <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
         </ul>
@@ -1089,6 +1702,7 @@
       terminalLines.forEach((line, index) => {
         line.style.animationDelay = `${index * 0.5 + 0.5}s`;
       });
+      
       // Terminal functionality
       const terminalOutput = document.getElementById('terminal-output');
       const terminalCommand = document.getElementById('terminal-command');
@@ -1179,12 +1793,25 @@
           desc: "Clear terminal",
           execute: () => {
             commandResult.innerHTML = '';
-            return "Terminal cleared";
+            terminalOutput.innerHTML = `
+              <div class="terminal-line">Terminal cleared</div>
+              <div class="terminal-line">Type 'help' for available commands</div>
+            `;
+            return "";
           }
         },
         uname: {
           desc: "Show system information",
           execute: () => "Linux kali 5.18.0-kali5-amd64 #1 SMP Debian 5.18.16-1kali1 (2022-08-31) x86_64 GNU/Linux"
+        },
+        secure: {
+          desc: "Show security recommendations",
+          execute: () => "Security Recommendations for Mid-Size Company:\n\n" +
+                         "1. Implement Zero Trust Architecture\n" +
+                         "2. Deploy EDR/XDR solution\n" +
+                         "3. Conduct regular penetration testing\n" +
+                         "4. Enable MFA for all users\n" +
+                         "5. Establish SOC monitoring"
         }
       };
       
@@ -1211,14 +1838,25 @@
           }
           
           // Display result
-          const resultElement = document.createElement('div');
-          resultElement.className = 'terminal-line';
-          resultElement.textContent = result;
-          terminalOutput.appendChild(resultElement);
+          if (result) {
+            const resultElement = document.createElement('div');
+            resultElement.className = 'terminal-line';
+            resultElement.textContent = result;
+            terminalOutput.appendChild(resultElement);
+          }
           
           // Scroll to bottom
           terminalOutput.scrollTop = terminalOutput.scrollHeight;
         }
+      });
+      
+      // Accordion functionality
+      const accordionItems = document.querySelectorAll('.accordion-item');
+      accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        header.addEventListener('click', () => {
+          item.classList.toggle('active');
+        });
       });
     });
   </script>
