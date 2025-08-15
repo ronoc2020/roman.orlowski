@@ -1,7 +1,35 @@
 {
   "particles": {
-    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-    "color": { "value": ["#00f7ff", "#00ffaa", "#ff00f7"] },
-    "shape": { "type": ["circle", "triangle", "star"] },
-    "opacity": { "value": 0.4, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1 } },
-    "size": { "value": 4, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 0.
+    "number": {
+      "value": 80,
+      "density": {
+        "enable": true,
+        "value_area": 800
+      }
+    },
+    "color": {
+      "value": ["#00f7ff", "#00ffaa", "#ff00f7"]
+    },
+    "shape": {
+      "type": ["circle", "triangle", "star"]
+    },
+    "opacity": {
+      "value": 0.4,
+      "random": true,
+      "anim": {
+        "enable": true,
+        "speed": 1,
+        "opacity_min": 0.1
+      }
+    },
+    "size": {
+      "value": 4,
+      "random": true,
+      "anim": {
+        "enable": true,
+        "speed": 2,
+        "size_min": 0.1
+      }
+    }
+  }
+}
