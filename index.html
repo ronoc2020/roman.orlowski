@@ -3,15 +3,14 @@
 <head>
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' https://d3js.org 'unsafe-inline';
-    style-src 'self' https://cdnjs.cloudflare.com 'unsafe-inline';
-    img-src 'self' data:;
-    font-src 'self';
-    connect-src 'self';
+    script-src 'self' https://d3js.org https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline';
+    style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com 'unsafe-inline';
+    img-src 'self' data: https:;
+    font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com;
+    connect-src 'self' https:;
     frame-ancestors 'none';
-    form-action 'self';
+    form-action 'none';
     base-uri 'self';
-    frame-src https://rocybersolutions;
   ">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -58,7 +57,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Cyber Gradient Overlay */
     .cyber-gradient {
       position: fixed;
       top: 0;
@@ -73,7 +71,6 @@
       transition: all 0.5s ease;
     }
 
-    /* Particle Background */
     #particles-js {
       position: fixed;
       width: 100%;
@@ -82,7 +79,6 @@
       background-color: var(--dark);
     }
 
-    /* Main Container */
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -90,7 +86,6 @@
       position: relative;
     }
 
-    /* Header with Decrypt Effect */
     .header {
       text-align: center;
       margin-bottom: 3rem;
@@ -127,7 +122,6 @@
       animation: fadeInUp 1s 0.5s forwards;
     }
 
-    /* Navigation */
     .nav {
       display: flex;
       justify-content: center;
@@ -156,6 +150,9 @@
     .nav-item:nth-child(5) { animation: fadeInUp 0.5s 1.5s forwards; }
     .nav-item:nth-child(6) { animation: fadeInUp 0.5s 1.7s forwards; }
     .nav-item:nth-child(7) { animation: fadeInUp 0.5s 1.9s forwards; }
+    .nav-item:nth-child(8) { animation: fadeInUp 0.5s 2.1s forwards; }
+    .nav-item:nth-child(9) { animation: fadeInUp 0.5s 2.3s forwards; }
+    .nav-item:nth-child(10) { animation: fadeInUp 0.5s 2.5s forwards; }
 
     .nav-item::before {
       content: '';
@@ -180,7 +177,6 @@
       width: 100%;
     }
 
-    /* Content Sections */
     .section {
       background: rgba(20, 20, 30, 0.7);
       backdrop-filter: blur(10px);
@@ -243,7 +239,6 @@
       background: linear-gradient(90deg, var(--primary), transparent);
     }
 
-    /* Skills Grid */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -291,7 +286,6 @@
       gap: 0.5rem;
     }
 
-    /* Experience Timeline */
     .timeline {
       position: relative;
       padding-left: 2rem;
@@ -352,7 +346,6 @@
       color: rgba(240, 240, 255, 0.8);
     }
 
-    /* Interactive Elements */
     .cyber-button {
       display: inline-flex;
       align-items: center;
@@ -396,7 +389,63 @@
       box-shadow: 0 10px 20px rgba(0, 247, 255, 0.3);
     }
 
-    /* Professional Footer */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .dashboard-item {
+      background: rgba(30, 30, 40, 0.5);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 247, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dashboard-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 247, 255, 0.05) 0%,
+        transparent 100%
+      );
+      z-index: -1;
+    }
+
+    .dashboard-item:hover {
+      transform: translateY(-5px);
+      background: rgba(40, 40, 50, 0.7);
+      border-color: var(--primary);
+      box-shadow: var(--glow);
+    }
+
+    .dashboard-item a {
+      color: var(--light);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .dashboard-item i {
+      font-size: 2rem;
+      color: var(--primary);
+    }
+
     .footer {
       background: rgba(10, 10, 20, 0.9);
       padding: 3rem 2rem;
@@ -504,7 +553,6 @@
       font-size: 0.9rem;
     }
 
-    /* Animations */
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
@@ -552,7 +600,6 @@
       }
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .header h1 {
         font-size: 2.5rem;
@@ -582,7 +629,6 @@
       }
     }
 
-    /* Terminal Effect */
     .terminal {
       background: rgba(10, 10, 20, 0.8);
       border-radius: 8px;
@@ -661,7 +707,6 @@
       }
     }
 
-    /* Floating Elements */
     .floating-element {
       position: absolute;
       z-index: -1;
@@ -748,8 +793,7 @@
     .warning {
       color: var(--medium);
     }
-    
-    /* Security Framework Visualizations */
+
     .framework-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -799,7 +843,6 @@
       color: var(--primary);
     }
     
-    /* Security Architecture Diagram */
     .architecture {
       margin-top: 2rem;
       background: rgba(20, 20, 30, 0.7);
@@ -868,7 +911,6 @@
       z-index: -1;
     }
     
-    /* Threat Matrix */
     .threat-matrix {
       margin-top: 2rem;
       background: rgba(20, 20, 30, 0.7);
@@ -930,7 +972,6 @@
       border: 1px solid var(--low);
     }
     
-    /* Zero Day Response Flow */
     .response-flow {
       margin-top: 2rem;
       position: relative;
@@ -977,7 +1018,6 @@
       display: none;
     }
     
-    /* Checklist */
     .checklist {
       margin-top: 2rem;
     }
@@ -1017,7 +1057,6 @@
       font-size: 0.9rem;
     }
     
-    /* Tooltip */
     .tooltip {
       position: relative;
       display: inline-block;
@@ -1048,7 +1087,6 @@
       opacity: 1;
     }
     
-    /* Tabs */
     .tabs {
       display: flex;
       margin-bottom: 1rem;
@@ -1076,7 +1114,6 @@
       display: block;
     }
     
-    /* Accordion */
     .accordion {
       margin-top: 1rem;
     }
@@ -1117,7 +1154,6 @@
       max-height: 500px;
     }
     
-    /* Status Indicators */
     .status {
       display: inline-flex;
       align-items: center;
@@ -1169,7 +1205,6 @@
       background: var(--low);
     }
     
-    /* Certifications Grid */
     .certifications-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -1206,7 +1241,6 @@
       color: rgba(240, 240, 255, 0.8);
     }
 
-    /* Resources List */
     .resources-list {
       list-style: none;
       margin-top: 1.5rem;
@@ -1235,7 +1269,6 @@
       color: var(--secondary);
     }
 
-    /* Quiz Styles */
     .quiz-container {
       margin-top: 2rem;
     }
@@ -1283,8 +1316,6 @@
       color: var(--critical);
     }
 
-    /* New Advanced Features */
-    /* Threat Simulation Canvas */
     .simulation-container {
       margin-top: 2rem;
       position: relative;
@@ -1298,7 +1329,6 @@
       background: var(--dark);
     }
 
-    /* Encryption Animation */
     .encryption-demo {
       margin-top: 2rem;
       text-align: center;
@@ -1337,7 +1367,6 @@
       }
     }
 
-    /* Vulnerability Scanner Simulation */
     .scanner-sim {
       margin-top: 2rem;
     }
@@ -1364,7 +1393,6 @@
       border-radius: 8px;
     }
 
-    /* D3 Threat Visualization */
     .threat-vis {
       margin-top: 2rem;
     }
@@ -1374,7 +1402,6 @@
       height: 400px;
     }
 
-    /* Modal for ROCyber Solutions */
     .modal {
       display: none;
       position: fixed;
@@ -1461,16 +1488,25 @@
           </div>
         </div>
         
-        <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://drive.google.com/file/d/1GnioItEUBuB99Ee4jprSGxGQpwptl_2s/view?usp=sharing" class="cyber-button" download>
-            <i class="fas fa-file-download"></i> Download Resume
-          </a>
-          <a href="#contact" class="cyber-button">
-            <i class="fas fa-envelope"></i> Contact Me
-          </a>
-          <button onclick="openModal()" class="cyber-button">
-            <i class="fas fa-external-link-alt"></i> Visit ROCyber Solutions
-          </button>
+        <div class="dashboard-grid">
+          <div class="dashboard-item">
+            <a href="https://drive.google.com/file/d/1GnioItEUBuB99Ee4jprSGxGQpwptl_2s/view?usp=sharing" target="_blank">
+              <i class="fas fa-file-download"></i>
+              Download Resume
+            </a>
+          </div>
+          <div class="dashboard-item">
+            <a href="#contact">
+              <i class="fas fa-envelope"></i>
+              Contact Me
+            </a>
+          </div>
+          <div class="dashboard-item">
+            <a href="#" onclick="openModal()">
+              <i class="fas fa-external-link-alt"></i>
+              Visit ROCyber Solutions
+            </a>
+          </div>
         </div>
       </section>
 
@@ -1923,22 +1959,4 @@
         
         <h3 style="margin-top: 2rem; color: var(--secondary);">Encryption Demo (Animated Caesar Cipher)</h3>
         <div class="encryption-demo">
-          <input type="text" id="encryption-input" class="encryption-input" placeholder="Enter text to encrypt...">
-          <button onclick="encryptText()" class="cyber-button"><i class="fas fa-lock"></i> Encrypt</button>
-          <div id="encryption-result" class="encryption-result"></div>
-        </div>
-        
-        <h3 style="margin-top: 2rem; color: var(--secondary);">Vulnerability Scanner Simulation</h3>
-        <div class="scanner-sim">
-          <button onclick="runScanner()" class="cyber-button"><i class="fas fa-search"></i> Run Scan</button>
-          <div class="scanner-progress">
-            <div id="scanner-bar" class="scanner-bar"></div>
-          </div>
-          <div id="scanner-results" class="scanner-results"></div>
-        </div>
-        
-        <h3 style="margin-top: 2rem; color: var(--secondary);">Data Flow Simulation (Canvas)</h3>
-        <div class="simulation-container">
-          <canvas id="simulation-canvas" class="simulation-canvas"></canvas>
-        </div>
-      </section>
+          <input
