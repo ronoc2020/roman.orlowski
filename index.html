@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'unsafe-inline';
+    script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://d3js.org 'unsafe-inline';
     style-src 'self' https://cdnjs.cloudflare.com 'unsafe-inline';
     img-src 'self' data:;
     font-src 'self' https://cdnjs.cloudflare.com;
@@ -11,6 +11,7 @@
     frame-ancestors 'none';
     form-action 'self';
     base-uri 'self';
+    frame-src https://rocybersolutions;
   ">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -406,6 +407,7 @@
       padding: 3rem 2rem;
       text-align: center;
       margin-top: 4rem;
+      margin-bottom: 0;
       position: relative;
       border-top: 1px solid rgba(0, 247, 255, 0.1);
     }
@@ -672,7 +674,7 @@
       animation: float 6s ease-in-out infinite;
     }
 
-    .floating-element:nth-child(1) {
+    .floating-element:nth-child(1) { 
       top: 20%;
       left: 10%;
       width: 100px;
@@ -1172,7 +1174,6 @@
       background: var(--low);
     }
     
-    /* New Styles for Expanded Sections */
     /* Certifications Grid */
     .certifications-grid {
       display: grid;
@@ -1286,6 +1287,135 @@
     .incorrect {
       color: var(--critical);
     }
+
+    /* New Advanced Features */
+    /* Threat Simulation Canvas */
+    .simulation-container {
+      margin-top: 2rem;
+      position: relative;
+    }
+
+    .simulation-canvas {
+      width: 100%;
+      height: 400px;
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      background: var(--dark);
+    }
+
+    /* Encryption Animation */
+    .encryption-demo {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .encryption-input {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: rgba(30, 30, 40, 0.5);
+      border: 1px solid var(--primary);
+      color: var(--light);
+      font-family: 'Courier New', monospace;
+    }
+
+    .encryption-result {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(30, 30, 40, 0.5);
+      border: 1px solid var(--secondary);
+      color: var(--secondary);
+      font-family: 'Courier New', monospace;
+      animation: encryptAnim 1s ease-in-out;
+    }
+
+    @keyframes encryptAnim {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+        filter: blur(5px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+      }
+    }
+
+    /* Vulnerability Scanner Simulation */
+    .scanner-sim {
+      margin-top: 2rem;
+    }
+
+    .scanner-progress {
+      height: 20px;
+      background: rgba(30, 30, 40, 0.5);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .scanner-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: width 3s ease;
+    }
+
+    .scanner-results {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(30, 30, 40, 0.5);
+      border-radius: 8px;
+    }
+
+    /* D3 Threat Visualization */
+    .threat-vis {
+      margin-top: 2rem;
+    }
+
+    .threat-vis svg {
+      width: 100%;
+      height: 400px;
+    }
+
+    /* Modal for ROCyber Solutions */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.9);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      height: 80vh;
+      border: none;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body class="smooth-scroll">
@@ -1307,9 +1437,10 @@
       <div class="nav-item" data-section="skills">Skills</div>
       <div class="nav-item" data-section="solutions">Solutions</div>
       <div class="nav-item" data-section="experience">Experience</div>
-      <div class="nav-item" data-section="certifications">Certifications</div>
+      <div class="nav-item" data-section="certifications">Trainings & Certifications</div>
       <div class="nav-item" data-section="resources">Resources</div>
       <div class="nav-item" data-section="quiz">Cyber Quiz</div>
+      <div class="nav-item" data-section="simulations">Simulations</div>
       <div class="nav-item" data-section="terminal">Terminal</div>
       <div class="nav-item" data-section="contact">Contact</div>
     </nav>
@@ -1342,6 +1473,9 @@
           <a href="#contact" class="cyber-button">
             <i class="fas fa-envelope"></i> Contact Me
           </a>
+          <button onclick="openModal()" class="cyber-button">
+            <i class="fas fa-external-link-alt"></i> Visit ROCyber Solutions
+          </button>
         </div>
       </section>
 
@@ -1371,6 +1505,14 @@
           <div class="skill-card">
             <h3><i class="fas fa-key"></i> Privacy Protection</h3>
             <p>Encryption techniques, anonymization, and data minimization. Educating on GDPR compliance and privacy-by-design to protect individual rights.</p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fas fa-search-dollar"></i> OSINT & OpSec</h3>
+            <p>Advanced open-source intelligence gathering and operational security practices, including military-grade awareness for threat mitigation.</p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fas fa-phone-alt"></i> Customer Support Security</h3>
+            <p>Professional handling of secure communications and support, ensuring confidentiality in phone and digital interactions.</p>
           </div>
         </div>
       </section>
@@ -1657,37 +1799,48 @@
             <h3 class="timeline-title">Junior Network Specialist – Emitel SA</h3>
             <p class="timeline-desc">Maintained MPLS and SDH links. Resolved Cisco-related issues, handled Jira tickets, and configured VPN and signal systems with privacy considerations.</p>
           </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2017 - 2018</div>
-            <h3 class="timeline-title">Security Intern – Local Firm</h3>
-            <p class="timeline-desc">Assisted in basic audits and learned CEH fundamentals. Contributed to team efforts in building defensive strategies for small businesses.</p>
-          </div>
         </div>
       </section>
 
       <section id="certifications" class="section">
-        <h2><i class="fas fa-certificate"></i> Certifications</h2>
-        <p>Committed to continuous learning and upholding the highest standards in cybersecurity. These certifications reflect expertise in ethical hacking, protection strategies, and compliance.</p>
+        <h2><i class="fas fa-certificate"></i> Trainings & Certifications</h2>
+        <p>Committed to continuous learning and upholding the highest standards in cybersecurity, operations, and professional development. These trainings and certifications reflect expertise in ethical practices, security awareness, and technical competencies.</p>
         <div class="certifications-grid">
           <div class="cert-card">
-            <h3><i class="fas fa-graduation-cap"></i> Certified Ethical Hacker (CEH)</h3>
-            <p>EC-Council. Mastery in ethical hacking methodologies, vulnerability assessment, and defensive techniques to protect systems responsibly.</p>
+            <h3><i class="fas fa-chain-broken"></i> The Cyber Kill Chain</h3>
+            <p>Training on understanding adversary tactics and implementing defensive measures across the attack lifecycle.</p>
           </div>
           <div class="cert-card">
-            <h3><i class="fas fa-shield-alt"></i> CompTIA Security+</h3>
-            <p>Foundational knowledge in network security, compliance, and operational security. Emphasizes practical skills for entry-level protection.</p>
+            <h3><i class="fas fa-search"></i> OSINT Basics</h3>
+            <p>Foundational knowledge in open-source intelligence gathering for threat assessment and reconnaissance.</p>
           </div>
           <div class="cert-card">
-            <h3><i class="fab fa-microsoft"></i> Microsoft Azure Security Engineer Associate</h3>
-            <p>Expertise in implementing security controls, maintaining security posture, and protecting data in Azure environments.</p>
+            <h3><i class="fas fa-user-shield"></i> OpSec Awareness for Military Members</h3>
+            <p>Operational security training tailored for military personnel, emphasizing protection of sensitive information.</p>
           </div>
           <div class="cert-card">
-            <h3><i class="fas fa-lock"></i> CISSP (In Progress)</h3>
-            <p>ISC2. Advanced certification covering security and risk management, asset security, and communication protection.</p>
+            <h3><i class="fas fa-exclamation-triangle"></i> Counterintelligence Awareness and Reporting Course for DOD</h3>
+            <p>Department of Defense course on identifying and reporting counterintelligence threats.</p>
           </div>
           <div class="cert-card">
-            <h3><i class="fas fa-cloud"></i> AWS Certified Security - Specialty</h3>
-            <p>Specialized in designing and implementing security solutions on AWS, focusing on data protection and incident response.</p>
+            <h3><i class="fas fa-certificate"></i> MS-L100, MS-L200</h3>
+            <p>Microsoft certifications in leadership and advanced technical skills (L100 and L200 levels).</p>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-standard-definition"></i> ISO 9001:2015</h3>
+            <p>Quality management system certification, ensuring compliance with international standards for processes and services.</p>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-phone-volume"></i> Professional Customer Phone Support</h3>
+            <p>Training in secure and professional customer support communications over phone systems.</p>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-bolt"></i> SEP Authorization – up to 1 kV</h3>
+            <p>Authorization for working with electrical installations up to 1 kV, including safety protocols.</p>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-sitemap"></i> MDF Accreditation License (Frame Basic)</h3>
+            <p>Accreditation for Main Distribution Frame (MDF) operations, focusing on basic frame management and security.</p>
           </div>
         </div>
       </section>
@@ -1764,6 +1917,37 @@
         </div>
       </section>
 
+      <section id="simulations" class="section">
+        <h2><i class="fas fa-desktop"></i> Cybersecurity Simulations</h2>
+        <p>Interactive simulations to demonstrate defensive concepts. These are simple, educational tools to empower users with knowledge of protection strategies. Remember, these are simulations - always use real tools ethically.</p>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">Threat Network Visualization (D3.js)</h3>
+        <div class="threat-vis">
+          <div id="threat-visualizer"></div>
+        </div>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">Encryption Demo (Animated Caesar Cipher)</h3>
+        <div class="encryption-demo">
+          <input type="text" id="encryption-input" class="encryption-input" placeholder="Enter text to encrypt...">
+          <button onclick="encryptText()" class="cyber-button"><i class="fas fa-lock"></i> Encrypt</button>
+          <div id="encryption-result" class="encryption-result"></div>
+        </div>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">Vulnerability Scanner Simulation</h3>
+        <div class="scanner-sim">
+          <button onclick="runScanner()" class="cyber-button"><i class="fas fa-search"></i> Run Scan</button>
+          <div class="scanner-progress">
+            <div id="scanner-bar" class="scanner-bar"></div>
+          </div>
+          <div id="scanner-results" class="scanner-results"></div>
+        </div>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">Data Flow Simulation (Canvas)</h3>
+        <div class="simulation-container">
+          <canvas id="simulation-canvas" class="simulation-canvas"></canvas>
+        </div>
+      </section>
+
       <section id="terminal" class="section">
         <h2><i class="fas fa-terminal"></i> Interactive Terminal</h2>
         <p>Try some Kali OS commands (simulated). Expanded with educational commands on CEH concepts and defensive tips:</p>
@@ -1790,7 +1974,7 @@
       
       <section id="contact" class="section">
         <h2><i class="fas fa-envelope"></i> Contact</h2>
-        <p>For professional inquiries, collaborations, or cybersecurity advice, please contact me via email. I prioritize privacy and will respond ethically.</p>
+        <p>For professional inquiries, please contact me via email:</p>
         
         <div style="margin-top: 2rem; text-align: center;">
           <a href="mailto:ro-noc2020@protonmail.com" class="cyber-button" style="font-size: 1.2rem; padding: 1rem 2rem;">
@@ -1810,9 +1994,11 @@
           <li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li>
           <li><a href="#solutions"><i class="fas fa-chevron-right"></i> Solutions</a></li>
           <li><a href="#experience"><i class="fas fa-chevron-right"></i> Experience</a></li>
-          <li><a href="#certifications"><i class="fas fa-chevron-right"></i> Certifications</a></li>
+          <li><a href="#certifications"><i class="fas fa-chevron-right"></i> Trainings & Certifications</a></li>
           <li><a href="#resources"><i class="fas fa-chevron-right"></i> Resources</a></li>
           <li><a href="#quiz"><i class="fas fa-chevron-right"></i> Quiz</a></li>
+          <li><a href="#simulations"><i class="fas fa-chevron-right"></i> Simulations</a></li>
+          <li><a href="#terminal"><i class="fas fa-chevron-right"></i> Terminal</a></li>
           <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
         </ul>
       </div>
@@ -1835,11 +2021,18 @@
     </div>
     
     <div class="footer-bottom">
-      <p class="copyright">© 2025 Roman Orłowski. All rights reserved. | Secure by Design | Committed to Ethical Cybersecurity</p>
+      <p class="copyright">© 2025 Roman Orłowski. All rights reserved. | Secure by Design</p>
     </div>
   </footer>
 
+  <!-- Modal for ROCyber Solutions -->
+  <div id="rocyberModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <iframe class="modal-content" src="https://rocybersolutions"></iframe>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Initialize particles.js
@@ -1971,20 +2164,11 @@
       const navItems = document.querySelectorAll('.nav-item');
       navItems.forEach(item => {
         item.addEventListener('click', function() {
-          // Remove active class from all items
           navItems.forEach(nav => nav.classList.remove('active'));
-          
-          // Add active class to clicked item
           this.classList.add('active');
-          
-          // Hide all sections
           sections.forEach(section => section.classList.remove('visible'));
-          
-          // Show selected section
           const sectionId = this.getAttribute('data-section');
           document.getElementById(sectionId).classList.add('visible');
-          
-          // Smooth scroll to section
           document.getElementById(sectionId).scrollIntoView({
             behavior: 'smooth',
             block: 'start'
@@ -1992,7 +2176,7 @@
         });
       });
       
-      // Interactive background elements
+      // Interactive background
       const gradient = document.querySelector('.cyber-gradient');
       document.addEventListener('mousemove', (e) => {
         const x = e.clientX / window.innerWidth;
@@ -2002,7 +2186,7 @@
            linear-gradient(${-135 + x * 45}deg, rgba(255, 0, 247, 0.05) 0%, transparent 50%)`;
       });
 
-      // Typewriter effect for terminal
+      // Typewriter for terminal
       const terminalLines = document.querySelectorAll('.terminal-line');
       terminalLines.forEach((line, index) => {
         line.style.animationDelay = `${index * 0.5 + 0.5}s`;
@@ -2013,7 +2197,6 @@
       const terminalCommand = document.getElementById('terminal-command');
       const commandResult = document.getElementById('command-result');
       
-      // Expanded commands
       const commands = {
         help: {
           desc: "Show available commands",
@@ -2041,8 +2224,7 @@
                         "443/tcp  open  https\n" +
                         "3306/tcp open  mysql\n" +
                         "8080/tcp open  http-proxy\n\n" +
-                        "Nmap done: 1 IP address (1 host up) scanned in 0.06 seconds\n\n" +
-                        "Tip: Use Nmap ethically for vulnerability scanning to identify risks, not exploit them."
+                        "Nmap done: 1 IP address (1 host up) scanned in 0.06 seconds"
         },
         msfconsole: {
           desc: "Metasploit framework console",
@@ -2051,8 +2233,7 @@
                          "+ -- --=[ 968 payloads - 45 encoders - 11 nops            ]\n" +
                          "+ -- --=[ 9 evasion                                       ]\n\n" +
                          "Metasploit tip: View all productivity tips with the tips command\n\n" +
-                         "msf6 > \n\n" +
-                         "Remember: Metasploit should be used for defensive testing with permission."
+                         "msf6 > "
         },
         searchsploit: {
           desc: "Search for exploits",
@@ -2063,8 +2244,7 @@
                          "WordPress 5.8.2 - SQL Injection         | php/webapps/50756.txt\n" +
                          "Linux Kernel 5.8 - Local Privilege Esc  | linux/local/50740.c\n" +
                          "----------------------------------------------------------------------------------------\n" +
-                         "Shellcodes: No Results\n\n" +
-                         "Note: Report vulnerabilities responsibly to vendors before public disclosure."
+                         "Shellcodes: No Results"
         },
         ifconfig: {
           desc: "Network interface configuration",
@@ -2075,8 +2255,7 @@
                          "        RX packets 123456  bytes 987654321 (987.6 MB)\n" +
                          "        RX errors 0  dropped 0  overruns 0  frame 0\n" +
                          "        TX packets 654321  bytes 123456789 (123.4 MB)\n" +
-                         "        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0\n\n" +
-                         "Tip: Secure your network interfaces with firewalls and VPNs for privacy."
+                         "        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0"
         },
         ping: {
           desc: "Test network connectivity",
@@ -2086,8 +2265,7 @@
                          "64 bytes from waw02s21-in-f14.1e100.net (142.250.190.46): icmp_seq=3 ttl=117 time=12.1 ms\n\n" +
                          "--- google.com ping statistics ---\n" +
                          "3 packets transmitted, 3 received, 0% packet loss, time 2003ms\n" +
-                         "rtt min/avg/max/mdev = 11.876/12.098/12.342/0.193 ms\n\n" +
-                         "Use ping for diagnostics, but avoid DoS by limiting usage."
+                         "rtt min/avg/max/mdev = 11.876/12.098/12.342/0.193 ms"
         },
         netstat: {
           desc: "Network statistics",
@@ -2097,8 +2275,7 @@
                          "tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN\n" +
                          "tcp        0      0 192.168.1.100:22        192.168.1.1:49234       ESTABLISHED\n" +
                          "tcp6       0      0 :::80                   :::*                    LISTEN\n" +
-                         "tcp6       0      0 :::22                   :::*                    LISTEN\n\n" +
-                         "Monitor connections to detect unauthorized access promptly."
+                         "tcp6       0      0 :::22                   :::*                    LISTEN"
         },
         clear: {
           desc: "Clear terminal",
@@ -2113,50 +2290,43 @@
         },
         uname: {
           desc: "Show system information",
-          execute: () => "Linux kali 5.18.0-kali5-amd64 #1 SMP Debian 5.18.16-1kali1 (2022-08-31) x86_64 GNU/Linux\n\n" +
-                         "Keep your system updated for security; apply patches responsibly."
+          execute: () => "Linux kali 5.18.0-kali5-amd64 #1 SMP Debian 5.18.16-1kali1 (2022-08-31) x86_64 GNU/Linux"
         },
         secure: {
           desc: "Show security recommendations",
           execute: () => "Security Recommendations for Mid-Size Company:\n\n" +
                          "1. Implement Zero Trust Architecture\n" +
                          "2. Deploy EDR/XDR solution\n" +
-                         "3. Conduct regular penetration testing (with permission)\n" +
+                         "3. Conduct regular penetration testing\n" +
                          "4. Enable MFA for all users\n" +
-                         "5. Establish SOC monitoring\n" +
-                         "6. Educate on privacy practices like encryption\n" +
-                         "7. Join communities like OWASP for collaborative learning"
+                         "5. Establish SOC monitoring"
         },
         ceh_phases: {
           desc: "List CEH ethical hacking phases",
           execute: () => "CEH Phases:\n" +
-                         "1. Reconnaissance - Gather information ethically.\n" +
-                         "2. Scanning - Identify vulnerabilities without harm.\n" +
-                         "3. Gaining Access - Simulate attacks defensively.\n" +
-                         "4. Maintaining Access - Understand persistence for mitigation.\n" +
-                         "5. Covering Tracks - Learn to detect hidden threats.\n\n" +
-                         "Always prioritize protection and obtain legal permission."
+                         "1. Reconnaissance\n" +
+                         "2. Scanning\n" +
+                         "3. Gaining Access\n" +
+                         "4. Maintaining Access\n" +
+                         "5. Clearing Tracks"
         },
         privacy_tip: {
           desc: "Get a privacy protection tip",
-          execute: () => "Privacy Tip: Use VPNs and encrypted communications (e.g., Signal) to protect your data. Comply with GDPR by minimizing data collection and using anonymization techniques."
+          execute: () => "Privacy Tip: Use VPNs and encrypted messaging apps to protect your data from unauthorized access."
         },
         disclosure: {
           desc: "Explain responsible disclosure",
-          execute: () => "Responsible Disclosure: When finding vulnerabilities, report them to the vendor or owner promptly and ethically. Allow time for fixes before public release to prevent harm. Follow guidelines like those from CERT or vendor policies."
+          execute: () => "Responsible Disclosure: Report vulnerabilities to vendors promptly and ethically to prevent harm."
         },
         community: {
           desc: "Suggest cybersecurity communities",
-          execute: () => "Join these communities for collaborative defense:\n" +
-                         "- OWASP: Web security forums\n" +
-                         "- CEH Forums: Ethical hacking discussions\n" +
-                         "- Reddit r/netsec: Threat intelligence sharing\n" +
-                         "- TryHackMe Discord: Hands-on learning groups\n\n" +
-                         "Foster brotherhood by sharing knowledge responsibly."
+          execute: () => "Cybersecurity Communities:\n" +
+                         "- OWASP\n" +
+                         "- CEH Forums\n" +
+                         "- TryHackMe"
         }
       };
-      
-      // Handle command execution
+
       terminalCommand.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
           const command = terminalCommand.value.trim();
@@ -2164,13 +2334,11 @@
           
           if (!command) return;
           
-          // Add command to output
           const commandLine = document.createElement('div');
           commandLine.className = 'terminal-line';
           commandLine.textContent = `$ ${command}`;
           terminalOutput.appendChild(commandLine);
           
-          // Execute command
           let result;
           if (commands[command]) {
             result = commands[command].execute();
@@ -2178,7 +2346,6 @@
             result = `Command not found: ${command}\nType 'help' for available commands`;
           }
           
-          // Display result
           if (result) {
             const resultElement = document.createElement('div');
             resultElement.className = 'terminal-line';
@@ -2186,20 +2353,10 @@
             terminalOutput.appendChild(resultElement);
           }
           
-          // Scroll to bottom
           terminalOutput.scrollTop = terminalOutput.scrollHeight;
         }
       });
       
-      // Accordion functionality
-      const accordionItems = document.querySelectorAll('.accordion-item');
-      accordionItems.forEach(item => {
-        const header = item.querySelector('.accordion-header');
-        header.addEventListener('click', () => {
-          item.classList.toggle('active');
-        });
-      });
-
       // Quiz functionality
       const quizOptions = document.querySelectorAll('.quiz-option');
       quizOptions.forEach(option => {
@@ -2211,7 +2368,6 @@
           feedback.textContent = isCorrect ? 'Correct! Great job protecting knowledge.' : 'Incorrect. Review CEH resources to learn more.';
           feedback.className = `quiz-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
           
-          // Disable other options
           question.querySelectorAll('.quiz-option').forEach(opt => {
             opt.style.pointerEvents = 'none';
             if (opt !== this && opt.dataset.correct === 'true') {
@@ -2220,6 +2376,133 @@
           });
         });
       });
+
+      // Threat Visualization with D3
+      const threatData = {
+        nodes: [
+          { id: "Threat Actor", group: 1 },
+          { id: "Phishing Email", group: 2 },
+          { id: "Vulnerable Endpoint", group: 3 },
+          { id: "Data Exfiltration", group: 4 },
+          { id: "Firewall", group: 5 },
+          { id: "SIEM Alert", group: 6 }
+        ],
+        links: [
+          { source: "Threat Actor", target: "Phishing Email", value: 1 },
+          { source: "Phishing Email", target: "Vulnerable Endpoint", value: 1 },
+          { source: "Vulnerable Endpoint", target: "Data Exfiltration", value: 1 },
+          { source: "Firewall", target: "Vulnerable Endpoint", value: 1 },
+          { source: "SIEM Alert", target: "Firewall", value: 1 }
+        ]
+      };
+
+      const svg = d3.select("#threat-visualizer")
+        .append("svg")
+        .attr("width", "100%")
+        .attr("height", 400);
+
+      const simulation = d3.forceSimulation(threatData.nodes)
+        .force("link", d3.forceLink(threatData.links).id(d => d.id))
+        .force("charge", d3.forceManyBody().strength(-400))
+        .force("center", d3.forceCenter(600 / 2, 400 / 2));
+
+      const link = svg.append("g")
+        .attr("stroke", "#999")
+        .selectAll("line")
+        .data(threatData.links)
+        .join("line");
+
+      const node = svg.append("g")
+        .attr("fill", "currentColor")
+        .attr("stroke", "#fff")
+        .selectAll("circle")
+        .data(threatData.nodes)
+        .join("circle")
+        .attr("r", 20)
+        .attr("fill", d => d.group === 1 ? var(--critical) : d.group === 5 ? var(--low) : var(--medium));
+
+      node.append("title")
+        .text(d => d.id);
+
+      simulation.on("tick", () => {
+        link
+          .attr("x1", d => d.source.x)
+          .attr("y1", d => d.source.y)
+          .attr("x2", d => d.target.x)
+          .attr("y2", d => d.target.y);
+
+        node
+          .attr("cx", d => d.x)
+          .attr("cy", d => d.y);
+      });
+
+      // Encryption function
+      window.encryptText = function() {
+        const input = document.getElementById('encryption-input').value;
+        const result = btoa(input); // Simple base64 for demo
+        document.getElementById('encryption-result').textContent = `Encrypted: ${result}`;
+      };
+
+      // Scanner simulation
+      window.runScanner = function() {
+        const bar = document.getElementById('scanner-bar');
+        bar.style.width = '0%';
+        setTimeout(() => bar.style.width = '100%', 100);
+        setTimeout(() => {
+          document.getElementById('scanner-results').innerHTML = 'Scan Complete:<br> - 2 Critical vulnerabilities found<br> - Mitigation: Update systems immediately';
+        }, 3100);
+      };
+
+      // Canvas simulation
+      const canvas = document.getElementById('simulation-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+
+      let simParticles = [];
+      for (let i = 0; i < 100; i++) {
+        simParticles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: Math.random() * 2 - 1,
+          vy: Math.random() * 2 - 1,
+          color: '#00f7ff'
+        });
+      }
+
+      function animateSimulation() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        simParticles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+          
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+        });
+        requestAnimationFrame(animateSimulation);
+      }
+      animateSimulation();
+
+      // Modal functions
+      window.openModal = function() {
+        document.getElementById('rocyberModal').style.display = "block";
+      }
+
+      window.closeModal = function() {
+        document.getElementById('rocyberModal').style.display = "none";
+      }
+
+      // Close modal if clicked outside
+      window.onclick = function(event) {
+        const modal = document.getElementById('rocyberModal');
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
     });
   </script>
 </body>
