@@ -1,11 +1,10 @@
-html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' https://d3js.org https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline';
-    style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com 'unsafe-inline';
+    script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline';
+    style-src 'self' https://cdnjs.cloudflare.com 'unsafe-inline';
     img-src 'self' data: https:;
     font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com;
     connect-src 'self' https:;
@@ -20,7 +19,6 @@ html
   <meta charset="UTF-8">
   <title>Roman Orłowski | ROCyber Solutions</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/3g9Z8l9rVqH5o3QEpq0h2x2jL7z5Qz3+0q9z5Xz5z5z5z5Qz3+0q9z5Xz5z5z5Qz3+0q9z5Xw==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <style>
     :root {
       --primary: #00f7ff;
@@ -28,7 +26,12 @@ html
       --accent: #ff00f7;
       --dark: #0a0a12;
       --light: #f0f0ff;
-      --glow: 0 0 15px currentColor;
+      --glow: 0 0 10px currentColor;
+      --critical: #ff5555;
+      --high: #ff9966;
+      --medium: #ffcc33;
+      --low: #55ff55;
+      --info: #5555ff;
     }
 
     * {
@@ -43,14 +46,42 @@ html
       color: var(--light);
       line-height: 1.6;
       overflow-x: hidden;
+      scroll-behavior: smooth;
+      position: relative;
     }
 
     #particles-js {
       position: fixed;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: -2;
       background-color: var(--dark);
+    }
+
+    .cyber-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(135deg, rgba(0, 247, 255, 0.05) 0%, transparent 50%),
+        linear-gradient(-135deg, rgba(255, 0, 247, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .cursor-trail {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+      pointer-events: none;
+      box-shadow: var(--glow);
+      z-index: 1000;
+      transition: transform 0.1s ease;
+      animation: pulse 1.5s infinite;
     }
 
     .container {
@@ -61,7 +92,7 @@ html
 
     .header {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
 
     .header h1 {
@@ -70,83 +101,131 @@ html
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 1rem;
+      animation: decrypt 1.5s ease-out forwards;
     }
 
     .header p {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: var(--primary);
       max-width: 600px;
-      margin: 0 auto;
+      margin: 0.5rem auto;
+      animation: fadeInUp 1s 0.5s forwards;
     }
 
     .nav {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 3rem;
+      gap: 1rem;
+      margin-bottom: 2rem;
       flex-wrap: wrap;
     }
 
     .nav-item {
       cursor: pointer;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--light);
       padding: 0.5rem 1rem;
+      border-radius: 5px;
       transition: all 0.3s ease;
       text-transform: uppercase;
+      position: relative;
+    }
+
+    .nav-item::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: width 0.3s ease;
+    }
+
+    .nav-item:hover::before, .nav-item.active::before {
+      width: 100%;
     }
 
     .nav-item:hover, .nav-item.active {
-      color: var(--primary);
-      border-bottom: 2px solid var(--primary);
+      background: var(--primary);
+      color: var(--dark);
+      transform: scale(1.05);
     }
 
     .section {
-      background: rgba(20, 20, 30, 0.7);
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(0, 247, 255, 0.1);
+      background: rgba(20, 20, 30, 0.8);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--primary);
       display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     .section.visible {
       display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .section h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
       color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 1rem;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
     }
 
     .dashboard-item {
-      background: rgba(30, 30, 40, 0.7);
+      background: rgba(30, 30, 40, 0.9);
       border-radius: 8px;
-      padding: 1.5rem;
+      padding: 1rem;
       text-align: center;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       border: 1px solid var(--primary);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
 
     .dashboard-item:hover {
       transform: translateY(-5px);
       box-shadow: var(--glow);
-      background: rgba(40, 40, 50, 0.7);
+      background: rgba(40, 40, 50, 0.9);
+    }
+
+    .dashboard-item::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(0, 247, 255, 0.3), transparent);
+      transition: width 0.3s ease, height 0.3s ease;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .dashboard-item:hover::after {
+      width: 200%;
+      height: 200%;
     }
 
     .dashboard-item a {
       color: var(--light);
       text-decoration: none;
-      font-size: 1rem;
+      font-size: 0.9rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -154,59 +233,585 @@ html
     }
 
     .dashboard-item i {
-      font-size: 2rem;
+      font-size: 1.5rem;
       color: var(--primary);
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .dashboard-item:hover i {
+      color: var(--secondary);
+      transform: scale(1.2);
     }
 
     .terminal {
-      background: rgba(10, 10, 20, 0.8);
+      background: rgba(10, 10, 20, 0.9);
       border-radius: 8px;
       padding: 1.5rem;
       font-family: 'Courier New', monospace;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
+      color: var(--secondary);
+      position: relative;
     }
 
+    .terminal-header {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .terminal-btn {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+
+    .terminal-btn:hover {
+      transform: scale(1.2);
+    }
+
+    .terminal-btn.red { background: #ff5f56; }
+    .terminal-btn.yellow { background: #ffbd2e; }
+    .terminal-btn.green { background: #27c93f; }
+
     .terminal-body {
-      color: var(--secondary);
-      line-height: 1.6;
+      height: 200px;
+      overflow-y: auto;
+    }
+
+    .terminal-body::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .terminal-body::-webkit-scrollbar-thumb {
+      background: rgba(0, 247, 255, 0.3);
+      border-radius: 5px;
     }
 
     .terminal-line {
       margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: typeIn 0.5s forwards;
     }
+
+    .terminal-cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1.2rem;
+      background: var(--secondary);
+      vertical-align: middle;
+      animation: blink 1s infinite;
+    }
+
+    .terminal-input {
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .terminal-prompt {
+      color: var(--secondary);
+      margin-right: 0.5rem;
+    }
+
+    #terminal-command {
+      background: transparent;
+      border: none;
+      color: var(--secondary);
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      width: calc(100% - 50px);
+      outline: none;
+      transition: box-shadow 0.3s ease;
+    }
+
+    #terminal-command:focus {
+      box-shadow: 0 0 5px var(--primary);
+    }
+
+    .command-output {
+      margin-top: 0.5rem;
+      color: var(--secondary);
+      white-space: pre-wrap;
+      font-family: 'Courier New', monospace;
+      opacity: 0;
+      animation: fadeInUp 0.5s forwards;
+    }
+
+    .error { color: var(--critical); }
+    .success { color: var(--low); }
+    .info { color: var(--info); }
+    .warning { color: var(--medium); }
+
+    .skills-grid, .certifications-grid, .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .skill-card, .cert-card, .framework-card {
+      background: rgba(30, 30, 40, 0.9);
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 1px solid var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    .skill-card:hover, .cert-card:hover, .framework-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--glow);
+    }
+
+    .skill-card h3, .cert-card h3, .framework-card h3 {
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .framework-card ul {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .framework-card li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .framework-card li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    .timeline {
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 5px;
+      height: 100%;
+      width: 2px;
+      background: var(--primary);
+    }
+
+    .timeline-item {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    .timeline-date {
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+
+    .architecture {
+      margin-top: 2rem;
+      background: rgba(20, 20, 30, 0.9);
+      border-radius: 10px;
+      padding: 1.5rem;
+      border: 1px solid var(--primary);
+    }
+
+    .architecture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+
+    .architecture-item {
+      background: rgba(40, 40, 50, 0.9);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    .architecture-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--glow);
+    }
+
+    .architecture-item i {
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    .architecture-item h4 {
+      color: var(--light);
+      margin: 0.5rem 0;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background: rgba(10, 10, 20, 0.9);
+      color: var(--light);
+      text-align: center;
+      border-radius: 6px;
+      padding: 0.5rem;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      border: 1px solid var(--primary);
+      font-size: 0.9rem;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .threat-matrix {
+      margin-top: 2rem;
+      background: rgba(20, 20, 30, 0.9);
+      border-radius: 10px;
+      padding: 1.5rem;
+      border: 1px solid var(--primary);
+    }
+
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .matrix-header {
+      text-align: center;
+      font-weight: bold;
+      padding: 0.5rem;
+      color: var(--light);
+      background: rgba(0, 247, 255, 0.1);
+      border-radius: 4px;
+    }
+
+    .matrix-cell {
+      padding: 0.5rem;
+      text-align: center;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .matrix-cell:hover {
+      transform: scale(1.05);
+      box-shadow: var(--glow);
+    }
+
+    .critical { background: rgba(255, 85, 85, 0.2); color: var(--critical); border: 1px solid var(--critical); }
+    .high { background: rgba(255, 153, 102, 0.2); color: var(--high); border: 1px solid var(--high); }
+    .medium { background: rgba(255, 204, 51, 0.2); color: var(--medium); border: 1px solid var(--medium); }
+    .low { background: rgba(85, 255, 85, 0.2); color: var(--low); border: 1px solid var(--low); }
+
+    .response-flow {
+      margin-top: 2rem;
+    }
+
+    .flow-step {
+      background: rgba(30, 30, 40, 0.9);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    .flow-step:hover {
+      transform: translateX(5px);
+      box-shadow: var(--glow);
+    }
+
+    .flow-step h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .flow-step::after {
+      content: '↓';
+      position: absolute;
+      bottom: -1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--secondary);
+      font-size: 1.5rem;
+    }
+
+    .flow-step:last-child::after {
+      display: none;
+    }
+
+    .checklist {
+      margin-top: 2rem;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      background: rgba(30, 30, 40, 0.9);
+      padding: 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .checklist-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--glow);
+    }
+
+    .checklist-checkbox {
+      margin-right: 1rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .checklist-title {
+      color: var(--light);
+      margin-bottom: 0.3rem;
+    }
+
+    .resources-list {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .resources-list li {
+      margin-bottom: 0.5rem;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .resources-list li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    .resources-list a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .resources-list a:hover {
+      color: var(--secondary);
+    }
+
+    .quiz-container {
+      margin-top: 2rem;
+    }
+
+    .quiz-question {
+      background: rgba(30, 30, 40, 0.9);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--primary);
+    }
+
+    .quiz-question h4 {
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .quiz-option {
+      padding: 0.5rem;
+      border: 1px solid var(--primary);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quiz-option:hover {
+      background: rgba(40, 40, 50, 0.9);
+      transform: scale(1.02);
+    }
+
+    .quiz-option.correct-answer {
+      background: rgba(85, 255, 85, 0.2);
+      border-color: var(--low);
+    }
+
+    .quiz-option.incorrect-answer {
+      animation: shake 0.3s;
+    }
+
+    .quiz-feedback {
+      margin-top: 1rem;
+      font-weight: bold;
+      opacity: 0;
+      animation: fadeInUp 0.5s forwards;
+    }
+
+    .correct { color: var(--low); }
+    .incorrect { color: var(--critical); }
 
     .footer {
       background: rgba(10, 10, 20, 0.9);
-      padding: 2rem;
+      padding: 1.5rem;
       text-align: center;
-      margin-top: 3rem;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      text-align: left;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-column h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
     }
 
     .footer-links a {
       color: var(--primary);
-      margin: 0 1rem;
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .footer-links a:hover {
       color: var(--secondary);
     }
 
+    .footer-bottom {
+      margin-top: 2rem;
+      border-top: 1px solid var(--primary);
+      padding-top: 1rem;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+    }
+
+    .modal-content {
+      margin: 5% auto;
+      width: 90%;
+      max-width: 800px;
+      height: 80vh;
+      border: none;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: var(--light);
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .close:hover {
+      transform: scale(1.2);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes decrypt {
+      0% { opacity: 0; letter-spacing: 1em; filter: blur(10px); }
+      100% { opacity: 1; letter-spacing: normal; filter: blur(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-3px); }
+    }
+
+    @keyframes typeIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
     @media (max-width: 768px) {
-      .header h1 {
-        font-size: 2rem;
-      }
-      .nav {
-        gap: 1rem;
-      }
-      .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
+      .header h1 { font-size: 2rem; }
+      .nav { gap: 0.5rem; }
+      .dashboard-grid, .skills-grid, .certifications-grid, .framework-grid, .architecture-grid { grid-template-columns: 1fr; }
+      .matrix-grid { grid-template-columns: 1fr; }
+      .footer-content { grid-template-columns: 1fr; text-align: center; }
+      .footer-links { display: flex; flex-direction: column; align-items: center; }
+      .cursor-trail { display: none; }
     }
   </style>
 </head>
 <body>
   <div id="particles-js"></div>
+  <div class="cyber-gradient"></div>
+  <div class="cursor-trail" id="cursor-trail"></div>
   <div class="container">
     <header class="header">
       <h1>ROMAN ORŁOWSKI</h1>
@@ -218,10 +823,9 @@ html
       <div class="nav-item" data-section="skills">Skills</div>
       <div class="nav-item" data-section="solutions">Solutions</div>
       <div class="nav-item" data-section="experience">Experience</div>
-      <div class="nav-item" data-section="certifications">Trainings & Certifications</div>
+      <div class="nav-item" data-section="certifications">Certifications</div>
       <div class="nav-item" data-section="resources">Resources</div>
       <div class="nav-item" data-section="quiz">Cyber Quiz</div>
-      <div class="nav-item" data-section="simulations">Simulations</div>
       <div class="nav-item" data-section="terminal">Terminal</div>
       <div class="nav-item" data-section="contact">Contact</div>
     </nav>
@@ -229,15 +833,20 @@ html
     <main>
       <section id="about" class="section visible">
         <h2><i class="fas fa-user-secret"></i> Professional Profile</h2>
-        <p>Self-driven cybersecurity expert specializing in cloud infrastructure protection, threat analysis, and secure system architecture. With a passion for creating impenetrable digital environments and a track record of successful implementations across diverse industries. Committed to ethical practices, responsible disclosure, and empowering others with knowledge to foster a safer cyberspace.</p>
+        <p>Self-driven cybersecurity expert specializing in cloud infrastructure protection, threat analysis, and secure system architecture. Committed to ethical practices, responsible disclosure, and empowering others with knowledge to foster a safer cyberspace.</p>
         <div class="terminal">
+          <div class="terminal-header">
+            <div class="terminal-btn red"></div>
+            <div class="terminal-btn yellow"></div>
+            <div class="terminal-btn green"></div>
+          </div>
           <div class="terminal-body">
-            <div class="terminal-line">$ whoami</div>
-            <div class="terminal-line">> Roman Orłowski - Cybersecurity Specialist</div>
-            <div class="terminal-line">$ skills --list</div>
-            <div class="terminal-line">> Cloud Security | Threat Analysis | Network Defense</div>
-            <div class="terminal-line">$ contact --method</div>
-            <div class="terminal-line">> Email: ro-noc2020@protonmail.com</div>
+            <div class="terminal-line">$ whoami<span class="terminal-cursor"></span></div>
+            <div class="terminal-line">> Roman Orłowski - Cybersecurity Specialist<span class="terminal-cursor"></span></div>
+            <div class="terminal-line">$ skills --list<span class="terminal-cursor"></span></div>
+            <div class="terminal-line">> Cloud Security | Threat Analysis | Network Defense<span class="terminal-cursor"></span></div>
+            <div class="terminal-line">$ contact --method<span class="terminal-cursor"></span></div>
+            <div class="terminal-line">> Email: ro-noc2020@protonmail.com<span class="terminal-cursor"></span></div>
           </div>
         </div>
         <div class="dashboard-grid">
@@ -254,7 +863,7 @@ html
             </a>
           </div>
           <div class="dashboard-item">
-            <a href="#" onclick="openModal()" aria-label="Visit ROCyber Solutions">
+            <a href="#" onclick="openModal('https://www.rocybersolutions.com')" aria-label="Visit ROCyber Solutions">
               <i class="fas fa-external-link-alt"></i>
               Visit ROCyber Solutions
             </a>
@@ -264,65 +873,473 @@ html
 
       <section id="skills" class="section">
         <h2><i class="fas fa-code"></i> Core Competencies</h2>
-        <p>Expertise in defensive cybersecurity strategies to protect systems and empower users, aligned with CEH principles.</p>
-        <!-- Add skills content here -->
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3><i class="fab fa-microsoft"></i> Azure Security</h3>
+            <p>Defender for Endpoint, Sentinel, Identity Protection, and Cloud Posture Management. Focus on defensive strategies to protect user privacy and data integrity.</p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fas fa-shield-alt"></i> Threat Protection</h3>
+            <p>MITRE ATT&CK framework, SIEM solutions, and behavioral analysis. Emphasizing ethical hacking methodologies for vulnerability identification without exploitation.</p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fas fa-network-wired"></i> Network Security</h3>
+            <p>Zero Trust Architecture, VPN configurations, and advanced firewall management. Promoting equitable access to secure networks for all users.</p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fas fa-lock"></i> Compliance</h3>
+            <p>ISO 27001, NIST frameworks, GDPR, and industry-specific regulations. Ensuring adherence to global standards for fair and just cybersecurity practices.</p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fas fa-user-shield"></i> Ethical Hacking</h3>
+            <p>CEH principles for reconnaissance, scanning, and enumeration. Prioritizing defense over offense to safeguard systems and promote responsible disclosure.</p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fas fa-key"></i> Privacy Protection</h3>
+            <p>Encryption techniques, anonymization, and data minimization. Educating on GDPR compliance and privacy-by-design to protect individual rights.</p>
+          </div>
+        </div>
       </section>
 
       <section id="solutions" class="section">
         <h2><i class="fas fa-shield-virus"></i> Enterprise Security Solutions</h2>
-        <p>Comprehensive solutions for hybrid infrastructure protection, zero-day response, and compliance.</p>
-        <!-- Add solutions content here -->
+        <h3 style="margin-top: 2rem; color: var(--secondary);">1. Hybrid Infrastructure Protection</h3>
+        <div class="architecture">
+          <div class="architecture-grid">
+            <div class="architecture-item">
+              <i class="fas fa-network-wired"></i>
+              <h4>Network</h4>
+              <p>Zero Trust Segmentation</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Azure Network Security Groups, Cisco ISE, Microsegmentation. Ensures least privilege access to protect sensitive data.</span>
+              </div>
+            </div>
+            <div class="architecture-item">
+              <i class="fas fa-laptop"></i>
+              <h4>Endpoints</h4>
+              <p>Unified EDR/XDR</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Microsoft Defender, CrowdStrike, SentinelOne. Real-time threat detection with minimal privacy intrusion.</span>
+              </div>
+            </div>
+            <div class="architecture-item">
+              <i class="fas fa-cloud"></i>
+              <h4>Cloud</h4>
+              <p>CASB + CSPM</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Microsoft Defender for Cloud, Prisma Cloud, AWS Security Hub. Continuous compliance monitoring aligned with NIST.</span>
+              </div>
+            </div>
+            <div class="architecture-item">
+              <i class="fas fa-user-shield"></i>
+              <h4>Identity</h4>
+              <p>Conditional Access</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Azure AD, Okta, MFA, PIM. Multi-factor authentication to enhance user protection without complexity.</span>
+              </div>
+            </div>
+            <div class="architecture-item">
+              <i class="fas fa-database"></i>
+              <h4>Data</h4>
+              <p>Encryption & DLP</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Azure Information Protection, Symantec DLP. Safeguards sensitive information with encryption and leak prevention.</span>
+              </div>
+            </div>
+            <div class="architecture-item">
+              <i class="fas fa-chart-line"></i>
+              <h4>Monitoring</h4>
+              <p>SIEM & Analytics</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Splunk, ELK Stack. Advanced logging for threat hunting, ensuring transparent and ethical monitoring.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3 style="margin-top: 2rem; color: var(--secondary);">2. Zero-Day Response Protocol</h3>
+        <div class="response-flow">
+          <div class="flow-step">
+            <h4><i class="fas fa-search"></i> Detection</h4>
+            <p>SIEM alerts, EDR telemetry, and threat intelligence feeds. Use CEH-inspired scanning to identify anomalies early.</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-flag"></i> Triage</h4>
+            <p>Initial assessment using MITRE ATT&CK framework. Prioritize based on impact to human safety and data privacy.</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-fire-extinguisher"></i> Containment</h4>
+            <p>Network segmentation, endpoint isolation, credential rotation. Minimize harm through swift, ethical actions.</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-bug"></i> Eradication</h4>
+            <p>Patch deployment, malware removal, system hardening. Align with CEH standards for thorough vulnerability mitigation.</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-undo"></i> Recovery</h4>
+            <p>System restoration from clean backups, validation testing. Ensure equitable recovery for all affected parties.</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-book"></i> Lessons Learned</h4>
+            <p>Post-incident review and process improvement. Share knowledge responsibly to build community resilience.</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-share-alt"></i> Disclosure</h4>
+            <p>Responsible reporting to vendors and stakeholders. Promote transparency while protecting vulnerable systems.</p>
+          </div>
+        </div>
+        <h3 style="margin-top: 2rem; color: var(--secondary);">3. Security Frameworks</h3>
+        <div class="framework-grid">
+          <div class="framework-card">
+            <h3><i class="fas fa-chess-board"></i> MITRE ATT&CK</h3>
+            <p>Adversary tactics and techniques framework for threat modeling</p>
+            <ul>
+              <li>Threat intelligence integration</li>
+              <li>Detection rule development</li>
+              <li>Red team exercises</li>
+              <li>Mapping to CEH methodologies</li>
+            </ul>
+          </div>
+          <div class="framework-card">
+            <h3><i class="fas fa-shield-alt"></i> NIST CSF</h3>
+            <p>Identify, Protect, Detect, Respond, Recover framework</p>
+            <ul>
+              <li>Risk assessment methodology</li>
+              <li>Security controls mapping</li>
+              <li>Maturity benchmarking</li>
+              <li>Privacy enhancement focus</li>
+            </ul>
+          </div>
+          <div class="framework-card">
+            <h3><i class="fas fa-lock"></i> CIS Controls</h3>
+            <p>Prioritized set of actions for cyber defense</p>
+            <ul>
+              <li>Implementation Groups</li>
+              <li>Configuration benchmarks</li>
+              <li>Hardening guidelines</li>
+              <li>Equitable access recommendations</li>
+            </ul>
+          </div>
+          <div class="framework-card">
+            <h3><i class="fas fa-globe"></i> ISO 27001</h3>
+            <p>International standard for information security management</p>
+            <ul>
+              <li>Risk treatment plans</li>
+              <li>Audit and certification</li>
+              <li>Continuous improvement</li>
+              <li>GDPR alignment</li>
+            </ul>
+          </div>
+        </div>
+        <h3 style="margin-top: 2rem; color: var(--secondary);">4. Threat Risk Matrix</h3>
+        <div class="threat-matrix">
+          <div class="matrix-grid">
+            <div class="matrix-header">Threat</div>
+            <div class="matrix-header">Likelihood</div>
+            <div class="matrix-header">Impact</div>
+            <div class="matrix-header">Risk Level</div>
+            <div class="matrix-header">Mitigation</div>
+            <div class="matrix-cell">Phishing</div>
+            <div class="matrix-cell">High</div>
+            <div class="matrix-cell">Medium</div>
+            <div class="matrix-cell high">High</div>
+            <div class="matrix-cell">User training, Email filtering, Awareness quizzes</div>
+            <div class="matrix-cell">Ransomware</div>
+            <div class="matrix-cell">Medium</div>
+            <div class="matrix-cell">Critical</div>
+            <div class="matrix-cell critical">Critical</div>
+            <div class="matrix-cell">Backups, EDR, Patch management, Immutable storage</div>
+            <div class="matrix-cell">Insider Threat</div>
+            <div class="matrix-cell">Low</div>
+            <div class="matrix-cell">High</div>
+            <div class="matrix-cell medium">Medium</div>
+            <div class="matrix-cell">DLP, User monitoring, Least privilege, Behavior analytics</div>
+            <div class="matrix-cell">DDoS</div>
+            <div class="matrix-cell">Low</div>
+            <div class="matrix-cell">Medium</div>
+            <div class="matrix-cell low">Low</div>
+            <div class="matrix-cell">Cloudflare, Rate limiting, Traffic scrubbing</div>
+            <div class="matrix-cell">Zero-Day Exploit</div>
+            <div class="matrix-cell">Low</div>
+            <div class="matrix-cell">Critical</div>
+            <div class="matrix-cell high">High</div>
+            <div class="matrix-cell">Threat intel, Sandboxing, Rapid patching, Isolation</div>
+            <div class="matrix-cell">Supply Chain Attack</div>
+            <div class="matrix-cell">Medium</div>
+            <div class="matrix-cell">High</div>
+            <div class="matrix-cell high">High</div>
+            <div class="matrix-cell">Vendor assessment, Code signing, Dependency scanning</div>
+          </div>
+        </div>
+        <h3 style="margin-top: 2rem; color: var(--secondary);">5. For 100 Users & 200 Devices</h3>
+        <div class="checklist">
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Automate patch management</div>
+              <div class="checklist-desc">WSUS + Intune for Windows, Ansible for Linux. Ensure timely updates to mitigate known vulnerabilities ethically.</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Segment networks</div>
+              <div class="checklist-desc">VLANs for departments/IoT, microsegmentation for critical assets. Implement Zero Trust to protect user privacy.</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Monitor with 24/7 SOC</div>
+              <div class="checklist-desc">Microsoft Sentinel + MDE with playbooks for common scenarios. Transparent alerting to build trust.</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Train users</div>
+              <div class="checklist-desc">Quarterly simulated phishing + interactive security training. Use CEH-inspired scenarios for empowerment.</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Backup strategy</div>
+              <div class="checklist-desc">3-2-1 rule with immutable backups (Veeam + Azure Blob). Ensure data recovery without compromising privacy.</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Implement MFA</div>
+              <div class="checklist-desc">Enforce multi-factor authentication across all accounts. Simple setup for accessibility to all users.</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Regular Audits</div>
+              <div class="checklist-desc">Conduct vulnerability scans and penetration tests ethically, reporting findings responsibly.</div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="experience" class="section">
         <h2><i class="fas fa-briefcase"></i> Professional Journey</h2>
-        <p>Proven track record in securing systems across industries with ethical and collaborative approaches.</p>
-        <!-- Add experience content here -->
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">2024 - Present</div>
+            <h3>Freelance Cybersecurity Consultant</h3>
+            <p>Performed pentesting, incident response, and security training for SMBs and NGOs. Delivered risk-based reports and improved client defenses via OWASP/NIST-aligned strategies, emphasizing ethical disclosure.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2023 - 2024</div>
+            <h3>Senior Engineer for Cloud & Infrastructure – Microsoft Project</h3>
+            <p>Implemented Defender for Endpoint, EDR, SIEM, and Identity Protection. Reduced threat exposure and educated teams on latest threat intel and mitigation tactics, fostering collaborative defense.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2022 - 2023</div>
+            <h3>Support Engineer – Intellias</h3>
+            <p>Led cloud migration across 5 EU regions. Managed Azure resources, SLAs, policy enforcement, and authored technical documentation and procedures, ensuring GDPR compliance.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2021</div>
+            <h3>IT Specialist – Cinema City</h3>
+            <p>Rebuilt regional IT infrastructure. Delivered OS deployments (Debian/Win), supported POS systems, and enforced backup/recovery procedures with a focus on data protection.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2020 - 2021</div>
+            <h3>Platform Engineer – Discovery</h3>
+            <p>Handled SIEM ops via Splunk and SolarWinds. Authored automation scripts and participated in incident bridges and recovery plans, promoting team brotherhood.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2020</div>
+            <h3>NOC Engineer – Sperasoft</h3>
+            <p>24/7 infrastructure monitoring. Produced SOPs, ran escalations, and participated in collaborative network response workflows for equitable security.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2019 - 2020</div>
+            <h3>Enterprise Operation Center Analyst – Grand Parade / William Hill</h3>
+            <p>Led vulnerability scans, threat hunting, patch management, and awareness training. Created incident response scenarios aligned with CEH principles.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2018 - 2019</div>
+            <h3>Junior Network Specialist – Emitel SA</h3>
+            <p>Maintained MPLS and SDH links. Resolved Cisco-related issues, handled Jira tickets, and configured VPN and signal systems with privacy considerations.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2017 - 2018</div>
+            <h3>Security Intern – Local Firm</h3>
+            <p>Assisted in basic audits and learned CEH fundamentals. Contributed to team efforts in building defensive strategies for small businesses.</p>
+          </div>
+        </div>
       </section>
 
       <section id="certifications" class="section">
-        <h2><i class="fas fa-certificate"></i> Trainings & Certifications</h2>
-        <p>Continuous learning to uphold the highest cybersecurity standards.</p>
-        <!-- Add certifications content here -->
+        <h2><i class="fas fa-certificate"></i> Certifications</h2>
+        <p>Committed to continuous learning and upholding the highest standards in cybersecurity. These certifications reflect expertise in ethical hacking, protection strategies, and compliance.</p>
+        <div class="certifications-grid">
+          <div class="cert-card">
+            <h3><i class="fas fa-graduation-cap"></i> Certified Ethical Hacker (CEH)</h3>
+            <p>EC-Council. Mastery in ethical hacking methodologies, vulnerability assessment, and defensive techniques to protect systems responsibly.</p>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-shield-alt"></i> CompTIA Security+</h3>
+            <p>Foundational knowledge in network security, compliance, and operational security. Emphasizes practical skills for entry-level protection.</p>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fab fa-microsoft"></i> Microsoft Azure Security Engineer Associate</h3>
+            <p>Expertise in implementing security controls, maintaining security posture, and protecting data in Azure environments.</p>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-lock"></i> CISSP (In Progress)</h3>
+            <p>ISC2. Advanced certification covering security and risk management, asset security, and communication protection.</p>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-cloud"></i> AWS Certified Security - Specialty</h3>
+            <p>Specialized in designing and implementing security solutions on AWS, focusing on data protection and incident response.</p>
+          </div>
+        </div>
       </section>
 
       <section id="resources" class="section">
         <h2><i class="fas fa-book-open"></i> Cybersecurity Resources</h2>
-        <p>Free resources to empower everyone in building a safer cyberspace.</p>
-        <!-- Add resources content here -->
+        <p>To empower everyone with knowledge, here are free and accessible resources for learning cybersecurity. These align with CEH principles and promote equitable access to education for a just cyberspace.</p>
+        <ul class="resources-list">
+          <li><a href="https://tryhackme.com/" target="_blank">TryHackMe</a> - Hands-on labs for beginners to advanced ethical hacking.</li>
+          <li><a href="https://www.cybrary.it/" target="_blank">Cybrary</a> - Free courses on CEH, penetration testing, and defensive strategies.</li>
+          <li><a href="https://owasp.org/" target="_blank">OWASP</a> - Community-driven resources for web application security and vulnerability management.</li>
+          <li><a href="https://www.sans.org/" target="_blank">SANS Institute</a> - Free cheat sheets and webinars on threat intelligence and incident response.</li>
+          <li><a href="https://www.nist.gov/cyberframework" target="_blank">NIST Cybersecurity Framework</a> - Guidelines for improving organizational security posture.</li>
+          <li><a href="https://www.ec-council.org/programs/certified-ethical-hacker-ceh/" target="_blank">EC-Council CEH</a> - Official resources for ethical hacking certification preparation.</li>
+          <li><a href="https://portswigger.net/web-security" target="_blank">PortSwigger Web Security Academy</a> - Free interactive lessons on web vulnerabilities.</li>
+        </ul>
+        <p>Remember, use these tools defensively to protect yourself and others. Always obtain permission before testing systems.</p>
       </section>
 
       <section id="quiz" class="section">
         <h2><i class="fas fa-question-circle"></i> Cybersecurity Awareness Quiz</h2>
-        <p>Test your knowledge with interactive questions.</p>
-        <!-- Add quiz content here -->
-      </section>
-
-      <section id="simulations" class="section">
-        <h2><i class="fas fa-desktop"></i> Cybersecurity Simulations</h2>
-        <p>Educational simulations to demonstrate defensive techniques.</p>
-        <!-- Add simulations content here -->
+        <p>Test your knowledge with this interactive quiz inspired by CEH concepts. It's designed for all levels to promote learning and awareness in a supportive way.</p>
+        <div class="quiz-container">
+          <div class="quiz-question">
+            <h4>Question 1: What is the first phase of ethical hacking in CEH?</h4>
+            <div class="quiz-options">
+              <div class="quiz-option" data-correct="true">Reconnaissance</div>
+              <div class="quiz-option">Scanning</div>
+              <div class="quiz-option">Gaining Access</div>
+              <div class="quiz-option">Maintaining Access</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+          <div class="quiz-question">
+            <h4>Question 2: Which practice best protects against phishing?</h4>
+            <div class="quiz-options">
+              <div class="quiz-option">Clicking all links</div>
+              <div class="quiz-option" data-correct="true">Verifying sender and using MFA</div>
+              <div class="quiz-option">Sharing passwords</div>
+              <div class="quiz-option">Ignoring updates</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+          <div class="quiz-question">
+            <h4>Question 3: What does responsible disclosure mean?</h4>
+            <div class="quiz-options">
+              <div class="quiz-option">Publicly sharing exploits immediately</div>
+              <div class="quiz-option" data-correct="true">Reporting vulnerabilities to vendors first</div>
+              <div class="quiz-option">Ignoring found issues</div>
+              <div class="quiz-option">Selling vulnerabilities</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+          <div class="quiz-question">
+            <h4>Question 4: Why is encryption important for privacy?</h4>
+            <div class="quiz-options">
+              <div class="quiz-option" data-correct="true">It protects data from unauthorized access</div>
+              <div class="quiz-option">It slows down systems</div>
+              <div class="quiz-option">It shares data publicly</div>
+              <div class="quiz-option">It removes data</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+          <div class="quiz-question">
+            <h4>Question 5: What framework helps map adversary tactics?</h4>
+            <div class="quiz-options">
+              <div class="quiz-option" data-correct="true">MITRE ATT&CK</div>
+              <div class="quiz-option">OWASP Top 10</div>
+              <div class="quiz-option">PCI DSS</div>
+              <div class="quiz-option">HIPAA</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
       </section>
 
       <section id="terminal" class="section">
         <h2><i class="fas fa-terminal"></i> Interactive Terminal</h2>
-        <p>Simulated terminal for exploring cybersecurity commands.</p>
-        <!-- Add terminal content here -->
+        <p>Try some Kali OS commands (simulated). Expanded with educational commands on CEH concepts and defensive tips:</p>
+        <div class="terminal">
+          <div class="terminal-header">
+            <div class="terminal-btn red"></div>
+            <div class="terminal-btn yellow"></div>
+            <div class="terminal-btn green"></div>
+          </div>
+          <div class="terminal-body" id="terminal-output">
+            <div class="terminal-line">Kali Linux Terminal Simulator<span class="terminal-cursor"></span></div>
+            <div class="terminal-line">Type 'help' for available commands<span class="terminal-cursor"></span></div>
+            <div class="terminal-line">Try: nmap, msfconsole, searchsploit, whoami, ceh_phases, privacy_tip, disclosure<span class="terminal-cursor"></span></div>
+          </div>
+          <div class="terminal-input">
+            <span class="terminal-prompt">$</span>
+            <input type="text" id="terminal-command" autocomplete="off" placeholder="Type command...">
+          </div>
+        </div>
+        <div class="command-output" id="command-result"></div>
       </section>
 
       <section id="contact" class="section">
         <h2><i class="fas fa-envelope"></i> Contact</h2>
-        <p>Reach out securely: <a href="mailto:ro-noc2020@protonmail.com">ro-noc2020@protonmail.com</a></p>
-      </section>
+        <p>For professional inquiries, collaborations, or cybersecurity advice, please contact me via email. I prioritize privacy and will respond ethically.</p>
+        <div style="margin-top: 2rem; text-align: center;">
+          <a href="mailto:ro-noc2020@protonmail.com" class="dashboard-item" style="display: inline-flex; padding: 1rem 2rem;">
+            <i class="fas fa-envelope"></i>
+            ro-noc2020@protonmail.com
+          </a>
+        </section>
     </main>
 
     <footer class="footer">
-      <div class="footer-links">
-        <a href="https://tryhackme.com/" target="_blank">TryHackMe</a>
-        <a href="https://owasp.org/" target="_blank">OWASP</a>
-        <a href="https://www.nist.gov/cyberframework" target="_blank">NIST</a>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Navigation</h3>
+          <ul class="footer-links">
+            <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+            <li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li>
+            <li><a href="#solutions"><i class="fas fa-chevron-right"></i> Solutions</a></li>
+            <li><a href="#experience"><i class="fas fa-chevron-right"></i> Experience</a></li>
+            <li><a href="#certifications"><i class="fas fa-chevron-right"></i> Certifications</a></li>
+            <li><a href="#resources"><i class="fas fa-chevron-right"></i> Resources</a></li>
+            <li><a href="#quiz"><i class="fas fa-chevron-right"></i> Quiz</a></li>
+            <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact</h3>
+          <ul class="footer-links">
+            <li><a href="mailto:ro-noc2020@protonmail.com"><i class="fas fa-envelope"></i> Email</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Community</h3>
+          <ul class="footer-links">
+            <li><a href="https://owasp.org/" target="_blank"><i class="fas fa-users"></i> OWASP</a></li>
+            <li><a href="https://www.ec-council.org/" target="_blank"><i class="fas fa-graduation-cap"></i> EC-Council</a></li>
+            <li><a href="https://tryhackme.com/" target="_blank"><i class="fas fa-laptop-code"></i> TryHackMe</a></li>
+          </ul>
+        </div>
       </div>
-      <p class="copyright">&copy; 2025 Roman Orłowski. All rights reserved.</p>
+      <div class="footer-bottom">
+        <p>© 2025 Roman Orłowski. All rights reserved. | Secure by Design | Committed to Ethical Cybersecurity</p>
+      </div>
     </footer>
   </div>
 
@@ -332,30 +1349,88 @@ html
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script>
     // Particles.js initialization
-    if (typeof particlesJS !== 'undefined') {
-      particlesJS.load('particles-js', 'particles.json', function() {
-        console.log('particles.js loaded');
-      });
+    particlesJS.load('particles-js', 'particles.json', () => {
+      console.log('particles.js loaded');
+    });
+
+    // Cursor trail
+    const cursorTrail = document.getElementById('cursor-trail');
+    let trailTimeout;
+    document.addEventListener('mousemove', (e) => {
+      cursorTrail.style.left = `${e.clientX}px`;
+      cursorTrail.style.top = `${e.clientY}px`;
+      cursorTrail.style.display = 'block';
+      clearTimeout(trailTimeout);
+      trailTimeout = setTimeout(() => {
+        cursorTrail.style.display = 'none';
+      }, 1000);
+    });
+
+    // Particle burst on click
+    function createParticleBurst(x, y) {
+      if (window.pJSDom && window.pJSDom[0] && window.pJSDom[0].pJS) {
+        const pJS = window.pJSDom[0].pJS;
+        for (let i = 0; i < 5; i++) {
+          pJS.particles.array.push(
+            pJS.particles.array[0].clone().setPosition(x, y)
+          );
+        }
+        setTimeout(() => {
+          while (pJS.particles.array.length > pJS.particles.number.value) {
+            pJS.particles.array.shift();
+          }
+        }, 1000);
+      }
     }
+
+    document.addEventListener('click', (e) => {
+      createParticleBurst(e.clientX, e.clientY);
+    });
+
+    // Touch support for particles
+    document.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      createParticleBurst(touch.clientX, touch.clientY);
+    });
 
     // Navigation
     document.querySelectorAll('.nav-item').forEach(item => {
-      item.addEventListener('click', () => {
+      item.addEventListener('click', (e) => {
         document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
         item.classList.add('active');
         document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
-        document.getElementById(item.dataset.section).classList.add('visible');
+        const sectionId = item.dataset.section;
+        const section = document.getElementById(sectionId);
+        section.classList.add('visible');
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        createParticleBurst(e.clientX, e.clientY);
+      });
+      item.addEventListener('mouseenter', (e) => {
+        createParticleBurst(e.clientX, e.clientY);
       });
     });
 
+    // Scroll-based animation for sections and timeline items
+    function handleScrollAnimations() {
+      const elements = document.querySelectorAll('.section, .timeline-item');
+      elements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
+          el.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', handleScrollAnimations);
+    handleScrollAnimations(); // Initial check
+
     // Modal
-    function openModal() {
+    function openModal(url) {
       const modal = document.getElementById('rocyberModal');
       const iframe = document.getElementById('modalIframe');
-      iframe.src = 'https://www.rocybersolutions.com'; // Replace with actual URL
+      iframe.src = url;
       modal.style.display = 'block';
     }
 
@@ -366,11 +1441,202 @@ html
     }
 
     window.onclick = function(event) {
-      const modal = document.getElementById('rocyberModal');
-      if (event.target == modal) {
+      if (event.target.classList.contains('modal')) {
         closeModal();
       }
     };
+
+    // Quiz functionality
+    document.querySelectorAll('.quiz-option').forEach(option => {
+      option.addEventListener('click', function(e) {
+        const question = this.closest('.quiz-question');
+        const feedback = question.querySelector('.quiz-feedback');
+        const isCorrect = this.dataset.correct === 'true';
+        feedback.textContent = isCorrect ? 'Correct! Great job protecting knowledge.' : 'Incorrect. Review CEH resources to learn more.';
+        feedback.className = `quiz-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+        question.querySelectorAll('.quiz-option').forEach(opt => {
+          opt.style.pointerEvents = 'none';
+          if (opt !== this && opt.dataset.correct === 'true') {
+            opt.classList.add('correct-answer');
+          } else if (opt === this && !isCorrect) {
+            opt.classList.add('incorrect-answer');
+          }
+        });
+        createParticleBurst(e.clientX, e.clientY);
+      });
+    });
+
+    // Terminal functionality
+    const terminalOutput = document.getElementById('terminal-output');
+    const terminalCommand = document.getElementById('terminal-command');
+    const commandResult = document.getElementById('command-result');
+    const commands = {
+      help: {
+        desc: "Show available commands",
+        execute: () => {
+          let helpText = "Available commands:\n\n";
+          Object.keys(commands).forEach(cmd => {
+            helpText += `${cmd} - ${commands[cmd].desc}\n`;
+          });
+          return helpText;
+        }
+      },
+      whoami: {
+        desc: "Show current user",
+        execute: () => "root@kali"
+      },
+      nmap: {
+        desc: "Network scanner",
+        execute: () => "Starting Nmap 7.93 ( https://nmap.org )\n" +
+                      "Nmap scan report for localhost (127.0.0.1)\n" +
+                      "Host is up (0.000045s latency).\n" +
+                      "Not shown: 995 closed tcp ports (reset)\n" +
+                      "PORT     STATE SERVICE\n" +
+                      "22/tcp   open  ssh\n" +
+                      "80/tcp   open  http\n" +
+                      "443/tcp  open  https\n" +
+                      "3306/tcp open  mysql\n" +
+                      "8080/tcp open  http-proxy\n\n" +
+                      "Nmap done: 1 IP address (1 host up) scanned in 0.06 seconds\n\n" +
+                      "Tip: Use Nmap ethically for vulnerability scanning to identify risks, not exploit them."
+      },
+      msfconsole: {
+        desc: "Metasploit framework console",
+        execute: () => "       =[ metasploit v6.3.2-dev                          ]\n" +
+                       "+ -- --=[ 2291 exploits - 1205 auxiliary - 404 post       ]\n" +
+                       "+ -- --=[ 968 payloads - 45 encoders - 11 nops            ]\n" +
+                       "+ -- --=[ 9 evasion                                       ]\n\n" +
+                       "Metasploit tip: View all productivity tips with the tips command\n\n" +
+                       "msf6 > \n\n" +
+                       "Remember: Metasploit should be used for defensive testing with permission."
+      },
+      searchsploit: {
+        desc: "Search for exploits",
+        execute: () => "----------------------------------------------------------------------------------------\n" +
+                       " Exploit Title                           | Path\n" +
+                       "----------------------------------------------------------------------------------------\n" +
+                       "Apache 2.4.49 - Path Traversal          | linux/remote/50808.py\n" +
+                       "WordPress 5.8.2 - SQL Injection         | php/webapps/50756.txt\n" +
+                       "Linux Kernel 5.8 - Local Privilege Esc  | linux/local/50740.c\n" +
+                       "----------------------------------------------------------------------------------------\n" +
+                       "Shellcodes: No Results\n\n" +
+                       "Note: Report vulnerabilities responsibly to vendors before public disclosure."
+      },
+      ifconfig: {
+        desc: "Network interface configuration",
+        execute: () => "eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500\n" +
+                       "        inet 192.168.1.100  netmask 255.255.255.0  broadcast 192.168.1.255\n" +
+                       "        inet6 fe80::a00:27ff:fe4e:66a1  prefixlen 64  scopeid 0x20<link>\n" +
+                       "        ether 08:00:27:4e:66:a1  txqueuelen 1000  (Ethernet)\n" +
+                       "        RX packets 123456  bytes 987654321 (987.6 MB)\n" +
+                       "        RX errors 0  dropped 0  overruns 0  frame 0\n" +
+                       "        TX packets 654321  bytes 123456789 (123.4 MB)\n" +
+                       "        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0\n\n" +
+                       "Tip: Secure your network interfaces with firewalls and VPNs for privacy."
+      },
+      ping: {
+        desc: "Test network connectivity",
+        execute: () => "PING google.com (142.250.190.46) 56(84) bytes of data.\n" +
+                       "64 bytes from waw02s21-in-f14.1e100.net (142.250.190.46): icmp_seq=1 ttl=117 time=12.3 ms\n" +
+                       "64 bytes from waw02s21-in-f14.1e100.net (142.250.190.46): icmp_seq=2 ttl=117 time=11.8 ms\n" +
+                       "64 bytes from waw02s21-in-f14.1e100.net (142.250.190.46): icmp_seq=3 ttl=117 time=12.1 ms\n\n" +
+                       "--- google.com ping statistics ---\n" +
+                       "3 packets transmitted, 3 received, 0% packet loss, time 2003ms\n" +
+                       "rtt min/avg/max/mdev = 11.876/12.098/12.342/0.193 ms\n\n" +
+                       "Use ping for diagnostics, but avoid DoS by limiting usage."
+      },
+      netstat: {
+        desc: "Network statistics",
+        execute: () => "Active Internet connections (servers and established)\n" +
+                       "Proto Recv-Q Send-Q Local Address           Foreign Address         State\n" +
+                       "tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN\n" +
+                       "tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN\n" +
+                       "tcp        0      0 192.168.1.100:22        192.168.1.1:49234       ESTABLISHED\n" +
+                       "tcp6       0      0 :::80                   :::*                    LISTEN\n" +
+                       "tcp6       0      0 :::22                   :::*                    LISTEN\n\n" +
+                       "Monitor connections to detect unauthorized access promptly."
+      },
+      clear: {
+        desc: "Clear terminal",
+        execute: () => {
+          commandResult.innerHTML = '';
+          terminalOutput.innerHTML = `
+            <div class="terminal-line">Terminal cleared</div>
+            <div class="terminal-line">Type 'help' for available commands</div>
+          `;
+          return "";
+        }
+      },
+      uname: {
+        desc: "Show system information",
+        execute: () => "Linux kali 5.18.0-kali5-amd64 #1 SMP Debian 5.18.16-1kali1 (2022-08-31) x86_64 GNU/Linux\n\n" +
+                       "Keep your system updated for security; apply patches responsibly."
+      },
+      secure: {
+        desc: "Show security recommendations",
+        execute: () => "Security Recommendations for Mid-Size Company:\n\n" +
+                       "1. Implement Zero Trust Architecture\n" +
+                       "2. Deploy EDR/XDR solution\n" +
+                       "3. Conduct regular penetration testing (with permission)\n" +
+                       "4. Enable MFA for all users\n" +
+                       "5. Establish SOC monitoring\n" +
+                       "6. Educate on privacy practices like encryption\n" +
+                       "7. Join communities like OWASP for collaborative learning"
+      },
+      ceh_phases: {
+        desc: "List CEH ethical hacking phases",
+        execute: () => "CEH Phases:\n" +
+                       "1. Reconnaissance - Gather information ethically.\n" +
+                       "2. Scanning - Identify vulnerabilities without harm.\n" +
+                       "3. Gaining Access - Simulate attacks defensively.\n" +
+                       "4. Maintaining Access - Understand persistence for mitigation.\n" +
+                       "5. Covering Tracks - Learn to detect hidden threats.\n\n" +
+                       "Always prioritize protection and obtain legal permission."
+      },
+      privacy_tip: {
+        desc: "Get a privacy protection tip",
+        execute: () => "Privacy Tip: Use VPNs and encrypted communications (e.g., Signal) to protect your data. Comply with GDPR by minimizing data collection and using anonymization techniques."
+      },
+      disclosure: {
+        desc: "Explain responsible disclosure",
+        execute: () => "Responsible Disclosure: When finding vulnerabilities, report them to the vendor or owner promptly and ethically. Allow time for fixes before public release to prevent harm. Follow guidelines like those from CERT or vendor policies."
+      },
+      community: {
+        desc: "Suggest cybersecurity communities",
+        execute: () => "Join these communities for collaborative defense:\n" +
+                       "- OWASP: Web security forums\n" +
+                       "- CEH Forums: Ethical hacking discussions\n" +
+                       "- Reddit r/netsec: Threat intelligence sharing\n" +
+                       "- TryHackMe Discord: Hands-on learning groups\n\n" +
+                       "Foster brotherhood by sharing knowledge responsibly."
+      }
+    };
+
+    terminalCommand.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const command = terminalCommand.value.trim();
+        terminalCommand.value = '';
+        if (!command) return;
+        const commandLine = document.createElement('div');
+        commandLine.className = 'terminal-line';
+        commandLine.textContent = `$ ${command}`;
+        terminalOutput.appendChild(commandLine);
+        let result;
+        if (commands[command]) {
+          result = commands[command].execute();
+        } else {
+          result = `Command not found: ${command}\nType 'help' for available commands`;
+        }
+        if (result) {
+          const resultElement = document.createElement('div');
+          resultElement.className = 'terminal-line';
+          resultElement.textContent = result;
+          terminalOutput.appendChild(resultElement);
+        }
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        createParticleBurst(terminalCommand.getBoundingClientRect().left + 50, terminalCommand.getBoundingClientRect().top);
+      }
+    });
   </script>
 </body>
 </html>
