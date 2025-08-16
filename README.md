@@ -1,11 +1,7 @@
 # ROCyber Solutions Portfolio
-▄▄▄         ▐ ▄        ▄▄·
-▀▄ █·▪     •█▌▐█▪     ▐█ ▌▪
-▐▀▀▄  ▄█▀▄ ▐█▐▐▌ ▄█▀▄ ██ ▄▄
-▐█•█▌▐█▌.▐▌██▐█▌▐█▌.▐▌▐███▌
-.▀  ▀ ▀█▄▀▪▀▀ █▪ ▀█▄▀▪·
-
-![RO-NOC logo](https://github.com/ronoc2020/roman.orlowski/blob/main/ro-noc%20logo.png "RO-NOC Logo")
+<p style="text-align: center;">
+  <img src="https://raw.githubusercontent.com/ronoc2020/roman.orlowski/main/RO-NOC.png" alt="ROCyber Solutions Logo" width="150">
+</p>
 
 Welcome to the professional cybersecurity portfolio of **Roman Orłowski**, a SecDevOps expert dedicated to protecting people and systems through ethical cybersecurity practices. This portfolio showcases expertise in cloud security, support engineering, incident response, and automation, built with a focus on Certified Ethical Hacker (CEH) principles: honesty, privacy, responsible disclosure, and community collaboration.
 
