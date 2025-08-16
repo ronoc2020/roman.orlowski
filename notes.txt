@@ -1,0 +1,6 @@
+**Cybersecurity Notes**:
+- **Honesty**: Clearly explains the portfolio’s purpose, features, and limitations (e.g., simulated terminal commands).
+- **Privacy**: Emphasizes no data collection, aligning with GDPR and CEH privacy standards.
+- **Knowledge Empowerment**: Promotes free resources (e.g., TryHackMe, OWASP) to make cybersecurity education accessible to all.
+- **Brotherhood**: Encourages community engagement through email and links to cybersecurity forums.
+- **Standards**: References secure setup practices (e.g., HTTPS, CSP) to align with NIST and ISO 27001 guidelines.
