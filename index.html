@@ -3,11 +3,11 @@
 <head>
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline';
+    script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://threejs.org 'unsafe-inline';
     style-src 'self' https://cdnjs.cloudflare.com 'unsafe-inline';
     img-src 'self' data: https:;
-    font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com;
-    connect-src 'self' https:;
+    font-src 'self' https://cdnjs.cloudflare.com;
+    connect-src 'self';
     frame-ancestors 'none';
     form-action 'self';
     base-uri 'self';
@@ -86,9 +86,20 @@
       background-color: var(--dark);
     }
 
+    /* 3D Visualization Container */
+    #threejs-vis {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      opacity: 0.5;
+    }
+
     /* Main Container */
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 2rem;
       position: relative;
@@ -112,6 +123,7 @@
       position: relative;
       display: inline-block;
       text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+      animation: decrypt 1.5s ease-out forwards;
     }
 
     .header h1::after {
@@ -151,6 +163,7 @@
       transform: translateY(20px);
       text-transform: uppercase;
       letter-spacing: 1px;
+      border: 1px solid transparent;
     }
 
     .nav-item:nth-child(1) { animation: fadeInUp 0.5s 0.7s forwards; }
@@ -160,6 +173,9 @@
     .nav-item:nth-child(5) { animation: fadeInUp 0.5s 1.5s forwards; }
     .nav-item:nth-child(6) { animation: fadeInUp 0.5s 1.7s forwards; }
     .nav-item:nth-child(7) { animation: fadeInUp 0.5s 1.9s forwards; }
+    .nav-item:nth-child(8) { animation: fadeInUp 0.5s 2.1s forwards; }
+    .nav-item:nth-child(9) { animation: fadeInUp 0.5s 2.3s forwards; }
+    .nav-item:nth-child(10) { animation: fadeInUp 0.5s 2.5s forwards; }
 
     .nav-item::before {
       content: '';
@@ -178,16 +194,16 @@
 
     .nav-item.active {
       color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: 5px;
     }
 
     .nav-item.active::before {
       width: 100%;
     }
 
-    /* Content Sections */
     .section {
-      background: rgba(20, 20, 30, 0.7);
-      backdrop-filter: blur(10px);
+      background: rgba(20, 20, 30, 0.8);
       border-radius: 16px;
       padding: 2.5rem;
       margin-bottom: 2rem;
@@ -247,7 +263,6 @@
       background: linear-gradient(90deg, var(--primary), transparent);
     }
 
-    /* Skills Grid */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -295,7 +310,6 @@
       gap: 0.5rem;
     }
 
-    /* Experience Timeline */
     .timeline {
       position: relative;
       padding-left: 2rem;
@@ -356,7 +370,6 @@
       color: rgba(240, 240, 255, 0.8);
     }
 
-    /* Interactive Elements */
     .cyber-button {
       display: inline-flex;
       align-items: center;
@@ -400,7 +413,6 @@
       box-shadow: 0 10px 20px rgba(0, 247, 255, 0.3);
     }
 
-    /* Professional Footer */
     .footer {
       background: rgba(10, 10, 20, 0.9);
       padding: 3rem 2rem;
@@ -707,18 +719,18 @@
       background: radial-gradient(circle, var(--primary), transparent);
       animation-delay: 3s;
     }
-    
+
     .terminal-input {
       display: flex;
       align-items: center;
       margin-top: 1rem;
     }
-    
+
     .terminal-prompt {
       color: #00ffaa;
       margin-right: 0.5rem;
     }
-    
+
     #terminal-command {
       background: transparent;
       border: none;
@@ -728,38 +740,37 @@
       width: calc(100% - 50px);
       outline: none;
     }
-    
+
     .command-output {
       margin-top: 0.5rem;
       color: #00ffaa;
       white-space: pre-wrap;
       font-family: 'Courier New', monospace;
     }
-    
+
     .error {
       color: var(--critical);
     }
-    
+
     .success {
       color: var(--low);
     }
-    
+
     .info {
       color: var(--info);
     }
-    
+
     .warning {
       color: var(--medium);
     }
-    
-    /* Security Framework Visualizations */
+
     .framework-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
       margin-top: 2rem;
     }
-    
+
     .framework-card {
       background: rgba(30, 30, 40, 0.7);
       border-radius: 12px;
@@ -769,13 +780,13 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .framework-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(0, 247, 255, 0.1);
       border-color: var(--primary);
     }
-    
+
     .framework-card h3 {
       color: var(--secondary);
       margin-bottom: 1rem;
@@ -783,26 +794,25 @@
       align-items: center;
       gap: 0.5rem;
     }
-    
+
     .framework-card ul {
       list-style: none;
       margin-top: 1rem;
     }
-    
+
     .framework-card li {
       margin-bottom: 0.5rem;
       position: relative;
       padding-left: 1.5rem;
     }
-    
+
     .framework-card li::before {
       content: '▹';
       position: absolute;
       left: 0;
       color: var(--primary);
     }
-    
-    /* Security Architecture Diagram */
+
     .architecture {
       margin-top: 2rem;
       background: rgba(20, 20, 30, 0.7);
@@ -811,7 +821,7 @@
       border: 1px solid rgba(0, 247, 255, 0.1);
       position: relative;
     }
-    
+
     .architecture::before {
       content: '';
       position: absolute;
@@ -823,14 +833,14 @@
         linear-gradient(135deg, transparent 0%, rgba(0, 247, 255, 0.03) 50%, transparent 100%);
       pointer-events: none;
     }
-    
+
     .architecture-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
       margin-top: 1.5rem;
     }
-    
+
     .architecture-item {
       background: rgba(40, 40, 50, 0.5);
       border-radius: 8px;
@@ -841,37 +851,36 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .architecture-item:hover {
       transform: translateY(-3px);
       box-shadow: 0 5px 15px rgba(0, 247, 255, 0.1);
       border-color: var(--secondary);
     }
-    
+
     .architecture-item i {
       font-size: 2rem;
       margin-bottom: 0.5rem;
       color: var(--primary);
     }
-    
+
     .architecture-item h4 {
       color: var(--light);
       margin-bottom: 0.5rem;
     }
-    
+
     .architecture-item p {
       color: rgba(240, 240, 255, 0.7);
       font-size: 0.9rem;
     }
-    
+
     .architecture-connector {
       position: absolute;
       height: 2px;
       background: linear-gradient(90deg, var(--primary), var(--secondary));
       z-index: -1;
     }
-    
-    /* Threat Matrix */
+
     .threat-matrix {
       margin-top: 2rem;
       background: rgba(20, 20, 30, 0.7);
@@ -879,14 +888,14 @@
       padding: 1.5rem;
       border: 1px solid rgba(0, 247, 255, 0.1);
     }
-    
+
     .matrix-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 0.5rem;
       margin-top: 1.5rem;
     }
-    
+
     .matrix-header {
       text-align: center;
       font-weight: bold;
@@ -895,7 +904,7 @@
       background: rgba(0, 247, 255, 0.1);
       border-radius: 4px;
     }
-    
+
     .matrix-cell {
       padding: 0.5rem;
       text-align: center;
@@ -903,42 +912,41 @@
       font-size: 0.9rem;
       transition: all 0.3s ease;
     }
-    
+
     .matrix-cell:hover {
       transform: scale(1.05);
       box-shadow: 0 0 10px currentColor;
     }
-    
+
     .critical {
       background-color: rgba(255, 85, 85, 0.2);
       color: var(--critical);
       border: 1px solid var(--critical);
     }
-    
+
     .high {
       background-color: rgba(255, 153, 102, 0.2);
       color: var(--high);
       border: 1px solid var(--high);
     }
-    
+
     .medium {
       background-color: rgba(255, 204, 51, 0.2);
       color: var(--medium);
       border: 1px solid var(--medium);
     }
-    
+
     .low {
       background-color: rgba(85, 255, 85, 0.2);
       color: var(--low);
       border: 1px solid var(--low);
     }
-    
-    /* Zero Day Response Flow */
+
     .response-flow {
       margin-top: 2rem;
       position: relative;
     }
-    
+
     .flow-step {
       background: rgba(30, 30, 40, 0.7);
       border-radius: 8px;
@@ -948,12 +956,12 @@
       position: relative;
       transition: all 0.3s ease;
     }
-    
+
     .flow-step:hover {
       transform: translateX(5px);
       box-shadow: 0 5px 15px rgba(0, 247, 255, 0.1);
     }
-    
+
     .flow-step h4 {
       color: var(--primary);
       margin-bottom: 0.5rem;
@@ -961,11 +969,11 @@
       align-items: center;
       gap: 0.5rem;
     }
-    
+
     .flow-step p {
       color: rgba(240, 240, 255, 0.8);
     }
-    
+
     .flow-step::after {
       content: '↓';
       position: absolute;
@@ -975,16 +983,15 @@
       color: var(--secondary);
       font-size: 1.5rem;
     }
-    
+
     .flow-step:last-child::after {
       display: none;
     }
-    
-    /* Checklist */
+
     .checklist {
       margin-top: 2rem;
     }
-    
+
     .checklist-item {
       display: flex;
       align-items: flex-start;
@@ -994,12 +1001,12 @@
       border-radius: 8px;
       transition: all 0.3s ease;
     }
-    
+
     .checklist-item:hover {
       background: rgba(40, 40, 50, 0.7);
       transform: translateY(-3px);
     }
-    
+
     .checklist-checkbox {
       margin-right: 1rem;
       color: var(--primary);
@@ -1009,24 +1016,23 @@
     .checklist-content {
       flex-grow: 1;
     }
-    
+
     .checklist-title {
       color: var(--light);
       margin-bottom: 0.3rem;
     }
-    
+
     .checklist-desc {
       color: rgba(240, 240, 255, 0.7);
       font-size: 0.9rem;
     }
-    
-    /* Tooltip */
+
     .tooltip {
       position: relative;
       display: inline-block;
       cursor: help;
     }
-    
+
     .tooltip .tooltiptext {
       visibility: hidden;
       width: 200px;
@@ -1045,19 +1051,18 @@
       border: 1px solid var(--primary);
       font-size: 0.9rem;
     }
-    
+
     .tooltip:hover .tooltiptext {
       visibility: visible;
       opacity: 1;
     }
-    
-    /* Tabs */
+
     .tabs {
       display: flex;
       margin-bottom: 1rem;
       border-bottom: 1px solid rgba(0, 247, 255, 0.2);
     }
-    
+
     .tab {
       padding: 0.5rem 1rem;
       cursor: pointer;
@@ -1065,31 +1070,30 @@
       border-bottom: 2px solid transparent;
       transition: all 0.3s ease;
     }
-    
+
     .tab.active {
       color: var(--primary);
       border-bottom: 2px solid var(--primary);
     }
-    
+
     .tab-content {
       display: none;
     }
-    
+
     .tab-content.active {
       display: block;
     }
-    
-    /* Accordion */
+
     .accordion {
       margin-top: 1rem;
     }
-    
+
     .accordion-item {
       margin-bottom: 0.5rem;
       border-radius: 6px;
       overflow: hidden;
     }
-    
+
     .accordion-header {
       background: rgba(40, 40, 50, 0.7);
       padding: 1rem;
@@ -1099,11 +1103,11 @@
       align-items: center;
       transition: all 0.3s ease;
     }
-    
+
     .accordion-header:hover {
       background: rgba(50, 50, 60, 0.7);
     }
-    
+
     .accordion-content {
       background: rgba(30, 30, 40, 0.5);
       padding: 0;
@@ -1111,16 +1115,15 @@
       overflow: hidden;
       transition: max-height 0.3s ease;
     }
-    
+
     .accordion-content-inner {
       padding: 1rem;
     }
-    
+
     .accordion-item.active .accordion-content {
       max-height: 500px;
     }
-    
-    /* Status Indicators */
+
     .status {
       display: inline-flex;
       align-items: center;
@@ -1129,51 +1132,49 @@
       padding: 0.2rem 0.5rem;
       border-radius: 50px;
     }
-    
+
     .status-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
     }
-    
+
     .status-critical {
       color: var(--critical);
       background: rgba(255, 85, 85, 0.1);
     }
-    
+
     .status-critical .status-dot {
       background: var(--critical);
     }
-    
+
     .status-high {
       color: var(--high);
       background: rgba(255, 153, 102, 0.1);
     }
-    
+
     .status-high .status-dot {
       background: var(--high);
     }
-    
+
     .status-medium {
       color: var(--medium);
       background: rgba(255, 204, 51, 0.1);
     }
-    
+
     .status-medium .status-dot {
       background: var(--medium);
     }
-    
+
     .status-low {
       color: var(--low);
       background: rgba(85, 255, 85, 0.1);
     }
-    
+
     .status-low .status-dot {
       background: var(--low);
     }
-    
-    /* New Styles for Expanded Sections */
-    /* Certifications Grid */
+
     .certifications-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -1210,7 +1211,6 @@
       color: rgba(240, 240, 255, 0.8);
     }
 
-    /* Resources List */
     .resources-list {
       list-style: none;
       margin-top: 1.5rem;
@@ -1239,7 +1239,6 @@
       color: var(--secondary);
     }
 
-    /* Quiz Styles */
     .quiz-container {
       margin-top: 2rem;
     }
@@ -1686,7 +1685,7 @@
       </section>
 
       <section id="certifications" class="section">
-        <h2><i class="fas fa-certificate"></i> Certifications</h2>
+        <h2><i class="fas fa-certificate"></i> Certifications</h3>
         <p>Committed to continuous learning and upholding the highest standards in cybersecurity. These certifications reflect expertise in ethical hacking, protection strategies, and compliance.</p>
         <div class="certifications-grid">
           <div class="cert-card">
@@ -1861,12 +1860,14 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://threejs.org/build/three.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Initialize particles.js
       particlesJS("particles-js", {
         "particles": {
           "number": {
-            "value": 80,
+            "value": 100,
             "density": {
               "enable": true,
               "value_area": 800
@@ -1886,7 +1887,7 @@
             }
           },
           "opacity": {
-            "value": 0.3,
+            "value": 0.4,
             "random": false,
             "anim": {
               "enable": false,
@@ -1896,7 +1897,7 @@
             }
           },
           "size": {
-            "value": 3,
+            "value": 4,
             "random": true,
             "anim": {
               "enable": false,
@@ -1909,12 +1910,12 @@
             "enable": true,
             "distance": 150,
             "color": "#00f7ff",
-            "opacity": 0.2,
+            "opacity": 0.3,
             "width": 1
           },
           "move": {
             "enable": true,
-            "speed": 2,
+            "speed": 3,
             "direction": "none",
             "random": false,
             "straight": false,
@@ -1969,9 +1970,39 @@
         "retina_detect": true
       });
 
+      // 3D Visualization with Three.js for background enhancement
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.getElementById('threejs-vis').appendChild(renderer.animate());
+
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial({ color: 0x00f7ff, wireframe: true });
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+
+      camera.position.z = 5;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // Decrypt animation for header
       const header = document.querySelector('.header h1');
       header.style.animation = 'decrypt 1.5s ease-out forwards';
       
+      // Intersection Observer for sections
       const sections = document.querySelectorAll('.section');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1985,6 +2016,7 @@
         observer.observe(section);
       });
       
+      // Navigation
       const navItems = document.querySelectorAll('.nav-item');
       navItems.forEach(item => {
         item.addEventListener('click', function() {
@@ -2000,6 +2032,7 @@
         });
       });
       
+      // Interactive background elements
       const gradient = document.querySelector('.cyber-gradient');
       document.addEventListener('mousemove', (e) => {
         const x = e.clientX / window.innerWidth;
@@ -2009,12 +2042,161 @@
            linear-gradient(${-135 + x * 45}deg, rgba(255, 0, 247, 0.05) 0%, transparent 50%)`;
       });
 
+      // Typewriter effect for terminal
       const terminalLines = document.querySelectorAll('.terminal-line');
       terminalLines.forEach((line, index) => {
         line.style.animationDelay = `${index * 0.5 + 0.5}s`;
       });
       
+      // Terminal functionality
+      const terminalOutput = document.getElementById('terminal-output');
       const terminalCommand = document.getElementById('terminal-command');
+      const commandResult = document.getElementById('command-result');
+      
+      // Expanded commands
+      const commands = {
+        help: {
+          desc: "Show available commands",
+          execute: () => {
+            let helpText = "Available commands:\n\n";
+            Object.keys(commands).forEach(cmd => {
+              helpText += `${cmd} - ${commands[cmd].desc}\n`;
+            });
+            return helpText;
+          }
+        },
+        whoami: {
+          desc: "Show current user",
+          execute: () => "root@kali"
+        },
+        nmap: {
+          desc: "Network scanner",
+          execute: () => "Starting Nmap 7.93 ( https://nmap.org )\n" +
+                        "Nmap scan report for localhost (127.0.0.1)\n" +
+                        "Host is up (0.000045s latency).\n" +
+                        "Not shown: 995 closed tcp ports (reset)\n" +
+                        "PORT     STATE SERVICE\n" +
+                        "22/tcp   open  ssh\n" +
+                        "80/tcp   open  http\n" +
+                        "443/tcp  open  https\n" +
+                        "3306/tcp open  mysql\n" +
+                        "8080/tcp open  http-proxy\n\n" +
+                        "Nmap done: 1 IP address (1 host up) scanned in 0.06 seconds\n\n" +
+                        "Tip: Use Nmap ethically for vulnerability scanning to identify risks, not exploit them."
+        },
+        msfconsole: {
+          desc: "Metasploit framework console",
+          execute: () => "       =[ metasploit v6.3.2-dev                          ]\n" +
+                         "+ -- --=[ 2291 exploits - 1205 auxiliary - 404 post       ]\n" +
+                         "+ -- --=[ 968 payloads - 45 encoders - 11 nops            ]\n" +
+                         "+ -- --=[ 9 evasion                                       ]\n\n" +
+                         "Metasploit tip: View all productivity tips with the tips command\n\n" +
+                         "msf6 > \n\n" +
+                         "Remember: Metasploit should be used for defensive testing with permission."
+        },
+        searchsploit: {
+          desc: "Search for exploits",
+          execute: () => "----------------------------------------------------------------------------------------\n" +
+                         " Exploit Title                           | Path\n" +
+                         "----------------------------------------------------------------------------------------\n" +
+                         "Apache 2.4.49 - Path Traversal          | linux/remote/50808.py\n" +
+                         "WordPress 5.8.2 - SQL Injection         | php/webapps/50756.txt\n" +
+                         "Linux Kernel 5.8 - Local Privilege Esc  | linux/local/50740.c\n" +
+                         "----------------------------------------------------------------------------------------\n" +
+                         "Shellcodes: No Results\n\n" +
+                         "Note: Report vulnerabilities responsibly to vendors before public disclosure."
+        },
+        ifconfig: {
+          desc: "Network interface configuration",
+          execute: () => "eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500\n" +
+                         "        inet 192.168.1.100  netmask 255.255.255.0  broadcast 192.168.1.255\n" +
+                         "        inet6 fe80::a00:27ff:fe4e:66a1  prefixlen 64  scopeid 0x20<link>\n" +
+                         "        ether 08:00:27:4e:66:a1  txqueuelen 1000  (Ethernet)\n" +
+                         "        RX packets 123456  bytes 987654321 (987.6 MB)\n" +
+                         "        RX errors 0  dropped 0  overruns 0  frame 0\n" +
+                         "        TX packets 654321  bytes 123456789 (123.4 MB)\n" +
+                         "        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0\n\n" +
+                         "Tip: Secure your network interfaces with firewalls and VPNs for privacy."
+        },
+        ping: {
+          desc: "Test network connectivity",
+          execute: () => "PING google.com (142.250.190.46) 56(84) bytes of data.\n" +
+                         "64 bytes from waw02s21-in-f14.1e100.net (142.250.190.46): icmp_seq=1 ttl=117 time=12.3 ms\n" +
+                         "64 bytes from waw02s21-in-f14.1e100.net (142.250.190.46): icmp_seq=2 ttl=117 time=11.8 ms\n" +
+                         "64 bytes from waw02s21-in-f14.1e100.net (142.250.190.46): icmp_seq=3 ttl=117 time=12.1 ms\n\n" +
+                         "--- google.com ping statistics ---\n" +
+                         "3 packets transmitted, 3 received, 0% packet loss, time 2003ms\n" +
+                         "rtt min/avg/max/mdev = 11.876/12.098/12.342/0.193 ms\n\n" +
+                         "Use ping for diagnostics, but avoid DoS by limiting usage."
+        },
+        netstat: {
+          desc: "Network statistics",
+          execute: () => "Active Internet connections (servers and established)\n" +
+                         "Proto Recv-Q Send-Q Local Address           Foreign Address         State\n" +
+                         "tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN\n" +
+                         "tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN\n" +
+                         "tcp        0      0 192.168.1.100:22        192.168.1.1:49234       ESTABLISHED\n" +
+                         "tcp6       0      0 :::80                   :::*                    LISTEN\n" +
+                         "tcp6       0      0 :::22                   :::*                    LISTEN\n\n" +
+                         "Monitor connections to detect unauthorized access promptly."
+        },
+        clear: {
+          desc: "Clear terminal",
+          execute: () => {
+            commandResult.innerHTML = '';
+            terminalOutput.innerHTML = `
+              <div class="terminal-line">Terminal cleared</div>
+              <div class="terminal-line">Type 'help' for available commands</div>
+            `;
+            return "";
+          }
+        },
+        uname: {
+          desc: "Show system information",
+          execute: () => "Linux kali 5.18.0-kali5-amd64 #1 SMP Debian 5.18.16-1kali1 (2022-08-31) x86_64 GNU/Linux\n\n" +
+                         "Keep your system updated for security; apply patches responsibly."
+        },
+        secure: {
+          desc: "Show security recommendations",
+          execute: () => "Security Recommendations for Mid-Size Company:\n\n" +
+                         "1. Implement Zero Trust Architecture\n" +
+                         "2. Deploy EDR/XDR solution\n" +
+                         "3. Conduct regular penetration testing (with permission)\n" +
+                         "4. Enable MFA for all users\n" +
+                         "5. Establish SOC monitoring\n" +
+                         "6. Educate on privacy practices like encryption\n" +
+                         "7. Join communities like OWASP for collaborative learning"
+        },
+        ceh_phases: {
+          desc: "List CEH ethical hacking phases",
+          execute: () => "CEH Phases:\n" +
+                         "1. Reconnaissance - Gather information ethically.\n" +
+                         "2. Scanning - Identify vulnerabilities without harm.\n" +
+                         "3. Gaining Access - Simulate attacks defensively.\n" +
+                         "4. Maintaining Access - Understand persistence for mitigation.\n" +
+                         "5. Covering Tracks - Learn to detect hidden threats.\n\n" +
+                         "Always prioritize protection and obtain legal permission."
+        },
+        privacy_tip: {
+          desc: "Get a privacy protection tip",
+          execute: () => "Privacy Tip: Use VPNs and encrypted communications (e.g., Signal) to protect your data. Comply with GDPR by minimizing data collection and using anonymization techniques."
+        },
+        disclosure: {
+          desc: "Explain responsible disclosure",
+          execute: () => "Responsible Disclosure: When finding vulnerabilities, report them to the vendor or owner promptly and ethically. Allow time for fixes before public release to prevent harm. Follow guidelines like those from CERT or vendor policies."
+        },
+        community: {
+          desc: "Suggest cybersecurity communities",
+          execute: () => "Join these communities for collaborative defense:\n" +
+                         "- OWASP: Web security forums\n" +
+                         "- CEH Forums: Ethical hacking discussions\n" +
+                         "- Reddit r/netsec: Threat intelligence sharing\n" +
+                         "- TryHackMe Discord: Hands-on learning groups\n\n" +
+                         "Foster brotherhood by sharing knowledge responsibly."
+        }
+      };
+      
+      // Handle command execution
       terminalCommand.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
           const command = terminalCommand.value.trim();
@@ -2022,11 +2204,13 @@
           
           if (!command) return;
           
+          // Add command to output
           const commandLine = document.createElement('div');
           commandLine.className = 'terminal-line';
           commandLine.textContent = `$ ${command}`;
           terminalOutput.appendChild(commandLine);
           
+          // Execute command
           let result;
           if (commands[command]) {
             result = commands[command].execute();
@@ -2034,6 +2218,7 @@
             result = `Command not found: ${command}\nType 'help' for available commands`;
           }
           
+          // Display result
           if (result) {
             const resultElement = document.createElement('div');
             resultElement.className = 'terminal-line';
@@ -2041,10 +2226,12 @@
             terminalOutput.appendChild(resultElement);
           }
           
+          // Scroll to bottom
           terminalOutput.scrollTop = terminalOutput.scrollHeight;
         }
       });
       
+      // Accordion functionality
       const accordionItems = document.querySelectorAll('.accordion-item');
       accordionItems.forEach(item => {
         const header = item.querySelector('.accordion-header');
