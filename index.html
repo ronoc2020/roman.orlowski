@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,6 +161,12 @@
     .nav-item:nth-child(5) { animation: fadeInUp 0.5s 1.5s forwards; }
     .nav-item:nth-child(6) { animation: fadeInUp 0.5s 1.7s forwards; }
     .nav-item:nth-child(7) { animation: fadeInUp 0.5s 1.9s forwards; }
+    .nav-item:nth-child(8) { animation: fadeInUp 0.5s 2.1s forwards; }
+    .nav-item:nth-child(9) { animation: fadeInUp 0.5s 2.3s forwards; }
+    .nav-item:nth-child(10) { animation: fadeInUp 0.5s 2.5s forwards; }
+    .nav-item:nth-child(11) { animation: fadeInUp 0.5s 2.7s forwards; }
+    .nav-item:nth-child(12) { animation: fadeInUp 0.5s 2.9s forwards; }
+    .nav-item:nth-child(13) { animation: fadeInUp 0.5s 3.1s forwards; }
 
     .nav-item::before {
       content: '';
@@ -1210,6 +1217,18 @@
       color: rgba(240, 240, 255, 0.8);
     }
 
+    .cert-card a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.8rem;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    .cert-card a:hover {
+      color: var(--secondary);
+    }
+
     /* Resources List */
     .resources-list {
       list-style: none;
@@ -1286,6 +1305,100 @@
     .incorrect {
       color: var(--critical);
     }
+
+    /* Attributes Grid */
+    .attributes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .attribute-card {
+      background: rgba(30, 30, 40, 0.5);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 247, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .attribute-card:hover {
+      transform: translateY(-5px);
+      background: rgba(40, 40, 50, 0.7);
+      border-color: var(--primary);
+      box-shadow: var(--glow);
+    }
+
+    .attribute-card h3 {
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .attribute-card ul {
+      list-style: none;
+    }
+
+    .attribute-card li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(240, 240, 255, 0.8);
+    }
+
+    /* Tools Grid */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tool-card {
+      background: rgba(30, 30, 40, 0.5);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 247, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+      background: rgba(40, 40, 50, 0.7);
+      border-color: var(--primary);
+      box-shadow: var(--glow);
+    }
+
+    .tool-card h3 {
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tool-card p {
+      color: rgba(240, 240, 255, 0.8);
+    }
+
+    .tool-card a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.8rem;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    .tool-card a:hover {
+      color: var(--secondary);
+    }
   </style>
 </head>
 <body class="smooth-scroll">
@@ -1304,10 +1417,15 @@
 
     <nav class="nav">
       <div class="nav-item active" data-section="about">About</div>
+      <div class="nav-item" data-section="profile">Profile</div>
+      <div class="nav-item" data-section="personality">Personality</div>
+      <div class="nav-item" data-section="abilities">Abilities</div>
+      <div class="nav-item" data-section="management">Management</div>
       <div class="nav-item" data-section="skills">Skills</div>
       <div class="nav-item" data-section="solutions">Solutions</div>
       <div class="nav-item" data-section="experience">Experience</div>
       <div class="nav-item" data-section="certifications">Certifications</div>
+      <div class="nav-item" data-section="tools">Privacy, Security, Tools & Learning</div>
       <div class="nav-item" data-section="resources">Resources</div>
       <div class="nav-item" data-section="quiz">Cyber Quiz</div>
       <div class="nav-item" data-section="terminal">Terminal</div>
@@ -1342,6 +1460,65 @@
           <a href="#contact" class="cyber-button">
             <i class="fas fa-envelope"></i> Contact Me
           </a>
+        </div>
+      </section>
+
+      <section id="profile" class="section">
+        <h2><i class="fas fa-user"></i> Profile</h2>
+        <p>Postgraduate qualification in Cyber/Information Security. Strong understanding of NIST Cybersecurity Framework (CSF). Knowledge of global regulatory frameworks: ISO 27001, NIS2, SOX, GDPR, DORA. Experience in Cyber Due Diligence Assessments for mergers, acquisitions, and business risk evaluations. Expertise in Third-Party & Supply Chain Cyber Risk Management. Skilled in Incident Response Planning, Review & Post-Incident Analysis. Delivered Crisis Management Exercises (CMX) for executive and operational teams. Proven ability in supporting bids, RFP responses, and proposals for cyber security services. Professional certifications: CISSP, CISM, CISA, GSLC, GSTRT, GCPM. Contributed to the design of Target Operating Models (TOMs) and RACI Matrices. Developed and guided Cyber Security Roadmaps aligned with organizational strategy. Proficient in analyzing, summarizing Cyber Threat Intelligence (CTI) reports for executive decision-making. Implementation and oversight of Cybersecurity Compliance Programs (GDPR, DORA, ISO 27001, NIS2, SOX). Conducted Cyber Risk Assessments and Maturity Assessments across multiple industries. Designed and delivered Cyber Awareness Training for staff and executives. Hands-on experience with Identity and Access Management (IAM) and Privileged Access Management (PAM) projects.</p>
+      </section>
+
+      <section id="personality" class="section">
+        <h2><i class="fas fa-heart"></i> Personality</h2>
+        <div class="attributes-grid">
+          <div class="attribute-card">
+            <h3><i class="fas fa-users"></i> Personality Traits</h3>
+            <ul>
+              <li><i class="fas fa-check"></i> Good Team Mate</li>
+              <li><i class="fas fa-check"></i> Self-development</li>
+              <li><i class="fas fa-check"></i> Optimistic</li>
+              <li><i class="fas fa-check"></i> Patient and persistent in finding solutions</li>
+              <li><i class="fas fa-check"></i> Positive attitude and ability to stay calm in difficult situations</li>
+              <li><i class="fas fa-check"></i> Empathetic and patient in helping users troubleshoot technical issues</li>
+              <li><i class="fas fa-check"></i> Dependable and reliable in completing tasks</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="abilities" class="section">
+        <h2><i class="fas fa-tools"></i> Abilities</h2>
+        <div class="attributes-grid">
+          <div class="attribute-card">
+            <h3><i class="fas fa-brain"></i> Key Abilities</h3>
+            <ul>
+              <li><i class="fas fa-check"></i> Organized</li>
+              <li><i class="fas fa-check"></i> Precision</li>
+              <li><i class="fas fa-check"></i> Detail-oriented and precise in work</li>
+              <li><i class="fas fa-check"></i> Analytical and logical in approach to problem-solving</li>
+              <li><i class="fas fa-check"></i> Strong work ethic and attention to detail</li>
+              <li><i class="fas fa-check"></i> Excellent communication skills to convey technical issues to non-technical people</li>
+              <li><i class="fas fa-check"></i> Ability to work well under pressure and in high-stress situations</li>
+              <li><i class="fas fa-check"></i> Excellent communication and customer service skills</li>
+              <li><i class="fas fa-check"></i> Team player who can collaborate with others effectively</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="management" class="section">
+        <h2><i class="fas fa-sitemap"></i> Management</h2>
+        <div class="attributes-grid">
+          <div class="attribute-card">
+            <h3><i class="fas fa-chart-line"></i> Management Skills</h3>
+            <ul>
+              <li><i class="fas fa-check"></i> Strong leadership skills to motivate and inspire teams</li>
+              <li><i class="fas fa-check"></i> Strategic thinker who can prioritize effectively</li>
+              <li><i class="fas fa-check"></i> Continuous learner with a curiosity for new technologies</li>
+              <li><i class="fas fa-check"></i> Independent and self-motivated</li>
+              <li><i class="fas fa-check"></i> Managing budgets and timelines</li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -1691,23 +1868,370 @@
         <div class="certifications-grid">
           <div class="cert-card">
             <h3><i class="fas fa-graduation-cap"></i> Certified Ethical Hacker (CEH)</h3>
-            <p>EC-Council. Mastery in ethical hacking methodologies, vulnerability assessment, and defensive techniques to protect systems responsibly.</p>
+            <p>Mastery in ethical hacking methodologies, vulnerability assessment, and defensive techniques to protect systems responsibly.</p>
+            <a href="https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/" target="_blank">Learn More</a>
           </div>
           <div class="cert-card">
             <h3><i class="fas fa-shield-alt"></i> CompTIA Security+</h3>
             <p>Foundational knowledge in network security, compliance, and operational security. Emphasizes practical skills for entry-level protection.</p>
+            <a href="https://www.comptia.org/certifications/security" target="_blank">Learn More</a>
           </div>
           <div class="cert-card">
             <h3><i class="fab fa-microsoft"></i> Microsoft Azure Security Engineer Associate</h3>
             <p>Expertise in implementing security controls, maintaining security posture, and protecting data in Azure environments.</p>
+            <a href="https://learn.microsoft.com/en-us/certifications/azure-security-engineer/" target="_blank">Learn More</a>
           </div>
           <div class="cert-card">
-            <h3><i class="fas fa-lock"></i> CISSP (In Progress)</h3>
+            <h3><i class="fas fa-lock"></i> CISSP</h3>
             <p>ISC2. Advanced certification covering security and risk management, asset security, and communication protection.</p>
+            <a href="https://www.isc2.org/certifications/cissp" target="_blank">Learn More</a>
           </div>
           <div class="cert-card">
             <h3><i class="fas fa-cloud"></i> AWS Certified Security - Specialty</h3>
             <p>Specialized in designing and implementing security solutions on AWS, focusing on data protection and incident response.</p>
+            <a href="https://aws.amazon.com/certification/certified-security-specialty/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-skull-crossbones"></i> The Cyber Kill Chain</h3>
+            <p>Training on Lockheed Martin's Cyber Kill Chain model for understanding and preventing cyber attacks through stages like reconnaissance and exfiltration.</p>
+            <a href="https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-search"></i> OSINT Basics</h3>
+            <p>Fundamentals of Open Source Intelligence gathering for ethical reconnaissance and threat intelligence without invasive methods.</p>
+            <a href="https://osintframework.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-user-secret"></i> OpSec Awareness for Military Members</h3>
+            <p>Operations Security training focused on protecting sensitive information in military contexts, emphasizing risk mitigation.</p>
+            <a href="https://www.cdse.edu/Training/OPSEC/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-exclamation-triangle"></i> Counterintelligence Awareness and Reporting Course for DOD</h3>
+            <p>U.S. Department of Defense course on identifying and reporting counterintelligence threats to safeguard national security.</p>
+            <a href="https://www.cdse.edu/Training/Counterintelligence/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-book"></i> MS-L100</h3>
+            <p>Military-specific leadership training focused on foundational skills for secure operations and team management.</p>
+            <a href="https://www.army.mil/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-book"></i> MS-L200</h3>
+            <p>Advanced military leadership course emphasizing strategic decision-making in high-stakes environments.</p>
+            <a href="https://www.army.mil/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-certificate"></i> ISO 9001:2015</h3>
+            <p>Quality management systems certification for ensuring consistent processes and compliance in operations.</p>
+            <a href="https://www.iso.org/standard/62085.html" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-phone"></i> Professional Customer Phone Support</h3>
+            <p>Training in effective customer service over phone, focusing on empathy and technical issue resolution.</p>
+            <a href="https://www.linkedin.com/learning/professional-customer-service" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-bolt"></i> SEP Authorization – up to 1 kV</h3>
+            <p>Authorization for safe electrical work up to 1 kV, ensuring compliance with safety standards in infrastructure.</p>
+            <a href="https://www.sep.org.pl/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-license"></i> MDF Accreditation License</h3>
+            <p>Accreditation for Main Distribution Frame management in telecommunications, focusing on secure network configurations.</p>
+            <a href="https://www.telecoms.com/" target="_blank">Learn More</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="tools" class="section">
+        <h2><i class="fas fa-toolbox"></i> Privacy, Security, Tools & Learning</h2>
+        <p>Expertise in privacy-focused frameworks, security tools, and continuous learning resources. Each tool is described with its defensive use case, aligned with ethical practices.</p>
+        <div class="tools-grid">
+          <div class="tool-card">
+            <h3><i class="fas fa-file-alt"></i> NIST SP 800-30</h3>
+            <p>Guide for conducting risk assessments to identify and prioritize cybersecurity risks ethically.</p>
+            <a href="https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-chess-board"></i> MITRE ATT&CK</h3>
+            <p>Knowledge base of adversary tactics for threat modeling and defense strategy development.</p>
+            <a href="https://attack.mitre.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-list-ol"></i> OWASP Top 10</h3>
+            <p>List of critical web application security risks for vulnerability mitigation and secure coding.</p>
+            <a href="https://owasp.org/www-project-top-ten/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-balance-scale"></i> CIA Triad</h3>
+            <p>Model for Confidentiality, Integrity, Availability to guide secure system design.</p>
+            <a href="https://en.wikipedia.org/wiki/CIA_triad" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-robot"></i> Darktrace</h3>
+            <p>AI-driven threat detection for autonomous response to anomalies in networks.</p>
+            <a href="https://www.darktrace.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-shield-virus"></i> CyOps</h3>
+            <p>Cyber operations tool for incident response and threat hunting.</p>
+            <a href="https://www.cyops.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-bug"></i> Metasploit</h3>
+            <p>Framework for developing and executing exploit code against remote targets ethically in testing.</p>
+            <a href="https://www.metasploit.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-key"></i> Hashcat</h3>
+            <p>Advanced password recovery tool for auditing weak passwords in controlled environments.</p>
+            <a href="https://hashcat.net/hashcat/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-search"></i> OpenVAS</h3>
+            <p>Open Vulnerability Assessment System for scanning and managing vulnerabilities.</p>
+            <a href="https://www.openvas.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-tools"></i> Didier Stevens Suite</h3>
+            <p>Collection of tools for malware analysis and PDF forensics.</p>
+            <a href="https://blog.didierstevens.com/programs/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-spider"></i> OWASP ZAP</h3>
+            <p>Web application security scanner for finding vulnerabilities in apps.</p>
+            <a href="https://www.zaproxy.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-wifi"></i> Aircrack-ng</h3>
+            <p>Suite for wireless network auditing and security testing.</p>
+            <a href="https://www.aircrack-ng.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-stethoscope"></i> Burp Suite</h3>
+            <p>Platform for web vulnerability scanning and manual testing.</p>
+            <a href="https://portswigger.net/burp" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-search-location"></i> Google Hacking Database</h3>
+            <p>Database of dorks for advanced Google searches in OSINT.</p>
+            <a href="https://www.exploit-db.com/google-hacking-database" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-network-wired"></i> Wireshark</h3>
+            <p>Network protocol analyzer for troubleshooting and security analysis.</p>
+            <a href="https://www.wireshark.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-exclamation-triangle"></i> CVE’s</h3>
+            <p>Common Vulnerabilities and Exposures database for tracking known issues.</p>
+            <a href="https://cve.mitre.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-user-secret"></i> OSINT</h3>
+            <p>Open Source Intelligence techniques for gathering public data ethically.</p>
+            <a href="https://osintframework.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-robot"></i> Chat GPT Jailbreaking</h3>
+            <p>Techniques for testing AI boundaries in ethical red teaming.</p>
+            <a href="https://openai.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-flask"></i> VulnLab</h3>
+            <p>Lab environment for practicing vulnerability exploitation safely.</p>
+            <a href="https://vulnhub.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-database"></i> VulnDB</h3>
+            <p>Vulnerability database for research and mitigation strategies.</p>
+            <a href="https://vuldb.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-box"></i> Hack the Box</h3>
+            <p>Platform for hands-on penetration testing challenges.</p>
+            <a href="https://www.hackthebox.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-shield-alt"></i> Let’s Defend</h3>
+            <p>Blue team simulation platform for defending against attacks.</p>
+            <a href="https://letsdefend.io/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-bug"></i> HackerOne</h3>
+            <p>Bug bounty platform for responsible disclosure of vulnerabilities.</p>
+            <a href="https://www.hackerone.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-search"></i> Censys Search</h3>
+            <p>Internet-wide search engine for exposed devices and services.</p>
+            <a href="https://censys.io/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-globe"></i> Shodan</h3>
+            <p>Search engine for Internet-connected devices for OSINT.</p>
+            <a href="https://www.shodan.io/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-link"></i> Maltego</h3>
+            <p>Tool for link analysis and data mining in investigations.</p>
+            <a href="https://www.maltego.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-chart-bar"></i> Splunk</h3>
+            <p>SIEM tool for searching, monitoring, and analyzing machine data.</p>
+            <a href="https://www.splunk.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-users"></i> Tribe</h3>
+            <p>Community platform for cybersecurity collaboration.</p>
+            <a href="https://tribe.xyz/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-cubes"></i> Kubernetes</h3>
+            <p>Container orchestration for secure deployment of applications.</p>
+            <a href="https://kubernetes.io/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-fire"></i> Spitfire</h3>
+            <p>Tool for rapid incident response and forensics.</p>
+            <a href="https://github.com/Spitfire" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-cat"></i> Wily</h3>
+            <p>Application performance monitoring for security insights.</p>
+            <a href="https://www.ca.com/us/products/ca-application-performance-management.html" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-cloud"></i> Cloudlock</h3>
+            <p>Cloud access security broker for data protection in cloud environments.</p>
+            <a href="https://www.cisco.com/c/en/us/products/security/cloudlock/index.html" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-snowflake"></i> Snow</h3>
+            <p>ServiceNow shorthand for IT service management with security integrations.</p>
+            <a href="https://www.servicenow.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-gamepad"></i> Openbet</h3>
+            <p>Gaming platform with secure transaction handling.</p>
+            <a href="https://www.openbet.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-envelope"></i> DMA</h3>
+            <p>Direct Marketing Association for privacy-compliant communications.</p>
+            <a href="https://thedma.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-code"></i> Deva</h3>
+            <p>Development tool for secure app building.</p>
+            <a href="https://deva.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-chart-line"></i> PRTG</h3>
+            <p>Network monitoring tool for performance and security alerts.</p>
+            <a href="https://www.paessler.com/prtg" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-eye"></i> Espy</h3>
+            <p>Monitoring tool for network visibility.</p>
+            <a href="https://espy.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-plug"></i> BlueSocket</h3>
+            <p>Wireless access control for secure Wi-Fi management.</p>
+            <a href="https://www.adtran.com/products/bluesocket/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-wifi"></i> Radwin</h3>
+            <p>Wireless broadband solutions with security features.</p>
+            <a href="https://www.radwin.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-network-wired"></i> WireShark</h3>
+            <p>Packet analyzer for network troubleshooting and security.</p>
+            <a href="https://www.wireshark.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-search-location"></i> The Harvester</h3>
+            <p>OSINT tool for gathering emails, subdomains, and hosts.</p>
+            <a href="https://github.com/laramies/theHarvester" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-certificate"></i> ISO:270001</h3>
+            <p>Standard for information security management systems.</p>
+            <a href="https://www.iso.org/isoiec-27001-information-security.html" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-crow"></i> Crowdstrike</h3>
+            <p>Endpoint protection platform for threat detection and response.</p>
+            <a href="https://www.crowdstrike.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fab fa-microsoft"></i> Azure Sentinel</h3>
+            <p>Cloud-native SIEM for intelligent security analytics.</p>
+            <a href="https://azure.microsoft.com/en-us/services/microsoft-sentinel/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-shield-alt"></i> Defender for Endpoint</h3>
+            <p>Microsoft's endpoint security solution for threat protection.</p>
+            <a href="https://www.microsoft.com/en-us/security/business/endpoint-protection/microsoft-defender-endpoint" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-cloud"></i> Azure Cost Management</h3>
+            <p>Tool for monitoring and optimizing cloud spending with security considerations.</p>
+            <a href="https://azure.microsoft.com/en-us/services/cost-management/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-cloud"></i> Cloudflare</h3>
+            <p>Web performance and security company for DDoS protection and more.</p>
+            <a href="https://www.cloudflare.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-ticket-alt"></i> Jira</h3>
+            <p>Issue tracking tool for agile project management in security teams.</p>
+            <a href="https://www.atlassian.com/software/jira" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-headset"></i> ServiceNow</h3>
+            <p>IT service management platform with security operations modules.</p>
+            <a href="https://www.servicenow.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-bell"></i> PagerDuty</h3>
+            <p>Incident response platform for alerting and on-call management.</p>
+            <a href="https://www.pagerduty.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-robot"></i> Rundeck</h3>
+            <p>Automation tool for operations and security tasks.</p>
+            <a href="https://www.rundeck.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-network-wired"></i> Alcatel Network</h3>
+            <p>Networking solutions for secure enterprise connectivity.</p>
+            <a href="https://www.al-enterprise.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fab fa-salesforce"></i> Salesforce CRM</h3>
+            <p>Customer relationship management platform with secure data handling and integration capabilities for sales and support.</p>
+            <a href="https://www.salesforce.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-database"></i> Zoho CRM</h3>
+            <p>Open-source alternative CRM for managing customer interactions with privacy-focused features.</p>
+            <a href="https://www.zoho.com/crm/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-users"></i> HubSpot CRM</h3>
+            <p>Free CRM tool for inbound marketing, sales, and service with secure data encryption.</p>
+            <a href="https://www.hubspot.com/products/crm" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-lock"></i> Bitrix24 CRM</h3>
+            <p>Open-source CRM with collaboration tools and GDPR-compliant security features.</p>
+            <a href="https://www.bitrix24.com/" target="_blank">Learn More</a>
           </div>
         </div>
       </section>
@@ -1827,10 +2351,15 @@
         <h3>Navigation</h3>
         <ul class="footer-links">
           <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+          <li><a href="#profile"><i class="fas fa-chevron-right"></i> Profile</a></li>
+          <li><a href="#personality"><i class="fas fa-chevron-right"></i> Personality</a></li>
+          <li><a href="#abilities"><i class="fas fa-chevron-right"></i> Abilities</a></li>
+          <li><a href="#management"><i class="fas fa-chevron-right"></i> Management</a></li>
           <li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li>
           <li><a href="#solutions"><i class="fas fa-chevron-right"></i> Solutions</a></li>
           <li><a href="#experience"><i class="fas fa-chevron-right"></i> Experience</a></li>
           <li><a href="#certifications"><i class="fas fa-chevron-right"></i> Certifications</a></li>
+          <li><a href="#tools"><i class="fas fa-chevron-right"></i> Tools</a></li>
           <li><a href="#resources"><i class="fas fa-chevron-right"></i> Resources</a></li>
           <li><a href="#quiz"><i class="fas fa-chevron-right"></i> Quiz</a></li>
           <li><a href="#terminal"><i class="fas fa-chevron-right"></i> Terminal</a></li>
@@ -2015,6 +2544,7 @@
       });
       
       const terminalCommand = document.getElementById('terminal-command');
+      const terminalOutput = document.getElementById('terminal-output');
       terminalCommand.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
           const command = terminalCommand.value.trim();
@@ -2052,7 +2582,47 @@
           item.classList.toggle('active');
         });
       });
+
+      // Quiz Functionality
+      const quizOptions = document.querySelectorAll('.quiz-option');
+      quizOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          const question = this.closest('.quiz-question');
+          const feedback = question.querySelector('.quiz-feedback');
+          const isCorrect = this.dataset.correct === 'true';
+          feedback.textContent = isCorrect ? 'Correct!' : 'Incorrect. Try again!';
+          feedback.className = `quiz-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+        });
+      });
     });
+
+    const commands = {
+      help: {
+        execute: () => `Available commands:\nnmap\nmsfconsole\nsearchsploit\nwhoami\nceh_phases\nprivacy_tip\ndisclosure`
+      },
+      nmap: {
+        execute: () => `Nmap 7.92 scan initiated... (simulated)\nDiscovered open port 80/tcp on target\nDiscovered open port 443/tcp on target`
+      },
+      msfconsole: {
+        execute: () => `Starting Metasploit Framework console... (simulated)\nmsf6 > use exploit/multi/http/example\nRemember: Use ethically for testing only.`
+      },
+      searchsploit: {
+        execute: () => `Exploit-DB search results: (simulated)\nWindows - Remote Code Execution\nLinux - Privilege Escalation\nReport vulnerabilities responsibly.`
+      },
+      whoami: {
+        execute: () => `root@kali`
+      },
+      ceh_phases: {
+        execute: () => `CEH Phases:\n1. Reconnaissance\n2. Scanning\n3. Gaining Access\n4. Maintaining Access\n5. Covering Tracks\nFocus on defense and ethical use.`
+      },
+      privacy_tip: {
+        execute: () => `Privacy Tip: Use encryption (e.g., VPNs) and enable MFA to protect personal data. Comply with GDPR for privacy-by-design.`
+      },
+      disclosure: {
+        execute: () => `Responsible Disclosure: Report vulnerabilities to vendors first, allow time for patches before public release. Align with CEH ethics.`
+      }
+    };
   </script>
 </body>
 </html>
+```
