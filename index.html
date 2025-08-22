@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline';
+    style-src 'self' https://cdnjs.cloudflare.com 'unsafe-inline';
+    img-src 'self' data: https:;
+    font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com;
+    connect-src 'self' https:;
+    frame-ancestors 'none';
+    form-action 'self';
+    base-uri 'self';
+  ">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roman Orłowski | Cyber Security Expert</title>
+  <meta charset="UTF-8">
+  <title>Roman Orłowski | ROCyber Solutions</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <style>
@@ -12,7 +26,6 @@
       --secondary: #00ffaa;
       --accent: #ff00f7;
       --dark: #0a0a12;
-      --darker: #050508;
       --light: #f0f0ff;
       --glow: 0 0 15px currentColor;
       --section-delay: 0.3s;
@@ -36,15 +49,13 @@
 
     body {
       font-family: 'Cyber', sans-serif;
-      background-color: var(--darker);
+      background-color: var(--dark);
       color: var(--light);
       line-height: 1.6;
       overflow-x: hidden;
       background-image: 
         radial-gradient(circle at 75% 25%, rgba(0, 247, 255, 0.03) 0%, transparent 30%),
         radial-gradient(circle at 25% 75%, rgba(0, 255, 170, 0.03) 0%, transparent 30%);
-      perspective: 1000px;
-      min-height: 100vh;
     }
 
     .smooth-scroll {
@@ -75,28 +86,6 @@
       background-color: var(--dark);
     }
 
-    /* Audio Visualizer */
-    #visualizer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 2px;
-      z-index: -1;
-      opacity: 0.7;
-    }
-
-    .bar {
-      width: 4px;
-      background: var(--primary);
-      border-radius: 2px 2px 0 0;
-      transition: height 0.1s ease;
-    }
-
     /* Main Container */
     .container {
       max-width: 1200px;
@@ -123,7 +112,6 @@
       position: relative;
       display: inline-block;
       text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
-      animation: decrypt 2s ease-out forwards, pulse 3s infinite alternate;
     }
 
     .header h1::after {
@@ -150,14 +138,6 @@
       gap: 1.5rem;
       margin-bottom: 3rem;
       flex-wrap: wrap;
-      position: sticky;
-      top: 20px;
-      z-index: 100;
-      background: rgba(10, 10, 18, 0.8);
-      backdrop-filter: blur(10px);
-      padding: 1rem;
-      border-radius: 50px;
-      border: 1px solid rgba(0, 247, 255, 0.1);
     }
 
     .nav-item {
@@ -183,6 +163,9 @@
     .nav-item:nth-child(8) { animation: fadeInUp 0.5s 2.1s forwards; }
     .nav-item:nth-child(9) { animation: fadeInUp 0.5s 2.3s forwards; }
     .nav-item:nth-child(10) { animation: fadeInUp 0.5s 2.5s forwards; }
+    .nav-item:nth-child(11) { animation: fadeInUp 0.5s 2.7s forwards; }
+    .nav-item:nth-child(12) { animation: fadeInUp 0.5s 2.9s forwards; }
+    .nav-item:nth-child(13) { animation: fadeInUp 0.5s 3.1s forwards; }
 
     .nav-item::before {
       content: '';
@@ -218,7 +201,7 @@
       border: 1px solid rgba(0, 247, 255, 0.1);
       transition: all 0.5s ease;
       opacity: 0;
-      transform: translateY(30px) rotateX(5deg);
+      transform: translateY(30px);
       position: relative;
       overflow: hidden;
     }
@@ -243,13 +226,13 @@
 
     .section.visible {
       opacity: 1;
-      transform: translateY(0) rotateX(0);
+      transform: translateY(0);
     }
 
     .section:hover {
       border-color: rgba(0, 247, 255, 0.3);
       box-shadow: 0 15px 40px rgba(0, 247, 255, 0.1);
-      transform: translateY(-5px) rotateX(0);
+      transform: translateY(-5px);
     }
 
     .section h2 {
@@ -268,6 +251,115 @@
       width: 100%;
       height: 2px;
       background: linear-gradient(90deg, var(--primary), transparent);
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .skill-card {
+      background: rgba(30, 30, 40, 0.5);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 247, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 247, 255, 0.05) 0%,
+        transparent 100%
+      );
+      z-index: -1;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      background: rgba(40, 40, 50, 0.7);
+      border-color: var(--primary);
+      box-shadow: var(--glow);
+    }
+
+    .skill-card h3 {
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Experience Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 7px;
+      height: 100%;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2rem;
+      padding-left: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(5px);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover::before {
+      transform: scale(1.2);
+      background: var(--accent);
+    }
+
+    .timeline-date {
+      color: var(--secondary);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--light);
+    }
+
+    .timeline-desc {
+      color: rgba(240, 240, 255, 0.8);
     }
 
     /* Interactive Elements */
@@ -312,6 +404,191 @@
     .cyber-button:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(0, 247, 255, 0.3);
+    }
+
+    /* Professional Footer */
+    .footer {
+      background: rgba(10, 10, 20, 0.9);
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-top: 4rem;
+      position: relative;
+      border-top: 1px solid rgba(0, 247, 255, 0.1);
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 247, 255, 0.02) 50%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      text-align: left;
+    }
+
+    .footer-column h3 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), transparent);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: rgba(240, 240, 255, 0.7);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+
+    .footer-bottom {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0, 247, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-social a {
+      color: var(--light);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .footer-social a:hover {
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      color: rgba(240, 240, 255, 0.5);
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes decrypt {
+      0% {
+        opacity: 0;
+        letter-spacing: 1em;
+        filter: blur(10px);
+      }
+      100% {
+        opacity: 1;
+        letter-spacing: normal;
+        filter: blur(0);
+      }
+    }
+
+    @keyframes shine {
+      0% {
+        transform: rotate(30deg) translate(-10%, -10%);
+      }
+      100% {
+        transform: rotate(30deg) translate(10%, 10%);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2.5rem;
+      }
+      
+      .nav {
+        gap: 1rem;
+      }
+      
+      .section {
+        padding: 1.5rem;
+      }
+      
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
     }
 
     /* Terminal Effect */
@@ -382,6 +659,17 @@
       animation: blink 1s infinite;
     }
 
+    @keyframes terminalTyping {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     /* Floating Elements */
     .floating-element {
       position: absolute;
@@ -426,239 +714,689 @@
       animation-delay: 3s;
     }
     
-    /* Audio Player */
-    .audio-player {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-      background: rgba(10, 10, 20, 0.8);
-      backdrop-filter: blur(10px);
-      border-radius: 50px;
-      padding: 0.5rem;
+    .terminal-input {
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+    }
+    
+    .terminal-prompt {
+      color: #00ffaa;
+      margin-right: 0.5rem;
+    }
+    
+    #terminal-command {
+      background: transparent;
+      border: none;
+      color: #00ffaa;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      width: calc(100% - 50px);
+      outline: none;
+    }
+    
+    .command-output {
+      margin-top: 0.5rem;
+      color: #00ffaa;
+      white-space: pre-wrap;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .error {
+      color: var(--critical);
+    }
+    
+    .success {
+      color: var(--low);
+    }
+    
+    .info {
+      color: var(--info);
+    }
+    
+    .warning {
+      color: var(--medium);
+    }
+    
+    /* Security Framework Visualizations */
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .framework-card {
+      background: rgba(30, 30, 40, 0.7);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .framework-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 247, 255, 0.1);
+      border-color: var(--primary);
+    }
+    
+    .framework-card h3 {
+      color: var(--secondary);
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      border: 1px solid rgba(0, 247, 255, 0.2);
     }
-
-    .player-btn {
-      background: transparent;
-      border: none;
+    
+    .framework-card ul {
+      list-style: none;
+      margin-top: 1rem;
+    }
+    
+    .framework-card li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    
+    .framework-card li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
       color: var(--primary);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
     }
-
-    .player-btn:hover {
-      background: rgba(0, 247, 255, 0.1);
-      transform: scale(1.1);
+    
+    /* Security Architecture Diagram */
+    .architecture {
+      margin-top: 2rem;
+      background: rgba(20, 20, 30, 0.7);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      position: relative;
     }
-
-    .volume-control {
-      width: 80px;
-      margin: 0 0.5rem;
-    }
-
-    /* Modal Popup */
-    .modal-overlay {
-      position: fixed;
+    
+    .architecture::before {
+      content: '';
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(5, 5, 10, 0.9);
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.5s ease;
+      background: 
+        linear-gradient(135deg, transparent 0%, rgba(0, 247, 255, 0.03) 50%, transparent 100%);
+      pointer-events: none;
     }
-
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
+    
+    .architecture-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
     }
-
-    .cyber-modal {
-      background: rgba(20, 20, 30, 0.95);
-      border-radius: 16px;
-      padding: 2.5rem;
-      width: 90%;
-      max-width: 600px;
-      border: 1px solid rgba(0, 247, 255, 0.2);
-      box-shadow: 0 0 50px rgba(0, 247, 255, 0.2);
+    
+    .architecture-item {
+      background: rgba(40, 40, 50, 0.5);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      transition: all 0.3s ease;
       position: relative;
-      transform: translateY(50px) scale(0.9);
-      opacity: 0;
-      transition: all 0.5s ease;
+      overflow: hidden;
     }
-
-    .modal-overlay.active .cyber-modal {
-      transform: translateY(0) scale(1);
-      opacity: 1;
+    
+    .architecture-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 247, 255, 0.1);
+      border-color: var(--secondary);
     }
-
-    .modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: transparent;
-      border: none;
+    
+    .architecture-item i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
       color: var(--primary);
-      font-size: 1.5rem;
-      cursor: pointer;
+    }
+    
+    .architecture-item h4 {
+      color: var(--light);
+      margin-bottom: 0.5rem;
+    }
+    
+    .architecture-item p {
+      color: rgba(240, 240, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    
+    .architecture-connector {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      z-index: -1;
+    }
+    
+    /* Threat Matrix */
+    .threat-matrix {
+      margin-top: 2rem;
+      background: rgba(20, 20, 30, 0.7);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(0, 247, 255, 0.1);
+    }
+    
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .matrix-header {
+      text-align: center;
+      font-weight: bold;
+      padding: 0.5rem;
+      color: var(--light);
+      background: rgba(0, 247, 255, 0.1);
+      border-radius: 4px;
+    }
+    
+    .matrix-cell {
+      padding: 0.5rem;
+      text-align: center;
+      border-radius: 4px;
+      font-size: 0.9rem;
       transition: all 0.3s ease;
     }
-
-    .modal-close:hover {
-      color: var(--accent);
-      transform: rotate(90deg);
+    
+    .matrix-cell:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px currentColor;
     }
-
-    .modal-title {
-      color: var(--primary);
-      margin-bottom: 1.5rem;
-      text-align: center;
+    
+    .critical {
+      background-color: rgba(255, 85, 85, 0.2);
+      color: var(--critical);
+      border: 1px solid var(--critical);
     }
-
-    .modal-options {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+    
+    .high {
+      background-color: rgba(255, 153, 102, 0.2);
+      color: var(--high);
+      border: 1px solid var(--high);
+    }
+    
+    .medium {
+      background-color: rgba(255, 204, 51, 0.2);
+      color: var(--medium);
+      border: 1px solid var(--medium);
+    }
+    
+    .low {
+      background-color: rgba(85, 255, 85, 0.2);
+      color: var(--low);
+      border: 1px solid var(--low);
+    }
+    
+    /* Zero Day Response Flow */
+    .response-flow {
       margin-top: 2rem;
+      position: relative;
     }
-
-    .modal-option {
-      background: rgba(30, 30, 40, 0.5);
-      border: 1px solid rgba(0, 247, 255, 0.1);
+    
+    .flow-step {
+      background: rgba(30, 30, 40, 0.7);
       border-radius: 8px;
       padding: 1.5rem;
-      text-align: center;
-      cursor: pointer;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--primary);
+      position: relative;
       transition: all 0.3s ease;
     }
+    
+    .flow-step:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(0, 247, 255, 0.1);
+    }
+    
+    .flow-step h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .flow-step p {
+      color: rgba(240, 240, 255, 0.8);
+    }
+    
+    .flow-step::after {
+      content: '↓';
+      position: absolute;
+      bottom: -1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--secondary);
+      font-size: 1.5rem;
+    }
+    
+    .flow-step:last-child::after {
+      display: none;
+    }
+    
+    /* Checklist */
+    .checklist {
+      margin-top: 2rem;
+    }
+    
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      background: rgba(30, 30, 40, 0.5);
+      padding: 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .checklist-item:hover {
+      background: rgba(40, 40, 50, 0.7);
+      transform: translateY(-3px);
+    }
+    
+    .checklist-checkbox {
+      margin-right: 1rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
 
-    .modal-option:hover {
+    .checklist-content {
+      flex-grow: 1;
+    }
+    
+    .checklist-title {
+      color: var(--light);
+      margin-bottom: 0.3rem;
+    }
+    
+    .checklist-desc {
+      color: rgba(240, 240, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: help;
+    }
+    
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: rgba(10, 10, 20, 0.9);
+      color: var(--light);
+      text-align: center;
+      border-radius: 6px;
+      padding: 0.5rem;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      border: 1px solid var(--primary);
+      font-size: 0.9rem;
+    }
+    
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+    }
+    
+    .tab {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      color: rgba(240, 240, 255, 0.7);
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .tab.active {
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    /* Accordion */
+    .accordion {
+      margin-top: 1rem;
+    }
+    
+    .accordion-item {
+      margin-bottom: 0.5rem;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    
+    .accordion-header {
+      background: rgba(40, 40, 50, 0.7);
+      padding: 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .accordion-header:hover {
+      background: rgba(50, 50, 60, 0.7);
+    }
+    
+    .accordion-content {
+      background: rgba(30, 30, 40, 0.5);
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    .accordion-content-inner {
+      padding: 1rem;
+    }
+    
+    .accordion-item.active .accordion-content {
+      max-height: 500px;
+    }
+    
+    /* Status Indicators */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.9rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 50px;
+    }
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    .status-critical {
+      color: var(--critical);
+      background: rgba(255, 85, 85, 0.1);
+    }
+    
+    .status-critical .status-dot {
+      background: var(--critical);
+    }
+    
+    .status-high {
+      color: var(--high);
+      background: rgba(255, 153, 102, 0.1);
+    }
+    
+    .status-high .status-dot {
+      background: var(--high);
+    }
+    
+    .status-medium {
+      color: var(--medium);
+      background: rgba(255, 204, 51, 0.1);
+    }
+    
+    .status-medium .status-dot {
+      background: var(--medium);
+    }
+    
+    .status-low {
+      color: var(--low);
+      background: rgba(85, 255, 85, 0.1);
+    }
+    
+    .status-low .status-dot {
+      background: var(--low);
+    }
+    
+    /* New Styles for Expanded Sections */
+    /* Certifications Grid */
+    .certifications-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .cert-card {
+      background: rgba(30, 30, 40, 0.5);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 247, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cert-card:hover {
       transform: translateY(-5px);
+      background: rgba(40, 40, 50, 0.7);
       border-color: var(--primary);
       box-shadow: var(--glow);
     }
 
-    .modal-option i {
-      font-size: 2rem;
+    .cert-card h3 {
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cert-card p {
+      color: rgba(240, 240, 255, 0.8);
+    }
+
+    .cert-card a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.8rem;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    .cert-card a:hover {
+      color: var(--secondary);
+    }
+
+    /* Resources List */
+    .resources-list {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .resources-list li {
       margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .resources-list li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
       color: var(--primary);
     }
 
-    /* Animations */
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
+    .resources-list a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: all 0.3s ease;
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .resources-list a:hover {
+      color: var(--secondary);
     }
 
-    @keyframes decrypt {
-      0% {
-        opacity: 0;
-        letter-spacing: 1em;
-        filter: blur(10px);
-      }
-      100% {
-        opacity: 1;
-        letter-spacing: normal;
-        filter: blur(0);
-      }
+    /* Quiz Styles */
+    .quiz-container {
+      margin-top: 2rem;
     }
 
-    @keyframes shine {
-      0% {
-        transform: rotate(30deg) translate(-10%, -10%);
-      }
-      100% {
-        transform: rotate(30deg) translate(10%, 10%);
-      }
+    .quiz-question {
+      background: rgba(30, 30, 40, 0.5);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
     }
 
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
+    .quiz-question h4 {
+      color: var(--secondary);
+      margin-bottom: 1rem;
     }
 
-    @keyframes pulse {
-      0%, 100% {
-        text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
-      }
-      50% {
-        text-shadow: 0 0 20px rgba(0, 247, 255, 0.6), 0 0 30px rgba(0, 247, 255, 0.4);
-      }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
 
-    @keyframes terminalTyping {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .quiz-option {
+      padding: 0.5rem;
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    @keyframes visualizerPulse {
-      0%, 100% {
-        transform: scaleY(1);
-      }
-      50% {
-        transform: scaleY(1.2);
-      }
+    .quiz-option:hover {
+      background: rgba(40, 40, 50, 0.7);
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .header h1 {
-        font-size: 2.5rem;
-      }
-      
-      .nav {
-        gap: 0.5rem;
-      }
-      
-      .nav-item {
-        font-size: 0.9rem;
-        padding: 0.4rem 0.8rem;
-      }
-      
-      .section {
-        padding: 1.5rem;
-      }
-      
-      .modal-options {
-        grid-template-columns: 1fr;
-      }
+    .quiz-feedback {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    .correct {
+      color: var(--low);
+    }
+
+    .incorrect {
+      color: var(--critical);
+    }
+
+    /* Attributes Grid */
+    .attributes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .attribute-card {
+      background: rgba(30, 30, 40, 0.5);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 247, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .attribute-card:hover {
+      transform: translateY(-5px);
+      background: rgba(40, 40, 50, 0.7);
+      border-color: var(--primary);
+      box-shadow: var(--glow);
+    }
+
+    .attribute-card h3 {
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .attribute-card ul {
+      list-style: none;
+    }
+
+    .attribute-card li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(240, 240, 255, 0.8);
+    }
+
+    /* Tools Grid */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tool-card {
+      background: rgba(30, 30, 40, 0.5);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 247, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+      background: rgba(40, 40, 50, 0.7);
+      border-color: var(--primary);
+      box-shadow: var(--glow);
+    }
+
+    .tool-card h3 {
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tool-card p {
+      color: rgba(240, 240, 255, 0.8);
+    }
+
+    .tool-card a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.8rem;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    .tool-card a:hover {
+      color: var(--secondary);
     }
   </style>
 </head>
@@ -670,44 +1408,6 @@
   <div class="floating-element"></div>
   <div class="floating-element"></div>
 
-  <!-- Audio Visualizer -->
-  <div id="visualizer"></div>
-
-  <!-- Audio Player -->
-  <div class="audio-player">
-    <button class="player-btn" id="play-btn">
-      <i class="fas fa-play"></i>
-    </button>
-    <input type="range" class="volume-control" id="volume" min="0" max="1" step="0.01" value="0.5">
-    <button class="player-btn" id="mute-btn">
-      <i class="fas fa-volume-up"></i>
-    </button>
-  </div>
-
-  <!-- Experience Modal -->
-  <div class="modal-overlay" id="experience-modal">
-    <div class="cyber-modal">
-      <button class="modal-close" id="modal-close">
-        <i class="fas fa-times"></i>
-      </button>
-      <h2 class="modal-title">Choose Your Experience</h2>
-      <p>How would you like to explore my portfolio?</p>
-      
-      <div class="modal-options">
-        <div class="modal-option" data-experience="immersive">
-          <i class="fas fa-vr-cardboard"></i>
-          <h3>Immersive Mode</h3>
-          <p>Full cyber experience with audio and effects</p>
-        </div>
-        <div class="modal-option" data-experience="standard">
-          <i class="fas fa-desktop"></i>
-          <h3>Standard Mode</h3>
-          <p>Traditional browsing experience</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="container">
     <header class="header">
       <h1 class="decrypt-text">ROMAN ORŁOWSKI</h1>
@@ -716,10 +1416,15 @@
 
     <nav class="nav">
       <div class="nav-item active" data-section="about">About</div>
+      <div class="nav-item" data-section="profile">Profile</div>
+      <div class="nav-item" data-section="personality">Personality</div>
+      <div class="nav-item" data-section="abilities">Abilities</div>
+      <div class="nav-item" data-section="management">Management</div>
       <div class="nav-item" data-section="skills">Skills</div>
       <div class="nav-item" data-section="solutions">Solutions</div>
       <div class="nav-item" data-section="experience">Experience</div>
       <div class="nav-item" data-section="certifications">Certifications</div>
+      <div class="nav-item" data-section="tools">Privacy, Security, Tools & Learning</div>
       <div class="nav-item" data-section="resources">Resources</div>
       <div class="nav-item" data-section="quiz">Cyber Quiz</div>
       <div class="nav-item" data-section="terminal">Terminal</div>
@@ -757,27 +1462,875 @@
         </div>
       </section>
 
+      <section id="profile" class="section">
+        <h2><i class="fas fa-user"></i> Profile</h2>
+        <p>Postgraduate qualification in Cyber/Information Security. Strong understanding of NIST Cybersecurity Framework (CSF). Knowledge of global regulatory frameworks: ISO 27001, NIS2, SOX, GDPR, DORA. Experience in Cyber Due Diligence Assessments for mergers, acquisitions, and business risk evaluations. Expertise in Third-Party & Supply Chain Cyber Risk Management. Skilled in Incident Response Planning, Review & Post-Incident Analysis. Delivered Crisis Management Exercises (CMX) for executive and operational teams. Proven ability in supporting bids, RFP responses, and proposals for cyber security services. Professional certifications: CISSP, CISM, CISA, GSLC, GSTRT, GCPM. Contributed to the design of Target Operating Models (TOMs) and RACI Matrices. Developed and guided Cyber Security Roadmaps aligned with organizational strategy. Proficient in analyzing, summarizing Cyber Threat Intelligence (CTI) reports for executive decision-making. Implementation and oversight of Cybersecurity Compliance Programs (GDPR, DORA, ISO 27001, NIS2, SOX). Conducted Cyber Risk Assessments and Maturity Assessments across multiple industries. Designed and delivered Cyber Awareness Training for staff and executives. Hands-on experience with Identity and Access Management (IAM) and Privileged Access Management (PAM) projects.</p>
+      </section>
+
+      <section id="personality" class="section">
+        <h2><i class="fas fa-heart"></i> Personality</h2>
+        <div class="attributes-grid">
+          <div class="attribute-card">
+            <h3><i class="fas fa-users"></i> Personality Traits</h3>
+            <ul>
+              <li><i class="fas fa-check"></i> Good Team Mate</li>
+              <li><i class="fas fa-check"></i> Self-development</li>
+              <li><i class="fas fa-check"></i> Optimistic</li>
+              <li><i class="fas fa-check"></i> Patient and persistent in finding solutions</li>
+              <li><i class="fas fa-check"></i> Positive attitude and ability to stay calm in difficult situations</li>
+              <li><i class="fas fa-check"></i> Empathetic and patient in helping users troubleshoot technical issues</li>
+              <li><i class="fas fa-check"></i> Dependable and reliable in completing tasks</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="abilities" class="section">
+        <h2><i class="fas fa-tools"></i> Abilities</h2>
+        <div class="attributes-grid">
+          <div class="attribute-card">
+            <h3><i class="fas fa-brain"></i> Key Abilities</h3>
+            <ul>
+              <li><i class="fas fa-check"></i> Organized</li>
+              <li><i class="fas fa-check"></i> Precision</li>
+              <li><i class="fas fa-check"></i> Detail-oriented and precise in work</li>
+              <li><i class="fas fa-check"></i> Analytical and logical in approach to problem-solving</li>
+              <li><i class="fas fa-check"></i> Strong work ethic and attention to detail</li>
+              <li><i class="fas fa-check"></i> Excellent communication skills to convey technical issues to non-technical people</li>
+              <li><i class="fas fa-check"></i> Ability to work well under pressure and in high-stress situations</li>
+              <li><i class="fas fa-check"></i> Excellent communication and customer service skills</li>
+              <li><i class="fas fa-check"></i> Team player who can collaborate with others effectively</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="management" class="section">
+        <h2><i class="fas fa-sitemap"></i> Management</h2>
+        <div class="attributes-grid">
+          <div class="attribute-card">
+            <h3><i class="fas fa-chart-line"></i> Management Skills</h3>
+            <ul>
+              <li><i class="fas fa-check"></i> Strong leadership skills to motivate and inspire teams</li>
+              <li><i class="fas fa-check"></i> Strategic thinker who can prioritize effectively</li>
+              <li><i class="fas fa-check"></i> Continuous learner with a curiosity for new technologies</li>
+              <li><i class="fas fa-check"></i> Independent and self-motivated</li>
+              <li><i class="fas fa-check"></i> Managing budgets and timelines</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <section id="skills" class="section">
         <h2><i class="fas fa-code"></i> Core Competencies</h2>
-        <p>Here are my key cybersecurity skills and areas of expertise:</p>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3><i class="fab fa-microsoft"></i> Azure Security</h3>
+            <p>Defender for Endpoint, Sentinel, Identity Protection, and Cloud Posture Management. Focus on defensive strategies to protect user privacy and data integrity.</p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fas fa-shield-alt"></i> Threat Protection</h3>
+            <p>MITRE ATT&CK framework, SIEM solutions, and behavioral analysis. Emphasizing ethical hacking methodologies for vulnerability identification without exploitation.</p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fas fa-network-wired"></i> Network Security</h3>
+            <p>Zero Trust Architecture, VPN configurations, and advanced firewall management. Promoting equitable access to secure networks for all users.</p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fas fa-lock"></i> Compliance</h3>
+            <p>ISO 27001, NIST frameworks, GDPR, and industry-specific regulations. Ensuring adherence to global standards for fair and just cybersecurity practices.</p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fas fa-user-shield"></i> Ethical Hacking</h3>
+            <p>CEH principles for reconnaissance, scanning, and enumeration. Prioritizing defense over offense to safeguard systems and promote responsible disclosure.</p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fas fa-key"></i> Privacy Protection</h3>
+            <p>Encryption techniques, anonymization, and data minimization. Educating on GDPR compliance and privacy-by-design to protect individual rights.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="solutions" class="section">
+        <h2><i class="fas fa-shield-virus"></i> Enterprise Security Solutions</h2>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">1. Hybrid Infrastructure Protection</h3>
+        
+        <div class="architecture">
+          <div class="architecture-grid">
+            <div class="architecture-item">
+              <i class="fas fa-network-wired"></i>
+              <h4>Network</h4>
+              <p>Zero Trust Segmentation</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Azure Network Security Groups, Cisco ISE, Microsegmentation. Ensures least privilege access to protect sensitive data.</span>
+              </div>
+            </div>
+            <div class="architecture-item">
+              <i class="fas fa-laptop"></i>
+              <h4>Endpoints</h4>
+              <p>Unified EDR/XDR</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Microsoft Defender, CrowdStrike, SentinelOne. Real-time threat detection with minimal privacy intrusion.</span>
+              </div>
+            </div>
+            <div class="architecture-item">
+              <i class="fas fa-cloud"></i>
+              <h4>Cloud</h4>
+              <p>CASB + CSPM</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Microsoft Defender for Cloud, Prisma Cloud, AWS Security Hub. Continuous compliance monitoring aligned with NIST.</span>
+              </div>
+            </div>
+            <div class="architecture-item">
+              <i class="fas fa-user-shield"></i>
+              <h4>Identity</h4>
+              <p>Conditional Access</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Azure AD, Okta, MFA, PIM. Multi-factor authentication to enhance user protection without complexity.</span>
+              </div>
+            </div>
+            <div class="architecture-item">
+              <i class="fas fa-database"></i>
+              <h4>Data</h4>
+              <p>Encryption & DLP</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Azure Information Protection, Symantec DLP. Safeguards sensitive information with encryption and leak prevention.</span>
+              </div>
+            </div>
+            <div class="architecture-item">
+              <i class="fas fa-chart-line"></i>
+              <h4>Monitoring</h4>
+              <p>SIEM & Analytics</p>
+              <div class="tooltip">ℹ️
+                <span class="tooltiptext">Splunk, ELK Stack. Advanced logging for threat hunting, ensuring transparent and ethical monitoring.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">2. Zero-Day Response Protocol</h3>
+        
+        <div class="response-flow">
+          <div class="flow-step">
+            <h4><i class="fas fa-search"></i> Detection</h4>
+            <p>SIEM alerts, EDR telemetry, and threat intelligence feeds. Use CEH-inspired scanning to identify anomalies early.</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-flag"></i> Triage</h4>
+            <p>Initial assessment using MITRE ATT&CK framework. Prioritize based on impact to human safety and data privacy.</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-fire-extinguisher"></i> Containment</h4>
+            <p>Network segmentation, endpoint isolation, credential rotation. Minimize harm through swift, ethical actions.</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-bug"></i> Eradication</h4>
+            <p>Patch deployment, malware removal, system hardening. Align with CEH standards for thorough vulnerability mitigation.</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-undo"></i> Recovery</h4>
+            <p>System restoration from clean backups, validation testing. Ensure equitable recovery for all affected parties.</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-book"></i> Lessons Learned</h4>
+            <p>Post-incident review and process improvement. Share knowledge responsibly to build community resilience.</p>
+          </div>
+          <div class="flow-step">
+            <h4><i class="fas fa-share-alt"></i> Disclosure</h4>
+            <p>Responsible reporting to vendors and stakeholders. Promote transparency while protecting vulnerable systems.</p>
+          </div>
+        </div>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">3. Security Frameworks</h3>
+        
+        <div class="framework-grid">
+          <div class="framework-card">
+            <h3><i class="fas fa-chess-board"></i> MITRE ATT&CK</h3>
+            <p>Adversary tactics and techniques framework for threat modeling</p>
+            <ul>
+              <li>Threat intelligence integration</li>
+              <li>Detection rule development</li>
+              <li>Red team exercises</li>
+              <li>Mapping to CEH methodologies</li>
+            </ul>
+          </div>
+          <div class="framework-card">
+            <h3><i class="fas fa-shield-alt"></i> NIST CSF</h3>
+            <p>Identify, Protect, Detect, Respond, Recover framework</p>
+            <ul>
+              <li>Risk assessment methodology</li>
+              <li>Security controls mapping</li>
+              <li>Maturity benchmarking</li>
+              <li>Privacy enhancement focus</li>
+            </ul>
+          </div>
+          <div class="framework-card">
+            <h3><i class="fas fa-lock"></i> CIS Controls</h3>
+            <p>Prioritized set of actions for cyber defense</p>
+            <ul>
+              <li>Implementation Groups</li>
+              <li>Configuration benchmarks</li>
+              <li>Hardening guidelines</li>
+              <li>Equitable access recommendations</li>
+            </ul>
+          </div>
+          <div class="framework-card">
+            <h3><i class="fas fa-globe"></i> ISO 27001</h3>
+            <p>International standard for information security management</p>
+            <ul>
+              <li>Risk treatment plans</li>
+              <li>Audit and certification</li>
+              <li>Continuous improvement</li>
+              <li>GDPR alignment</li>
+            </ul>
+          </div>
+        </div>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">4. Threat Risk Matrix</h3>
+        
+        <div class="threat-matrix">
+          <div class="matrix-grid">
+            <div class="matrix-header">Threat</div>
+            <div class="matrix-header">Likelihood</div>
+            <div class="matrix-header">Impact</div>
+            <div class="matrix-header">Risk Level</div>
+            <div class="matrix-header">Mitigation</div>
+            
+            <div class="matrix-cell">Phishing</div>
+            <div class="matrix-cell">High</div>
+            <div class="matrix-cell">Medium</div>
+            <div class="matrix-cell high">High</div>
+            <div class="matrix-cell">User training, Email filtering, Awareness quizzes</div>
+            
+            <div class="matrix-cell">Ransomware</div>
+            <div class="matrix-cell">Medium</div>
+            <div class="matrix-cell">Critical</div>
+            <div class="matrix-cell critical">Critical</div>
+            <div class="matrix-cell">Backups, EDR, Patch management, Immutable storage</div>
+            
+            <div class="matrix-cell">Insider Threat</div>
+            <div class="matrix-cell">Low</div>
+            <div class="matrix-cell">High</div>
+            <div class="matrix-cell medium">Medium</div>
+            <div class="matrix-cell">DLP, User monitoring, Least privilege, Behavior analytics</div>
+            
+            <div class="matrix-cell">DDoS</div>
+            <div class="matrix-cell">Low</div>
+            <div class="matrix-cell">Medium</div>
+            <div class="matrix-cell low">Low</div>
+            <div class="matrix-cell">Cloudflare, Rate limiting, Traffic scrubbing</div>
+            
+            <div class="matrix-cell">Zero-Day Exploit</div>
+            <div class="matrix-cell">Low</div>
+            <div class="matrix-cell">Critical</div>
+            <div class="matrix-cell high">High</div>
+            <div class="matrix-cell">Threat intel, Sandboxing, Rapid patching, Isolation</div>
+            
+            <div class="matrix-cell">Supply Chain Attack</div>
+            <div class="matrix-cell">Medium</div>
+            <div class="matrix-cell">High</div>
+            <div class="matrix-cell high">High</div>
+            <div class="matrix-cell">Vendor assessment, Code signing, Dependency scanning</div>
+          </div>
+        </div>
+        
+        <h3 style="margin-top: 2rem; color: var(--secondary);">5. For 100 Users & 200 Devices</h3>
+        
+        <div class="checklist">
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Automate patch management</div>
+              <div class="checklist-desc">WSUS + Intune for Windows, Ansible for Linux. Ensure timely updates to mitigate known vulnerabilities ethically.</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Segment networks</div>
+              <div class="checklist-desc">VLANs for departments/IoT, microsegmentation for critical assets. Implement Zero Trust to protect user privacy.</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Monitor with 24/7 SOC</div>
+              <div class="checklist-desc">Microsoft Sentinel + MDE with playbooks for common scenarios. Transparent alerting to build trust.</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Train users</div>
+              <div class="checklist-desc">Quarterly simulated phishing + interactive security training. Use CEH-inspired scenarios for empowerment.</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Backup strategy</div>
+              <div class="checklist-desc">3-2-1 rule with immutable backups (Veeam + Azure Blob). Ensure data recovery without compromising privacy.</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Implement MFA</div>
+              <div class="checklist-desc">Enforce multi-factor authentication across all accounts. Simple setup for accessibility to all users.</div>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <div class="checklist-checkbox"><i class="fas fa-check-circle"></i></div>
+            <div class="checklist-content">
+              <div class="checklist-title">Regular Audits</div>
+              <div class="checklist-desc">Conduct vulnerability scans and penetration tests ethically, reporting findings responsibly.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="section">
+        <h2><i class="fas fa-briefcase"></i> Professional Journey</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">2024 - Present</div>
+            <h3 class="timeline-title">Freelance Cybersecurity Consultant</h3>
+            <p class="timeline-desc">Performed pentesting, incident response, and security training for SMBs and NGOs. Delivered risk-based reports and improved client defenses via OWASP/NIST-aligned strategies, emphasizing ethical disclosure.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2023 - 2024</div>
+            <h3 class="timeline-title">Senior Engineer for Cloud & Infrastructure – Microsoft Project</h3>
+            <p class="timeline-desc">Implemented Defender for Endpoint, EDR, SIEM, and Identity Protection. Reduced threat exposure and educated teams on latest threat intel and mitigation tactics, fostering collaborative defense.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2022 - 2023</div>
+            <h3 class="timeline-title">Support Engineer – Intellias</h3>
+            <p class="timeline-desc">Led cloud migration across 5 EU regions. Managed Azure resources, SLAs, policy enforcement, and authored technical documentation and procedures, ensuring GDPR compliance.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2021</div>
+            <h3 class="timeline-title">IT Specialist – Cinema City</h3>
+            <p class="timeline-desc">Rebuilt regional IT infrastructure. Delivered OS deployments (Debian/Win), supported POS systems, and enforced backup/recovery procedures with a focus on data protection.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2020 - 2021</div>
+            <h3 class="timeline-title">Platform Engineer – Discovery</h3>
+            <p class="timeline-desc">Handled SIEM ops via Splunk and SolarWinds. Authored automation scripts and participated in incident bridges and recovery plans, promoting team brotherhood.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2020</div>
+            <h3 class="timeline-title">NOC Engineer – Sperasoft</h3>
+            <p class="timeline-desc">24/7 infrastructure monitoring. Produced SOPs, ran escalations, and participated in collaborative network response workflows for equitable security.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2019 - 2020</div>
+            <h3 class="timeline-title">Enterprise Operation Center Analyst – Grand Parade / William Hill</h3>
+            <p class="timeline-desc">Led vulnerability scans, threat hunting, patch management, and awareness training. Created incident response scenarios aligned with CEH principles.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2018 - 2019</div>
+            <h3 class="timeline-title">Junior Network Specialist – Emitel SA</h3>
+            <p class="timeline-desc">Maintained MPLS and SDH links. Resolved Cisco-related issues, handled Jira tickets, and configured VPN and signal systems with privacy considerations.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2017 - 2018</div>
+            <h3 class="timeline-title">Security Intern – Local Firm</h3>
+            <p class="timeline-desc">Assisted in basic audits and learned CEH fundamentals. Contributed to team efforts in building defensive strategies for small businesses.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2015 - 2017</div>
+            <h3 class="timeline-title">Service Specialist NOC – Horsebridge</h3>
+            <p class="timeline-desc">Monitored enterprise level distributed network using PRTG, Ruckus, BlueSocket, Radwin, WireShark, ZenMap. Resolved incidents, escalated issues, and maintained ISO 9001 standards.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2011 - 2014</div>
+            <h3 class="timeline-title">Telecommunication Engineer – BT Openreach</h3>
+            <p class="timeline-desc">Provided telephone and broadband services, performed circuit mapping, jumper wire routing, and ensured compliance with health and safety principles and quality standards (ISO 9001).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2006 - 2010</div>
+            <h3 class="timeline-title">IT Support (1st/2nd line) – First Red Midland Buses</h3>
+            <p class="timeline-desc">Managed IT equipment installation and maintenance, provided desktop and server support, ensured antivirus compliance, and handled Exchange server maintenance.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2003 - 2006</div>
+            <h3 class="timeline-title">IT Technician – M1 - REAL Ltd</h3>
+            <p class="timeline-desc">Installed and maintained IT equipment, supported POS systems, generated sales reports using Oracle Discoverer, performed MySQL queries, and managed daily backups on multiple servers.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="certifications" class="section">
+        <h2><i class="fas fa-certificate"></i> Certifications</h2>
+        <p>Committed to continuous learning and upholding the highest standards in cybersecurity. These certifications reflect expertise in ethical hacking, protection strategies, and compliance.</p>
+        <div class="certifications-grid">
+          <div class="cert-card">
+            <h3><i class="fas fa-graduation-cap"></i> Certified Ethical Hacker (CEH)</h3>
+            <p>Mastery in ethical hacking methodologies, vulnerability assessment, and defensive techniques to protect systems responsibly.</p>
+            <a href="https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-shield-alt"></i> CompTIA Security+</h3>
+            <p>Foundational knowledge in network security, compliance, and operational security. Emphasizes practical skills for entry-level protection.</p>
+            <a href="https://www.comptia.org/certifications/security" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fab fa-microsoft"></i> Microsoft Azure Security Engineer Associate</h3>
+            <p>Expertise in implementing security controls, maintaining security posture, and protecting data in Azure environments.</p>
+            <a href="https://learn.microsoft.com/en-us/certifications/azure-security-engineer/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-lock"></i> CISSP</h3>
+            <p>ISC2. Advanced certification covering security and risk management, asset security, and communication protection.</p>
+            <a href="https://www.isc2.org/certifications/cissp" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-cloud"></i> AWS Certified Security - Specialty</h3>
+            <p>Specialized in designing and implementing security solutions on AWS, focusing on data protection and incident response.</p>
+            <a href="https://aws.amazon.com/certification/certified-security-specialty/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-skull-crossbones"></i> The Cyber Kill Chain</h3>
+            <p>Training on Lockheed Martin's Cyber Kill Chain model for understanding and preventing cyber attacks through stages like reconnaissance and exfiltration.</p>
+            <a href="https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-search"></i> OSINT Basics</h3>
+            <p>Fundamentals of Open Source Intelligence gathering for ethical reconnaissance and threat intelligence without invasive methods.</p>
+            <a href="https://osintframework.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-user-secret"></i> OpSec Awareness for Military Members</h3>
+            <p>Operations Security training focused on protecting sensitive information in military contexts, emphasizing risk mitigation.</p>
+            <a href="https://www.cdse.edu/Training/OPSEC/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-exclamation-triangle"></i> Counterintelligence Awareness and Reporting Course for DOD</h3>
+            <p>U.S. Department of Defense course on identifying and reporting counterintelligence threats to safeguard national security.</p>
+            <a href="https://www.cdse.edu/Training/Counterintelligence/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-book"></i> MS-L100</h3>
+            <p>Military-specific leadership training focused on foundational skills for secure operations and team management.</p>
+            <a href="https://www.army.mil/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-book"></i> MS-L200</h3>
+            <p>Advanced military leadership course emphasizing strategic decision-making in high-stakes environments.</p>
+            <a href="https://www.army.mil/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-certificate"></i> ISO 9001:2015</h3>
+            <p>Quality management systems certification for ensuring consistent processes and compliance in operations.</p>
+            <a href="https://www.iso.org/standard/62085.html" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-phone"></i> Professional Customer Phone Support</h3>
+            <p>Training in effective customer service over phone, focusing on empathy and technical issue resolution.</p>
+            <a href="https://www.linkedin.com/learning/professional-customer-service" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-bolt"></i> SEP Authorization – up to 1 kV</h3>
+            <p>Authorization for safe electrical work up to 1 kV, ensuring compliance with safety standards in infrastructure.</p>
+            <a href="https://www.sep.org.pl/" target="_blank">Learn More</a>
+          </div>
+          <div class="cert-card">
+            <h3><i class="fas fa-license"></i> MDF Accreditation License</h3>
+            <p>Accreditation for Main Distribution Frame management in telecommunications, focusing on secure network configurations.</p>
+            <a href="https://www.telecoms.com/" target="_blank">Learn More</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="tools" class="section">
+        <h2><i class="fas fa-toolbox"></i> Privacy, Security, Tools & Learning</h2>
+        <p>Expertise in privacy-focused frameworks, security tools, and continuous learning resources. Each tool is described with its defensive use case, aligned with ethical practices.</p>
+        <div class="tools-grid">
+          <div class="tool-card">
+            <h3><i class="fas fa-file-alt"></i> NIST SP 800-30</h3>
+            <p>Guide for conducting risk assessments to identify and prioritize cybersecurity risks ethically.</p>
+            <a href="https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-chess-board"></i> MITRE ATT&CK</h3>
+            <p>Knowledge base of adversary tactics for threat modeling and defense strategy development.</p>
+            <a href="https://attack.mitre.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-list-ol"></i> OWASP Top 10</h3>
+            <p>List of critical web application security risks for vulnerability mitigation and secure coding.</p>
+            <a href="https://owasp.org/www-project-top-ten/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-balance-scale"></i> CIA Triad</h3>
+            <p>Model for Confidentiality, Integrity, Availability to guide secure system design.</p>
+            <a href="https://en.wikipedia.org/wiki/CIA_triad" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-robot"></i> Darktrace</h3>
+            <p>AI-driven threat detection for autonomous response to anomalies in networks.</p>
+            <a href="https://www.darktrace.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-shield-virus"></i> CyOps</h3>
+            <p>Cyber operations tool for incident response and threat hunting.</p>
+            <a href="https://www.cyops.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-bug"></i> Metasploit</h3>
+            <p>Framework for developing and executing exploit code against remote targets ethically in testing.</p>
+            <a href="https://www.metasploit.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-key"></i> Hashcat</h3>
+            <p>Advanced password recovery tool for auditing weak passwords in controlled environments.</p>
+            <a href="https://hashcat.net/hashcat/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-search"></i> OpenVAS</h3>
+            <p>Open Vulnerability Assessment System for scanning and managing vulnerabilities.</p>
+            <a href="https://www.openvas.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-tools"></i> Didier Stevens Suite</h3>
+            <p>Collection of tools for malware analysis and PDF forensics.</p>
+            <a href="https://blog.didierstevens.com/programs/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-spider"></i> OWASP ZAP</h3>
+            <p>Web application security scanner for finding vulnerabilities in apps.</p>
+            <a href="https://www.zaproxy.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-wifi"></i> Aircrack-ng</h3>
+            <p>Suite for wireless network auditing and security testing.</p>
+            <a href="https://www.aircrack-ng.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-stethoscope"></i> Burp Suite</h3>
+            <p>Platform for web vulnerability scanning and manual testing.</p>
+            <a href="https://portswigger.net/burp" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-search-location"></i> Google Hacking Database</h3>
+            <p>Database of dorks for advanced Google searches in OSINT.</p>
+            <a href="https://www.exploit-db.com/google-hacking-database" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-network-wired"></i> Wireshark</h3>
+            <p>Network protocol analyzer for troubleshooting and security analysis.</p>
+            <a href="https://www.wireshark.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-exclamation-triangle"></i> CVE’s</h3>
+            <p>Common Vulnerabilities and Exposures database for tracking known issues.</p>
+            <a href="https://cve.mitre.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-user-secret"></i> OSINT</h3>
+            <p>Open Source Intelligence techniques for gathering public data ethically.</p>
+            <a href="https://osintframework.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-robot"></i> Chat GPT Jailbreaking</h3>
+            <p>Techniques for testing AI boundaries in ethical red teaming.</p>
+            <a href="https://openai.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-flask"></i> VulnLab</h3>
+            <p>Lab environment for practicing vulnerability exploitation safely.</p>
+            <a href="https://vulnhub.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-database"></i> VulnDB</h3>
+            <p>Vulnerability database for research and mitigation strategies.</p>
+            <a href="https://vuldb.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-box"></i> Hack the Box</h3>
+            <p>Platform for hands-on penetration testing challenges.</p>
+            <a href="https://www.hackthebox.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-shield-alt"></i> Let’s Defend</h3>
+            <p>Blue team simulation platform for defending against attacks.</p>
+            <a href="https://letsdefend.io/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-bug"></i> HackerOne</h3>
+            <p>Bug bounty platform for responsible disclosure of vulnerabilities.</p>
+            <a href="https://www.hackerone.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-search"></i> Censys Search</h3>
+            <p>Internet-wide search engine for exposed devices and services.</p>
+            <a href="https://censys.io/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-globe"></i> Shodan</h3>
+            <p>Search engine for Internet-connected devices for OSINT.</p>
+            <a href="https://www.shodan.io/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-link"></i> Maltego</h3>
+            <p>Tool for link analysis and data mining in investigations.</p>
+            <a href="https://www.maltego.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-chart-bar"></i> Splunk</h3>
+            <p>SIEM tool for searching, monitoring, and analyzing machine data.</p>
+            <a href="https://www.splunk.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-users"></i> Tribe</h3>
+            <p>Community platform for cybersecurity collaboration.</p>
+            <a href="https://tribe.xyz/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-cubes"></i> Kubernetes</h3>
+            <p>Container orchestration for secure deployment of applications.</p>
+            <a href="https://kubernetes.io/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-fire"></i> Spitfire</h3>
+            <p>Tool for rapid incident response and forensics.</p>
+            <a href="https://github.com/Spitfire" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-cat"></i> Wily</h3>
+            <p>Application performance monitoring for security insights.</p>
+            <a href="https://www.ca.com/us/products/ca-application-performance-management.html" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-cloud"></i> Cloudlock</h3>
+            <p>Cloud access security broker for data protection in cloud environments.</p>
+            <a href="https://www.cisco.com/c/en/us/products/security/cloudlock/index.html" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-snowflake"></i> Snow</h3>
+            <p>ServiceNow shorthand for IT service management with security integrations.</p>
+            <a href="https://www.servicenow.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-gamepad"></i> Openbet</h3>
+            <p>Gaming platform with secure transaction handling.</p>
+            <a href="https://www.openbet.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-envelope"></i> DMA</h3>
+            <p>Direct Marketing Association for privacy-compliant communications.</p>
+            <a href="https://thedma.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-code"></i> Deva</h3>
+            <p>Development tool for secure app building.</p>
+            <a href="https://deva.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-chart-line"></i> PRTG</h3>
+            <p>Network monitoring tool for performance and security alerts.</p>
+            <a href="https://www.paessler.com/prtg" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-eye"></i> Espy</h3>
+            <p>Monitoring tool for network visibility.</p>
+            <a href="https://espy.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-plug"></i> BlueSocket</h3>
+            <p>Wireless access control for secure Wi-Fi management.</p>
+            <a href="https://www.adtran.com/products/bluesocket/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-wifi"></i> Radwin</h3>
+            <p>Wireless broadband solutions with security features.</p>
+            <a href="https://www.radwin.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-network-wired"></i> WireShark</h3>
+            <p>Packet analyzer for network troubleshooting and security.</p>
+            <a href="https://www.wireshark.org/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-search-location"></i> The Harvester</h3>
+            <p>OSINT tool for gathering emails, subdomains, and hosts.</p>
+            <a href="https://github.com/laramies/theHarvester" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-certificate"></i> ISO:270001</h3>
+            <p>Standard for information security management systems.</p>
+            <a href="https://www.iso.org/isoiec-27001-information-security.html" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-crow"></i> Crowdstrike</h3>
+            <p>Endpoint protection platform for threat detection and response.</p>
+            <a href="https://www.crowdstrike.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fab fa-microsoft"></i> Azure Sentinel</h3>
+            <p>Cloud-native SIEM for intelligent security analytics.</p>
+            <a href="https://azure.microsoft.com/en-us/services/microsoft-sentinel/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-shield-alt"></i> Defender for Endpoint</h3>
+            <p>Microsoft's endpoint security solution for threat protection.</p>
+            <a href="https://www.microsoft.com/en-us/security/business/endpoint-protection/microsoft-defender-endpoint" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-cloud"></i> Azure Cost Management</h3>
+            <p>Tool for monitoring and optimizing cloud spending with security considerations.</p>
+            <a href="https://azure.microsoft.com/en-us/services/cost-management/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-cloud"></i> Cloudflare</h3>
+            <p>Web performance and security company for DDoS protection and more.</p>
+            <a href="https://www.cloudflare.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-ticket-alt"></i> Jira</h3>
+            <p>Issue tracking tool for agile project management in security teams.</p>
+            <a href="https://www.atlassian.com/software/jira" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-headset"></i> ServiceNow</h3>
+            <p>IT service management platform with security operations modules.</p>
+            <a href="https://www.servicenow.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-bell"></i> PagerDuty</h3>
+            <p>Incident response platform for alerting and on-call management.</p>
+            <a href="https://www.pagerduty.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-robot"></i> Rundeck</h3>
+            <p>Automation tool for operations and security tasks.</p>
+            <a href="https://www.rundeck.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-network-wired"></i> Alcatel Network</h3>
+            <p>Networking solutions for secure enterprise connectivity.</p>
+            <a href="https://www.al-enterprise.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fab fa-salesforce"></i> Salesforce CRM</h3>
+            <p>Customer relationship management platform with secure data handling and integration capabilities for sales and support.</p>
+            <a href="https://www.salesforce.com/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-database"></i> Zoho CRM</h3>
+            <p>Open-source alternative CRM for managing customer interactions with privacy-focused features.</p>
+            <a href="https://www.zoho.com/crm/" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-users"></i> HubSpot CRM</h3>
+            <p>Free CRM tool for inbound marketing, sales, and service with secure data encryption.</p>
+            <a href="https://www.hubspot.com/products/crm" target="_blank">Learn More</a>
+          </div>
+          <div class="tool-card">
+            <h3><i class="fas fa-lock"></i> Bitrix24 CRM</h3>
+            <p>Open-source CRM with collaboration tools and GDPR-compliant security features.</p>
+            <a href="https://www.bitrix24.com/" target="_blank">Learn More</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="resources" class="section">
+        <h2><i class="fas fa-book-open"></i> Cybersecurity Resources</h2>
+        <p>To empower everyone with knowledge, here are free and accessible resources for learning cybersecurity. These align with CEH principles and promote equitable access to education for a just cyberspace.</p>
+        <ul class="resources-list">
+          <li><a href="https://tryhackme.com/" target="_blank">TryHackMe</a> - Hands-on labs for beginners to advanced ethical hacking.</li>
+          <li><a href="https://www.cybrary.it/" target="_blank">Cybrary</a> - Free courses on CEH, penetration testing, and defensive strategies.</li>
+          <li><a href="https://owasp.org/" target="_blank">OWASP</a> - Community-driven resources for web application security and vulnerability management.</li>
+          <li><a href="https://www.sans.org/" target="_blank">SANS Institute</a> - Free cheat sheets and webinars on threat intelligence and incident response.</li>
+          <li><a href="https://www.nist.gov/cyberframework" target="_blank">NIST Cybersecurity Framework</a> - Guidelines for improving organizational security posture.</li>
+          <li><a href="https://www.ec-council.org/programs/certified-ethical-hacker-ceh/" target="_blank">EC-Council CEH</a> - Official resources for ethical hacking certification preparation.</li>
+          <li><a href="https://portswigger.net/web-security" target="_blank">PortSwigger Web Security Academy</a> - Free interactive lessons on web vulnerabilities.</li>
+        </ul>
+        <p>Remember, use these tools defensively to protect yourself and others. Always obtain permission before testing systems.</p>
+      </section>
+
+      <section id="quiz" class="section">
+        <h2><i class="fas fa-question-circle"></i> Cybersecurity Awareness Quiz</h2>
+        <p>Test your knowledge with this interactive quiz inspired by CEH concepts. It's designed for all levels to promote learning and awareness in a supportive way.</p>
+        <div class="quiz-container">
+          <div class="quiz-question">
+            <h4>Question 1: What is the first phase of ethical hacking in CEH?</h4>
+            <div class="quiz-options">
+              <div class="quiz-option" data-correct="true">Reconnaissance</div>
+              <div class="quiz-option">Scanning</div>
+              <div class="quiz-option">Gaining Access</div>
+              <div class="quiz-option">Maintaining Access</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+          <div class="quiz-question">
+            <h4>Question 2: Which practice best protects against phishing?</h4>
+            <div class="quiz-options">
+              <div class="quiz-option">Clicking all links</div>
+              <div class="quiz-option" data-correct="true">Verifying sender and using MFA</div>
+              <div class="quiz-option">Sharing passwords</div>
+              <div class="quiz-option">Ignoring updates</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+          <div class="quiz-question">
+            <h4>Question 3: What does responsible disclosure mean?</h4>
+            <div class="quiz-options">
+              <div class="quiz-option">Publicly sharing exploits immediately</div>
+              <div class="quiz-option" data-correct="true">Reporting vulnerabilities to vendors first</div>
+              <div class="quiz-option">Ignoring found issues</div>
+              <div class="quiz-option">Selling vulnerabilities</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+          <div class="quiz-question">
+            <h4>Question 4: Why is encryption important for privacy?</h4>
+            <div class="quiz-options">
+              <div class="quiz-option" data-correct="true">It protects data from unauthorized access</div>
+              <div class="quiz-option">It slows down systems</div>
+              <div class="quiz-option">It shares data publicly</div>
+              <div class="quiz-option">It removes data</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+          <div class="quiz-question">
+            <h4>Question 5: What framework helps map adversary tactics?</h4>
+            <div class="quiz-options">
+              <div class="quiz-option" data-correct="true">MITRE ATT&CK</div>
+              <div class="quiz-option">OWASP Top 10</div>
+              <div class="quiz-option">PCI DSS</div>
+              <div class="quiz-option">HIPAA</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="terminal" class="section">
+        <h2><i class="fas fa-terminal"></i> Interactive Terminal</h2>
+        <p>Try some Kali OS commands (simulated). Expanded with educational commands on CEH concepts and defensive tips:</p>
+        
         <div class="terminal">
           <div class="terminal-header">
             <div class="terminal-btn red"></div>
             <div class="terminal-btn yellow"></div>
             <div class="terminal-btn green"></div>
           </div>
-          <div class="terminal-body">
-            <div class="terminal-line">$ skills --list --all<span class="terminal-cursor"></span></div>
-            <div class="terminal-line">> Azure Security: Defender for Endpoint, Sentinel, Identity Protection<span class="terminal-cursor"></span></div>
-            <div class="terminal-line">> Threat Protection: MITRE ATT&CK, SIEM solutions, behavioral analysis<span class="terminal-cursor"></span></div>
-            <div class="terminal-line">> Network Security: Zero Trust Architecture, VPN configurations<span class="terminal-cursor"></span></div>
-            <div class="terminal-line">> Compliance: ISO 27001, NIST frameworks, GDPR<span class="terminal-cursor"></span></div>
-            <div class="terminal-line">> Ethical Hacking: CEH principles, reconnaissance, scanning<span class="terminal-cursor"></span></div>
-            <div class="terminal-line">> Privacy Protection: Encryption techniques, anonymization<span class="terminal-cursor"></span></div>
+          <div class="terminal-body" id="terminal-output">
+            <div class="terminal-line">Kali Linux Terminal Simulator<span class="terminal-cursor"></span></div>
+            <div class="terminal-line">Type 'help' for available commands<span class="terminal-cursor"></span></div>
+            <div class="terminal-line">Try: nmap, msfconsole, searchsploit, whoami, ceh_phases, privacy_tip, disclosure<span class="terminal-cursor"></span></div>
+          </div>
+          <div class="terminal-input">
+            <span class="terminal-prompt">$</span>
+            <input type="text" id="terminal-command" autocomplete="off" placeholder="Type command...">
           </div>
         </div>
+        
+        <div class="command-output" id="command-result"></div>
       </section>
-
+      
       <section id="contact" class="section">
         <h2><i class="fas fa-envelope"></i> Contact</h2>
         <p>For professional inquiries, please contact me via email:</p>
@@ -787,29 +2340,57 @@
             <i class="fas fa-envelope"></i> ro-noc2020@protonmail.com
           </a>
         </div>
-        
-        <div class="terminal">
-          <div class="terminal-header">
-            <div class="terminal-btn red"></div>
-            <div class="terminal-btn yellow"></div>
-            <div class="terminal-btn green"></div>
-          </div>
-          <div class="terminal-body">
-            <div class="terminal-line">$ contact --all<span class="terminal-cursor"></span></div>
-            <div class="terminal-line">> Email: ro-noc2020@protonmail.com<span class="terminal-cursor"></span></div>
-            <div class="terminal-line">> LinkedIn: linkedin.com/in/roman-orlowski<span class="terminal-cursor"></span></div>
-            <div class="terminal-line">> GitHub: github.com/roman-cyber<span class="terminal-cursor"></span></div>
-            <div class="terminal-line">> Encryption Key: Available upon request<span class="terminal-cursor"></span></div>
-          </div>
-        </div>
       </section>
     </main>
   </div>
 
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Navigation</h3>
+        <ul class="footer-links">
+          <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+          <li><a href="#profile"><i class="fas fa-chevron-right"></i> Profile</a></li>
+          <li><a href="#personality"><i class="fas fa-chevron-right"></i> Personality</a></li>
+          <li><a href="#abilities"><i class="fas fa-chevron-right"></i> Abilities</a></li>
+          <li><a href="#management"><i class="fas fa-chevron-right"></i> Management</a></li>
+          <li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li>
+          <li><a href="#solutions"><i class="fas fa-chevron-right"></i> Solutions</a></li>
+          <li><a href="#experience"><i class="fas fa-chevron-right"></i> Experience</a></li>
+          <li><a href="#certifications"><i class="fas fa-chevron-right"></i> Certifications</a></li>
+          <li><a href="#tools"><i class="fas fa-chevron-right"></i> Tools</a></li>
+          <li><a href="#resources"><i class="fas fa-chevron-right"></i> Resources</a></li>
+          <li><a href="#quiz"><i class="fas fa-chevron-right"></i> Quiz</a></li>
+          <li><a href="#terminal"><i class="fas fa-chevron-right"></i> Terminal</a></li>
+          <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul class="footer-links">
+          <li><a href="mailto:ro-noc2020@protonmail.com"><i class="fas fa-envelope"></i> Email</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Community</h3>
+        <ul class="footer-links">
+          <li><a href="https://owasp.org/" target="_blank"><i class="fas fa-users"></i> OWASP</a></li>
+          <li><a href="https://www.ec-council.org/" target="_blank"><i class="fas fa-graduation-cap"></i> EC-Council</a></li>
+          <li><a href="https://tryhackme.com/" target="_blank"><i class="fas fa-laptop-code"></i> TryHackMe</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p class="copyright">© 2025 Roman Orłowski. All rights reserved. | Secure by Design | Committed to Ethical Cybersecurity</p>
+    </div>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Initialize particles.js
       particlesJS("particles-js", {
         "particles": {
           "number": {
@@ -827,15 +2408,30 @@
             "stroke": {
               "width": 0,
               "color": "#000000"
+            },
+            "polygon": {
+              "nb_sides": 5
             }
           },
           "opacity": {
             "value": 0.3,
-            "random": false
+            "random": false,
+            "anim": {
+              "enable": false,
+              "speed": 1,
+              "opacity_min": 0.1,
+              "sync": false
+            }
           },
           "size": {
             "value": 3,
-            "random": true
+            "random": true,
+            "anim": {
+              "enable": false,
+              "speed": 40,
+              "size_min": 0.1,
+              "sync": false
+            }
           },
           "line_linked": {
             "enable": true,
@@ -851,7 +2447,12 @@
             "random": false,
             "straight": false,
             "out_mode": "out",
-            "bounce": false
+            "bounce": false,
+            "attract": {
+              "enable": false,
+              "rotateX": 600,
+              "rotateY": 1200
+            }
           }
         },
         "interactivity": {
@@ -874,40 +2475,31 @@
                 "opacity": 1
               }
             },
+            "bubble": {
+              "distance": 400,
+              "size": 40,
+              "duration": 2,
+              "opacity": 8,
+              "speed": 3
+            },
+            "repulse": {
+              "distance": 200,
+              "duration": 0.4
+            },
             "push": {
               "particles_nb": 4
+            },
+            "remove": {
+              "particles_nb": 2
             }
           }
         },
         "retina_detect": true
       });
 
-      // Create audio visualizer bars
-      const visualizer = document.getElementById('visualizer');
-      for (let i = 0; i < 50; i++) {
-        const bar = document.createElement('div');
-        bar.className = 'bar';
-        bar.style.height = `${Math.random() * 60 + 10}px`;
-        bar.style.animation = `visualizerPulse ${0.5 + Math.random() * 1.5}s infinite alternate`;
-        bar.style.animationDelay = `${Math.random() * 2}s`;
-        visualizer.appendChild(bar);
-      }
-
-      // Animate visualizer bars randomly
-      setInterval(() => {
-        const bars = document.querySelectorAll('.bar');
-        bars.forEach(bar => {
-          if (Math.random() > 0.7) {
-            bar.style.height = `${Math.random() * 60 + 10}px`;
-          }
-        });
-      }, 200);
-
-      // Header animation
       const header = document.querySelector('.header h1');
-      header.style.animation = 'decrypt 2s ease-out forwards';
+      header.style.animation = 'decrypt 1.5s ease-out forwards';
       
-      // Section animations on scroll
       const sections = document.querySelectorAll('.section');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -921,7 +2513,6 @@
         observer.observe(section);
       });
       
-      // Navigation
       const navItems = document.querySelectorAll('.nav-item');
       navItems.forEach(item => {
         item.addEventListener('click', function() {
@@ -937,7 +2528,6 @@
         });
       });
       
-      // Background gradient effect on mouse move
       const gradient = document.querySelector('.cyber-gradient');
       document.addEventListener('mousemove', (e) => {
         const x = e.clientX / window.innerWidth;
@@ -947,115 +2537,90 @@
            linear-gradient(${-135 + x * 45}deg, rgba(255, 0, 247, 0.05) 0%, transparent 50%)`;
       });
 
-      // Terminal typing animation
       const terminalLines = document.querySelectorAll('.terminal-line');
       terminalLines.forEach((line, index) => {
         line.style.animationDelay = `${index * 0.5 + 0.5}s`;
       });
       
-      // Audio player functionality
-      const audio = new Audio();
-      audio.src = 'https://github.com/ronoc2020/roman.orlowski/blob/main/Music%20for%20Hacking%20Focus%20part18.mp3';
-      audio.volume = 0.5;
-      
-      const playBtn = document.getElementById('play-btn');
-      const volumeControl = document.getElementById('volume');
-      const muteBtn = document.getElementById('mute-btn');
-      let isPlaying = false;
-      
-      playBtn.addEventListener('click', () => {
-        if (isPlaying) {
-          audio.pause();
-          playBtn.innerHTML = '<i class="fas fa-play"></i>';
-        } else {
-          audio.play();
-          playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        }
-        isPlaying = !isPlaying;
-      });
-      
-      volumeControl.addEventListener('input', () => {
-        audio.volume = volumeControl.value;
-      });
-      
-      muteBtn.addEventListener('click', () => {
-        if (audio.muted) {
-          audio.muted = false;
-          muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-        } else {
-          audio.muted = true;
-          muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-        }
-      });
-      
-      // Modal functionality
-      const experienceModal = document.getElementById('experience-modal');
-      const modalClose = document.getElementById('modal-close');
-      const modalOptions = document.querySelectorAll('.modal-option');
-      
-      // Show modal on page load
-      setTimeout(() => {
-        experienceModal.classList.add('active');
-      }, 1000);
-      
-      modalClose.addEventListener('click', () => {
-        experienceModal.classList.remove('active');
-      });
-      
-      modalOptions.forEach(option => {
-        option.addEventListener('click', () => {
-          const experience = option.getAttribute('data-experience');
-          experienceModal.classList.remove('active');
+      const terminalCommand = document.getElementById('terminal-command');
+      const terminalOutput = document.getElementById('terminal-output');
+      terminalCommand.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          const command = terminalCommand.value.trim();
+          terminalCommand.value = '';
           
-          if (experience === 'immersive') {
-            // Enable immersive experience
-            audio.play();
-            isPlaying = true;
-            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => {
-              document.body.style.overflow = 'auto';
-            }, 2000);
+          if (!command) return;
+          
+          const commandLine = document.createElement('div');
+          commandLine.className = 'terminal-line';
+          commandLine.textContent = `$ ${command}`;
+          terminalOutput.appendChild(commandLine);
+          
+          let result;
+          if (commands[command]) {
+            result = commands[command].execute();
+          } else {
+            result = `Command not found: ${command}\nType 'help' for available commands`;
           }
+          
+          if (result) {
+            const resultElement = document.createElement('div');
+            resultElement.className = 'terminal-line';
+            resultElement.textContent = result;
+            terminalOutput.appendChild(resultElement);
+          }
+          
+          terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+      });
+      
+      const accordionItems = document.querySelectorAll('.accordion-item');
+      accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        header.addEventListener('click', () => {
+          item.classList.toggle('active');
         });
       });
-      
-      // Click effects
-      document.addEventListener('click', (e) => {
-        const effect = document.createElement('div');
-        effect.style.position = 'fixed';
-        effect.style.width = '10px';
-        effect.style.height = '10px';
-        effect.style.borderRadius = '50%';
-        effect.style.background = 'radial-gradient(circle, var(--accent), transparent)';
-        effect.style.pointerEvents = 'none';
-        effect.style.left = `${e.clientX - 5}px`;
-        effect.style.top = `${e.clientY - 5}px`;
-        effect.style.zIndex = '9999';
-        effect.style.animation = 'clickEffect 0.5s forwards';
-        document.body.appendChild(effect);
-        
-        setTimeout(() => {
-          effect.remove();
-        }, 500);
+
+      // Quiz Functionality
+      const quizOptions = document.querySelectorAll('.quiz-option');
+      quizOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          const question = this.closest('.quiz-question');
+          const feedback = question.querySelector('.quiz-feedback');
+          const isCorrect = this.dataset.correct === 'true';
+          feedback.textContent = isCorrect ? 'Correct!' : 'Incorrect. Try again!';
+          feedback.className = `quiz-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+        });
       });
-      
-      // Add CSS for click effect
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes clickEffect {
-          0% {
-            transform: scale(1);
-            opacity: 1;
-          }
-          100% {
-            transform: scale(3);
-            opacity: 0;
-          }
-        }
-      `;
-      document.head.appendChild(style);
     });
+
+    const commands = {
+      help: {
+        execute: () => `Available commands:\nnmap\nmsfconsole\nsearchsploit\nwhoami\nceh_phases\nprivacy_tip\ndisclosure`
+      },
+      nmap: {
+        execute: () => `Nmap 7.92 scan initiated... (simulated)\nDiscovered open port 80/tcp on target\nDiscovered open port 443/tcp on target`
+      },
+      msfconsole: {
+        execute: () => `Starting Metasploit Framework console... (simulated)\nmsf6 > use exploit/multi/http/example\nRemember: Use ethically for testing only.`
+      },
+      searchsploit: {
+        execute: () => `Exploit-DB search results: (simulated)\nWindows - Remote Code Execution\nLinux - Privilege Escalation\nReport vulnerabilities responsibly.`
+      },
+      whoami: {
+        execute: () => `root@kali`
+      },
+      ceh_phases: {
+        execute: () => `CEH Phases:\n1. Reconnaissance\n2. Scanning\n3. Gaining Access\n4. Maintaining Access\n5. Covering Tracks\nFocus on defense and ethical use.`
+      },
+      privacy_tip: {
+        execute: () => `Privacy Tip: Use encryption (e.g., VPNs) and enable MFA to protect personal data. Comply with GDPR for privacy-by-design.`
+      },
+      disclosure: {
+        execute: () => `Responsible Disclosure: Report vulnerabilities to vendors first, allow time for patches before public release. Align with CEH ethics.`
+      }
+    };
   </script>
 </body>
 </html>
