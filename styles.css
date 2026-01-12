@@ -1,5 +1,19 @@
 /* Dodaj na końcu pliku styles.css, przed ostatnimi } */
 
+/* --- Variable defaults (safe fallbacks) --- */
+:root {
+  --dark: #0a0a0a;
+  --darker: #000000;
+  --light: #e6e6e6;
+  --primary: #00f7ff;
+  --secondary: #ff00f7;
+  --accent: #00ffaa;
+  --low: #55ff55;
+  --medium: #ffcc00;
+  --warning: #ffcc33;
+  --critical: #ff5555;
+}
+
 /* Music Player Styles */
 .music-player {
   position: fixed;
@@ -33,6 +47,7 @@
   background: rgba(0, 247, 255, 0.1);
   border-bottom: 1px solid rgba(0, 247, 255, 0.2);
   cursor: pointer;
+  position: relative;
 }
 
 .player-header i {
@@ -330,6 +345,22 @@
   .hobbies-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .dark-mode-toggle {
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .contact-form-container {
+    padding: 1rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
 }
 
 @media (max-width: 480px) {
@@ -347,6 +378,7 @@
     font-size: 0.8rem;
   }
 }
+
 /* Dark mode styles */
 body.dark-mode {
     --dark: #0a0a0a;
@@ -549,33 +581,18 @@ body.dark-mode {
     }
 }
 
-/* Service Worker registration */
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(() => {
-        console.log('Service Worker registered successfully');
-    }).catch(err => {
-        console.log('Service Worker registration failed');
-    });
-}
+/* --- Service Worker registration (NOT valid in CSS) ---
+   Moved out of CSS: register your service worker from a JS file, e.g. main.js
 
-/* Additional responsive improvements */
-@media (max-width: 768px) {
-    .dark-mode-toggle {
-        top: 10px;
-        right: 10px;
-        width: 40px;
-        height: 40px;
-    }
-    
-    .contact-form-container {
-        padding: 1rem;
-    }
-    
-    .form-group input,
-    .form-group textarea {
-        font-size: 16px; /* Prevent zoom on iOS */
-    }
-}
+   Example (place into a JS file):
+   if ('serviceWorker' in navigator) {
+       navigator.serviceWorker.register('sw.js').then(() => {
+           console.log('Service Worker registered successfully');
+       }).catch(err => {
+           console.log('Service Worker registration failed', err);
+       });
+   }
+*/
 
 /* Loading optimization */
 .loading-lazy {
@@ -639,11 +656,6 @@ if ('serviceWorker' in navigator) {
 
 .slide-player:hover {
     transform: translateX(0) !important;
-}
-
-.player-header {
-    position: relative;
-    cursor: pointer;
 }
 
 .player-header::before {
@@ -1000,75 +1012,6 @@ if ('serviceWorker' in navigator) {
     .status-widgets {
         grid-template-columns: 1fr;
     }
-    
-    .slide-player {
-        width: 250px !important;
-    }
 }
 
-/* Enhanced animations for SOC feel */
-@keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 5px var(--primary); }
-    50% { box-shadow: 0 0 20px var(--primary), 0 0 30px var(--primary); }
-}
-
-.widget:hover {
-    animation: pulse-glow 2s infinite;
-}
-
-@keyframes data-flicker {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-}
-
-.status-value {
-    animation: data-flicker 1s infinite;
-}
-
-/* Dark mode adjustments */
-.dark-mode .threat-indicator {
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--dark);
-}
-
-.dark-mode .threat-label {
-    color: var(--dark);
-}
-
-.dark-mode .widget {
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--dark);
-}
-
-.dark-mode .widget-title {
-    color: var(--dark);
-}
-
-.dark-mode .status-label {
-    color: var(--dark);
-}
-
-.dark-mode .alert-text {
-    color: var(--dark);
-}
-
-/* Performance optimizations */
-.status-widgets,
-.education-dashboard,
-.hobbies-dashboard {
-    will-change: transform;
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    .scanline-effect,
-    .data-stream,
-    .cursor-trail,
-    .status-value {
-        animation: none !important;
-    }
-    
-    .slide-player {
-        transition: none !important;
-    }
-}  
+/* End of styles.css */
