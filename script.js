@@ -849,3 +849,334 @@ window.addEventListener('error', function(e) {
         }
     }
 }, true);
+
+// Music Player - slide out from edge
+const musicPlayer = document.getElementById('music-player');
+const playerHeader = document.getElementById('player-header');
+let playerCollapsed = true;
+
+// Initialize player position
+musicPlayer.style.transform = 'translateX(calc(100% - 40px))';
+musicPlayer.classList.add('slide-player');
+
+playerHeader.addEventListener('mouseenter', function() {
+    if (playerCollapsed) {
+        musicPlayer.style.transform = 'translateX(0)';
+        playerCollapsed = false;
+    }
+});
+
+musicPlayer.addEventListener('mouseleave', function() {
+    if (!playerCollapsed && !isPlaying) {
+        setTimeout(() => {
+            musicPlayer.style.transform = 'translateX(calc(100% - 40px))';
+            playerCollapsed = true;
+        }, 500);
+    }
+});
+
+// Terminology links functionality
+const terminologyLinks = {
+    'NIST': 'https://www.nist.gov/cyberframework',
+    'ISO 27001': 'https://www.iso.org/isoiec-27001-information-security.html',
+    'NIS2': 'https://digital-strategy.ec.europa.eu/en/policies/nis2-directive',
+    'SOX': 'https://www.soxlaw.com/',
+    'GDPR': 'https://gdpr.eu/',
+    'DORA': 'https://www.esma.europa.eu/policy-rules/mifid-ii-and-mifir',
+    'CISSP': 'https://www.isc2.org/Certifications/CISSP',
+    'CISM': 'https://www.isaca.org/credentialing/cism',
+    'CISA': 'https://www.isaca.org/credentialing/cisa',
+    'GSLC': 'https://www.giac.org/certifications/security-leadership-certification-gslc/',
+    'GSTRT': 'https://www.giac.org/certifications/strategic-planning-policy-leadership-gstrt/',
+    'GCPM': 'https://www.giac.org/certifications/project-management-certification-gcpm/',
+    'IAM': 'https://en.wikipedia.org/wiki/Identity_and_access_management',
+    'PAM': 'https://en.wikipedia.org/wiki/Privileged_access_management',
+    'TOMs': 'https://en.wikipedia.org/wiki/Target_operating_model',
+    'RACI': 'https://en.wikipedia.org/wiki/Responsibility_assignment_matrix',
+    'CTI': 'https://en.wikipedia.org/wiki/Threat_intelligence'
+};
+
+// Add links to terminology
+function addTerminologyLinks() {
+    const keywords = document.querySelectorAll('.keyword');
+    keywords.forEach(keyword => {
+        const term = keyword.textContent.trim();
+        if (terminologyLinks[term]) {
+            keyword.style.cursor = 'pointer';
+            keyword.style.textDecoration = 'underline';
+            keyword.style.textDecorationStyle = 'dotted';
+            
+            keyword.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open(terminologyLinks[term], '_blank', 'noopener,noreferrer');
+            });
+            
+            // Add tooltip
+            keyword.setAttribute('title', `Click to learn more about ${term}`);
+            
+            // Add hover effect
+            keyword.addEventListener('mouseenter', function() {
+                this.style.textDecoration = 'underline';
+                this.style.textDecorationStyle = 'solid';
+                this.style.textDecorationColor = 'var(--primary)';
+            });
+            
+            keyword.addEventListener('mouseleave', function() {
+                this.style.textDecoration = 'underline';
+                this.style.textDecorationStyle = 'dotted';
+            });
+        }
+    });
+}
+
+// SOC Dashboard effects
+function initializeSOCEffects() {
+    // Add scanning line effect
+    const scanline = document.createElement('div');
+    scanline.className = 'scanline-effect';
+    document.body.appendChild(scanline);
+    
+    // Add data stream effect
+    const dataStream = document.createElement('div');
+    dataStream.className = 'data-stream';
+    document.body.appendChild(dataStream);
+    
+    // Add threat level indicator
+    const threatIndicator = document.createElement('div');
+    threatIndicator.className = 'threat-indicator';
+    threatIndicator.innerHTML = `
+        <div class="threat-level">
+            <span class="threat-label">THREAT LEVEL:</span>
+            <span class="threat-status">LOW</span>
+        </div>
+        <div class="threat-bar">
+            <div class="threat-fill"></div>
+        </div>
+    `;
+    document.querySelector('.header').appendChild(threatIndicator);
+    
+    // Animate threat level
+    let threatLevel = 0;
+    setInterval(() => {
+        threatLevel = Math.random() * 100;
+        const threatFill = document.querySelector('.threat-fill');
+        const threatStatus = document.querySelector('.threat-status');
+        
+        threatFill.style.width = threatLevel + '%';
+        
+        if (threatLevel < 30) {
+            threatStatus.textContent = 'LOW';
+            threatStatus.style.color = 'var(--low)';
+        } else if (threatLevel < 70) {
+            threatStatus.textContent = 'MEDIUM';
+            threatStatus.style.color = 'var(--medium)';
+        } else {
+            threatStatus.textContent = 'HIGH';
+            threatStatus.style.color = 'var(--critical)';
+        }
+    }, 3000);
+}
+
+// Enhanced mouse effects
+function initializeMouseEffects() {
+    // Add cursor trail effect
+    const cursorTrail = document.createElement('div');
+    cursorTrail.className = 'cursor-trail';
+    document.body.appendChild(cursorTrail);
+    
+    let mouseX = 0, mouseY = 0;
+    let trailX = 0, trailY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    function animateTrail() {
+        trailX += (mouseX - trailX) * 0.1;
+        trailY += (mouseY - trailY) * 0.1;
+        
+        cursorTrail.style.left = trailX + 'px';
+        cursorTrail.style.top = trailY + 'px';
+        
+        requestAnimationFrame(animateTrail);
+    }
+    animateTrail();
+    
+    // Add grid interaction
+    const gridOverlay = document.querySelector('.grid-overlay');
+    if (gridOverlay) {
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            
+            gridOverlay.style.background = `
+                linear-gradient(90deg, transparent ${x-1}%, rgba(0,247,255,0.1) ${x}%, transparent ${x+1}%),
+                linear-gradient(180deg, transparent ${y-1}%, rgba(0,247,255,0.1) ${y}%, transparent ${y+1}%)
+            `;
+        });
+    }
+}
+
+// Dashboard widget effects
+function initializeDashboardWidgets() {
+    // Add system status widgets
+    const statusWidgets = document.createElement('div');
+    statusWidgets.className = 'status-widgets';
+    statusWidgets.innerHTML = `
+        <div class="widget">
+            <div class="widget-title">SYSTEM STATUS</div>
+            <div class="widget-content">
+                <div class="status-item">
+                    <span class="status-label">CPU:</span>
+                    <span class="status-value" id="cpu-usage">45%</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">MEMORY:</span>
+                    <span class="status-value" id="memory-usage">67%</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">NETWORK:</span>
+                    <span class="status-value" id="network-usage">23%</span>
+                </div>
+            </div>
+        </div>
+        <div class="widget">
+            <div class="widget-title">ACTIVE ALERTS</div>
+            <div class="widget-content">
+                <div class="alert-item">
+                    <span class="alert-severity low">●</span>
+                    <span class="alert-text">Firewall update available</span>
+                </div>
+                <div class="alert-item">
+                    <span class="alert-severity medium">●</span>
+                    <span class="alert-text">Unusual login activity</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.querySelector('.container').insertBefore(statusWidgets, document.querySelector('main'));
+    
+    // Animate status values
+    setInterval(() => {
+        document.getElementById('cpu-usage').textContent = Math.floor(Math.random() * 30 + 30) + '%';
+        document.getElementById('memory-usage').textContent = Math.floor(Math.random() * 20 + 50) + '%';
+        document.getElementById('network-usage').textContent = Math.floor(Math.random() * 40 + 10) + '%';
+    }, 2000);
+}
+
+// Education section 3-column layout
+function initializeEducationLayout() {
+    const educationSection = document.querySelector('#education');
+    if (!educationSection) return;
+    
+    const educationContent = educationSection.innerHTML;
+    educationSection.innerHTML = `
+        <h2><i class="fas fa-graduation-cap"></i> Education & Languages</h2>
+        <div class="education-dashboard">
+            <div class="edu-column">
+                <div class="edu-card">
+                    <h3><i class="fas fa-school"></i> Education</h3>
+                    <div class="edu-content">
+                        <p><strong>Diploma High School</strong><br>Kraków</p>
+                        <h4>Licenses & Certifications:</h4>
+                        <ul class="cert-list">
+                            <li><i class="fas fa-certificate"></i> SEP authorization for supervision and operation up to 1 kV</li>
+                            <li><i class="fas fa-certificate"></i> MDF Accreditation License (Frame Basic)</li>
+                            <li><i class="fas fa-certificate"></i> Crane Operations Basic Slinging Course</li>
+                            <li><i class="fas fa-certificate"></i> Driving License category D</li>
+                            <li><i class="fas fa-certificate"></i> Professional Customer Phone Support</li>
+                            <li><i class="fas fa-certificate"></i> Counterintelligence Awareness and Reporting Course</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="edu-column">
+                <div class="edu-card">
+                    <h3><i class="fas fa-language"></i> Languages</h3>
+                    <div class="language-dashboard">
+                        <div class="lang-item">
+                            <div class="lang-header">
+                                <span class="lang-name">Polish</span>
+                                <span class="lang-level-badge native">Native</span>
+                            </div>
+                            <div class="lang-progress">
+                                <div class="lang-progress-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="lang-item">
+                            <div class="lang-header">
+                                <span class="lang-name">English</span>
+                                <span class="lang-level-badge advanced">C1</span>
+                            </div>
+                            <div class="lang-progress">
+                                <div class="lang-progress-bar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="lang-item">
+                            <div class="lang-header">
+                                <span class="lang-name">German</span>
+                                <span class="lang-level-badge intermediate">B1</span>
+                            </div>
+                            <div class="lang-progress">
+                                <div class="lang-progress-bar" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="edu-column">
+                <div class="edu-card">
+                    <h3><i class="fas fa-heart"></i> Hobbies & Interests</h3>
+                    <div class="hobbies-dashboard">
+                        <div class="hobby-card">
+                            <i class="fas fa-fist-raised"></i>
+                            <span>Mixed Martial Arts</span>
+                            <div class="hobby-indicator active"></div>
+                        </div>
+                        <div class="hobby-card">
+                            <i class="fas fa-basketball-ball"></i>
+                            <span>Basketball</span>
+                            <div class="hobby-indicator active"></div>
+                        </div>
+                        <div class="hobby-card">
+                            <i class="fas fa-music"></i>
+                            <span>Music Editing</span>
+                            <div class="hobby-indicator"></div>
+                        </div>
+                        <div class="hobby-card">
+                            <i class="fas fa-video"></i>
+                            <span>Video Editing</span>
+                            <div class="hobby-indicator active"></div>
+                        </div>
+                        <div class="hobby-card">
+                            <i class="fas fa-book"></i>
+                            <span>Reading Books</span>
+                            <div class="hobby-indicator active"></div>
+                        </div>
+                        <div class="hobby-card">
+                            <i class="fas fa-tools"></i>
+                            <span>DIY Projects</span>
+                            <div class="hobby-indicator"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Initialize all enhancements
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait for main content to load
+    setTimeout(() => {
+        addTerminologyLinks();
+        initializeSOCEffects();
+        initializeMouseEffects();
+        initializeDashboardWidgets();
+        initializeEducationLayout();
+    }, 1000);
+});
