@@ -3,12 +3,11 @@
 <head>
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.youtube.com https://s.ytimg.com 'unsafe-inline';
+    script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline';
     style-src 'self' https://cdnjs.cloudflare.com 'unsafe-inline';
     img-src 'self' data: https:;
     font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com;
     connect-src 'self' https:;
-    frame-src https://www.youtube.com;
     frame-ancestors 'none';
     form-action 'self';
     base-uri 'self';
@@ -16,14 +15,12 @@
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <title>Roman Orłowski | ROCyber Solutions</title>
-  <meta name="description" content="Cybersecurity expert specializing in cloud security, threat analysis, and ethical hacking. CISSP, CISM, CISA certified.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <link rel="stylesheet" href="styles.css">
-  <link rel="preload" href="https://assets.codepen.io/605876/Blender-Pro-Bold.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body class="smooth-scroll">
   <!-- Intro Sequence -->
@@ -62,36 +59,25 @@
   <div class="floating-element"></div>
   <div class="floating-element"></div>
 
-  <!-- Audio Player -->
-  <div class="audio-player" id="audio-player">
-    <div class="player-controls">
-      <button class="player-btn" id="play-btn"><i class="fas fa-play"></i></button>
-      <button class="player-btn" id="pause-btn" style="display: none;"><i class="fas fa-pause"></i></button>
-      <button class="player-btn" id="next-btn"><i class="fas fa-forward"></i></button>
-      <div class="player-track">
-        <span id="track-name">Cyberpunk Mix</span>
-      </div>
-      <button class="player-btn" id="close-btn"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="player-progress">
-      <div class="progress-bar">
-        <div class="progress-fill" id="progress-fill"></div>
-      </div>
-    </div>
-    <!-- Hidden YouTube iframes -->
-    <div class="yt-frames">
-      <iframe id="yt-player-1" src="https://www.youtube.com/embed/VwXHT8HwgIs?enablejsapi=1&autoplay=1&controls=0&loop=1&playlist=VwXHT8HwgIs" allow="autoplay"></iframe>
-      <iframe id="yt-player-2" src="https://www.youtube.com/embed/uEFFrIW0buE?enablejsapi=1&autoplay=1&controls=0&loop=1&playlist=uEFFrIW0buE" allow="autoplay"></iframe>
-    </div>
-  </div>
-
-  <!-- Main Container (Fluid Layout) -->
-  <div class="container-fluid">
+  <!-- Main Container -->
+  <div class="container">
     <!-- Header -->
-    <header class="header" data-lazy="fade-down">
+    <header class="header">
       <h1 class="decrypt-text">
-        <span class="letter">R</span><span class="letter">O</span><span class="letter">M</span><span class="letter">A</span><span class="letter">N</span><span class="space"> </span>
-        <span class="letter">O</span><span class="letter">R</span><span class="letter">Ł</span><span class="letter">O</span><span class="letter">W</span><span class="letter">S</span><span class="letter">K</span><span class="letter">I</span>
+        <span class="letter">R</span>
+        <span class="letter">O</span>
+        <span class="letter">M</span>
+        <span class="letter">A</span>
+        <span class="letter">N</span>
+        <span class="space"> </span>
+        <span class="letter">O</span>
+        <span class="letter">R</span>
+        <span class="letter">Ł</span>
+        <span class="letter">O</span>
+        <span class="letter">W</span>
+        <span class="letter">S</span>
+        <span class="letter">K</span>
+        <span class="letter">I</span>
       </h1>
       <p class="tagline">Precision. Resilience. Command. – SecDevOps. Dedicated to protecting people and systems through ethical cybersecurity practices.</p>
       <div class="status-badge">
@@ -101,14 +87,16 @@
     </header>
 
     <!-- Navigation -->
-    <nav class="nav" data-lazy="fade-up">
+    <nav class="nav">
       <div class="nav-item active" data-section="about"><i class="fas fa-user-secret"></i> About</div>
       <div class="nav-item" data-section="profile"><i class="fas fa-user"></i> Profile</div>
-      <div class="nav-item" data-section="personality"><i class="fas fa-heart"></i> Attributes</div>
+      <div class="nav-item" data-section="personality"><i class="fas fa-heart"></i> Personality</div>
+      <div class="nav-item" data-section="abilities"><i class="fas fa-tools"></i> Abilities</div>
+      <div class="nav-item" data-section="management"><i class="fas fa-sitemap"></i> Management</div>
       <div class="nav-item" data-section="skills"><i class="fas fa-code"></i> Skills</div>
       <div class="nav-item" data-section="solutions"><i class="fas fa-shield-virus"></i> Solutions</div>
       <div class="nav-item" data-section="experience"><i class="fas fa-briefcase"></i> Experience</div>
-      <div class="nav-item" data-section="certifications"><i class="fas fa-certificate"></i> Certs</div>
+      <div class="nav-item" data-section="certifications"><i class="fas fa-certificate"></i> Certifications</div>
       <div class="nav-item" data-section="tools"><i class="fas fa-wrench"></i> Tools</div>
       <div class="nav-item" data-section="resources"><i class="fas fa-book-open"></i> Resources</div>
       <div class="nav-item" data-section="quiz"><i class="fas fa-question-circle"></i> Quiz</div>
@@ -119,8 +107,7 @@
     <!-- Main Content -->
     <main>
       <!-- About Section -->
-      <section id="about" class="section visible" data-lazy="slide-left">
-        <div class="section-loader"></div>
+      <section id="about" class="section visible">
         <h2><i class="fas fa-user-secret"></i> Professional Profile</h2>
         <p>Self-driven cybersecurity expert specializing in cloud infrastructure protection, threat analysis, and secure system architecture. With a passion for creating impenetrable digital environments and a track record of successful implementations across diverse industries. Committed to ethical practices, responsible disclosure, and empowering others with knowledge to foster a safer cyberspace.</p>
         
@@ -141,44 +128,22 @@
         </div>
         
         <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="#contact" class="cyber-button futurist-btn">
+          <a href="#contact" class="cyber-button">
             <i class="fas fa-envelope"></i> Contact Me
-          </a>
-          <a href="#skills" class="cyber-button futurist-btn btn-secondary">
-            <i class="fas fa-code"></i> View Skills
           </a>
         </div>
       </section>
 
       <!-- Profile Section -->
-      <section id="profile" class="section" data-lazy="slide-right">
-        <div class="section-loader"></div>
+      <section id="profile" class="section">
         <h2><i class="fas fa-user"></i> Profile</h2>
         <div class="profile-content">
           <p>Strong understanding of <span class="keyword" data-tooltip="National Institute of Standards and Technology Framework">NIST</span> Cybersecurity Framework (CSF). Knowledge of global regulatory frameworks: <span class="keyword" data-tooltip="Information Security Management">ISO 27001</span>, <span class="keyword">NIS2</span>, <span class="keyword">SOX</span>, <span class="keyword" data-tooltip="General Data Protection Regulation">GDPR</span>, <span class="keyword">DORA</span>. Experience in Cyber Due Diligence Assessments for mergers, acquisitions, and business risk evaluations. Expertise in Third-Party & Supply Chain Cyber Risk Management. Skilled in <span class="keyword">Incident Response Planning</span>, Review & Post-Incident Analysis. Delivered <span class="keyword">Crisis Management Exercises (CMX)</span> for executive and operational teams. Proven ability in supporting bids, RFP responses, and proposals for cyber security services. Professional certifications: <span class="keyword cert" data-tooltip="Certified Information Systems Security Professional">CISSP</span>, <span class="keyword cert" data-tooltip="Certified Information Security Manager">CISM</span>, <span class="keyword cert" data-tooltip="Certified Information Systems Auditor">CISA</span>, <span class="keyword cert">GSLC</span>, <span class="keyword cert">GSTRT</span>, <span class="keyword cert">GCPM</span>. Contributed to the design of <span class="keyword">Target Operating Models (TOMs)</span> and <span class="keyword">RACI Matrices</span>. Developed and guided <span class="keyword">Cyber Security Roadmaps</span> aligned with organizational strategy. Proficient in analyzing, summarizing <span class="keyword">Cyber Threat Intelligence (CTI)</span> reports for executive decision-making. Implementation and oversight of Cybersecurity Compliance Programs (<span class="keyword">GDPR</span>, <span class="keyword">DORA</span>, <span class="keyword">ISO 27001</span>, <span class="keyword">NIS2</span>, <span class="keyword">SOX</span>). Conducted <span class="keyword">Cyber Risk Assessments</span> and <span class="keyword">Maturity Assessments</span> across multiple industries. Designed and delivered <span class="keyword">Cyber Awareness Training</span> for staff and executives. Hands-on experience with <span class="keyword" data-tooltip="Identity and Access Management">IAM</span> and <span class="keyword" data-tooltip="Privileged Access Management">PAM</span> projects.</p>
         </div>
-        <div class="dashboard-grid">
-          <div class="dashboard-card">
-            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
-            <div class="card-value">6</div>
-            <div class="card-label">Certifications</div>
-          </div>
-          <div class="dashboard-card">
-            <div class="card-icon"><i class="fas fa-briefcase"></div>
-            <div class="card-value">8+</div>
-            <div class="card-label">Years Experience</div>
-          </div>
-          <div class="dashboard-card">
-            <div class="card-icon"><i class="fas fa-tools"></i></div>
-            <div class="card-value">50+</div>
-            <div class="card-label">Tools Mastered</div>
-          </div>
-        </div>
       </section>
 
-      <!-- Unified Attributes Section -->
-      <section id="personality" class="section unified-attributes visible" data-lazy="fade-up">
-        <div class="section-loader"></div>
+      <!-- Unified Attributes Section (Personality + Abilities + Management) -->
+      <section id="personality" class="section unified-attributes">
         <h2><i class="fas fa-brain"></i> Core Attributes</h2>
         <div class="tron-container">
           <div class="tron-panel">
@@ -239,11 +204,8 @@
       <section id="management" class="section" style="display: none;"></section>
 
       <!-- Skills Section -->
-      <section id="skills" class="section" data-lazy="slide-left">
-        <div class="section-loader"></div>
+      <section id="skills" class="section">
         <h2><i class="fas fa-code"></i> Core Competencies</h2>
-        
-        <!-- Original skills grid -->
         <div class="skills-grid">
           <div class="skill-card">
             <h3><i class="fab fa-microsoft"></i> Azure Security</h3>
@@ -270,111 +232,10 @@
             <p>Encryption techniques, anonymization, and data minimization. Educating on GDPR compliance and privacy-by-design to protect individual rights.</p>
           </div>
         </div>
-
-        <!-- Additional frameworks section -->
-        <div class="skills-grid">
-          <div class="skill-card">
-            <h3><i class="fas fa-clipboard-check"></i> Privacy & Security Frameworks</h3>
-            <ul>
-              <li>NIST SP 800-30: Risk management and assessment framework</li>
-              <li>MITRE ATT&CK: Knowledge base for adversary tactics and techniques</li>
-              <li>OWASP Top 10: Leading security risks and mitigation strategies</li>
-              <li>CIA Triage: Confidentiality, Integrity, Availability triage in incident response</li>
-              <li>ISO 27001: Information security management system standards</li>
-            </ul>
-          </div>
-          
-          <div class="skill-card">
-            <h3><i class="fas fa-search"></i> Security Tools & Vulnerability Scanning</h3>
-            <ul>
-              <li>Darktrace, CyOps, Metasploit, Hashcat: Threat detection, penetration testing, and cryptography</li>
-              <li>OpenVAS, OWASP ZAP: Vulnerability assessment and web application security</li>
-              <li>Aircrack-ng, Burp Suite: Wireless network auditing and web app penetration testing</li>
-              <li>Wireshark: Network protocol analysis</li>
-              <li>CVEs: Common Vulnerabilities and Exposures tracking</li>
-              <li>VulnLab, VulnDB: Vulnerability databases for security research</li>
-              <li>Splunk, Tribe, Snow, Cribl, Cloudlock, Elastic Search: SIEM solutions</li>
-            </ul>
-          </div>
-          
-          <div class="skill-card">
-            <h3><i class="fas fa-globe"></i> Advanced Threat Intelligence & OSINT</h3>
-            <ul>
-              <li>Google Hacking Database, OSINT: Open-source intelligence gathering</li>
-              <li>Censys Search, Shodan, Maltego: Network scanning and intelligence platforms</li>
-              <li>The Harvester: Reconnaissance tool for gathering information from public sources</li>
-            </ul>
-          </div>
-          
-          <div class="skill-card">
-            <h3><i class="fas fa-robot"></i> AI-Powered Tools</h3>
-            <ul>
-              <li>ChatGPT, DeepAI, DeepSeek, BoltNew, Kimi, Qwen, Lama Coder, LM Arena, Emergent, Google AI Studio, Abacus, Pokee, ZaiChat, Genspark, Cloude, PentestGPT, Trae, Garak, PyRIT</li>
-            </ul>
-          </div>
-          
-          <div class="skill-card">
-            <h3><i class="fas fa-cloud"></i> Cloud & Endpoint Security</h3>
-            <ul>
-              <li>AWS Security Hub, AWS GuardDuty, AWS CloudTrail: Threat detection, monitoring, and compliance in AWS environments</li>
-              <li>Google Cloud Security Command Center (SCC): Risk assessment and threat detection for Google Cloud environments</li>
-              <li>Kubernetes, Cloudflare, CrowdStrike: Cloud security, container orchestration, and endpoint protection</li>
-              <li>Azure Sentinel, Defender for Endpoint, Intune: Cloud security monitoring and endpoint detection</li>
-              <li>Azure Cost Management: Cloud resource optimization and management</li>
-            </ul>
-          </div>
-          
-          <div class="skill-card">
-            <h3><i class="fas fa-chart-line"></i> Incident & Network Monitoring</h3>
-            <ul>
-              <li>Cube Data Miner, Deva, PRTG, Espy, Cacti, Zabbix, Grafana, SolarWinds: Monitoring and alerting systems for network and infrastructure</li>
-              <li>BlueSocket, Radwin: Wireless network management tools</li>
-            </ul>
-          </div>
-          
-          <div class="skill-card">
-            <h3><i class="fas fa-flag"></i> Hacking & Penetration Testing Platforms</h3>
-            <ul>
-              <li>Hack the Box, Hack This Site, Try Hack Me, Hacker House: Capture the flag (CTF) platforms for hands-on security training</li>
-              <li>HackerOne: Bug bounty and vulnerability coordination platform</li>
-            </ul>
-          </div>
-          
-          <div class="skill-card">
-            <h3><i class="fas fa-cogs"></i> Automation & ITSM Tools</h3>
-            <ul>
-              <li>Jira, ServiceNow, PagerDuty, Rundeck: Incident management and service operations automation</li>
-              <li>GitHub, GitLab: Code repository and collaboration platforms</li>
-            </ul>
-          </div>
-          
-          <div class="skill-card">
-            <h3><i class="fas fa-network-wired"></i> Networking & Communication</h3>
-            <ul>
-              <li>Alcatel Network, Junipers, TP-Link, CISCO, HUAWEI, FORTINET: Network management and configuration tools</li>
-              <li>Spitfire: Threat detection and response tools for cloud and networks</li>
-            </ul>
-          </div>
-          
-          <div class="skill-card">
-            <h3><i class="fas fa-desktop"></i> Operating Systems</h3>
-            <ul>
-              <li>Windows Family, Linux (Gentoo, Ubuntu, Debian, Kali, Tails, Whonix), MacOS, Android, iOS</li>
-            </ul>
-          </div>
-          
-          <div class="skill-card">
-            <h3><i class="fas fa-database"></i> Databases</h3>
-            <ul>
-              <li>MySQL, MariaDb, Oracle Discoverer, Azure SQL Database</li>
-            </ul>
-          </div>
-        </div>
       </section>
 
       <!-- Solutions Section -->
-      <section id="solutions" class="section" data-lazy="slide-right">
-        <div class="section-loader"></div>
+      <section id="solutions" class="section">
         <h2><i class="fas fa-shield-virus"></i> Enterprise Security Solutions</h2>
         
         <h3 style="margin-top: 2rem; color: var(--secondary);">1. Hybrid Infrastructure Protection</h3>
@@ -466,17 +327,6 @@
         </div>
         
         <h3 style="margin-top: 2rem; color: var(--secondary);">3. Security Frameworks</h3>
-        
-        <div class="framework-card">
-            <h3><i class="fas fa-brain"></i> OWASP AI Testing Guide v1</h3>
-            <p>First industry-standard, tech-agnostic methodology for trustworthy AI validation</p>
-            <ul>
-              <li>Security + ethics + regulatory alignment in one test plan</li>
-              <li>Attack-pattern-driven test cases (data, model, ops)</li>
-              <li>Repeatable pipeline for high-stakes AI (health, finance, mobility)</li>
-              <li>Maps to NIST AI RMF & EU AI Act requirements</li>
-            </ul>
-          </div>
         
         <div class="framework-grid">
           <div class="framework-card">
@@ -624,180 +474,175 @@
         </div>
       </section>
 
-      <!-- Experience Section -->
-      <section id="experience" class="section" data-lazy="slide-left">
-        <div class="section-loader"></div>
-        <h2><i class="fas fa-briefcase"></i> Professional Journey</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-date">2024 - Present</div>
-            <h3 class="timeline-title">Freelance Cybersecurity Consultant</h3>
-            <p class="timeline-desc">Performed pentesting, incident response, and security training for SMBs and NGOs. Delivered risk-based reports and improved client defenses via OWASP/NIST-aligned strategies, emphasizing ethical disclosure.</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2023 - 2024</div>
-            <h3 class="timeline-title">Senior Engineer for Cloud & Infrastructure – LTIMINDTREE</h3>
-            <p class="timeline-desc">Mentor engineers and assist manager in coordinating team tasks. Implemented Defender for Endpoint, EDR, SIEM, and Identity Protection. Reduced threat exposure and educated teams on latest threat intel and mitigation tactics. Supporting team members and managing POCs.</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2022 - 2023</div>
-            <h3 class="timeline-title">Support Engineer – Intellias</h3>
-            <p class="timeline-desc">Supported cloud migration across 5 EU regions. Managed Azure resources, SLAs, policy enforcement. Created trainings, workflows, technical documentation and procedures, ensuring GDPR compliance.</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2021</div>
-            <h3 class="timeline-title">IT Specialist – Cinema City</h3>
-            <p class="timeline-desc">Rebuilt regional IT infrastructure. Delivered OS deployments (Debian/Windows), supported POS systems. Enforced backup/recovery procedures and maintained system reliability.</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2020 - 2021</div>
-            <h3 class="timeline-title">Platform Engineer – Discovery</h3>
-            <p class="timeline-desc">Handled SIEM operations via Splunk and SolarWinds. Authored automation scripts to improve efficiency. Participated in incident bridges and recovery plans for system reliability.</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2020</div>
-            <h3 class="timeline-title">NOC Engineer – Sperasoft</h3>
-            <p class="timeline-desc">Performed 24/7 infrastructure monitoring and produced SOPs. Ran escalations and participated in collaborative network response workflows to maintain service availability.</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2019 - 2020</div>
-            <h3 class="timeline-title">Enterprise Operation Center Analyst – Grand Parade / William Hill</h3>
-            <p class="timeline-desc">Conducted vulnerability scans, threat hunting, patch management, and awareness training. Created incident response scenarios to improve organizational security posture.</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2018 - 2019</div>
-            <h3 class="timeline-title">Junior Network Specialist – Emitel SA</h3>
-            <p class="timeline-desc">Maintained MPLS and SDH links. Coordinated field engineers team and resolved Cisco-related issues. Handled Jira tickets and configured VPN and signal systems.</p>
-          </div>
-        </div>
-      </section>
+ <!-- Experience Section -->
+<section id="experience" class="section">
+  <h2><i class="fas fa-briefcase"></i> Professional Journey</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">2024 - Present</div>
+      <h3 class="timeline-title">Freelance Cybersecurity Consultant</h3>
+      <p class="timeline-desc">Performed pentesting, incident response, and security training for SMBs and NGOs. Delivered risk-based reports and improved client defenses via OWASP/NIST-aligned strategies, emphasizing ethical disclosure.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2023 - 2024</div>
+      <h3 class="timeline-title">Senior Engineer for Cloud & Infrastructure – LTIMINDTREE</h3>
+      <p class="timeline-desc">Mentor engineers and assist manager in coordinating team tasks. Implemented Defender for Endpoint, EDR, SIEM, and Identity Protection. Reduced threat exposure and educated teams on latest threat intel and mitigation tactics. Supporting team members and managing POCs.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2022 - 2023</div>
+      <h3 class="timeline-title">Support Engineer – Intellias</h3>
+      <p class="timeline-desc">Supported cloud migration across 5 EU regions. Managed Azure resources, SLAs, policy enforcement. Created trainings, workflows, technical documentation and procedures, ensuring GDPR compliance.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2021</div>
+      <h3 class="timeline-title">IT Specialist – Cinema City</h3>
+      <p class="timeline-desc">Rebuilt regional IT infrastructure. Delivered OS deployments (Debian/Windows), supported POS systems. Enforced backup/recovery procedures and maintained system reliability.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2020 - 2021</div>
+      <h3 class="timeline-title">Platform Engineer – Discovery</h3>
+      <p class="timeline-desc">Handled SIEM operations via Splunk and SolarWinds. Authored automation scripts to improve efficiency. Participated in incident bridges and recovery plans for system reliability.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2020</div>
+      <h3 class="timeline-title">NOC Engineer – Sperasoft</h3>
+      <p class="timeline-desc">Performed 24/7 infrastructure monitoring and produced SOPs. Ran escalations and participated in collaborative network response workflows to maintain service availability.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2019 - 2020</div>
+      <h3 class="timeline-title">Enterprise Operation Center Analyst – Grand Parade / William Hill</h3>
+      <p class="timeline-desc">Conducted vulnerability scans, threat hunting, patch management, and awareness training. Created incident response scenarios to improve organizational security posture.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2018 - 2019</div>
+      <h3 class="timeline-title">Junior Network Specialist – Emitel SA</h3>
+      <p class="timeline-desc">Maintained MPLS and SDH links. Coordinated field engineers team and resolved Cisco-related issues. Handled Jira tickets and configured VPN and signal systems.</p>
+    </div>
+  </div>
+</section>
 
       <!-- Certifications Section -->
-      <section id="certifications" class="section" data-lazy="slide-right">
-        <div class="section-loader"></div>
+      <section id="certifications" class="section">
         <h2><i class="fas fa-certificate"></i> Certifications</h2>
         <div class="certifications-grid">
           <div class="cert-card">
             <h3><i class="fas fa-shield-alt"></i> CISSP</h3>
             <p>Certified Information Systems Security Professional</p>
-            <a href="https://www.isc2.org/Certifications/CISSP" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.isc2.org/Certifications/CISSP" target="_blank">Learn More</a>
           </div>
           <div class="cert-card">
             <h3><i class="fas fa-lock"></i> CISM</h3>
             <p>Certified Information Security Manager</p>
-            <a href="https://www.isaca.org/credentialing/cism" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.isaca.org/credentialing/cism" target="_blank">Learn More</a>
           </div>
           <div class="cert-card">
             <h3><i class="fas fa-search"></i> CISA</h3>
             <p>Certified Information Systems Auditor</p>
-            <a href="https://www.isaca.org/credentialing/cisa" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.isaca.org/credentialing/cisa" target="_blank">Learn More</a>
           </div>
           <div class="cert-card">
             <h3><i class="fas fa-user-shield"></i> GSLC</h3>
             <p>GIAC Security Leadership Certification</p>
-            <a href="https://www.giac.org/certifications/security-leadership-certification-gslc/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.giac.org/certifications/security-leadership-certification-gslc/" target="_blank">Learn More</a>
           </div>
           <div class="cert-card">
             <h3><i class="fas fa-exclamation-triangle"></i> GSTRT</h3>
             <p>GIAC Strategic Planning, Policy, and Leadership</p>
-            <a href="https://www.giac.org/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.giac.org/" target="_blank">Learn More</a>
           </div>
           <div class="cert-card">
             <h3><i class="fas fa-project-diagram"></i> GCPM</h3>
             <p>GIAC Certified Project Manager</p>
-            <a href="https://www.giac.org/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.giac.org/" target="_blank">Learn More</a>
           </div>
         </div>
       </section>
 
       <!-- Tools Section -->
-      <section id="tools" class="section" data-lazy="fade-up">
-        <div class="section-loader"></div>
+      <section id="tools" class="section">
         <h2><i class="fas fa-wrench"></i> Privacy, Security, Tools & Learning</h2>
         <div class="tools-grid">
           <div class="tool-card">
             <h3><i class="fas fa-network-wired"></i> Wireshark</h3>
             <p>Network protocol analyzer for troubleshooting and security analysis.</p>
-            <a href="https://www.wireshark.org/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.wireshark.org/" target="_blank">Learn More</a>
           </div>
           <div class="tool-card">
             <h3><i class="fas fa-exclamation-triangle"></i> CVE's</h3>
             <p>Common Vulnerabilities and Exposures database for tracking known issues.</p>
-            <a href="https://cve.mitre.org/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://cve.mitre.org/" target="_blank">Learn More</a>
           </div>
           <div class="tool-card">
             <h3><i class="fas fa-user-secret"></i> OSINT</h3>
             <p>Open Source Intelligence techniques for gathering public data ethically.</p>
-            <a href="https://osintframework.com/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://osintframework.com/" target="_blank">Learn More</a>
           </div>
           <div class="tool-card">
             <h3><i class="fas fa-box"></i> Hack the Box</h3>
             <p>Platform for hands-on penetration testing challenges.</p>
-            <a href="https://www.hackthebox.com/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.hackthebox.com/" target="_blank">Learn More</a>
           </div>
           <div class="tool-card">
             <h3><i class="fas fa-shield-alt"></i> Let's Defend</h3>
             <p>Blue team simulation platform for defending against attacks.</p>
-            <a href="https://letsdefend.io/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://letsdefend.io/" target="_blank">Learn More</a>
           </div>
           <div class="tool-card">
             <h3><i class="fas fa-bug"></i> HackerOne</h3>
             <p>Bug bounty platform for responsible disclosure of vulnerabilities.</p>
-            <a href="https://www.hackerone.com/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.hackerone.com/" target="_blank">Learn More</a>
           </div>
           <div class="tool-card">
             <h3><i class="fas fa-globe"></i> Shodan</h3>
             <p>Search engine for Internet-connected devices for OSINT.</p>
-            <a href="https://www.shodan.io/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.shodan.io/" target="_blank">Learn More</a>
           </div>
           <div class="tool-card">
             <h3><i class="fas fa-chart-bar"></i> Splunk</h3>
             <p>SIEM tool for searching, monitoring, and analyzing machine data.</p>
-            <a href="https://www.splunk.com/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.splunk.com/" target="_blank">Learn More</a>
           </div>
           <div class="tool-card">
             <h3><i class="fas fa-crow"></i> Crowdstrike</h3>
             <p>Endpoint protection platform for threat detection and response.</p>
-            <a href="https://www.crowdstrike.com/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.crowdstrike.com/" target="_blank">Learn More</a>
           </div>
           <div class="tool-card">
             <h3><i class="fab fa-microsoft"></i> Azure Sentinel</h3>
             <p>Cloud-native SIEM for intelligent security analytics.</p>
-            <a href="https://azure.microsoft.com/en-us/services/microsoft-sentinel/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://azure.microsoft.com/en-us/services/microsoft-sentinel/" target="_blank">Learn More</a>
           </div>
           <div class="tool-card">
             <h3><i class="fas fa-shield-alt"></i> Defender for Endpoint</h3>
             <p>Microsoft's endpoint security solution for threat protection.</p>
-            <a href="https://www.microsoft.com/en-us/security/business/endpoint-protection/microsoft-defender-endpoint" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.microsoft.com/en-us/security/business/endpoint-protection/microsoft-defender-endpoint" target="_blank">Learn More</a>
           </div>
           <div class="tool-card">
             <h3><i class="fas fa-cloud"></i> Cloudflare</h3>
             <p>Web performance and security company for DDoS protection and more.</p>
-            <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Learn More <i class="fas fa-external-link-alt"></i></a>
+            <a href="https://www.cloudflare.com/" target="_blank">Learn More</a>
           </div>
         </div>
       </section>
 
       <!-- Resources Section -->
-      <section id="resources" class="section" data-lazy="slide-left">
-        <div class="section-loader"></div>
+      <section id="resources" class="section">
         <h2><i class="fas fa-book-open"></i> Cybersecurity Resources</h2>
         <p>To empower everyone with knowledge, here are free and accessible resources for learning cybersecurity. These align with CEH principles and promote equitable access to education for a just cyberspace.</p>
         <ul class="resources-list">
-          <li><a href="https://tryhackme.com/" target="_blank" rel="noopener">TryHackMe</a> - Hands-on labs for beginners to advanced ethical hacking.</li>
-          <li><a href="https://www.cybrary.it/" target="_blank" rel="noopener">Cybrary</a> - Free courses on CEH, penetration testing, and defensive strategies.</li>
-          <li><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP</a> - Community-driven resources for web application security and vulnerability management.</li>
-          <li><a href="https://www.sans.org/" target="_blank" rel="noopener">SANS Institute</a> - Free cheat sheets and webinars on threat intelligence and incident response.</li>
-          <li><a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener">NIST Cybersecurity Framework</a> - Guidelines for improving organizational security posture.</li>
-          <li><a href="https://www.ec-council.org/programs/certified-ethical-hacker-ceh/" target="_blank" rel="noopener">EC-Council CEH</a> - Official resources for ethical hacking certification preparation.</li>
-          <li><a href="https://portswigger.net/web-security" target="_blank" rel="noopener">PortSwigger Web Security Academy</a> - Free interactive lessons on web vulnerabilities.</li>
+          <li><a href="https://tryhackme.com/" target="_blank">TryHackMe</a> - Hands-on labs for beginners to advanced ethical hacking.</li>
+          <li><a href="https://www.cybrary.it/" target="_blank">Cybrary</a> - Free courses on CEH, penetration testing, and defensive strategies.</li>
+          <li><a href="https://owasp.org/" target="_blank">OWASP</a> - Community-driven resources for web application security and vulnerability management.</li>
+          <li><a href="https://www.sans.org/" target="_blank">SANS Institute</a> - Free cheat sheets and webinars on threat intelligence and incident response.</li>
+          <li><a href="https://www.nist.gov/cyberframework" target="_blank">NIST Cybersecurity Framework</a> - Guidelines for improving organizational security posture.</li>
+          <li><a href="https://www.ec-council.org/programs/certified-ethical-hacker-ceh/" target="_blank">EC-Council CEH</a> - Official resources for ethical hacking certification preparation.</li>
+          <li><a href="https://portswigger.net/web-security" target="_blank">PortSwigger Web Security Academy</a> - Free interactive lessons on web vulnerabilities.</li>
         </ul>
         <p>Remember, use these tools defensively to protect yourself and others. Always obtain permission before testing systems.</p>
       </section>
 
       <!-- Quiz Section -->
-      <section id="quiz" class="section" data-lazy="fade-up">
-        <div class="section-loader"></div>
+      <section id="quiz" class="section">
         <h2><i class="fas fa-question-circle"></i> Cybersecurity Awareness Quiz</h2>
         <p>Test your knowledge with this interactive quiz inspired by CEH concepts. It's designed for all levels to promote learning and awareness in a supportive way.</p>
         <div class="quiz-container">
@@ -851,12 +696,11 @@
             </div>
             <div class="quiz-feedback"></div>
           </div>
-          <div class="quiz-results" id="quiz-results"></div>
+        </div>
       </section>
 
       <!-- Terminal Section -->
-      <section id="terminal" class="section" data-lazy="slide-up">
-        <div class="section-loader"></div>
+      <section id="terminal" class="section">
         <h2><i class="fas fa-terminal"></i> Interactive Terminal</h2>
         <p>Try out some commands in this simulated terminal. Type 'help' to see available commands.</p>
         <div class="terminal">
@@ -871,49 +715,34 @@
           </div>
           <div class="terminal-input">
             <span class="terminal-prompt">$</span>
-            <input type="text" id="terminal-command" placeholder="Enter command..." autocomplete="off" aria-label="Terminal command input">
+            <input type="text" id="terminal-command" placeholder="Enter command...">
           </div>
-        </div>
-        <div class="terminal-tips">
-          <small>Pro tip: Use <kbd>Ctrl+K</kbd> to focus terminal, <kbd>Esc</kbd> to clear</small>
         </div>
       </section>
 
       <!-- Contact Section -->
-      <section id="contact" class="section" data-lazy="fade-up">
-        <div class="section-loader"></div>
+      <section id="contact" class="section">
         <h2><i class="fas fa-envelope"></i> Contact</h2>
         <p>Let's connect and discuss how we can work together to enhance your cybersecurity posture.</p>
         <div class="contact-info">
           <div class="contact-item">
             <i class="fas fa-envelope"></i>
-            <a href="mailto:ro-noc2020@protonmail.com" rel="noopener">ro-noc2020@protonmail.com</a>
+            <a href="mailto:ro-noc2020@protonmail.com">ro-noc2020@protonmail.com</a>
           </div>
           <div class="contact-item">
             <i class="fab fa-linkedin"></i>
-            <a href="https://www.linkedin.com/in/roman-orlowski" target="_blank" rel="noopener">LinkedIn Profile</a>
+            <a href="https://www.linkedin.com/in/roman-orlowski" target="_blank">LinkedIn Profile</a>
           </div>
           <div class="contact-item">
             <i class="fab fa-github"></i>
-            <a href="https://github.com/roman-orlowski" target="_blank" rel="noopener">GitHub Profile</a>
+            <a href="https://github.com/roman-orlowski" target="_blank">GitHub Profile</a>
           </div>
-        </div>
-        <div class="contact-form">
-          <h3>Quick Message</h3>
-          <form id="contact-form">
-            <input type="text" placeholder="Your Name" required aria-label="Your name">
-            <input type="email" placeholder="Your Email" required aria-label="Your email">
-            <textarea placeholder="Your Message" rows="4" required aria-label="Your message"></textarea>
-            <button type="submit" class="cyber-button futurist-btn">
-              <i class="fas fa-paper-plane"></i> Send Secure Message
-            </button>
-          </form>
         </div>
       </section>
     </main>
 
     <!-- Footer -->
-    <footer class="footer" data-lazy="fade-up">
+    <footer class="footer">
       <div class="footer-content">
         <div class="footer-column">
           <h3>About</h3>
@@ -931,17 +760,17 @@
         <div class="footer-column">
           <h3>Resources</h3>
           <ul class="footer-links">
-            <li><a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener"><i class="fas fa-chevron-right"></i> NIST Framework</a></li>
-            <li><a href="https://attack.mitre.org/" target="_blank" rel="noopener"><i class="fas fa-chevron-right"></i> MITRE ATT&CK</a></li>
-            <li><a href="https://owasp.org/" target="_blank" rel="noopener"><i class="fas fa-chevron-right"></i> OWASP</a></li>
+            <li><a href="https://www.nist.gov/cyberframework" target="_blank"><i class="fas fa-chevron-right"></i> NIST Framework</a></li>
+            <li><a href="https://attack.mitre.org/" target="_blank"><i class="fas fa-chevron-right"></i> MITRE ATT&CK</a></li>
+            <li><a href="https://owasp.org/" target="_blank"><i class="fas fa-chevron-right"></i> OWASP</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
         <div class="footer-social">
-          <a href="https://www.linkedin.com/in/roman-orlowski" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-          <a href="https://github.com/roman-orlowski" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a href="mailto:ro-noc2020@protonmail.com" rel="noopener" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/roman-orlowski" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/roman-orlowski" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="mailto:ro-noc2020@protonmail.com"><i class="fas fa-envelope"></i></a>
         </div>
         <p class="copyright">&copy; 2025 Roman Orłowski | ROCyber Solutions. All rights reserved.</p>
       </div>
@@ -950,7 +779,7 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script src="https://www.youtube.com/iframe_api"></script>
   <script src="script.js"></script>
 </body>
 </html>
+
