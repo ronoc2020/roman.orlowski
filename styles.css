@@ -1387,40 +1387,669 @@ a.tech-link:hover {
   transform: translateY(-2px);
 }
 
-/* Responsive */
+/* Mobile Responsive - Tablets (768px and below) */
 @media (max-width: 768px) {
-  .header h1 {
-    font-size: 2rem;
+  :root {
+    font-size: 14px;
   }
 
+  body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid var(--neon-yellow);
+  }
+
+  .header h1 {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  .header h1 .letter {
+    display: inline-block;
+  }
+
+  .tagline {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .status-badge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* Navigation */
   .nav {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
   }
 
   .nav-item {
-    width: 100%;
-    justify-content: center;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+    flex: 1 1 calc(50% - 0.25rem);
+    min-width: 120px;
+    text-align: center;
   }
 
+  .nav-item i {
+    display: none;
+  }
+
+  /* Sections */
+  .section {
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 255, 0, 0.2);
+  }
+
+  .section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .section h3 {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .section h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .section p {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+  }
+
+  /* Skills Grid */
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  .skill-card {
+    padding: 1rem;
+  }
+
+  .skill-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-card p {
+    font-size: 0.85rem;
+  }
+
+  /* Frameworks Grid */
+  .frameworks-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .framework-card {
+    padding: 1rem;
+  }
+
+  .framework-card h3 {
+    font-size: 1rem;
+  }
+
+  .framework-card p {
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .framework-card ul {
+    padding-left: 0;
+  }
+
+  .framework-card li {
+    padding: 0.3rem 0;
+    padding-left: 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  /* Monitoring Tools Grid */
+  .monitoring-tools-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .monitoring-tool {
+    padding: 1rem;
+  }
+
+  .monitoring-tool h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .monitoring-tool p {
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .monitoring-tool .tool-category {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    margin-right: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  /* Timeline */
+  .timeline {
+    padding: 1rem 0;
+  }
+
+  .timeline::before {
+    left: 20px;
+    width: 2px;
+  }
+
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    margin-left: 60px;
+    margin-right: 0;
+    text-align: left;
+  }
+
+  .timeline-item::before {
+    left: 12px !important;
+    width: 16px;
+    height: 16px;
+  }
+
+  .timeline-date {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-title {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  /* Quiz */
+  .quiz-container {
+    margin: 1rem 0;
+  }
+
+  .quiz-question {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .quiz-question h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .quiz-options {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .quiz-option {
+    padding: 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .quiz-feedback {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+  }
+
+  /* Certifications Grid */
+  .certifications-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .cert-card {
+    padding: 1rem;
+  }
+
+  .cert-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .cert-card p {
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+  }
+
+  /* Tools Grid */
+  .tools-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .tool-card {
+    padding: 1rem;
+  }
+
+  .tool-card h3 {
+    font-size: 1rem;
+  }
+
+  .tool-card p {
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+  }
+
+  /* Contact Info */
+  .contact-info {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .contact-item {
+    padding: 1rem;
+  }
+
+  .contact-item i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-item a {
+    font-size: 0.9rem;
+  }
+
+  /* Resources List */
+  .resources-list li {
+    padding: 0.6rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  /* Pip-Boy Trigger */
+  .pip-boy-trigger {
+    width: 50px;
+    height: 50px;
+    right: 15px;
+    top: 50%;
+  }
+
+  .trigger-triangle {
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 43px solid var(--neon-yellow);
+  }
+
+  /* Pip-Boy Inventory */
   .pip-boy-inventory {
     width: 100%;
     right: -100%;
+    height: 100vh;
+    padding: 1.5rem 1rem;
   }
 
   .pip-boy-inventory.active {
     right: 0;
   }
 
-  .pip-boy-trigger {
-    right: 10px;
+  .inventory-header {
+    padding-bottom: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .inventory-title {
+    font-size: 1.2rem;
+  }
+
+  .inventory-tabs {
+    gap: 0.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .inventory-tab {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.75rem;
+    flex: 1 1 auto;
+  }
+
+  .inventory-item {
+    padding: 0.7rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .inventory-item-title {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .inventory-item-desc {
+    font-size: 0.8rem;
+  }
+
+  /* Terminal */
+  .terminal {
+    margin: 1rem 0;
+  }
+
+  .terminal-body {
+    padding: 0.8rem;
+    font-size: 0.8rem;
+    max-height: 250px;
+  }
+
+  .terminal-line {
+    margin-bottom: 0.4rem;
+  }
+
+  .terminal-input {
+    padding: 0.6rem;
+  }
+
+  #terminal-command {
+    font-size: 0.8rem;
+  }
+
+  /* Cyber Button */
+  .cyber-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .footer-column h3 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-column p {
+    font-size: 0.85rem;
+  }
+
+  .footer-links a {
+    font-size: 0.85rem;
+  }
+
+  .footer-social {
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-social a {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .copyright {
+    font-size: 0.8rem;
+  }
+
+  /* Floating Elements - Hide on Mobile */
+  .floating-element {
+    display: none;
+  }
+}
+
+/* Mobile Responsive - Small Phones (480px and below) */
+@media (max-width: 480px) {
+  :root {
+    font-size: 12px;
+  }
+
+  .container {
+    padding: 0.8rem;
+  }
+
+  .header {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.4rem;
+  }
+
+  .tagline {
+    font-size: 0.85rem;
+  }
+
+  .nav {
+    gap: 0.3rem;
+    padding: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .nav-item {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
+    flex: 1 1 calc(50% - 0.15rem);
+    min-width: 90px;
   }
 
   .section {
-    padding: 1.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
   }
 
   .section h2 {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .section h3 {
+    font-size: 1rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .section p {
+    font-size: 0.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .skill-card {
+    padding: 0.8rem;
+  }
+
+  .skill-card h3 {
+    font-size: 0.9rem;
+  }
+
+  .skill-card p {
+    font-size: 0.8rem;
+  }
+
+  .frameworks-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .framework-card {
+    padding: 0.8rem;
+  }
+
+  .framework-card h3 {
+    font-size: 0.9rem;
+  }
+
+  .framework-card p {
+    font-size: 0.8rem;
+  }
+
+  .framework-card li {
+    font-size: 0.8rem;
+  }
+
+  .monitoring-tools-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .monitoring-tool {
+    padding: 0.8rem;
+  }
+
+  .monitoring-tool h4 {
+    font-size: 0.9rem;
+  }
+
+  .monitoring-tool p {
+    font-size: 0.8rem;
+  }
+
+  .timeline::before {
+    left: 15px;
+  }
+
+  .timeline-item {
+    margin-bottom: 1.5rem;
+  }
+
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    margin-left: 50px;
+  }
+
+  .timeline-item::before {
+    left: 8px !important;
+    width: 14px;
+    height: 14px;
+  }
+
+  .timeline-date {
+    font-size: 0.85rem;
+  }
+
+  .timeline-title {
+    font-size: 0.95rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.8rem;
+  }
+
+  .quiz-question {
+    padding: 0.8rem;
+  }
+
+  .quiz-question h4 {
+    font-size: 0.9rem;
+  }
+
+  .quiz-options {
+    gap: 0.6rem;
+  }
+
+  .quiz-option {
+    padding: 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .certifications-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .cert-card {
+    padding: 0.8rem;
+  }
+
+  .contact-info {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .contact-item {
+    padding: 0.8rem;
+  }
+
+  .pip-boy-trigger {
+    width: 45px;
+    height: 45px;
+    right: 10px;
+  }
+
+  .trigger-triangle {
+    border-left: 22px solid transparent;
+    border-right: 22px solid transparent;
+    border-bottom: 38px solid var(--neon-yellow);
+  }
+
+  .pip-boy-inventory {
+    padding: 1.2rem 0.8rem;
+  }
+
+  .inventory-title {
+    font-size: 1rem;
+  }
+
+  .inventory-tab {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .terminal-body {
+    font-size: 0.75rem;
+    max-height: 200px;
+  }
+
+  .footer {
+    padding: 1rem;
+  }
+
+  .footer-column h3 {
+    font-size: 0.95rem;
+  }
+
+  .footer-social a {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
   }
 }
 

@@ -1,5 +1,74 @@
-// Particles.js Configuration
-particlesJS('particles-js', {
+// Detect mobile device
+const isMobile = () => window.innerWidth <= 768;
+const isSmallPhone = () => window.innerWidth <= 480;
+
+// Particles.js Configuration - Optimized for mobile
+const particleConfig = isMobile() ? {
+  particles: {
+    number: {
+      value: 30,
+      density: {
+        enable: true,
+        value_area: 1000
+      }
+    },
+    color: {
+      value: ['#ffff00', '#ff8800', '#dd00ff']
+    },
+    shape: {
+      type: 'circle',
+      stroke: {
+        width: 0,
+        color: '#000000'
+      }
+    },
+    opacity: {
+      value: 0.3,
+      random: false,
+      anim: {
+        enable: false
+      }
+    },
+    size: {
+      value: 2,
+      random: true,
+      anim: {
+        enable: false
+      }
+    },
+    line_linked: {
+      enable: true,
+      distance: 100,
+      color: '#ffff00',
+      opacity: 0.2,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 1,
+      direction: 'none',
+      random: false,
+      straight: false,
+      out_mode: 'out',
+      bounce: false
+    }
+  },
+  interactivity: {
+    detect_on: 'canvas',
+    events: {
+      onhover: {
+        enable: false,
+        mode: 'grab'
+      },
+      onclick: {
+        enable: false,
+        mode: 'push'
+      },
+      resize: true
+    }
+  },
+  retina_detect: true
+} : {
   particles: {
     number: {
       value: 60,
@@ -75,15 +144,18 @@ particlesJS('particles-js', {
     }
   },
   retina_detect: true
-});
+};
 
-// Intro Sequence
+particlesJS('particles-js', particleConfig);
+
+// Intro Sequence - Shorter on mobile
 document.addEventListener('DOMContentLoaded', function() {
   const introSequence = document.getElementById('intro-sequence');
+  const introDelay = isMobile() ? 3000 : 5000;
   
   setTimeout(() => {
     introSequence.style.display = 'none';
-  }, 5000);
+  }, introDelay);
 
   // Pip-Boy Inventory System
   const pipBoyTrigger = document.querySelector('.pip-boy-trigger');
@@ -92,13 +164,21 @@ document.addEventListener('DOMContentLoaded', function() {
   const inventoryContents = document.querySelectorAll('.inventory-content');
 
   if (pipBoyTrigger) {
-    pipBoyTrigger.addEventListener('click', function() {
+    pipBoyTrigger.addEventListener('click', function(e) {
+      e.stopPropagation();
       pipBoyInventory.classList.toggle('active');
     });
 
     // Close inventory when clicking outside
     document.addEventListener('click', function(e) {
       if (!pipBoyTrigger.contains(e.target) && !pipBoyInventory.contains(e.target)) {
+        pipBoyInventory.classList.remove('active');
+      }
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
         pipBoyInventory.classList.remove('active');
       }
     });
@@ -155,38 +235,44 @@ document.addEventListener('DOMContentLoaded', function() {
         targetSection.classList.add('visible');
       }, 10);
       
-      targetSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+      // Mobile: scroll with less delay
+      const scrollDelay = isMobile() ? 100 : 300;
+      setTimeout(() => {
+        targetSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, scrollDelay);
 
       pipBoyInventory.classList.remove('active');
     });
   });
 
-  // Dynamic gradient based on mouse movement
+  // Dynamic gradient based on mouse movement (Desktop only)
   const gradient = document.querySelector('.cyber-gradient');
-  document.addEventListener('mousemove', (e) => {
-    const x = e.clientX / window.innerWidth;
-    const y = e.clientY / window.innerHeight;
-    gradient.style.background = 
-      `linear-gradient(${135 + x * 45}deg, rgba(255, 255, 0, 0.05) 0%, transparent 50%),
-       linear-gradient(${-135 + y * 45}deg, rgba(221, 0, 255, 0.05) 0%, transparent 50%)`;
-  });
-
-  // Parallax effect for floating elements
-  document.addEventListener('mousemove', (e) => {
-    const floatingElements = document.querySelectorAll('.floating-element');
-    const mouseX = e.clientX / window.innerWidth;
-    const mouseY = e.clientY / window.innerHeight;
-    
-    floatingElements.forEach((element, index) => {
-      const speed = (index + 1) * 0.05;
-      const x = (mouseX - 0.5) * 100 * speed;
-      const y = (mouseY - 0.5) * 100 * speed;
-      element.style.transform = `translate(${x}px, ${y}px)`;
+  if (!isMobile()) {
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      gradient.style.background = 
+        `linear-gradient(${135 + x * 45}deg, rgba(255, 255, 0, 0.05) 0%, transparent 50%),
+         linear-gradient(${-135 + y * 45}deg, rgba(221, 0, 255, 0.05) 0%, transparent 50%)`;
     });
-  });
+
+    // Parallax effect for floating elements (Desktop only)
+    document.addEventListener('mousemove', (e) => {
+      const floatingElements = document.querySelectorAll('.floating-element');
+      const mouseX = e.clientX / window.innerWidth;
+      const mouseY = e.clientY / window.innerHeight;
+      
+      floatingElements.forEach((element, index) => {
+        const speed = (index + 1) * 0.05;
+        const x = (mouseX - 0.5) * 100 * speed;
+        const y = (mouseY - 0.5) * 100 * speed;
+        element.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+  }
 
   // Terminal Commands
   const commands = {
@@ -401,4 +487,23 @@ Align with CEH ethics and protect users.`
       letter.style.animationDelay = `${index * 0.05}s`;
     });
   }
+
+  // Handle window resize for responsive adjustments
+  window.addEventListener('resize', () => {
+    // Adjust layout on resize if needed
+    if (isMobile() && pipBoyInventory.classList.contains('active')) {
+      // Ensure inventory is properly positioned on resize
+      pipBoyInventory.style.width = '100%';
+    }
+  });
+
+  // Prevent zoom on double-tap (mobile)
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', function(event) {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, false);
 });
