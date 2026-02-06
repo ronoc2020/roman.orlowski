@@ -274,20 +274,30 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Terminal Commands
+  // Enhanced Terminal Commands
   const commands = {
     help: {
       execute: () => `Available commands:
-  help          - Show this help message
-  whoami        - Display current user
-  skills        - List cybersecurity skills
-  nmap          - Simulate network scan
-  msfconsole    - Launch Metasploit console
-  searchsploit  - Search exploit database
-  ceh_phases    - Display CEH hacking phases
-  privacy_tip   - Get privacy protection tip
-  disclosure    - Learn about responsible disclosure
-  clear         - Clear terminal output`
+  help              - Show this help message
+  whoami            - Display current user
+  skills            - List cybersecurity skills
+  nmap              - Simulate network scan
+  msfconsole        - Launch Metasploit console
+  searchsploit      - Search exploit database
+  ceh_phases        - Display CEH hacking phases
+  privacy_tip       - Get privacy protection tip
+  disclosure        - Learn about responsible disclosure
+  analyze_log       - Analyze security log
+  decrypt_hash      - Hash decryption tool
+  check_vuln        - Check vulnerability database
+  owasp_top10       - Display OWASP Top 10
+  azure_security    - Azure security best practices
+  incident_response - Incident response procedures
+  threat_hunt       - Threat hunting techniques
+  malware_analysis  - Malware analysis workflow
+  forensics         - Digital forensics guide
+  compliance_check  - Compliance framework overview
+  clear             - Clear terminal output`
     },
     whoami: {
       execute: () => 'Roman Orłowski - Cybersecurity Expert | ROCyber Solutions'
@@ -306,9 +316,9 @@ document.addEventListener('DOMContentLoaded', function() {
     nmap: {
       execute: () => `Starting Nmap 7.92 scan...
 Scanning target 192.168.1.1...
-Discovered open port 80/tcp on target
-Discovered open port 443/tcp on target
-Discovered open port 22/tcp on target
+Discovered open port 80/tcp http
+Discovered open port 443/tcp https
+Discovered open port 22/tcp ssh
 Nmap scan report complete.
 Security Assessment: Implement firewall rules and close unnecessary ports.`
     },
@@ -356,6 +366,103 @@ Use privacy-respecting tools: Signal, ProtonMail, Tor Browser.`
   5. Follow CVE assignment process
 Align with CEH ethics and protect users.`
     },
+    analyze_log: {
+      execute: () => `Analyzing security logs...
+[2024-02-05 14:32:15] Failed login attempt from 192.168.1.100
+[2024-02-05 14:33:22] Successful authentication for user: admin
+[2024-02-05 14:35:01] Suspicious file access detected
+[2024-02-05 14:36:45] Network anomaly: Unusual outbound traffic
+Analysis complete. Recommend immediate investigation of anomalies.`
+    },
+    decrypt_hash: {
+      execute: () => `Hash Decryption Tool
+Enter hash: 5d41402abc4b2a76b9719d911017c592
+Hash Type: MD5
+Status: Decrypted
+Result: hello
+Warning: MD5 is cryptographically broken. Use SHA-256 or better.`
+    },
+    check_vuln: {
+      execute: () => `Checking Vulnerability Database...
+Scanning for known CVEs...
+CVE-2024-1234: Critical - Remote Code Execution
+CVE-2024-5678: High - SQL Injection
+CVE-2024-9012: Medium - Cross-Site Scripting
+Total Vulnerabilities Found: 3
+Recommendation: Apply security patches immediately.`
+    },
+    owasp_top10: {
+      execute: () => `OWASP Top 10 2021:
+  1. Broken Access Control
+  2. Cryptographic Failures
+  3. Injection
+  4. Insecure Design
+  5. Security Misconfiguration
+  6. Vulnerable and Outdated Components
+  7. Authentication Failures
+  8. Software and Data Integrity Failures
+  9. Logging and Monitoring Failures
+  10. Server-Side Request Forgery (SSRF)`
+    },
+    azure_security: {
+      execute: () => `Azure Security Best Practices:
+  • Enable Azure Defender for comprehensive threat protection
+  • Implement Azure Policy for compliance enforcement
+  • Use Azure Key Vault for secrets management
+  • Enable MFA and Conditional Access
+  • Monitor with Azure Sentinel for threat detection
+  • Implement network segmentation with NSGs
+  • Regular security assessments and penetration testing`
+    },
+    incident_response: {
+      execute: () => `Incident Response Procedures:
+  1. PREPARATION: Establish IR team and tools
+  2. DETECTION & ANALYSIS: Identify and assess incident
+  3. CONTAINMENT: Stop the attack, prevent spread
+  4. ERADICATION: Remove attacker access and malware
+  5. RECOVERY: Restore systems to normal operations
+  6. POST-INCIDENT: Conduct lessons learned review
+Timeline: Follow 24-48 hour response protocol`
+    },
+    threat_hunt: {
+      execute: () => `Threat Hunting Techniques:
+  • Analyze network traffic patterns (Wireshark, Zeek)
+  • Review endpoint logs (Sysmon, Windows Event Viewer)
+  • Hunt for suspicious processes and registry changes
+  • Identify lateral movement indicators
+  • Search for C2 communication patterns
+  • Analyze user behavior anomalies
+  • Use MITRE ATT&CK framework for TTP mapping`
+    },
+    malware_analysis: {
+      execute: () => `Malware Analysis Workflow:
+  1. STATIC ANALYSIS: File properties, strings, imports
+  2. DYNAMIC ANALYSIS: Sandbox execution, behavior monitoring
+  3. NETWORK ANALYSIS: Traffic capture and protocol analysis
+  4. CODE ANALYSIS: Reverse engineering and disassembly
+  5. REPORTING: Document findings and IOCs
+Tools: IDA Pro, Ghidra, Wireshark, Cuckoo Sandbox`
+    },
+    forensics: {
+      execute: () => `Digital Forensics Guide:
+  • Preserve evidence chain of custody
+  • Image drives using forensic tools (FTK, EnCase)
+  • Analyze file systems (NTFS, ext4, APFS)
+  • Recover deleted files and unallocated space
+  • Timeline analysis of file system events
+  • Memory forensics for RAM analysis
+  • Report findings with expert testimony`
+    },
+    compliance_check: {
+      execute: () => `Compliance Framework Overview:
+  • ISO 27001: Information Security Management
+  • GDPR: Data Protection and Privacy
+  • NIST: Cybersecurity Framework
+  • PCI-DSS: Payment Card Industry Data Security
+  • HIPAA: Healthcare data protection
+  • SOX: Financial reporting security
+  • DORA: Digital Operational Resilience`
+    },
     clear: {
       execute: () => {
         const terminalOutput = document.getElementById('terminal-output');
@@ -372,7 +479,7 @@ Align with CEH ethics and protect users.`
   if (terminalCommand) {
     terminalCommand.addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
-        const command = terminalCommand.value.trim();
+        const command = terminalCommand.value.trim().toLowerCase();
         terminalCommand.value = '';
         
         if (!command) return;
@@ -436,18 +543,30 @@ Align with CEH ethics and protect users.`
     }
   }
 
-  // Quiz Functionality
+  // Enhanced Quiz Functionality
   const quizOptions = document.querySelectorAll('.quiz-option');
+  let quizScore = 0;
+  let quizTotal = 0;
+
   quizOptions.forEach(option => {
     option.addEventListener('click', function() {
       const question = this.closest('.quiz-question');
       const feedback = question.querySelector('.quiz-feedback');
       const isCorrect = this.dataset.correct === 'true';
       
+      // Prevent multiple answers per question
+      if (question.classList.contains('answered')) {
+        return;
+      }
+      
+      question.classList.add('answered');
+      quizTotal++;
+      
       // Remove previous selections
       question.querySelectorAll('.quiz-option').forEach(opt => {
         opt.style.background = 'rgba(20, 20, 30, 0.5)';
         opt.style.borderColor = 'rgba(0, 247, 255, 0.1)';
+        opt.style.cursor = 'default';
       });
       
       // Highlight selected option
@@ -456,11 +575,25 @@ Align with CEH ethics and protect users.`
         this.style.borderColor = 'var(--low)';
         feedback.textContent = '✓ Correct! Great job!';
         feedback.className = 'quiz-feedback correct';
+        quizScore++;
       } else {
         this.style.background = 'rgba(255, 85, 85, 0.2)';
         this.style.borderColor = 'var(--critical)';
         feedback.textContent = '✗ Incorrect. Try again!';
         feedback.className = 'quiz-feedback incorrect';
+      }
+      
+      // Display score if all questions answered
+      if (quizTotal === quizOptions.length / 4) {
+        const scorePercentage = Math.round((quizScore / (quizTotal)) * 100);
+        const scoreMessage = document.createElement('div');
+        scoreMessage.className = 'terminal-line';
+        scoreMessage.style.marginTop = '1rem';
+        scoreMessage.style.padding = '1rem';
+        scoreMessage.style.background = 'rgba(0, 255, 0, 0.1)';
+        scoreMessage.style.border = '1px solid #00ff00';
+        scoreMessage.textContent = `Quiz Complete! Score: ${quizScore}/${quizTotal} (${scorePercentage}%)`;
+        question.parentElement.appendChild(scoreMessage);
       }
     });
   });
