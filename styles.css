@@ -2083,3 +2083,122 @@ a.tech-link:hover {
   background: var(--neon-orange);
   box-shadow: 0 0 15px var(--neon-orange);
 }
+
+
+/* Qualifications Grid - Fully Responsive */
+.qualifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.qualification-card {
+  background: linear-gradient(135deg, rgba(0, 247, 255, 0.05) 0%, rgba(255, 136, 0, 0.05) 100%);
+  border: 1px solid rgba(0, 247, 255, 0.2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 247, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.qualification-card:hover {
+  border-color: var(--neon-yellow);
+  box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, rgba(0, 247, 255, 0.1) 0%, rgba(255, 136, 0, 0.1) 100%);
+}
+
+.qual-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  width: 100%;
+}
+
+.qualification-card h4 {
+  color: var(--neon-yellow);
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+.qualification-card p {
+  color: rgba(240, 240, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  text-align: left;
+}
+
+/* Mobile Optimization for Qualifications */
+@media (max-width: 768px) {
+  .qualifications-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .qualification-card {
+    padding: 1.2rem;
+    border-radius: 6px;
+  }
+
+  .qual-icon {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .qualification-card h4 {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .qualification-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .qualifications-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    margin: 1rem 0;
+  }
+
+  .qualification-card {
+    padding: 1rem;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 247, 255, 0.15);
+  }
+
+  .qual-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .qualification-card h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+  }
+
+  .qualification-card p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+}
