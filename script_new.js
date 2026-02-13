@@ -5,7 +5,7 @@
 // ============================================
 
 // 🔐 Tutaj wpisz hash SHA256 swojego tajnego hasła.
-// Przykład dla hasła "Vault111Operator!" - ZASTĄP SWOIM!
+// Przykład dla hasła "Vault111Operator!" 
 const SECRET_HASH = "c7e8c9f8a9b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0";
 
 // ========== BAZA PYTAŃ SELF ASSESSMENT ==========
