@@ -2263,3 +2263,312 @@ a.tech-link:hover {
 #result-cipher {
   display: none;
 }
+
+
+/* ===== PIP-BOY 3000 SELF ASSESSMENT SECTION ===== */
+.assessment-container {
+  background: linear-gradient(135deg, rgba(0, 247, 255, 0.05) 0%, rgba(255, 136, 0, 0.05) 100%);
+  border: 2px solid var(--neon-yellow);
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 0 20px rgba(255, 255, 0, 0.2), inset 0 0 10px rgba(255, 255, 0, 0.05);
+}
+
+.assessment-intro {
+  color: var(--neon-orange);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(255, 136, 0, 0.3);
+}
+
+.assessment-question {
+  background: rgba(26, 26, 46, 0.6);
+  border-left: 4px solid var(--neon-purple);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.assessment-question:hover {
+  background: rgba(26, 26, 46, 0.9);
+  border-left-color: var(--neon-yellow);
+  box-shadow: 0 0 15px rgba(255, 255, 0, 0.15);
+}
+
+.assessment-question h4 {
+  color: var(--neon-yellow);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.assessment-question i {
+  color: var(--neon-orange);
+}
+
+.assessment-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+}
+
+.assessment-option {
+  background: rgba(0, 247, 255, 0.05);
+  border: 1px solid rgba(0, 247, 255, 0.2);
+  padding: 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: rgba(240, 240, 255, 0.85);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.assessment-option:hover {
+  background: rgba(0, 247, 255, 0.15);
+  border-color: var(--neon-yellow);
+  box-shadow: 0 0 10px rgba(0, 247, 255, 0.2);
+}
+
+.assessment-option.selected {
+  background: rgba(255, 255, 0, 0.15);
+  border-color: var(--neon-yellow);
+  box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
+}
+
+.assessment-results {
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.05) 0%, rgba(255, 255, 0, 0.05) 100%);
+  border: 2px solid var(--pip-green);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+  text-align: center;
+  display: none;
+}
+
+.assessment-results h4 {
+  color: var(--pip-green);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.results-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.results-summary p {
+  color: var(--neon-yellow);
+  font-size: 0.95rem;
+}
+
+.results-summary span {
+  color: var(--pip-green);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.results-message {
+  color: rgba(240, 240, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+
+/* Mobile Responsiveness for Assessment */
+@media (max-width: 768px) {
+  .assessment-container {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .assessment-question {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .assessment-question h4 {
+    font-size: 0.95rem;
+  }
+
+  .assessment-option {
+    padding: 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .results-summary {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== DRAGGABLE MUSIC PLAYER ===== */
+.draggable-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  background: linear-gradient(135deg, rgba(0, 247, 255, 0.1) 0%, rgba(255, 136, 0, 0.1) 100%);
+  border: 2px solid var(--neon-yellow);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+  z-index: 1000;
+  cursor: grab;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.draggable-player:active {
+  cursor: grabbing;
+}
+
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--neon-orange);
+}
+
+.player-header h3 {
+  color: var(--neon-yellow);
+  font-size: 0.9rem;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+.player-close {
+  background: none;
+  border: none;
+  color: var(--neon-orange);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.player-close:hover {
+  color: var(--neon-yellow);
+  transform: scale(1.2);
+}
+
+.player-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.player-btn {
+  background: rgba(0, 247, 255, 0.2);
+  border: 1px solid var(--neon-yellow);
+  color: var(--neon-yellow);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+  flex: 1;
+}
+
+.player-btn:hover {
+  background: rgba(255, 255, 0, 0.2);
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+.player-btn.active {
+  background: rgba(255, 255, 0, 0.3);
+  box-shadow: 0 0 15px rgba(255, 255, 0, 0.4);
+}
+
+.player-info {
+  color: rgba(240, 240, 255, 0.7);
+  font-size: 0.8rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.player-progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 247, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.player-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-yellow), var(--neon-orange));
+  width: 0%;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+.player-volume {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.player-volume input {
+  flex: 1;
+  height: 4px;
+  background: rgba(0, 247, 255, 0.2);
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.player-volume input::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--neon-yellow);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+.player-volume input::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: var(--neon-yellow);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+.player-volume i {
+  color: var(--neon-orange);
+  font-size: 0.9rem;
+}
+
+/* Mobile Responsiveness for Player */
+@media (max-width: 768px) {
+  .draggable-player {
+    width: 280px;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .player-header h3 {
+    font-size: 0.8rem;
+  }
+
+  .player-btn {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
+  }
+}

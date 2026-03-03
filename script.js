@@ -640,3 +640,181 @@ Tools: IDA Pro, Ghidra, Wireshark, Cuckoo Sandbox`
     lastTouchEnd = now;
   }, false);
 });
+
+
+// ===== PIP-BOY 3000 SELF ASSESSMENT FUNCTIONALITY =====
+document.addEventListener('DOMContentLoaded', function() {
+  const assessmentOptions = document.querySelectorAll('.assessment-option');
+  const assessmentResults = document.querySelector('.assessment-results');
+  let scores = { ethical: 0, unethical: 0, neutral: 0, manipulative: 0 };
+  let answeredQuestions = 0;
+  const totalQuestions = 15;
+
+  assessmentOptions.forEach(option => {
+    option.addEventListener('click', function() {
+      const question = this.closest('.assessment-question');
+      const alreadyAnswered = question.querySelector('.assessment-option.selected');
+      
+      if (!alreadyAnswered) {
+        answeredQuestions++;
+      }
+
+      // Remove previous selection
+      question.querySelectorAll('.assessment-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+
+      // Mark current selection
+      this.classList.add('selected');
+      const value = this.getAttribute('data-value');
+      scores[value]++;
+
+      // Show results when all questions are answered
+      if (answeredQuestions === totalQuestions) {
+        displayAssessmentResults();
+      }
+    });
+  });
+
+  function displayAssessmentResults() {
+    const ethicalScore = Math.round((scores.ethical / totalQuestions) * 100);
+    const culturalFit = Math.round(((scores.ethical + (totalQuestions - scores.unethical - scores.manipulative)) / totalQuestions) * 100);
+    const redFlags = scores.unethical + scores.manipulative;
+
+    document.getElementById('ethical-score').textContent = ethicalScore;
+    document.getElementById('cultural-score').textContent = culturalFit;
+    document.getElementById('red-flags').textContent = redFlags;
+
+    let message = '';
+    if (ethicalScore >= 80) {
+      message = '<i class="fas fa-check-circle"></i> Excellent ethical alignment. You demonstrate strong integrity and cultural fit.';
+    } else if (ethicalScore >= 60) {
+      message = '<i class="fas fa-star"></i> Good ethical foundation. Some areas for improvement in consistency.';
+    } else if (ethicalScore >= 40) {
+      message = '<i class="fas fa-exclamation-triangle"></i> Moderate concerns. Consider reflecting on your values and decision-making.';
+    } else {
+      message = '<i class="fas fa-times-circle"></i> Significant red flags detected. This role may not be a good fit.';
+    }
+
+    document.querySelector('.results-message').innerHTML = message;
+    assessmentResults.style.display = 'block';
+    assessmentResults.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+// ===== DRAGGABLE MUSIC PLAYER =====
+(function() {
+  const player = document.querySelector('.draggable-player');
+  if (!player) return;
+
+  let isDragging = false;
+  let currentX;
+  let currentY;
+  let initialX;
+  let initialY;
+
+  player.addEventListener('mousedown', dragStart);
+  player.addEventListener('touchstart', dragStart);
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('touchmove', drag);
+  document.addEventListener('mouseup', dragEnd);
+  document.addEventListener('touchend', dragEnd);
+
+  function dragStart(e) {
+    if (e.target.closest('.player-btn') || e.target.closest('.player-close') || e.target.closest('.player-volume')) {
+      return;
+    }
+
+    isDragging = true;
+    initialX = e.clientX ? e.clientX : e.touches[0].clientX;
+    initialY = e.clientY ? e.clientY : e.touches[0].clientY;
+
+    const rect = player.getBoundingClientRect();
+    currentX = rect.left;
+    currentY = rect.top;
+  }
+
+  function drag(e) {
+    if (!isDragging) return;
+
+    e.preventDefault();
+    const clientX = e.clientX ? e.clientX : e.touches[0].clientX;
+    const clientY = e.clientY ? e.clientY : e.touches[0].clientY;
+
+    const moveX = clientX - initialX;
+    const moveY = clientY - initialY;
+
+    player.style.position = 'fixed';
+    player.style.left = (currentX + moveX) + 'px';
+    player.style.top = (currentY + moveY) + 'px';
+    player.style.right = 'auto';
+    player.style.bottom = 'auto';
+  }
+
+  function dragEnd() {
+    isDragging = false;
+  }
+
+  // Close button functionality
+  const closeBtn = player.querySelector('.player-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      player.style.display = 'none';
+    });
+  }
+
+  // Player controls
+  const playBtn = player.querySelector('[data-action="play"]');
+  const pauseBtn = player.querySelector('[data-action="pause"]');
+  const stopBtn = player.querySelector('[data-action="stop"]');
+  const volumeSlider = player.querySelector('.player-volume input');
+  const progressBar = player.querySelector('.player-progress-bar');
+  const audio = player.querySelector('audio');
+
+  if (playBtn && audio) {
+    playBtn.addEventListener('click', function() {
+      audio.play();
+      playBtn.classList.add('active');
+      pauseBtn.classList.remove('active');
+    });
+  }
+
+  if (pauseBtn && audio) {
+    pauseBtn.addEventListener('click', function() {
+      audio.pause();
+      pauseBtn.classList.add('active');
+      playBtn.classList.remove('active');
+    });
+  }
+
+  if (stopBtn && audio) {
+    stopBtn.addEventListener('click', function() {
+      audio.pause();
+      audio.currentTime = 0;
+      playBtn.classList.remove('active');
+      pauseBtn.classList.remove('active');
+      stopBtn.classList.add('active');
+    });
+  }
+
+  if (volumeSlider && audio) {
+    volumeSlider.addEventListener('input', function() {
+      audio.volume = this.value / 100;
+    });
+  }
+
+  if (audio) {
+    audio.addEventListener('timeupdate', function() {
+      if (this.duration) {
+        const progress = (this.currentTime / this.duration) * 100;
+        if (progressBar) progressBar.style.width = progress + '%';
+      }
+    });
+
+    audio.addEventListener('ended', function() {
+      playBtn.classList.remove('active');
+      pauseBtn.classList.remove('active');
+      stopBtn.classList.add('active');
+    });
+  }
+})();
