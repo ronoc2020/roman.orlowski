@@ -818,3 +818,99 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 })();
+
+
+// ===== PIP-BOY 3000 SELF ASSESSMENT FUNCTIONALITY =====
+
+// Initialize Assessment on page load
+document.addEventListener('DOMContentLoaded', function() {
+  initializeAssessment();
+});
+
+function initializeAssessment() {
+  const options = document.querySelectorAll('.assessment-option');
+  let scores = { ethical: 0, unethical: 0, neutral: 0, manipulative: 0 };
+  let answeredCount = 0;
+  const totalQuestions = document.querySelectorAll('.assessment-question').length;
+
+  options.forEach(option => {
+    option.addEventListener('click', function() {
+      const question = this.closest('.assessment-question');
+      const alreadyAnswered = question.querySelector('.assessment-option.selected');
+
+      if (!alreadyAnswered) {
+        answeredCount++;
+      }
+
+      // Remove previous selection
+      question.querySelectorAll('.assessment-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+
+      // Mark current selection
+      this.classList.add('selected');
+      const value = this.getAttribute('data-value');
+      scores[value]++;
+
+      // Show results when all questions are answered
+      if (answeredCount === totalQuestions) {
+        displayAssessmentResults(scores, totalQuestions);
+      }
+    });
+  });
+}
+
+function displayAssessmentResults(scores, totalQuestions) {
+  const ethicalScore = Math.round((scores.ethical / totalQuestions) * 100);
+  const redFlags = scores.unethical + scores.manipulative;
+  const culturalFit = Math.round(((scores.ethical + (totalQuestions - redFlags)) / totalQuestions) * 100);
+
+  document.getElementById('ethical-score').textContent = ethicalScore + '%';
+  document.getElementById('cultural-score').textContent = culturalFit + '%';
+  document.getElementById('red-flags').textContent = redFlags;
+
+  let verdict = '';
+  let verdictClass = '';
+
+  if (ethicalScore >= 80) {
+    verdict = '<i class="fas fa-check-circle"></i> <strong>SAFE TO JOIN</strong> – Excellent ethical alignment. This organization demonstrates strong integrity and cultural fit for a vCISO.';
+    verdictClass = 'verdict-safe';
+  } else if (ethicalScore >= 60) {
+    verdict = '<i class="fas fa-exclamation-circle"></i> <strong>PROCEED WITH CAUTION</strong> – Good ethical foundation with some areas of concern. Recommend further investigation.';
+    verdictClass = 'verdict-caution';
+  } else if (ethicalScore >= 40) {
+    verdict = '<i class="fas fa-exclamation-triangle"></i> <strong>INVESTIGATE FURTHER</strong> – Significant red flags detected. Consider declining or negotiating major changes.';
+    verdictClass = 'verdict-warning';
+  } else {
+    verdict = '<i class="fas fa-times-circle"></i> <strong>DO NOT JOIN</strong> – Toxic, unethical, or deceptive environment. This role is not a good fit.';
+    verdictClass = 'verdict-danger';
+  }
+
+  const verdictElement = document.getElementById('results-verdict');
+  verdictElement.className = 'results-verdict ' + verdictClass;
+  verdictElement.innerHTML = verdict;
+
+  // Generate encrypted verdict (SHA-256)
+  const verdictText = `ROCS Assessment - Ethical: ${ethicalScore}% | Cultural Fit: ${culturalFit}% | Red Flags: ${redFlags} | Verdict: ${verdict.replace(/<[^>]*>/g, '')}`;
+  const encryptedVerdictText = CryptoJS.SHA256(verdictText).toString();
+  const encryptedTextarea = document.getElementById('encrypted-verdict');
+  encryptedTextarea.value = encryptedVerdictText;
+
+  // Show results section
+  document.getElementById('assessment-results').style.display = 'block';
+  document.getElementById('assessment-results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function copyVerdictToClipboard() {
+  const textarea = document.getElementById('encrypted-verdict');
+  textarea.select();
+  document.execCommand('copy');
+  
+  const btn = document.getElementById('copy-verdict');
+  const originalText = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-check"></i> COPIED!';
+  
+  setTimeout(() => {
+    btn.innerHTML = originalText;
+  }, 2000);
+}
