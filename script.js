@@ -914,3 +914,77 @@ function copyVerdictToClipboard() {
     btn.innerHTML = originalText;
   }, 2000);
 }
+
+
+// ===== PIP-BOY FULL SCREEN MODE =====
+(function() {
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
+  const pipBoyInventory = document.querySelector('.pip-boy-inventory');
+  
+  if (!fullscreenBtn || !pipBoyInventory) return;
+  
+  fullscreenBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    pipBoyInventory.classList.toggle('fullscreen');
+    
+    // Update button text
+    if (pipBoyInventory.classList.contains('fullscreen')) {
+      fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i> COLLAPSE';
+      fullscreenBtn.title = 'Exit Full Screen Mode';
+    } else {
+      fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> EXPAND';
+      fullscreenBtn.title = 'Toggle Full Screen Mode';
+    }
+  });
+  
+  // Close fullscreen on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && pipBoyInventory.classList.contains('fullscreen')) {
+      pipBoyInventory.classList.remove('fullscreen');
+      fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> EXPAND';
+      fullscreenBtn.title = 'Toggle Full Screen Mode';
+    }
+  });
+})();
+
+// ===== ENHANCED ASSESSMENT ANALYSIS =====
+function analyzeAssessmentResponses(scores, totalQuestions) {
+  const ethicalScore = Math.round((scores.ethical / totalQuestions) * 100);
+  const redFlags = scores.unethical + scores.manipulative;
+  const culturalFit = Math.round(((scores.ethical + (totalQuestions - redFlags)) / totalQuestions) * 100);
+  
+  // Detect patterns and inconsistencies
+  const patterns = {
+    avoidance: scores.manipulative > (totalQuestions * 0.4), // More than 40% evasive answers
+    unethical_tendency: scores.unethical > (totalQuestions * 0.3), // More than 30% unethical answers
+    inconsistency: Math.abs(scores.ethical - scores.neutral) > (totalQuestions * 0.5), // Large variance
+    red_flag_count: redFlags
+  };
+  
+  return {
+    ethicalScore,
+    culturalFit,
+    redFlags,
+    patterns
+  };
+}
+
+function generateRedFlags(scores, totalQuestions) {
+  const flags = [];
+  const analysis = analyzeAssessmentResponses(scores, totalQuestions);
+  
+  if (analysis.patterns.avoidance) {
+    flags.push('🚩 Excessive evasiveness detected – recruiter avoiding direct answers');
+  }
+  if (analysis.patterns.unethical_tendency) {
+    flags.push('🚩 Unethical practices normalized – concerning compliance attitude');
+  }
+  if (analysis.patterns.inconsistency) {
+    flags.push('🚩 Inconsistent responses – possible deception or lack of clarity');
+  }
+  if (analysis.redFlags >= 8) {
+    flags.push('🚩 CRITICAL: Multiple serious red flags – high risk environment');
+  }
+  
+  return flags;
+}

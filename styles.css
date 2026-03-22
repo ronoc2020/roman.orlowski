@@ -2786,3 +2786,99 @@ a.tech-link:hover {
   margin-top: 0.5rem;
   text-shadow: 0 0 5px rgba(255, 136, 0, 0.2);
 }
+
+
+/* ===== PIP-BOY FULL SCREEN MODE ===== */
+
+.pip-boy-fullscreen-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: var(--neon-yellow);
+  color: #000;
+  border: 2px solid var(--neon-yellow);
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.pip-boy-fullscreen-btn:hover {
+  background: var(--neon-orange);
+  border-color: var(--neon-orange);
+  box-shadow: 0 0 15px rgba(255, 136, 0, 0.5);
+}
+
+.pip-boy-inventory.fullscreen {
+  position: fixed;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  border-radius: 0 !important;
+  z-index: 10000 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+.pip-boy-inventory.fullscreen .inventory-content {
+  max-height: calc(100vh - 200px) !important;
+  overflow-y: auto !important;
+}
+
+.pip-boy-inventory.fullscreen .pip-boy-fullscreen-btn {
+  top: 1rem;
+  right: 1rem;
+}
+
+.pip-boy-inventory.fullscreen .pip-boy-fullscreen-btn::before {
+  content: "⛶ ";
+}
+
+/* Exit Full Screen Button */
+.pip-boy-exit-fullscreen {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: var(--critical);
+  color: #fff;
+  border: 2px solid var(--critical);
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  z-index: 10001;
+  transition: all 0.3s ease;
+}
+
+.pip-boy-exit-fullscreen:hover {
+  background: #ff4444;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+/* Responsive Full Screen */
+@media (max-width: 768px) {
+  .pip-boy-inventory.fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+
+  .pip-boy-inventory.fullscreen .inventory-header {
+    padding: 1rem;
+  }
+
+  .pip-boy-inventory.fullscreen .inventory-tabs {
+    flex-wrap: wrap;
+  }
+
+  .pip-boy-inventory.fullscreen .inventory-tab {
+    flex: 1 1 calc(50% - 0.5rem);
+    min-width: 120px;
+  }
+}
