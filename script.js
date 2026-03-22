@@ -917,11 +917,14 @@ function copyVerdictToClipboard() {
 
 
 // ===== PIP-BOY FULL SCREEN MODE =====
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   const fullscreenBtn = document.getElementById('fullscreen-btn');
   const pipBoyInventory = document.querySelector('.pip-boy-inventory');
   
-  if (!fullscreenBtn || !pipBoyInventory) return;
+  if (!fullscreenBtn || !pipBoyInventory) {
+    console.log('Fullscreen elements not found');
+    return;
+  }
   
   fullscreenBtn.addEventListener('click', function(e) {
     e.preventDefault();
@@ -945,7 +948,7 @@ function copyVerdictToClipboard() {
       fullscreenBtn.title = 'Toggle Full Screen Mode';
     }
   });
-})();
+});
 
 // ===== ENHANCED ASSESSMENT ANALYSIS =====
 function analyzeAssessmentResponses(scores, totalQuestions) {
