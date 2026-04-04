@@ -398,9 +398,10 @@ body {
 /* Pip-Boy Inventory Panel */
 .pip-boy-inventory {
   position: fixed;
-  right: -400px;
+  right: -70vw; /* Adjusted for 70% width */
   top: 0;
-  width: 400px;
+  width: 70vw; /* Occupy 70% of viewport width */
+  max-width: 600px; /* Optional: Set a max-width for very large screens */
   height: 100vh;
   background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(30, 30, 50, 0.95) 100%);
   border-left: 3px solid var(--neon-yellow);
@@ -415,6 +416,30 @@ body {
 
 .pip-boy-inventory.active {
   right: 0;
+}
+
+@media (max-width: 768px) {
+  .pip-boy-inventory {
+    width: 100vw; /* Full width on smaller screens */
+    right: -100vw;
+    max-width: none;
+  }
+
+  .pip-boy-inventory.active {
+    right: 0;
+  }
+
+  .pip-boy-trigger {
+    right: 10px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .trigger-triangle {
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 43px solid var(--neon-yellow);
+  }
 }
 
 .inventory-header {
