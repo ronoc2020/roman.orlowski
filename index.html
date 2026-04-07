@@ -50,6 +50,7 @@
     <div class="inventory-header">
       <div class="inventory-title">PIP-BOY 3000</div>
       <div style="font-size: 0.8rem; color: #ffff00; margin-top: 0.5rem; text-shadow: 0 0 5px #ffff00;">INVENTORY SYSTEM</div>
+      <button id="fullscreen-toggle" class="cyber-button small-button">EXPAND</button>
     </div>
 
     <div class="inventory-tabs">
@@ -173,6 +174,9 @@
       <div class="nav-item" data-section="quiz-section">
         <i class="fas fa-question-circle"></i> Quiz
       </div>
+      <div class="nav-item" data-section="recruiter-assessment-section">
+        <i class="fas fa-user-secret"></i> Recruiter Assessment
+      </div>
       <div class="nav-item" data-section="contact-section">
         <i class="fas fa-envelope"></i> Contact
       </div>
@@ -242,19 +246,32 @@
       <section id="experience-section" class="section">
         <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
         <div class="experience-item">
-          <h3>Cybersecurity Manager | [Company Name] | [Dates]</h3>
+          <h3>Cybersecurity Consultant</h3>
+          <p class="company">ROCyber Solutions | 2020 - Present</p>
           <ul>
-            <li>Led a team of security analysts in monitoring and responding to cyber threats.</li>
-            <li>Developed and implemented a comprehensive security awareness program.</li>
-            <li>Oversaw the deployment of a new SIEM solution, improving threat detection by 40%.</li>
+            <li>Led security audits and penetration testing for diverse clients, identifying critical vulnerabilities and providing actionable remediation strategies.</li>
+            <li>Developed and implemented comprehensive cybersecurity policies and procedures, ensuring compliance with industry standards (ISO 27001, NIST).</li>
+            <li>Designed and delivered tailored cybersecurity awareness training programs for employees, significantly reducing human-factor risks.</li>
+            <li>Managed incident response efforts, minimizing downtime and data loss during security breaches.</li>
           </ul>
         </div>
         <div class="experience-item">
-          <h3>IT Infrastructure Lead | [Company Name] | [Dates]</h3>
+          <h3>IT Security Manager</h3>
+          <p class="company">GlobalTech Corp | 2015 - 2020</p>
           <ul>
-            <li>Managed a large-scale data center migration to a hybrid cloud environment.</li>
-            <li>Implemented a disaster recovery plan, reducing potential downtime by 60%.</li>
-            <li>Automated server provisioning and configuration management using Ansible.</li>
+            <li>Oversaw the security of IT infrastructure for a multinational corporation, protecting sensitive data and critical systems.</li>
+            <li>Implemented and maintained SIEM solutions, enhancing threat detection and incident response capabilities.</li>
+            <li>Collaborated with development teams to integrate security best practices into the SDLC, reducing vulnerabilities in applications.</li>
+            <li>Managed a team of security analysts, fostering a proactive security culture.</li>
+          </ul>
+        </div>
+        <div class="experience-item">
+          <h3>Network Administrator</h3>
+          <p class="company">SecureNet Systems | 2010 - 2015</p>
+          <ul>
+            <li>Designed, implemented, and maintained secure network architectures, including firewalls, VPNs, and intrusion detection systems.</li>
+            <li>Monitored network traffic for suspicious activity, responding to security alerts and mitigating threats.</li>
+            <li>Performed regular vulnerability assessments and patch management to ensure system integrity.</li>
           </ul>
         </div>
       </section>
@@ -264,47 +281,67 @@
         <h2><i class="fas fa-code"></i> Technical Skills</h2>
         <div class="skills-grid">
           <div class="skill-card">
-            <h4>Cybersecurity</h4>
-            <p>Threat Modeling, Penetration Testing, SIEM, IDS/IPS, Firewalls, IAM, PAM, DLP</p>
+            <h4>Cloud Security</h4>
+            <p>Azure Security, AWS Security, GCP Security, Cloud Compliance, Container Security (Kubernetes, Docker).</p>
           </div>
           <div class="skill-card">
-            <h4>Cloud Platforms</h4>
-            <p>AWS, Azure, Google Cloud Platform (GCP)</p>
+            <h4>Network Security</h4>
+            <p>Firewalls (Palo Alto, Fortinet), IDS/IPS, VPN, Zero Trust, Network Segmentation, DDoS Protection.</p>
           </div>
           <div class="skill-card">
-            <h4>Operating Systems</h4>
-            <p>Linux (Debian, CentOS), Windows Server</p>
+            <h4>Endpoint Security</h4>
+            <p>EDR/XDR, Antivirus, Patch Management, Device Hardening, Mobile Device Management (MDM).</p>
           </div>
           <div class="skill-card">
-            <h4>Scripting & Automation</h4>
-            <p>Python, Bash, PowerShell, Ansible</p>
+            <h4>Identity & Access Management</h4>
+            <p>Azure AD, Okta, PAM, MFA, SSO, RBAC.</p>
+          </div>
+          <div class="skill-card">
+            <h4>Security Operations</h4>
+            <p>SIEM (Splunk, Sentinel), SOAR, Threat Hunting, Incident Response, Vulnerability Management.</p>
+          </div>
+          <div class="skill-card">
+            <h4>Compliance & Governance</h4>
+            <p>ISO 27001, GDPR, NIST, NIS2, SOX, DORA, Risk Assessments, Policy Development.</p>
+          </div>
+          <div class="skill-card">
+            <h4>Offensive Security</h4>
+            <p>Penetration Testing, Ethical Hacking, Vulnerability Assessment, Social Engineering, Red Teaming.</p>
+          </div>
+          <div class="skill-card">
+            <h4>Programming & Scripting</h4>
+            <p>Python, PowerShell, Bash, JavaScript, SQL.</p>
           </div>
         </div>
       </section>
 
       <!-- Frameworks Section -->
       <section id="frameworks-section" class="section">
-        <h2><i class="fas fa-shield-alt"></i> Security Frameworks</h2>
+        <h2><i class="fas fa-shield-alt"></i> Cybersecurity Frameworks</h2>
         <div class="frameworks-grid">
           <div class="framework-card">
-            <div class="framework-icon">🛡️</div>
-            <h4>NIST CSF</h4>
-            <p>National Institute of Standards and Technology Cybersecurity Framework</p>
+            <h4>NIST Cybersecurity Framework</h4>
+            <p>Identify, Protect, Detect, Respond, Recover.</p>
           </div>
           <div class="framework-card">
-            <div class="framework-icon">🌐</div>
             <h4>ISO 27001</h4>
-            <p>Information Security Management Systems</p>
+            <p>Information Security Management System (ISMS).</p>
           </div>
           <div class="framework-card">
-            <div class="framework-icon">🇪🇺</div>
+            <h4>MITRE ATT&CK</h4>
+            <p>Adversarial Tactics, Techniques, and Common Knowledge.</p>
+          </div>
+          <div class="framework-card">
             <h4>GDPR</h4>
-            <p>General Data Protection Regulation</p>
+            <p>General Data Protection Regulation.</p>
           </div>
           <div class="framework-card">
-            <div class="framework-icon">🏛️</div>
-            <h4>NIS2</h4>
-            <p>Network and Information Systems Directive 2</p>
+            <h4>NIS2 Directive</h4>
+            <p>Network and Information Security Directive 2.</p>
+          </div>
+          <div class="framework-card">
+            <h4>OWASP Top 10</h4>
+            <p>Web Application Security Risks.</p>
           </div>
         </div>
       </section>
@@ -314,16 +351,20 @@
         <h2><i class="fas fa-chart-line"></i> Monitoring & Analytics</h2>
         <div class="monitoring-grid">
           <div class="monitoring-card">
-            <h4>SIEM & Log Management</h4>
-            <p>Splunk, Elastic Stack (ELK), Graylog</p>
+            <h4>SIEM Solutions</h4>
+            <p>Splunk, Microsoft Sentinel, Elastic SIEM, IBM QRadar.</p>
           </div>
           <div class="monitoring-card">
             <h4>Network Monitoring</h4>
-            <p>Wireshark, tcpdump, Nmap, Zabbix</p>
+            <p>Wireshark, tcpdump, PRTG Network Monitor, Zabbix.</p>
           </div>
           <div class="monitoring-card">
-            <h4>Performance Monitoring</h4>
-            <p>Prometheus, Grafana, Datadog</p>
+            <h4>Cloud Monitoring</h4>
+            <p>Azure Monitor, AWS CloudWatch, Google Cloud Monitoring.</p>
+          </div>
+          <div class="monitoring-card">
+            <h4>Threat Intelligence Platforms</h4>
+            <p>MISP, Recorded Future, Anomali.</p>
           </div>
         </div>
       </section>
@@ -333,16 +374,20 @@
         <h2><i class="fas fa-certificate"></i> Certifications</h2>
         <div class="certifications-grid">
           <div class="certification-card">
-            <h4>Certified Information Systems Security Professional (CISSP)</h4>
-            <p>(ISC)²</p>
+            <h4>Certified Ethical Hacker (CEH)</h4>
+            <p>EC-Council</p>
           </div>
           <div class="certification-card">
-            <h4>Certified Cloud Security Professional (CCSP)</h4>
-            <p>(ISC)²</p>
+            <h4>Azure Security Engineer Associate</h4>
+            <p>Microsoft</p>
           </div>
           <div class="certification-card">
-            <h4>AWS Certified Security - Specialty</h4>
-            <p>Amazon Web Services</p>
+            <h4>CompTIA Security+</h4>
+            <p>CompTIA</p>
+          </div>
+          <div class="certification-card">
+            <h4>ISO 27001 Lead Implementer</h4>
+            <p>PECB</p>
           </div>
         </div>
       </section>
@@ -354,42 +399,85 @@
           <div class="quiz-question">
             <h4>What is the primary purpose of a firewall?</h4>
             <div class="quiz-options">
-              <div class="quiz-option">To prevent unauthorized access to a network</div>
-              <div class="quiz-option">To encrypt all network traffic</div>
-              <div class="quiz-option">To detect and remove malware</div>
+              <div class="quiz-option" data-answer="correct">To prevent unauthorized access to a network</div>
+              <div class="quiz-option" data-answer="incorrect">To encrypt all network traffic</div>
+              <div class="quiz-option" data-answer="incorrect">To detect and remove malware</div>
             </div>
             <div class="quiz-feedback"></div>
           </div>
           <div class="quiz-question">
             <h4>Which of the following is a common social engineering technique?</h4>
             <div class="quiz-options">
-              <div class="quiz-option">Phishing</div>
-              <div class="quiz-option">SQL Injection</div>
-              <div class="quiz-option">Cross-Site Scripting (XSS)</div>
+              <div class="quiz-option" data-answer="correct">Phishing</div>
+              <div class="quiz-option" data-answer="incorrect">SQL Injection</div>
+              <div class="quiz-option" data-answer="incorrect">Cross-Site Scripting (XSS)</div>
             </div>
             <div class="quiz-feedback"></div>
           </div>
         </div>
       </section>
 
+      <!-- Recruiter Assessment Section -->
+      <section id="recruiter-assessment-section" class="section">
+        <h2><i class="fas fa-user-secret"></i> Advanced Psychological Recruiter Investigation</h2>
+        <p>This section is designed to evaluate behavioral patterns and ethical alignment. Your responses are analyzed for consistency, ethical considerations, and problem-solving approaches in complex scenarios. Please answer thoughtfully.</p>
+        
+        <div class="assessment-container">
+          <div class="assessment-question">
+            <h4>W sytuacji, gdy zasady firmy kolidują z Twoimi osobistymi przekonaniami etycznymi, jak postępujesz?</h4>
+            <div class="assessment-options">
+              <textarea class="assessment-response" placeholder="Twoja odpowiedź..."></textarea>
+            </div>
+          </div>
+          <div class="assessment-question">
+            <h4>Opisz sytuację, w której musiałeś podjąć trudną decyzję pod presją czasu, mającą wpływ na bezpieczeństwo. Jakie były Twoje kroki i rezultat?</h4>
+            <div class="assessment-options">
+              <textarea class="assessment-response" placeholder="Twoja odpowiedź..."></textarea>
+            </div>
+          </div>
+          <div class="assessment-question">
+            <h4>Jak reagujesz na krytykę swojej pracy lub pomysłów? Podaj przykład.</h4>
+            <div class="assessment-options">
+              <textarea class="assessment-response" placeholder="Twoja odpowiedź..."></textarea>
+            </div>
+          </div>
+          <div class="assessment-question">
+            <h4>Co jest dla Ciebie ważniejsze: ścisłe przestrzeganie procedur czy elastyczność w rozwiązywaniu problemów, gdy procedury wydają się niewystarczające?</h4>
+            <div class="assessment-options">
+              <textarea class="assessment-response" placeholder="Twoja odpowiedź..."></textarea>
+            </div>
+          </div>
+          <div class="assessment-question">
+            <h4>Jakie są Twoje oczekiwania wobec środowiska pracy pod kątem etyki i wsparcia zespołu?</h4>
+            <div class="assessment-options">
+              <textarea class="assessment-response" placeholder="Twoja odpowiedź..."></textarea>
+            </div>
+          </div>
+          <button id="submit-assessment" class="cyber-button" style="margin-top: 1.5rem;">SUBMIT ASSESSMENT</button>
+          <div id="assessment-results" class="assessment-results" style="margin-top: 1.5rem; display: none;"></div>
+        </div>
+      </section>
+
       <!-- Contact Section -->
       <section id="contact-section" class="section">
         <h2><i class="fas fa-envelope"></i> Get in Touch</h2>
-        <p>For inquiries, please contact me at <a href="mailto:roman.orlowski@rocybersolutions.com">roman.orlowski@rocybersolutions.com</a>.</p>
-        <div class="social-links">
-          <a href="https://www.linkedin.com/in/roman-orlowski/" target="_blank"><i class="fab fa-linkedin"></i></a>
-          <a href="https://github.com/ronoc2020" target="_blank"><i class="fab fa-github"></i></a>
+        <p>Have a project in mind or just want to connect? Feel free to reach out!</p>
+        <div class="contact-info">
+          <p><i class="fas fa-map-marker-alt"></i> Warsaw, Poland</p>
+          <p><i class="fas fa-envelope"></i> <a href="mailto:roman.orlowski@rocybersolutions.com" class="tech-link">roman.orlowski@rocybersolutions.com</a></p>
+          <p><i class="fas fa-globe"></i> <a href="https://rocybersolutions.com" target="_blank" class="tech-link">rocybersolutions.com</a></p>
+          <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/roman-orlowski-cybersecurity/" target="_blank" class="tech-link">LinkedIn Profile</a></p>
         </div>
       </section>
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer>
       <p>&copy; 2024 ROCyber Solutions. All rights reserved.</p>
     </footer>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
