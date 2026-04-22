@@ -6,10 +6,71 @@ const isTablet = () => window.innerWidth > 768 && window.innerWidth <= 1024;
 const isDesktop = () => window.innerWidth > 1024;
 
 // ============================================
-// PARTICLES.JS CONFIGURATION - PEŁNA WERSJA
+// PARTICLES.JS CONFIGURATION - OPTYMALNA WERSJA
 // ============================================
 const particleConfig = (() => {
     if (isMobile()) {
+        return {
+            particles: {
+                number: {
+                    value: 15,
+                    density: {
+                        enable: true,
+                        value_area: 1500
+                    }
+                },
+                color: {
+                    value: ['#ffff00', '#ff8800', '#dd00ff']
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.3,
+                    random: true,
+                    anim: {
+                        enable: false
+                    }
+                },
+                size: {
+                    value: 2,
+                    random: true,
+                    anim: {
+                        enable: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 100,
+                    color: '#ffff00',
+                    opacity: 0.15,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 0.8,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: false
+                    },
+                    onclick: {
+                        enable: false
+                    },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        };
+    } else {
         return {
             particles: {
                 number: {
@@ -23,32 +84,25 @@ const particleConfig = (() => {
                     value: ['#ffff00', '#ff8800', '#dd00ff', '#00ff00', '#00f7ff']
                 },
                 shape: {
-                    type: 'circle',
-                    stroke: {
-                        width: 0,
-                        color: '#000000'
-                    },
-                    polygon: {
-                        nb_sides: 5
-                    }
+                    type: 'circle'
                 },
                 opacity: {
                     value: 0.4,
                     random: true,
                     anim: {
                         enable: true,
-                        speed: 1,
+                        speed: 0.5,
                         opacity_min: 0.1,
                         sync: false
                     }
                 },
                 size: {
-                    value: 2,
+                    value: 2.5,
                     random: true,
                     anim: {
                         enable: true,
-                        speed: 2,
-                        size_min: 0.5,
+                        speed: 1,
+                        size_min: 0.8,
                         sync: false
                     }
                 },
@@ -61,103 +115,12 @@ const particleConfig = (() => {
                 },
                 move: {
                     enable: true,
-                    speed: 1.5,
+                    speed: 1,
                     direction: 'none',
                     random: true,
                     straight: false,
                     out_mode: 'out',
-                    bounce: false,
-                    attract: {
-                        enable: false,
-                        rotateX: 600,
-                        rotateY: 1200
-                    }
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: {
-                        enable: false,
-                        mode: 'grab'
-                    },
-                    onclick: {
-                        enable: false,
-                        mode: 'push'
-                    },
-                    resize: true
-                }
-            },
-            retina_detect: true
-        };
-    } else {
-        return {
-            particles: {
-                number: {
-                    value: 120,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: ['#ffff00', '#ff8800', '#dd00ff', '#00ff00', '#00f7ff', '#ff5555']
-                },
-                shape: {
-                    type: 'circle',
-                    stroke: {
-                        width: 0,
-                        color: '#000000'
-                    },
-                    polygon: {
-                        nb_sides: 5
-                    },
-                    image: {
-                        src: '',
-                        width: 100,
-                        height: 100
-                    }
-                },
-                opacity: {
-                    value: 0.6,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 1.5,
-                        opacity_min: 0.2,
-                        sync: false
-                    }
-                },
-                size: {
-                    value: 3.5,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 3,
-                        size_min: 0.8,
-                        sync: false
-                    }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#ffff00',
-                    opacity: 0.4,
-                    width: 1.5
-                },
-                move: {
-                    enable: true,
-                    speed: 2.5,
-                    direction: 'none',
-                    random: true,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false,
-                    attract: {
-                        enable: true,
-                        rotateX: 600,
-                        rotateY: 600
-                    }
+                    bounce: false
                 }
             },
             interactivity: {
@@ -175,24 +138,12 @@ const particleConfig = (() => {
                 },
                 modes: {
                     grab: {
-                        distance: 180,
+                        distance: 140,
                         line_linked: {
-                            opacity: 0.8
+                            opacity: 0.5
                         }
                     },
-                    bubble: {
-                        distance: 200,
-                        size: 6,
-                        duration: 0.4
-                    },
-                    repulse: {
-                        distance: 200,
-                        duration: 0.4
-                    },
                     push: {
-                        particles_nb: 4
-                    },
-                    remove: {
                         particles_nb: 2
                     }
                 }
@@ -201,7 +152,6 @@ const particleConfig = (() => {
         };
     }
 })();
-
 // Initialize particles.js
 if (typeof particlesJS !== 'undefined') {
     particlesJS('particles-js', particleConfig);
