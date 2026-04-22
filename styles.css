@@ -663,7 +663,7 @@ body {
 /* ============================================ */
 .pip-boy-trigger {
     position: fixed;
-    right: 25px;
+    right: 20px;
     top: 50%;
     transform: translateY(-50%);
     width: 70px;
