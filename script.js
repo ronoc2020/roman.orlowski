@@ -914,3 +914,742 @@ Would you like detailed remediation steps? (yes/no)`;
 │ A01│ Broken Access Control                      │
 │    │ • Missing restrictions on authenticated    │
 │    │   users                                    │
+│    │ • IDOR vulnerabilities                     │
+├────┼────────────────────────────────────────────┤
+│ A02│ Cryptographic Failures                     │
+│    │ • Weak encryption algorithms               │
+│    │ • Improper key management                  │
+│    │ • Missing encryption                       │
+├────┼────────────────────────────────────────────┤
+│ A03│ Injection                                  │
+│    │ • SQL Injection                            │
+│    │ • NoSQL Injection                          │
+│    │ • OS Command Injection                     │
+├────┼────────────────────────────────────────────┤
+│ A04│ Insecure Design                            │
+│    │ • Missing security controls                │
+│    │ • Flawed business logic                    │
+├────┼────────────────────────────────────────────┤
+│ A05│ Security Misconfiguration                  │
+│    │ • Default configurations                   │
+│    │ • Verbose error messages                   │
+│    │ • Missing security headers                 │
+├────┼────────────────────────────────────────────┤
+│ A06│ Vulnerable and Outdated Components         │
+│    │ • Unpatched software                       │
+│    │ • End-of-life components                   │
+├────┼────────────────────────────────────────────┤
+│ A07│ Identification and Authentication Failures │
+│    │ • Weak password policies                   │
+│    │ • Missing MFA                              │
+├────┼────────────────────────────────────────────┤
+│ A08│ Software and Data Integrity Failures       │
+│    │ • Insecure CI/CD pipelines                 │
+│    │ • Unsigned updates                         │
+├────┼────────────────────────────────────────────┤
+│ A09│ Security Logging and Monitoring Failures   │
+│    │ • Insufficient logging                     │
+│    │ • No alerting                              │
+├────┼────────────────────────────────────────────┤
+│ A10│ Server-Side Request Forgery (SSRF)         │
+│    │ • Internal network scanning                │
+│    │ • Cloud metadata access                    │
+└────┴────────────────────────────────────────────┘
+
+[RESOURCES]
+https://owasp.org/www-project-top-ten/`;
+    },
+    
+    azure_security: () => {
+        return `=== AZURE SECURITY BEST PRACTICES ===
+┌─────────────────────────────────────────────────┐
+│ 1. IDENTITY & ACCESS MANAGEMENT                │
+│    • Enable Azure AD MFA for all users         │
+│    • Implement Conditional Access policies     │
+│    • Use Privileged Identity Management (PIM)  │
+│    • Regular access reviews                    │
+├─────────────────────────────────────────────────┤
+│ 2. NETWORK SECURITY                            │
+│    • Network Security Groups (NSGs)            │
+│    • Azure Firewall                            │
+│    • DDoS Protection                           │
+│    • Web Application Firewall (WAF)            │
+├─────────────────────────────────────────────────┤
+│ 3. DATA PROTECTION                             │
+│    • Azure Key Vault for secrets               │
+│    • Encryption at rest (SSE)                  │
+│    • Encryption in transit (TLS)               │
+│    • Azure Information Protection              │
+├─────────────────────────────────────────────────┤
+│ 4. MONITORING & THREAT DETECTION               │
+│    • Azure Sentinel SIEM                       │
+│    • Azure Security Center                     │
+│    • Defender for Cloud                        │
+│    • Log Analytics Workspaces                  │
+├─────────────────────────────────────────────────┤
+│ 5. COMPLIANCE & GOVERNANCE                     │
+│    • Azure Policy                              │
+│    • Azure Blueprints                          │
+│    • Compliance Manager                        │
+│    • Regulatory compliance reports             │
+└─────────────────────────────────────────────────┘
+
+[CHECKLIST] Regular security assessments required
+[AUDIT] Enable diagnostic logging for all resources`;
+    },
+    
+    incident_response: () => {
+        return `=== INCIDENT RESPONSE PROCEDURES ===
+┌─────────────────────────────────────────────────┐
+│ PHASE 1: PREPARATION                           │
+│    • Establish IR team                         │
+│    • Define roles & responsibilities           │
+│    • Create playbooks                          │
+│    • Acquire tools & training                  │
+├─────────────────────────────────────────────────┤
+│ PHASE 2: DETECTION & ANALYSIS                  │
+│    • Monitor alerts                            │
+│    • Investigate anomalies                     │
+│    • Determine scope & impact                  │
+│    • Preserve evidence                         │
+├─────────────────────────────────────────────────┤
+│ PHASE 3: CONTAINMENT                           │
+│    • Short-term containment (isolate)          │
+│    • Long-term containment (patching)          │
+│    • Backup critical data                      │
+├─────────────────────────────────────────────────┤
+│ PHASE 4: ERADICATION                           │
+│    • Remove malware                            │
+│    • Close attack vectors                      │
+│    • Reset compromised credentials             │
+│    • Apply security patches                    │
+├─────────────────────────────────────────────────┤
+│ PHASE 5: RECOVERY                              │
+│    • Restore from clean backups                │
+│    • Monitor for re-infection                  │
+│    • Gradual service restoration               │
+├─────────────────────────────────────────────────┤
+│ PHASE 6: POST-INCIDENT                         │
+│    • Lessons learned meeting                   │
+│    • Update procedures                         │
+│    • Legal & regulatory reporting              │
+│    • Improve security controls                 │
+└─────────────────────────────────────────────────┘
+
+[TIMELINE] Response within 24 hours required
+[ESCALATION] Notify management immediately for critical incidents`;
+    },
+    
+    threat_hunt: () => {
+        return `=== THREAT HUNTING TECHNIQUES ===
+┌─────────────────────────────────────────────────┐
+│ NETWORK ANALYSIS                               │
+│    • Wireshark packet inspection               │
+│    • Zeek (Bro) network monitoring             │
+│    • NetFlow analysis                          │
+│    • DNS tunneling detection                   │
+├─────────────────────────────────────────────────┤
+│ ENDPOINT ANALYSIS                              │
+│    • Sysmon logs review                        │
+│    • Windows Event Viewer                      │
+│    • Process tree analysis                     │
+│    • Registry changes                          │
+├─────────────────────────────────────────────────┤
+│ LATERAL MOVEMENT DETECTION                     │
+│    • RDP/SSH logs                              │
+│    • PSExec usage                              │
+│    • Scheduled tasks                           │
+│    • WMI activity                              │
+├─────────────────────────────────────────────────┤
+│ C2 COMMUNICATION PATTERNS                      │
+│    • Beaconing detection                       │
+│    • Domain generation algorithm (DGA)         │
+│    • Encrypted traffic analysis                │
+│    • Unusual port usage                        │
+├─────────────────────────────────────────────────┤
+│ USER BEHAVIOR ANALYTICS                        │
+│    • Impossible travel                         │
+│    • Unusual login times                       │
+│    • Data exfiltration patterns                │
+│    • Privilege escalation attempts             │
+└─────────────────────────────────────────────────┘
+
+[FRAMEWORK] MITRE ATT&CK mapping recommended
+[TOOLS] Use SIEM with UEBA capabilities`;
+    },
+    
+    malware_analysis: () => {
+        return `=== MALWARE ANALYSIS WORKFLOW ===
+┌─────────────────────────────────────────────────┐
+│ 1. STATIC ANALYSIS                             │
+│    • File properties (hash, size, type)        │
+│    • String extraction (strings command)       │
+│    • PE/ELF header analysis                    │
+│    • Import/export table review                │
+│    • Disassembly (IDA Pro, Ghidra)             │
+├─────────────────────────────────────────────────┤
+│ 2. DYNAMIC ANALYSIS                            │
+│    • Sandbox execution (Cuckoo, CAPE)          │
+│    • API monitoring                            │
+│    • Registry/File system changes              │
+│    • Process behavior analysis                 │
+├─────────────────────────────────────────────────┤
+│ 3. NETWORK ANALYSIS                            │
+│    • Traffic capture (Wireshark)               │
+│    • DNS queries                               │
+│    • HTTP/HTTPS requests                       │
+│    • C2 communication patterns                 │
+├─────────────────────────────────────────────────┤
+│ 4. CODE ANALYSIS                               │
+│    • Reverse engineering                       │
+│    • Decompilation                             │
+│    • Debugging (x64dbg, OllyDbg)               │
+│    • Anti-analysis bypass                      │
+├─────────────────────────────────────────────────┤
+│ 5. REPORTING                                   │
+│    • Indicators of Compromise (IOCs)           │
+│    • YARA rules                                │
+│    • Mitigation recommendations                │
+│    • Family classification                     │
+└─────────────────────────────────────────────────┘
+
+[TOOLS] Ghidra, IDA Pro, x64dbg, Cuckoo Sandbox
+[OUTPUT] Generate IOCs for detection tools`;
+    },
+    
+    forensics: () => {
+        return `=== DIGITAL FORENSICS GUIDE ===
+┌─────────────────────────────────────────────────┐
+│ 1. PRESERVATION                                │
+│    • Chain of custody documentation            │
+│    • Write-blockers for imaging                │
+│    • Cryptographic hash verification           │
+│    • Evidence bags/labeling                    │
+├─────────────────────────────────────────────────┤
+│ 2. ACQUISITION                                 │
+│    • Disk imaging (dd, FTK Imager)             │
+│    • Memory capture (Volatility, LiME)         │
+│    • Network logs preservation                 │
+│    • Cloud forensics acquisition               │
+├─────────────────────────────────────────────────┤
+│ 3. ANALYSIS                                    │
+│    • File system analysis (NTFS, ext4, APFS)   │
+│    • Deleted file recovery                     │
+│    • Timeline analysis                         │
+│    • Registry analysis (Windows)               │
+│    • Log analysis                              │
+├─────────────────────────────────────────────────┤
+│ 4. MEMORY FORENSICS                            │
+│    • Process analysis                          │
+│    • Network connections                       │
+│    • Rootkit detection                         │
+│    • Malware extraction                        │
+├─────────────────────────────────────────────────┤
+│ 5. REPORTING                                   │
+│    • Expert report writing                     │
+│    • Visual timeline creation                  │
+│    • Evidence presentation                     │
+│    • Court testimony preparation               │
+└─────────────────────────────────────────────────┘
+
+[TOOLS] FTK, EnCase, Autopsy, Volatility, Wireshark
+[CERTIFICATION] GCFE, GCFA, EnCE recommended`;
+    },
+    
+    compliance_check: () => {
+        return `=== COMPLIANCE FRAMEWORK OVERVIEW ===
+┌─────────────────────────────────────────────────┐
+│ ISO 27001                                      │
+│    • Information Security Management System    │
+│    • 114 controls across 14 clauses           │
+│    • Risk-based approach                      │
+│    • Continuous improvement                    │
+├─────────────────────────────────────────────────┤
+│ GDPR                                           │
+│    • Data protection for EU citizens           │
+│    • 7 key principles                         │
+│    • Rights of data subjects                   │
+│    • Breach notification (72 hours)            │
+├─────────────────────────────────────────────────┤
+│ NIST CSF                                       │
+│    • 5 core functions                         │
+│    • 23 categories                            │
+│    • 108 subcategories                        │
+│    • Tiered implementation                    │
+├─────────────────────────────────────────────────┤
+│ PCI-DSS                                        │
+│    • Payment card data security               │
+│    • 12 requirements                          │
+│    • 4 compliance levels                      │
+│    • Quarterly scans required                 │
+├─────────────────────────────────────────────────┤
+│ SOX                                            │
+│    • Financial reporting controls              │
+│    • Section 302 (certification)              │
+│    • Section 404 (internal controls)          │
+│    • IT general controls                      │
+├─────────────────────────────────────────────────┤
+│ DORA                                           │
+│    • Digital Operational Resilience            │
+│    • ICT risk management                      │
+│    • Incident reporting                       │
+│    • Resilience testing                       │
+└─────────────────────────────────────────────────┘
+
+[AUDIT] Regular compliance assessments required
+[UPDATE] Monitor regulatory changes`;
+    },
+    
+    clear: () => {
+        const output = document.getElementById('terminal-output');
+        if (output) {
+            output.innerHTML = '<div class="terminal-line">Terminal cleared. Type "help" for commands.</div>';
+        }
+        return '';
+    }
+};
+
+// ============================================
+// DOM CONTENT LOADED - MAIN INITIALIZATION
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('ROCyber System Initializing...');
+    
+    // ========================================
+    // INTRO SEQUENCE
+    // ========================================
+    const introSequence = document.getElementById('intro-sequence');
+    const introDelay = isMobile() ? 3000 : 5000;
+    setTimeout(() => {
+        if (introSequence) {
+            introSequence.style.display = 'none';
+        }
+    }, introDelay);
+    
+    // ========================================
+    // RECRUITMENT PANEL (Ctrl+Shift+A)
+    // ========================================
+    const recruitmentPanel = document.getElementById('recruitment-panel');
+    let ctrlPressed = false;
+    let shiftPressed = false;
+    let aPressed = false;
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Control') ctrlPressed = true;
+        if (e.key === 'Shift') shiftPressed = true;
+        if (e.key === 'a' || e.key === 'A') aPressed = true;
+        
+        if (ctrlPressed && shiftPressed && aPressed && recruitmentPanel) {
+            e.preventDefault();
+            recruitmentPanel.classList.toggle('active');
+        }
+    });
+    
+    document.addEventListener('keyup', function(e) {
+        if (e.key === 'Control') ctrlPressed = false;
+        if (e.key === 'Shift') shiftPressed = false;
+        if (e.key === 'a' || e.key === 'A') aPressed = false;
+    });
+    
+    // Close recruitment panel
+    const closeRecruitment = document.getElementById('closeRecruitment');
+    if (closeRecruitment) {
+        closeRecruitment.addEventListener('click', () => {
+            if (recruitmentPanel) recruitmentPanel.classList.remove('active');
+        });
+    }
+    
+    // Regenerate verification code
+    const regenerateCode = document.getElementById('regenerateCode');
+    const verificationCodeSpan = document.getElementById('verificationCode');
+    if (regenerateCode && verificationCodeSpan) {
+        regenerateCode.addEventListener('click', () => {
+            const newCode = 'CYBER-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+            verificationCodeSpan.textContent = newCode;
+            localStorage.setItem('verificationCode', newCode);
+        });
+        
+        const storedCode = localStorage.getItem('verificationCode');
+        if (storedCode) verificationCodeSpan.textContent = storedCode;
+    }
+    
+    // ========================================
+    // PIP-BOY INVENTORY SYSTEM
+    // ========================================
+    const pipBoyTrigger = document.getElementById('pipBoyTrigger');
+    const pipBoyInventory = document.getElementById('pipBoyInventory');
+    const pipBoyClose = document.getElementById('pipBoyClose');
+    const inventoryTabs = document.querySelectorAll('.inventory-tab');
+    const inventoryContents = document.querySelectorAll('.inventory-content');
+    
+    if (pipBoyTrigger && pipBoyInventory) {
+        pipBoyTrigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            pipBoyInventory.classList.toggle('active');
+        });
+        
+        if (pipBoyClose) {
+            pipBoyClose.addEventListener('click', function() {
+                pipBoyInventory.classList.remove('active');
+            });
+        }
+        
+        document.addEventListener('click', function(e) {
+            if (!pipBoyTrigger.contains(e.target) && !pipBoyInventory.contains(e.target)) {
+                pipBoyInventory.classList.remove('active');
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                pipBoyInventory.classList.remove('active');
+            }
+        });
+    }
+    
+    // Inventory tabs switching
+    if (inventoryTabs.length) {
+        inventoryTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                inventoryTabs.forEach(t => t.classList.remove('active'));
+                inventoryContents.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                const tabName = this.getAttribute('data-tab');
+                const targetContent = document.getElementById(tabName);
+                if (targetContent) targetContent.classList.add('active');
+            });
+        });
+    }
+    
+    // ========================================
+    // YOUTUBE PLAYER SETUP
+    // ========================================
+    loadYouTubeAPI();
+    
+    // Setup YouTube controls after API loads
+    setTimeout(() => {
+        const playBtn = document.getElementById('yt-play-btn');
+        const pauseBtn = document.getElementById('yt-pause-btn');
+        const stopBtn = document.getElementById('yt-stop-btn');
+        const muteBtn = document.getElementById('yt-mute-btn');
+        const loadBtn = document.getElementById('load-yt-btn');
+        const urlInput = document.getElementById('yt-url');
+        const presetBtns = document.querySelectorAll('.playlist-preset');
+        
+        if (playBtn) playBtn.addEventListener('click', playYouTube);
+        if (pauseBtn) pauseBtn.addEventListener('click', pauseYouTube);
+        if (stopBtn) stopBtn.addEventListener('click', stopYouTube);
+        if (muteBtn) muteBtn.addEventListener('click', toggleMuteYouTube);
+        
+        if (loadBtn && urlInput) {
+            loadBtn.addEventListener('click', () => loadYouTubeVideo(urlInput.value));
+            urlInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') loadYouTubeVideo(urlInput.value);
+            });
+        }
+        
+        presetBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const videoId = btn.getAttribute('data-id');
+                if (videoId && videoId !== 'YOUR_VIDEO_ID_HERE') {
+                    loadYouTubeVideo(videoId);
+                    if (urlInput) urlInput.value = videoId;
+                } else if (videoId === 'YOUR_VIDEO_ID_HERE') {
+                    alert('🔧 KONFIGURACJA: Zamień "YOUR_VIDEO_ID_HERE" na ID swojego filmu z YouTube!\n\nID filmu znajdziesz w linku:\nhttps://www.youtube.com/watch?v=XXXXXXXXXXX');
+                }
+            });
+        });
+        
+        const lastVideo = localStorage.getItem('lastYouTubeVideo');
+        if (lastVideo && urlInput) urlInput.value = lastVideo;
+    }, 1000);
+    
+    // ========================================
+    // PIP-BOY TERMINAL
+    // ========================================
+    const pipTerminalCommand = document.getElementById('pipTerminalCommand');
+    const pipTerminalOutput = document.getElementById('pipTerminalOutput');
+    
+    if (pipTerminalCommand && pipTerminalOutput) {
+        pipTerminalCommand.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const fullCommand = this.value.trim();
+                this.value = '';
+                if (!fullCommand) return;
+                
+                // Display command
+                const commandLine = document.createElement('div');
+                commandLine.className = 'terminal-line';
+                commandLine.innerHTML = `<span class="terminal-prompt">$</span> ${fullCommand}`;
+                pipTerminalOutput.appendChild(commandLine);
+                
+                // Parse command and argument
+                const parts = fullCommand.toLowerCase().split(' ');
+                const command = parts[0];
+                const argument = parts.slice(1).join(' ');
+                
+                let result;
+                if (pipCommands[command]) {
+                    result = pipCommands[command](argument);
+                } else {
+                    result = `Command not found: ${command}\nType 'help' for available commands`;
+                }
+                
+                if (result) {
+                    const resultElement = document.createElement('div');
+                    resultElement.className = 'terminal-line';
+                    resultElement.style.whiteSpace = 'pre-wrap';
+                    resultElement.textContent = result;
+                    pipTerminalOutput.appendChild(resultElement);
+                }
+                
+                pipTerminalOutput.scrollTop = pipTerminalOutput.scrollHeight;
+            }
+        });
+    }
+    
+    // ========================================
+    // MAIN NAVIGATION
+    // ========================================
+    const navItems = document.querySelectorAll('.nav-item');
+    const sections = document.querySelectorAll('.section');
+    
+    if (navItems.length && sections.length) {
+        // Hide all sections except about
+        sections.forEach(section => {
+            if (section.id !== 'about') {
+                section.style.display = 'none';
+                section.classList.remove('visible');
+            }
+        });
+        
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Update active nav
+                navItems.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Hide all sections
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                    section.classList.remove('visible');
+                });
+                
+                // Show selected section
+                const sectionId = this.getAttribute('data-section');
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    setTimeout(() => targetSection.classList.add('visible'), 10);
+                    
+                    const scrollDelay = isMobile() ? 100 : 300;
+                    setTimeout(() => {
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, scrollDelay);
+                }
+                
+                // Close pip-boy inventory
+                if (pipBoyInventory) pipBoyInventory.classList.remove('active');
+            });
+        });
+    }
+    
+    // ========================================
+    // MAIN TERMINAL
+    // ========================================
+    const terminalCommand = document.getElementById('terminal-command');
+    const terminalOutput = document.getElementById('terminal-output');
+    
+    if (terminalCommand && terminalOutput) {
+        terminalCommand.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const command = this.value.trim().toLowerCase();
+                this.value = '';
+                if (!command) return;
+                
+                // Display command
+                const commandLine = document.createElement('div');
+                commandLine.className = 'terminal-line';
+                commandLine.innerHTML = `<span class="terminal-prompt">$</span> ${command}`;
+                terminalOutput.appendChild(commandLine);
+                
+                let result;
+                if (mainCommands[command]) {
+                    result = mainCommands[command]();
+                } else {
+                    result = `Command not found: ${command}\nType 'help' for available commands`;
+                }
+                
+                if (result) {
+                    const resultElement = document.createElement('div');
+                    resultElement.className = 'terminal-line';
+                    resultElement.style.whiteSpace = 'pre-wrap';
+                    resultElement.textContent = result;
+                    terminalOutput.appendChild(resultElement);
+                }
+                
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            }
+        });
+    }
+    
+    // ========================================
+    // QUIZ FUNCTIONALITY
+    // ========================================
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    let quizScore = 0;
+    let quizAnswered = 0;
+    const totalQuizQuestions = document.querySelectorAll('.quiz-question').length;
+    
+    quizOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const question = this.closest('.quiz-question');
+            const feedback = question.querySelector('.quiz-feedback');
+            const isCorrect = this.dataset.correct === 'true';
+            
+            if (question.classList.contains('answered')) return;
+            question.classList.add('answered');
+            quizAnswered++;
+            
+            // Disable all options in this question
+            question.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.style.background = 'rgba(20, 20, 30, 0.5)';
+                opt.style.borderColor = 'rgba(0, 247, 255, 0.1)';
+                opt.style.cursor = 'default';
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (isCorrect) {
+                this.style.background = 'rgba(85, 255, 85, 0.2)';
+                this.style.borderColor = '#55ff55';
+                feedback.textContent = '✓ Correct! Great job!';
+                feedback.className = 'quiz-feedback correct';
+                quizScore++;
+            } else {
+                this.style.background = 'rgba(255, 85, 85, 0.2)';
+                this.style.borderColor = '#ff5555';
+                feedback.textContent = '✗ Incorrect. The correct answer is highlighted.';
+                feedback.className = 'quiz-feedback incorrect';
+                
+                // Highlight correct answer
+                question.querySelectorAll('.quiz-option').forEach(opt => {
+                    if (opt.dataset.correct === 'true') {
+                        opt.style.background = 'rgba(85, 255, 85, 0.15)';
+                        opt.style.borderColor = '#55ff55';
+                    }
+                });
+            }
+            
+            // Show final score when all questions answered
+            if (quizAnswered === totalQuizQuestions) {
+                const scorePercentage = Math.round((quizScore / totalQuizQuestions) * 100);
+                const quizContainer = document.querySelector('.quiz-container');
+                const existingScore = quizContainer.querySelector('.final-score');
+                
+                if (!existingScore) {
+                    const scoreMessage = document.createElement('div');
+                    scoreMessage.className = 'final-score';
+                    scoreMessage.innerHTML = `
+                        <i class="fas fa-chart-line"></i> 
+                        Quiz Complete! Score: ${quizScore}/${totalQuizQuestions} (${scorePercentage}%)
+                        <br>
+                        <small>${scorePercentage >= 75 ? 'Excellent! You know your security!' : 'Review the materials and try again.'}</small>
+                    `;
+                    quizContainer.appendChild(scoreMessage);
+                }
+            }
+        });
+    });
+    
+    // ========================================
+    // DYNAMIC GRADIENT (DESKTOP ONLY)
+    // ========================================
+    const gradient = document.querySelector('.cyber-gradient');
+    if (gradient && !isMobile()) {
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            gradient.style.background = `
+                linear-gradient(${135 + x * 45}deg, rgba(255, 255, 0, 0.08) 0%, transparent 50%),
+                linear-gradient(${-135 + y * 45}deg, rgba(221, 0, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(0, 247, 255, 0.05) 0%, transparent 70%)
+            `;
+        });
+    }
+    
+    // ========================================
+    // PARALLAX EFFECT (DESKTOP ONLY)
+    // ========================================
+    if (!isMobile()) {
+        const floatingElements = document.querySelectorAll('.floating-element');
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            floatingElements.forEach((element, index) => {
+                const speed = (index + 1) * 0.04;
+                const x = (mouseX - 0.5) * 120 * speed;
+                const y = (mouseY - 0.5) * 120 * speed;
+                element.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    }
+    
+    // ========================================
+    // SMOOTH SCROLL FOR ANCHOR LINKS
+    // ========================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+    
+    // ========================================
+    // WINDOW RESIZE HANDLER
+    // ========================================
+    window.addEventListener('resize', () => {
+        if (isMobile() && pipBoyInventory && pipBoyInventory.classList.contains('active')) {
+            pipBoyInventory.style.width = '100%';
+        }
+    });
+    
+    // ========================================
+    // PREVENT ZOOM ON DOUBLE TAP (MOBILE)
+    // ========================================
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function(event) {
+        const now = Date.now();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
+    
+    // ========================================
+    // CONSOLE WELCOME MESSAGE
+    // ========================================
+    console.log('%c🔐 ROCyber Security System Online', 'color: #00ff00; font-size: 18px; font-weight: bold;');
+    console.log('%c┌─────────────────────────────────────────┐', 'color: #ffff00');
+    console.log('%c│ Welcome to ROCyber Solutions Portfolio  │', 'color: #ffff00');
+    console.log('%c│                                         │', 'color: #ffff00');
+    console.log('%c│ 🔑 Tip: Press Ctrl+Shift+A for          │', 'color: #ff8800');
+    console.log('%c│    Recruitment Verification Panel      │', 'color: #ff8800');
+    console.log('%c│                                         │', 'color: #ffff00');
+    console.log('%c│ 🎵 Tip: Use Pip-Boy (right side) for    │', 'color: #dd00ff');
+    console.log('%c│    YouTube music player and terminal    │', 'color: #dd00ff');
+    console.log('%c└─────────────────────────────────────────┘', 'color: #ffff00');
+    
+    console.log('%c🚀 System ready. Enjoy the experience!', 'color: #00f7ff; font-size: 14px;');
+});
+
+// Expose functions globally for debugging
+window.pipCommands = pipCommands;
+window.mainCommands = mainCommands;
+window.playYouTube = playYouTube;
+window.pauseYouTube = pauseYouTube;
+window.stopYouTube = stopYouTube;
+window.loadYouTubeVideo = loadYouTubeVideo;
