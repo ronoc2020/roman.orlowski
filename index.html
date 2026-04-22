@@ -1,258 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>ROCyber Solutions | Cybersecurity Expert</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div id="intro-sequence" class="intro-sequence">
-        <div class="intro-content">
-            <div class="glitch-wrapper">
-                <div class="glitch">ROCyber Solutions</div>
-            </div>
-            <div class="loading-bar">
-                <div class="loading-progress"></div>
-            </div>
-            <div class="boot-text">
-                <div class="boot-line">> Initializing security protocols...</div>
-                <div class="boot-line">> Loading cyber defense modules...</div>
-                <div class="boot-line">> Establishing secure connection...</div>
-                <div class="boot-line">> System ready. Welcome.</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="scanlines"></div>
-    <div class="grid-overlay"></div>
-    <div class="cyber-gradient"></div>
-    <div id="particles-js"></div>
-
-    <div class="floating-element"></div>
-    <div class="floating-element"></div>
-    <div class="floating-element"></div>
-    <div class="floating-element"></div>
-
-    <div class="pip-boy-trigger">
-        <div class="trigger-triangle"></div>
-    </div>
-
-    <div class="pip-boy-inventory">
-        <div class="inventory-header">
-            <div class="inventory-title">PIP-BOY 3000 Mk IV</div>
-        </div>
-        <div class="inventory-tabs">
-            <div class="inventory-tab active" data-tab="items">ITEMS</div>
-            <div class="inventory-tab" data-tab="data">DATA</div>
-            <div class="inventory-tab" data-tab="stats">STATS</div>
-        </div>
-        <div id="items" class="inventory-content active">
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-shield-alt"></i> Firewall+ v2.0</div><div class="inventory-item-desc">Enterprise-grade protection system</div></div>
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-crosshairs"></i> IDS/IPS Module</div><div class="inventory-item-desc">Threat detection & prevention</div></div>
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-chart-line"></i> SIEM Dashboard</div><div class="inventory-item-desc">Real-time security monitoring</div></div>
-        </div>
-        <div id="data" class="inventory-content">
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-database"></i> Threat Intelligence</div><div class="inventory-item-desc">Latest CVE database - Updated daily</div></div>
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-chart-pie"></i> Attack Patterns</div><div class="inventory-item-desc">MITRE ATT&CK Framework v13</div></div>
-        </div>
-        <div id="stats" class="inventory-content">
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-charging-station"></i> Security Score: 98%</div><div class="inventory-item-desc">Protection level: Critical</div></div>
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-certificate"></i> Certifications: 7</div><div class="inventory-item-desc">Active & Verified</div></div>
-        </div>
-    </div>
-
-    <div class="container">
-        <header class="header">
-            <h1>
-                <span class="letter">R</span><span class="letter">O</span><span class="letter">C</span><span class="letter">y</span><span class="letter">b</span><span class="letter">e</span><span class="letter">r</span>
-            </h1>
-            <div class="tagline">Cybersecurity Expert | Cloud Security Architect | Ethical Hacker</div>
-            <div class="status-badge">
-                <span class="status-dot pulse"></span>
-                <span>SECURITY CLEARANCE: LEVEL 5 // SYSTEM ONLINE</span>
-            </div>
-        </header>
-
-        <nav class="nav">
-            <div class="nav-item active" data-section="about"><i class="fas fa-user-secret"></i> ABOUT</div>
-            <div class="nav-item" data-section="skills"><i class="fas fa-code"></i> SKILLS</div>
-            <div class="nav-item" data-section="certifications"><i class="fas fa-certificate"></i> CERTS</div>
-            <div class="nav-item" data-section="experience"><i class="fas fa-timeline"></i> TIMELINE</div>
-            <div class="nav-item" data-section="tools"><i class="fas fa-toolbox"></i> TOOLS</div>
-            <div class="nav-item" data-section="quiz"><i class="fas fa-question-circle"></i> QUIZ</div>
-            <div class="nav-item" data-section="contact"><i class="fas fa-envelope"></i> CONTACT</div>
-        </nav>
-
-        <main>
-            <section id="about" class="section visible">
-                <h2><i class="fas fa-user-secret"></i> Profile</h2>
-                <p>Roman Orłowski - Cybersecurity expert with over 15 years of experience in IT sector, NOC, SOC, EOC environments. Founder of ROCyber Solutions, specializing in Zero Trust Architecture, SIEM implementation, and compliance frameworks (ISO 27001, GDPR, NIST, DORA).</p>
-                <div class="qualifications-grid">
-                    <div class="qualification-card"><i class="fas fa-graduation-cap qual-icon"></i><h4>Education</h4><p>MSc in Cybersecurity, Warsaw University of Technology<br>CEH Certified Ethical Hacker<br>Azure Security Engineer Expert</p></div>
-                    <div class="qualification-card"><i class="fas fa-trophy qual-icon"></i><h4>Achievements</h4><p>Top 1% TryHackMe<br>Bug Bounty Hunter - Google, Microsoft<br>Speaker at CyberSec Conference 2024</p></div>
-                    <div class="qualification-card"><i class="fas fa-language qual-icon"></i><h4>Languages</h4><p>English (Fluent)<br>Polish (Native)<br>German (Intermediate)</p></div>
-                </div>
-            </section>
-
-            <section id="skills" class="section">
-                <h2><i class="fas fa-code"></i> Technical Arsenal</h2>
-                <div class="skills-grid">
-                    <div class="skill-card"><h3><i class="fas fa-cloud"></i> Cloud Security</h3><p>Azure Security Center, AWS Shield, GCP Security Command Center, Container Security (K8s), Zero Trust Architecture</p></div>
-                    <div class="skill-card"><h3><i class="fas fa-shield-alt"></i> Threat Detection</h3><p>SIEM (Splunk, QRadar, Sentinel), IDS/IPS, EDR, Threat Hunting, MITRE ATT&CK</p></div>
-                    <div class="skill-card"><h3><i class="fas fa-network-wired"></i> Network Security</h3><p>Firewall (Palo Alto, Fortinet), VPN, NAC, Zero Trust, Micro-segmentation</p></div>
-                    <div class="skill-card"><h3><i class="fas fa-lock"></i> Compliance & Risk</h3><p>ISO 27001, GDPR, NIST CSF, PCI-DSS, SOX, DORA, Risk Assessment, Auditing</p></div>
-                    <div class="skill-card"><h3><i class="fas fa-terminal"></i> Offensive Security</h3><p>Penetration Testing, Red Teaming, Social Engineering, Exploit Development, Reverse Engineering</p></div>
-                    <div class="skill-card"><h3><i class="fas fa-chart-line"></i> IR & Forensics</h3><p>Incident Response, Malware Analysis, Digital Forensics, Log Analysis, Chain of Custody</p></div>
-                </div>
-
-                <h3><i class="fas fa-cubes"></i> Security Frameworks</h3>
-                <div class="frameworks-grid">
-                    <div class="framework-card"><h3><i class="fas fa-chart-simple"></i> NIST CSF</h3><p>Complete implementation of Identify, Protect, Detect, Respond, Recover functions</p><ul><li>Risk Assessment</li><li>Access Control</li><li>Continuous Monitoring</li></ul></div>
-                    <div class="framework-card"><h3><i class="fas fa-balance-scale"></i> ISO 27001</h3><p>ISMS implementation and certification management</p><ul><li>Annex A Controls</li><li>Risk Treatment</li><li>Internal Audits</li></ul></div>
-                    <div class="framework-card"><h3><i class="fas fa-database"></i> MITRE ATT&CK</h3><p>Threat modeling and adversary emulation</p><ul><li>Tactics & Techniques</li><li>Detection Analytics</li><li>Purple Teaming</li></ul></div>
-                    <div class="framework-card"><h3><i class="fas fa-shield-virus"></i> Zero Trust</h3><p>Never trust, always verify architecture</p><ul><li>Micro-segmentation</li><li>Least Privilege</li><li>Continuous Auth</li></ul></div>
-                    <div class="framework-card"><h3><i class="fas fa-chart-line"></i> DORA</h3><p>Digital Operational Resilience compliance</p><ul><li>ICT Risk Management</li><li>Incident Reporting</li><li>Resilience Testing</li></ul></div>
-                    <div class="framework-card"><h3><i class="fas fa-lock"></i> GDPR</h3><p>Data protection and privacy framework</p><ul><li>Data Mapping</li><li>DPIA</li><li>Breach Notification</li></ul></div>
-                </div>
-
-                <h3><i class="fas fa-eye"></i> Monitoring & SIEM Tools</h3>
-                <div class="monitoring-tools-grid">
-                    <div class="monitoring-tool"><h4>Splunk Enterprise Security</h4><p>Advanced correlation searches, risk scoring, and threat intelligence integration</p><span class="tool-category">SIEM</span><span class="tool-category">Enterprise</span></div>
-                    <div class="monitoring-tool"><h4>Microsoft Sentinel</h4><p>Cloud-native SIEM with AI-powered threat detection and automated response</p><span class="tool-category">Cloud SIEM</span><span class="tool-category">Azure</span></div>
-                    <div class="monitoring-tool"><h4>IBM QRadar</h4><p>Offense management, network activity monitoring, and forensic analysis</p><span class="tool-category">SIEM</span><span class="tool-category">Enterprise</span></div>
-                    <div class="monitoring-tool"><h4>Wazuh</h4><p>Open-source XDR with file integrity monitoring and vulnerability detection</p><span class="tool-category">Open Source</span><span class="tool-category">XDR</span></div>
-                    <div class="monitoring-tool"><h4>Elastic Stack (ELK)</h4><p>Log aggregation, analysis, and visualization with security dashboards</p><span class="tool-category">Log Management</span><span class="tool-category">Open Source</span></div>
-                    <div class="monitoring-tool"><h4>Prometheus + Grafana</h4><p>Infrastructure monitoring and alerting for cloud-native environments</p><span class="tool-category">Monitoring</span><span class="tool-category">K8s</span></div>
-                </div>
-            </section>
-
-            <section id="certifications" class="section">
-                <h2><i class="fas fa-certificate"></i> Certifications</h2>
-                <div class="certifications-grid">
-                    <div class="cert-card"><h3>CEH</h3><p>Certified Ethical Hacker v12</p><a href="#"><i class="fas fa-check-circle"></i> Verify</a></div>
-                    <div class="cert-card"><h3>Azure Security Engineer</h3><p>Microsoft Certified: AZ-500</p><a href="#"><i class="fas fa-check-circle"></i> Verify</a></div>
-                    <div class="cert-card"><h3>ISO 27001 Lead Implementer</h3><p>PECB Certified</p><a href="#"><i class="fas fa-check-circle"></i> Verify</a></div>
-                    <div class="cert-card"><h3>Splunk Core Power User</h3><p>Splunk Certified</p><a href="#"><i class="fas fa-check-circle"></i> Verify</a></div>
-                    <div class="cert-card"><h3>CompTIA Security+</h3><p>SY0-601 Certified</p><a href="#"><i class="fas fa-check-circle"></i> Verify</a></div>
-                    <div class="cert-card"><h3>Certified Cloud Security Professional</h3><p>(ISC)² CCSP</p><a href="#"><i class="fas fa-check-circle"></i> Verify</a></div>
-                </div>
-            </section>
-
-            <section id="experience" class="section">
-                <h2><i class="fas fa-timeline"></i> Professional Timeline</h2>
-                <div class="timeline">
-                    <div class="timeline-item"><div class="timeline-date">2023 - Present</div><div class="timeline-title">Founder & Principal Consultant - ROCyber Solutions</div><div class="timeline-desc">Leading cloud security transformations, incident response, and compliance for enterprise clients.</div></div>
-                    <div class="timeline-item"><div class="timeline-date">2020 - 2023</div><div class="timeline-title">Lead Security Architect - CyberGuard Inc.</div><div class="timeline-desc">Architected Zero Trust framework for 50+ clients, reduced breach risk by 78%.</div></div>
-                    <div class="timeline-item"><div class="timeline-date">2017 - 2020</div><div class="timeline-title">Security Analyst - SecOps Global</div><div class="timeline-desc">Managed SIEM operations, threat hunting, and incident response for Fortune 500.</div></div>
-                    <div class="timeline-item"><div class="timeline-date">2015 - 2017</div><div class="timeline-title">Penetration Tester - RedTeam Security</div><div class="timeline-desc">Conducted web app, network, and social engineering assessments.</div></div>
-                </div>
-            </section>
-
-            <section id="tools" class="section">
-                <h2><i class="fas fa-toolbox"></i> Security Arsenal</h2>
-                <div class="tools-grid">
-                    <div class="tool-card"><h3><i class="fab fa-wireshark"></i> Wireshark</h3><p>Network protocol analyzer for deep packet inspection</p><a href="https://www.wireshark.org/" target="_blank"><i class="fas fa-external-link-alt"></i> Official Site</a></div>
-                    <div class="tool-card"><h3><i class="fas fa-bug"></i> Burp Suite</h3><p>Web vulnerability scanner and proxy</p><a href="https://portswigger.net/burp" target="_blank"><i class="fas fa-external-link-alt"></i> Official Site</a></div>
-                    <div class="tool-card"><h3><i class="fas fa-skull"></i> Metasploit</h3><p>Penetration testing framework</p><a href="https://www.metasploit.com/" target="_blank"><i class="fas fa-external-link-alt"></i> Official Site</a></div>
-                    <div class="tool-card"><h3><i class="fas fa-database"></i> Nmap</h3><p>Network discovery and security scanning</p><a href="https://nmap.org/" target="_blank"><i class="fas fa-external-link-alt"></i> Official Site</a></div>
-                    <div class="tool-card"><h3><i class="fab fa-osi"></i> Ghidra</h3><p>Reverse engineering framework</p><a href="https://ghidra-sre.org/" target="_blank"><i class="fas fa-external-link-alt"></i> Official Site</a></div>
-                    <div class="tool-card"><h3><i class="fas fa-chart-line"></i> Zeek</h3><p>Network security monitoring</p><a href="https://zeek.org/" target="_blank"><i class="fas fa-external-link-alt"></i> Official Site</a></div>
-                </div>
-
-                <h3><i class="fas fa-shield-alt"></i> OWASP Resources</h3>
-                <div class="owasp-tools-grid">
-                    <div class="owasp-tool"><h4>OWASP Top Ten</h4><p>Critical web application security risks</p><a href="https://owasp.org/www-project-top-ten/" target="_blank"><i class="fas fa-external-link-alt"></i> View Resource</a></div>
-                    <div class="owasp-tool"><h4>OWASP Testing Guide</h4><p>Comprehensive testing framework</p><a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank"><i class="fas fa-external-link-alt"></i> View Resource</a></div>
-                    <div class="owasp-tool"><h4>OWASP ZAP</h4><p>Web app security scanner</p><a href="https://www.zaproxy.org/" target="_blank"><i class="fas fa-external-link-alt"></i> View Resource</a></div>
-                    <div class="owasp-tool"><h4>OWASP Cheat Sheets</h4><p>Quick security references</p><a href="https://cheatsheetseries.owasp.org/" target="_blank"><i class="fas fa-external-link-alt"></i> View Resource</a></div>
-                </div>
-            </section>
-
-            <section id="quiz" class="section">
-                <h2><i class="fas fa-question-circle"></i> Security Challenge</h2>
-                <div class="quiz-container">
-                    <div class="quiz-question">
-                        <h4>Question 1: What does Zero Trust security assume?</h4>
-                        <div class="quiz-options">
-                            <div class="quiz-option" data-correct="true">Never trust, always verify</div>
-                            <div class="quiz-option" data-correct="false">Trust internal network by default</div>
-                            <div class="quiz-option" data-correct="false">Only verify external traffic</div>
-                            <div class="quiz-option" data-correct="false">Trust all authenticated users</div>
-                        </div>
-                        <div class="quiz-feedback"></div>
-                    </div>
-                    <div class="quiz-question">
-                        <h4>Question 2: Which framework uses Tactics, Techniques, and Procedures (TTPs)?</h4>
-                        <div class="quiz-options">
-                            <div class="quiz-option" data-correct="false">ISO 27001</div>
-                            <div class="quiz-option" data-correct="true">MITRE ATT&CK</div>
-                            <div class="quiz-option" data-correct="false">GDPR</div>
-                            <div class="quiz-option" data-correct="false">PCI-DSS</div>
-                        </div>
-                        <div class="quiz-feedback"></div>
-                    </div>
-                    <div class="quiz-question">
-                        <h4>Question 3: What is the primary purpose of a SIEM?</h4>
-                        <div class="quiz-options">
-                            <div class="quiz-option" data-correct="false">Block network traffic</div>
-                            <div class="quiz-option" data-correct="true">Aggregate and analyze security logs</div>
-                            <div class="quiz-option" data-correct="false">Encrypt data at rest</div>
-                            <div class="quiz-option" data-correct="false">Manage user passwords</div>
-                        </div>
-                        <div class="quiz-feedback"></div>
-                    </div>
-                    <div class="quiz-question">
-                        <h4>Question 4: Which phase follows "Detection & Analysis" in incident response?</h4>
-                        <div class="quiz-options">
-                            <div class="quiz-option" data-correct="false">Recovery</div>
-                            <div class="quiz-option" data-correct="false">Post-Incident</div>
-                            <div class="quiz-option" data-correct="true">Containment</div>
-                            <div class="quiz-option" data-correct="false">Preparation</div>
-                        </div>
-                        <div class="quiz-feedback"></div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="contact" class="section">
-                <h2><i class="fas fa-envelope"></i> Secure Channel</h2>
-                <div class="contact-info">
-                    <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:contact@rocybersolutions.com">contact@rocybersolutions.com</a></div>
-                    <div class="contact-item"><i class="fab fa-linkedin"></i><a href="#">linkedin.com/in/rocyber-solutions</a></div>
-               
-                </div>
-                <div class="terminal">
-                    <div class="terminal-header"><div class="terminal-btn red"></div><div class="terminal-btn yellow"></div><div class="terminal-btn green"></div></div>
-                    <div id="terminal-output" class="terminal-body"><div class="terminal-line">Welcome to ROCyber Terminal v2.0</div><div class="terminal-line">Type 'help' for available commands</div><div class="terminal-line">------------------------------------------------</div></div>
-                    <div class="terminal-input"><span class="terminal-prompt">$</span><input type="text" id="terminal-command" placeholder="Enter command..." autocomplete="off"></div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-column"><h3>ROCyber Solutions</h3><p>Securing the digital frontier with cutting-edge cybersecurity solutions.</p></div>
-            <div class="footer-column"><h3>Quick Links</h3><ul class="footer-links"><li><a href="#about"><i class="fas fa-chevron-right"></i> Profile</a></li><li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li><li><a href="#certifications"><i class="fas fa-chevron-right"></i> Certifications</a></li></ul></div>
-            <div class="footer-column"><h3>Resources</h3><ul class="footer-links"><li><a href="https://owasp.org/www-project-top-ten/" target="_blank"><i class="fas fa-chevron-right"></i> OWASP Top 10</a></li><li><a href="https://attack.mitre.org/" target="_blank"><i class="fas fa-chevron-right"></i> MITRE ATT&CK</a></li><li><a href="https://www.nist.gov/cyberframework" target="_blank"><i class="fas fa-chevron-right"></i> NIST CSF</a></li></ul></div>
-        </div>
-        <div class="footer-bottom"><div class="footer-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-github"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div><div class="copyright">© 2024 ROCyber Solutions | Securing Tomorrow, Today</div></div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>ROCyber Solutions | Cybersecurity Expert</title>
-    <!-- Particles.js library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -281,59 +33,68 @@
     <div class="cyber-gradient"></div>
     <div id="particles-js"></div>
 
-    <!-- Floating Elements -->
     <div class="floating-element"></div>
     <div class="floating-element"></div>
     <div class="floating-element"></div>
     <div class="floating-element"></div>
 
-    <!-- Pip-Boy Inventory Trigger -->
-    <div class="pip-boy-trigger">
+    <!-- Pip-Boy Trigger -->
+    <div class="pip-boy-trigger" id="pipBoyTrigger">
         <div class="trigger-triangle"></div>
     </div>
 
     <!-- Pip-Boy Inventory Panel -->
-    <div class="pip-boy-inventory">
+    <div class="pip-boy-inventory" id="pipBoyInventory">
         <div class="inventory-header">
             <div class="inventory-title">PIP-BOY 3000 Mk IV</div>
+            <div class="inventory-close" id="pipBoyClose"><i class="fas fa-times"></i></div>
         </div>
+        
+        <!-- Music Player -->
+        <div class="music-player">
+            <h4><i class="fas fa-headphones"></i> Pip-Boy Radio</h4>
+            <audio id="audio-player" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+            <div class="player-controls">
+                <button id="play-btn"><i class="fas fa-play"></i></button>
+                <button id="pause-btn" style="display:none;"><i class="fas fa-pause"></i></button>
+                <button id="stop-btn"><i class="fas fa-stop"></i></button>
+            </div>
+        </div>
+        
         <div class="inventory-tabs">
             <div class="inventory-tab active" data-tab="items">ITEMS</div>
             <div class="inventory-tab" data-tab="data">DATA</div>
             <div class="inventory-tab" data-tab="stats">STATS</div>
+            <div class="inventory-tab" data-tab="terminal">TERMINAL</div>
         </div>
+        
         <div id="items" class="inventory-content active">
-            <div class="inventory-item">
-                <div class="inventory-item-title">🔐 Firewall+ v2.0</div>
-                <div class="inventory-item-desc">Enterprise-grade protection system</div>
-            </div>
-            <div class="inventory-item">
-                <div class="inventory-item-title">🛡️ IDS/IPS Module</div>
-                <div class="inventory-item-desc">Threat detection & prevention</div>
-            </div>
-            <div class="inventory-item">
-                <div class="inventory-item-title">📊 SIEM Dashboard</div>
-                <div class="inventory-item-desc">Real-time security monitoring</div>
-            </div>
+            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-shield-alt"></i> Firewall+ v2.0</div><div class="inventory-item-desc">Enterprise-grade protection system</div></div>
+            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-crosshairs"></i> IDS/IPS Module</div><div class="inventory-item-desc">Threat detection & prevention</div></div>
+            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-chart-line"></i> SIEM Dashboard</div><div class="inventory-item-desc">Real-time security monitoring</div></div>
         </div>
+        
         <div id="data" class="inventory-content">
-            <div class="inventory-item">
-                <div class="inventory-item-title">📁 Threat Intelligence</div>
-                <div class="inventory-item-desc">Latest CVE database - Updated daily</div>
-            </div>
-            <div class="inventory-item">
-                <div class="inventory-item-title">📈 Attack Patterns</div>
-                <div class="inventory-item-desc">MITRE ATT&CK Framework v13</div>
-            </div>
+            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-database"></i> Threat Intelligence</div><div class="inventory-item-desc">Latest CVE database - Updated daily</div></div>
+            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-chart-pie"></i> Attack Patterns</div><div class="inventory-item-desc">MITRE ATT&CK Framework v13</div></div>
         </div>
+        
         <div id="stats" class="inventory-content">
-            <div class="inventory-item">
-                <div class="inventory-item-title">⚡ Security Score: 98%</div>
-                <div class="inventory-item-desc">Protection level: Critical</div>
-            </div>
-            <div class="inventory-item">
-                <div class="inventory-item-title">🎯 Certifications: 7</div>
-                <div class="inventory-item-desc">Active & Verified</div>
+            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-charging-station"></i> Security Score: 98%</div><div class="inventory-item-desc">Protection level: Critical</div></div>
+            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-certificate"></i> Certifications: 7</div><div class="inventory-item-desc">Active & Verified</div></div>
+        </div>
+        
+        <div id="terminal" class="inventory-content">
+            <div class="pip-terminal">
+                <div class="pip-terminal-output" id="pipTerminalOutput">
+                    <div class="terminal-line">> PIP-BOY OS v2.0.1</div>
+                    <div class="terminal-line">> Type 'help' for commands</div>
+                    <div class="terminal-line">> ---</div>
+                </div>
+                <div class="pip-terminal-input">
+                    <span class="terminal-prompt">$</span>
+                    <input type="text" id="pipTerminalCommand" placeholder="Enter command...">
+                </div>
             </div>
         </div>
     </div>
@@ -366,9 +127,9 @@
                 <h2><i class="fas fa-user-secret"></i> Profile</h2>
                 <p>Roman Orłowski - Cybersecurity expert with over 15 years of experience in IT sector, NOC, SOC, EOC environments. Founder of ROCyber Solutions, specializing in Zero Trust Architecture, SIEM implementation, and compliance frameworks (ISO 27001, GDPR, NIST, DORA).</p>
                 <div class="qualifications-grid">
-                    <div class="qualification-card"><span class="qual-icon">🎓</span><h4>Education</h4><p>MSc in Cybersecurity, Warsaw University of Technology<br>CEH Certified Ethical Hacker<br>Azure Security Engineer Expert</p></div>
-                    <div class="qualification-card"><span class="qual-icon">🏆</span><h4>Achievements</h4><p>Top 1% TryHackMe<br>Bug Bounty Hunter - Google, Microsoft<br>Speaker at CyberSec Conference 2024</p></div>
-                    <div class="qualification-card"><span class="qual-icon">🌍</span><h4>Languages</h4><p>English (Fluent)<br>Polish (Native)<br>German (Intermediate)</p></div>
+                    <div class="qualification-card"><i class="fas fa-graduation-cap qual-icon"></i><h4>Education</h4><p>MSc in Cybersecurity, Warsaw University of Technology<br>CEH Certified Ethical Hacker<br>Azure Security Engineer Expert</p></div>
+                    <div class="qualification-card"><i class="fas fa-trophy qual-icon"></i><h4>Achievements</h4><p>Top 1% TryHackMe<br>Bug Bounty Hunter - Google, Microsoft<br>Speaker at CyberSec Conference 2024</p></div>
+                    <div class="qualification-card"><i class="fas fa-language qual-icon"></i><h4>Languages</h4><p>English (Fluent)<br>Polish (Native)<br>German (Intermediate)</p></div>
                 </div>
             </section>
 
@@ -377,31 +138,11 @@
                 <h2><i class="fas fa-code"></i> Technical Arsenal</h2>
                 <div class="skills-grid">
                     <div class="skill-card"><h3><i class="fas fa-cloud"></i> Cloud Security</h3><p>Azure Security Center, AWS Shield, GCP Security Command Center, Container Security (K8s), Zero Trust Architecture</p></div>
-                    <div class="skill-card"><h3><i class="fas fa-shield-hart"></i> Threat Detection</h3><p>SIEM (Splunk, QRadar, Sentinel), IDS/IPS, EDR, Threat Hunting, MITRE ATT&CK</p></div>
+                    <div class="skill-card"><h3><i class="fas fa-shield-alt"></i> Threat Detection</h3><p>SIEM (Splunk, QRadar, Sentinel), IDS/IPS, EDR, Threat Hunting, MITRE ATT&CK</p></div>
                     <div class="skill-card"><h3><i class="fas fa-network-wired"></i> Network Security</h3><p>Firewall (Palo Alto, Fortinet), VPN, NAC, Zero Trust, Micro-segmentation</p></div>
                     <div class="skill-card"><h3><i class="fas fa-lock"></i> Compliance & Risk</h3><p>ISO 27001, GDPR, NIST CSF, PCI-DSS, SOX, DORA, Risk Assessment, Auditing</p></div>
                     <div class="skill-card"><h3><i class="fas fa-terminal"></i> Offensive Security</h3><p>Penetration Testing, Red Teaming, Social Engineering, Exploit Development, Reverse Engineering</p></div>
                     <div class="skill-card"><h3><i class="fas fa-chart-line"></i> IR & Forensics</h3><p>Incident Response, Malware Analysis, Digital Forensics, Log Analysis, Chain of Custody</p></div>
-                </div>
-
-                <h3><i class="fas fa-cubes"></i> Security Frameworks</h3>
-                <div class="frameworks-grid">
-                    <div class="framework-card"><h3><i class="fas fa-chart-simple"></i> NIST CSF</h3><p>Complete implementation of Identify, Protect, Detect, Respond, Recover functions</p><ul><li>Risk Assessment</li><li>Access Control</li><li>Continuous Monitoring</li></ul></div>
-                    <div class="framework-card"><h3><i class="fas fa-balance-scale"></i> ISO 27001</h3><p>ISMS implementation and certification management</p><ul><li>Annex A Controls</li><li>Risk Treatment</li><li>Internal Audits</li></ul></div>
-                    <div class="framework-card"><h3><i class="fas fa-database"></i> MITRE ATT&CK</h3><p>Threat modeling and adversary emulation</p><ul><li>Tactics & Techniques</li><li>Detection Analytics</li><li>Purple Teaming</li></ul></div>
-                    <div class="framework-card"><h3><i class="fas fa-shield"></i> Zero Trust</h3><p>Never trust, always verify architecture</p><ul><li>Micro-segmentation</li><li>Least Privilege</li><li>Continuous Auth</li></ul></div>
-                    <div class="framework-card"><h3><i class="fas fa-chart-line"></i> DORA</h3><p>Digital Operational Resilience compliance</p><ul><li>ICT Risk Management</li><li>Incident Reporting</li><li>Resilience Testing</li></ul></div>
-                    <div class="framework-card"><h3><i class="fas fa-lock"></i> GDPR</h3><p>Data protection and privacy framework</p><ul><li>Data Mapping</li><li>DPIA</li><li>Breach Notification</li></ul></div>
-                </div>
-
-                <h3><i class="fas fa-eye"></i> Monitoring & SIEM Tools</h3>
-                <div class="monitoring-tools-grid">
-                    <div class="monitoring-tool"><h4>Splunk Enterprise Security</h4><p>Advanced correlation searches, risk scoring, and threat intelligence integration</p><span class="tool-category">SIEM</span><span class="tool-category">Enterprise</span></div>
-                    <div class="monitoring-tool"><h4>Microsoft Sentinel</h4><p>Cloud-native SIEM with AI-powered threat detection and automated response</p><span class="tool-category">Cloud SIEM</span><span class="tool-category">Azure</span></div>
-                    <div class="monitoring-tool"><h4>IBM QRadar</h4><p>Offense management, network activity monitoring, and forensic analysis</p><span class="tool-category">SIEM</span><span class="tool-category">Enterprise</span></div>
-                    <div class="monitoring-tool"><h4>Wazuh</h4><p>Open-source XDR with file integrity monitoring and vulnerability detection</p><span class="tool-category">Open Source</span><span class="tool-category">XDR</span></div>
-                    <div class="monitoring-tool"><h4>Elastic Stack (ELK)</h4><p>Log aggregation, analysis, and visualization with security dashboards</p><span class="tool-category">Log Management</span><span class="tool-category">Open Source</span></div>
-                    <div class="monitoring-tool"><h4>Prometheus + Grafana</h4><p>Infrastructure monitoring and alerting for cloud-native environments</p><span class="tool-category">Monitoring</span><span class="tool-category">K8s</span></div>
                 </div>
             </section>
 
@@ -409,12 +150,12 @@
             <section id="certifications" class="section">
                 <h2><i class="fas fa-certificate"></i> Certifications</h2>
                 <div class="certifications-grid">
-                    <div class="cert-card"><h3>CEH</h3><p>Certified Ethical Hacker v12</p><a href="#">Verify</a></div>
-                    <div class="cert-card"><h3>Azure Security Engineer</h3><p>Microsoft Certified: AZ-500</p><a href="#">Verify</a></div>
-                    <div class="cert-card"><h3>ISO 27001 Lead Implementer</h3><p>PECB Certified</p><a href="#">Verify</a></div>
-                    <div class="cert-card"><h3>Splunk Core Power User</h3><p>Splunk Certified</p><a href="#">Verify</a></div>
-                    <div class="cert-card"><h3>CompTIA Security+</h3><p>SY0-601 Certified</p><a href="#">Verify</a></div>
-                    <div class="cert-card"><h3>Certified Cloud Security Professional</h3><p>(ISC)² CCSP</p><a href="#">Verify</a></div>
+                    <div class="cert-card"><h3>CEH</h3><p>Certified Ethical Hacker v12</p><a href="#"><i class="fas fa-check-circle"></i> Verify</a></div>
+                    <div class="cert-card"><h3>Azure Security Engineer</h3><p>Microsoft Certified: AZ-500</p><a href="#"><i class="fas fa-check-circle"></i> Verify</a></div>
+                    <div class="cert-card"><h3>ISO 27001 Lead Implementer</h3><p>PECB Certified</p><a href="#"><i class="fas fa-check-circle"></i> Verify</a></div>
+                    <div class="cert-card"><h3>Splunk Core Power User</h3><p>Splunk Certified</p><a href="#"><i class="fas fa-check-circle"></i> Verify</a></div>
+                    <div class="cert-card"><h3>CompTIA Security+</h3><p>SY0-601 Certified</p><a href="#"><i class="fas fa-check-circle"></i> Verify</a></div>
+                    <div class="cert-card"><h3>CCSP</h3><p>(ISC)² Certified</p><a href="#"><i class="fas fa-check-circle"></i> Verify</a></div>
                 </div>
             </section>
 
@@ -433,24 +174,14 @@
             <section id="tools" class="section">
                 <h2><i class="fas fa-toolbox"></i> Security Arsenal</h2>
                 <div class="tools-grid">
-                    <div class="tool-card"><h3><i class="fab fa-wireshark"></i> Wireshark</h3><p>Network protocol analyzer for deep packet inspection</p><a href="https://www.wireshark.org/" target="_blank">Official Site</a></div>
-                    <div class="tool-card"><h3><i class="fas fa-bug"></i> Burp Suite</h3><p>Web vulnerability scanner and proxy</p><a href="https://portswigger.net/burp" target="_blank">Official Site</a></div>
-                    <div class="tool-card"><h3><i class="fas fa-skull"></i> Metasploit</h3><p>Penetration testing framework</p><a href="https://www.metasploit.com/" target="_blank">Official Site</a></div>
-                    <div class="tool-card"><h3><i class="fas fa-database"></i> Nmap</h3><p>Network discovery and security scanning</p><a href="https://nmap.org/" target="_blank">Official Site</a></div>
-                    <div class="tool-card"><h3><i class="fab fa-osi"></i> Ghidra</h3><p>Reverse engineering framework</p><a href="https://ghidra-sre.org/" target="_blank">Official Site</a></div>
-                    <div class="tool-card"><h3><i class="fas fa-chart-line"></i> Zeek</h3><p>Network security monitoring</p><a href="https://zeek.org/" target="_blank">Official Site</a></div>
-                </div>
-
-                <h3><i class="fas fa-shield-hart"></i> OWASP Resources</h3>
-                <div class="owasp-tools-grid">
-                    <div class="owasp-tool"><h4>OWASP Top Ten</h4><p>Critical web application security risks</p><a href="https://owasp.org/www-project-top-ten/" target="_blank">View Resource</a></div>
-                    <div class="owasp-tool"><h4>OWASP Testing Guide</h4><p>Comprehensive testing framework</p><a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank">View Resource</a></div>
-                    <div class="owasp-tool"><h4>OWASP ZAP</h4><p>Web app security scanner</p><a href="https://www.zaproxy.org/" target="_blank">View Resource</a></div>
-                    <div class="owasp-tool"><h4>OWASP Cheat Sheets</h4><p>Quick security references</p><a href="https://cheatsheetseries.owasp.org/" target="_blank">View Resource</a></div>
+                    <div class="tool-card"><h3><i class="fab fa-wireshark"></i> Wireshark</h3><p>Network protocol analyzer</p><a href="https://www.wireshark.org/" target="_blank"><i class="fas fa-external-link-alt"></i> Official Site</a></div>
+                    <div class="tool-card"><h3><i class="fas fa-bug"></i> Burp Suite</h3><p>Web vulnerability scanner</p><a href="https://portswigger.net/burp" target="_blank"><i class="fas fa-external-link-alt"></i> Official Site</a></div>
+                    <div class="tool-card"><h3><i class="fas fa-skull"></i> Metasploit</h3><p>Penetration testing framework</p><a href="https://www.metasploit.com/" target="_blank"><i class="fas fa-external-link-alt"></i> Official Site</a></div>
+                    <div class="tool-card"><h3><i class="fas fa-database"></i> Nmap</h3><p>Network discovery and scanning</p><a href="https://nmap.org/" target="_blank"><i class="fas fa-external-link-alt"></i> Official Site</a></div>
                 </div>
             </section>
 
-            <!-- Quiz Section -->
+            <!-- Quiz Section - Public -->
             <section id="quiz" class="section">
                 <h2><i class="fas fa-question-circle"></i> Security Challenge</h2>
                 <div class="quiz-container">
@@ -465,32 +196,12 @@
                         <div class="quiz-feedback"></div>
                     </div>
                     <div class="quiz-question">
-                        <h4>Question 2: Which framework uses Tactics, Techniques, and Procedures (TTPs)?</h4>
+                        <h4>Question 2: Which framework uses TTPs?</h4>
                         <div class="quiz-options">
                             <div class="quiz-option" data-correct="false">ISO 27001</div>
                             <div class="quiz-option" data-correct="true">MITRE ATT&CK</div>
                             <div class="quiz-option" data-correct="false">GDPR</div>
                             <div class="quiz-option" data-correct="false">PCI-DSS</div>
-                        </div>
-                        <div class="quiz-feedback"></div>
-                    </div>
-                    <div class="quiz-question">
-                        <h4>Question 3: What is the primary purpose of a SIEM?</h4>
-                        <div class="quiz-options">
-                            <div class="quiz-option" data-correct="false">Block network traffic</div>
-                            <div class="quiz-option" data-correct="true">Aggregate and analyze security logs</div>
-                            <div class="quiz-option" data-correct="false">Encrypt data at rest</div>
-                            <div class="quiz-option" data-correct="false">Manage user passwords</div>
-                        </div>
-                        <div class="quiz-feedback"></div>
-                    </div>
-                    <div class="quiz-question">
-                        <h4>Question 4: Which phase follows "Detection & Analysis" in incident response?</h4>
-                        <div class="quiz-options">
-                            <div class="quiz-option" data-correct="false">Recovery</div>
-                            <div class="quiz-option" data-correct="false">Post-Incident</div>
-                            <div class="quiz-option" data-correct="true">Containment</div>
-                            <div class="quiz-option" data-correct="false">Preparation</div>
                         </div>
                         <div class="quiz-feedback"></div>
                     </div>
@@ -506,22 +217,76 @@
                     <div class="contact-item"><i class="fab fa-github"></i><a href="#">github.com/rocyber</a></div>
                     <div class="contact-item"><i class="fas fa-lock"></i><a href="#">PGP Key Available</a></div>
                 </div>
-                <div class="terminal">
-                    <div class="terminal-header"><div class="terminal-btn red"></div><div class="terminal-btn yellow"></div><div class="terminal-btn green"></div></div>
-                    <div id="terminal-output" class="terminal-body"><div class="terminal-line">Welcome to ROCyber Terminal v2.0</div><div class="terminal-line">Type 'help' for available commands</div><div class="terminal-line">------------------------------------------------</div></div>
-                    <div class="terminal-input"><span class="terminal-prompt">$</span><input type="text" id="terminal-command" placeholder="Enter command..." autocomplete="off"></div>
-                </div>
             </section>
         </main>
+    </div>
+
+    <!-- HIDDEN RECRUITMENT SECTION - ONLY VISIBLE TO YOU (Admin) -->
+    <!-- Aby zobaczyć tę sekcję, naciśnij Ctrl+Shift+A (lub dotknij 3 razy logo) -->
+    <div id="recruitment-panel" class="recruitment-panel">
+        <div class="recruitment-header">
+            <h2><i class="fas fa-user-secret"></i> RECRUITMENT VERIFICATION PANEL</h2>
+            <button id="closeRecruitment"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="recruitment-content">
+            <div class="recruiter-questions">
+                <h3><i class="fas fa-question-circle"></i> Trick Questions - Verify Candidate Honesty</h3>
+                <p class="warning"><i class="fas fa-exclamation-triangle"></i> These answers are ONLY visible to you. Candidate will NOT see them.</p>
+                
+                <div class="question-item">
+                    <div class="question">Q1: "What is our company's core philosophy regarding client data?"</div>
+                    <div class="correct-answer">CORRECT ANSWER: "Client data is sacred - we never sell, share, or monetize any client information. Privacy by design is our foundation."</div>
+                    <div class="trick-note">TRICK: If candidate says "we share with partners" or "anonymized data is fine" - they are lying or didn't read our policy.</div>
+                </div>
+                
+                <div class="question-item">
+                    <div class="question">Q2: "How do we handle zero-day vulnerabilities found during audits?"</div>
+                    <div class="correct-answer">CORRECT ANSWER: "Immediate responsible disclosure to vendor, 24-hour internal containment, no public disclosure until patch is ready."</div>
+                    <div class="trick-note">TRICK: If candidate says "sell to highest bidder" or "keep secret for leverage" - immediate disqualification.</div>
+                </div>
+                
+                <div class="question-item">
+                    <div class="question">Q3: "What is our stance on offensive security vs defensive security?"</div>
+                    <div class="correct-answer">CORRECT ANSWER: "Defense first. Offensive only with written authorization and strictly for improving defenses. We never attack without permission."</div>
+                    <div class="trick-note">TRICK: If candidate brags about illegal hacking or shows "cowboy mentality" - red flag.</div>
+                </div>
+                
+                <div class="question-item">
+                    <div class="question">Q4: "How do we measure success in security implementations?"</div>
+                    <div class="correct-answer">CORRECT ANSWER: "Reduction in incident response time, compliance scores, client retention, and zero data breaches - not just technical metrics."</div>
+                    <div class="trick-note">TRICK: If candidate only talks about technical metrics without business impact - lacks business acumen.</div>
+                </div>
+                
+                <div class="question-item">
+                    <div class="question">Q5: "What would you do if a client asked you to hide a security incident?"</div>
+                    <div class="correct-answer">CORRECT ANSWER: "Refuse immediately, explain legal obligations, escalate internally. If pressured - resign and report to authorities."</div>
+                    <div class="trick-note">TRICK: If candidate says "client is always right" or shows flexibility on ethics - disqualify.</div>
+                </div>
+            </div>
+            
+            <div class="verification-code">
+                <h3><i class="fas fa-code"></i> Candidate Verification Code</h3>
+                <p>Ask candidate to type this code in terminal: <strong id="verificationCode">CYBER-2024-TRUST</strong></p>
+                <button id="regenerateCode"><i class="fas fa-sync-alt"></i> Generate New Code</button>
+            </div>
+        </div>
     </div>
 
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-column"><h3>ROCyber Solutions</h3><p>Securing the digital frontier with cutting-edge cybersecurity solutions.</p></div>
             <div class="footer-column"><h3>Quick Links</h3><ul class="footer-links"><li><a href="#about"><i class="fas fa-chevron-right"></i> Profile</a></li><li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li><li><a href="#certifications"><i class="fas fa-chevron-right"></i> Certifications</a></li></ul></div>
-            <div class="footer-column"><h3>Resources</h3><ul class="footer-links"><li><a href="https://owasp.org/www-project-top-ten/" target="_blank"><i class="fas fa-chevron-right"></i> OWASP Top 10</a></li><li><a href="https://attack.mitre.org/" target="_blank"><i class="fas fa-chevron-right"></i> MITRE ATT&CK</a></li><li><a href="https://www.nist.gov/cyberframework" target="_blank"><i class="fas fa-chevron-right"></i> NIST CSF</a></li></ul></div>
+            <div class="footer-column"><h3>Resources</h3><ul class="footer-links"><li><a href="https://owasp.org/www-project-top-ten/" target="_blank"><i class="fas fa-chevron-right"></i> OWASP Top 10</a></li><li><a href="https://attack.mitre.org/" target="_blank"><i class="fas fa-chevron-right"></i> MITRE ATT&CK</a></li></ul></div>
         </div>
-        <div class="footer-bottom"><div class="footer-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-github"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div><div class="copyright">© 2024 ROCyber Solutions | Securing Tomorrow, Today</div></div>
+        <div class="footer-bottom">
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="copyright">© 2024 ROCyber Solutions | Securing Tomorrow, Today</div>
+        </div>
     </footer>
 
     <script src="script.js"></script>
