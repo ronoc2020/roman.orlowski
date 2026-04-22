@@ -50,14 +50,28 @@
             <div class="inventory-close" id="pipBoyClose"><i class="fas fa-times"></i></div>
         </div>
         
-        <!-- Music Player -->
+        <!-- YouTube Music Player -->
         <div class="music-player">
-            <h4><i class="fas fa-headphones"></i> Pip-Boy Radio</h4>
-            <audio id="audio-player" src="https://www.youtube.com/watch?v=VwXHT8HwgIs&t=1803s"></audio>
+            <h4><i class="fab fa-youtube"></i> PIP-BOY RADIO</h4>
+            <div id="yt-player"></div>
             <div class="player-controls">
-                <button id="play-btn"><i class="fas fa-play"></i></button>
-                <button id="pause-btn" style="display:none;"><i class="fas fa-pause"></i></button>
-                <button id="stop-btn"><i class="fas fa-stop"></i></button>
+                <button id="yt-play-btn"><i class="fas fa-play"></i></button>
+                <button id="yt-pause-btn" style="display:none;"><i class="fas fa-pause"></i></button>
+                <button id="yt-stop-btn"><i class="fas fa-stop"></i></button>
+                <button id="yt-mute-btn"><i class="fas fa-volume-up"></i></button>
+            </div>
+            <div class="track-info" id="track-info">
+                <i class="fas fa-music"></i> <span id="current-track">ROCyber Security Radio</span>
+            </div>
+            <div class="yt-url-input">
+                <input type="text" id="yt-url" placeholder="Wklej link z YouTube (lub ID filmu)" value="dQw4w9WgXcQ">
+                <button id="load-yt-btn"><i class="fas fa-sync-alt"></i> Załaduj</button>
+            </div>
+            <div class="playlist-buttons">
+                <button class="playlist-preset" data-id="dQw4w9WgXcQ">🎵 Track 1</button>
+                <button class="playlist-preset" data-id="JGwWNGJdvx8">🎵 Track 2</button>
+                <button class="playlist-preset" data-id="L_jWHffIx5E">🎵 Track 3</button>
+                <button class="playlist-preset" data-id="YOUR_VIDEO_ID_HERE">📀 TWÓJ UTWÓR</button>
             </div>
         </div>
         
@@ -181,7 +195,7 @@
                 </div>
             </section>
 
-            <!-- Quiz Section - Public -->
+            <!-- Quiz Section -->
             <section id="quiz" class="section">
                 <h2><i class="fas fa-question-circle"></i> Security Challenge</h2>
                 <div class="quiz-container">
@@ -205,6 +219,16 @@
                         </div>
                         <div class="quiz-feedback"></div>
                     </div>
+                    <div class="quiz-question">
+                        <h4>Question 3: What is the primary purpose of a SIEM?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" data-correct="false">Block network traffic</div>
+                            <div class="quiz-option" data-correct="true">Aggregate and analyze security logs</div>
+                            <div class="quiz-option" data-correct="false">Encrypt data at rest</div>
+                            <div class="quiz-option" data-correct="false">Manage user passwords</div>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
                 </div>
             </section>
 
@@ -217,12 +241,16 @@
                     <div class="contact-item"><i class="fab fa-github"></i><a href="#">github.com/rocyber</a></div>
                     <div class="contact-item"><i class="fas fa-lock"></i><a href="#">PGP Key Available</a></div>
                 </div>
+                <div class="terminal">
+                    <div class="terminal-header"><div class="terminal-btn red"></div><div class="terminal-btn yellow"></div><div class="terminal-btn green"></div></div>
+                    <div id="terminal-output" class="terminal-body"><div class="terminal-line">Welcome to ROCyber Terminal v2.0</div><div class="terminal-line">Type 'help' for available commands</div><div class="terminal-line">------------------------------------------------</div></div>
+                    <div class="terminal-input"><span class="terminal-prompt">$</span><input type="text" id="terminal-command" placeholder="Enter command..." autocomplete="off"></div>
+                </div>
             </section>
         </main>
     </div>
 
-    <!-- HIDDEN RECRUITMENT SECTION - ONLY VISIBLE TO YOU (Admin) -->
-    <!-- Aby zobaczyć tę sekcję, naciśnij Ctrl+Shift+A (lub dotknij 3 razy logo) -->
+    <!-- HIDDEN RECRUITMENT PANEL - Ctrl+Shift+A -->
     <div id="recruitment-panel" class="recruitment-panel">
         <div class="recruitment-header">
             <h2><i class="fas fa-user-secret"></i> RECRUITMENT VERIFICATION PANEL</h2>
@@ -236,37 +264,37 @@
                 <div class="question-item">
                     <div class="question">Q1: "What is our company's core philosophy regarding client data?"</div>
                     <div class="correct-answer">CORRECT ANSWER: "Client data is sacred - we never sell, share, or monetize any client information. Privacy by design is our foundation."</div>
-                    <div class="trick-note">TRICK: If candidate says "we share with partners" or "anonymized data is fine" - they are lying or didn't read our policy.</div>
+                    <div class="trick-note">TRICK: If candidate says "we share with partners" or "anonymized data is fine" - they are lying.</div>
                 </div>
                 
                 <div class="question-item">
                     <div class="question">Q2: "How do we handle zero-day vulnerabilities found during audits?"</div>
                     <div class="correct-answer">CORRECT ANSWER: "Immediate responsible disclosure to vendor, 24-hour internal containment, no public disclosure until patch is ready."</div>
-                    <div class="trick-note">TRICK: If candidate says "sell to highest bidder" or "keep secret for leverage" - immediate disqualification.</div>
+                    <div class="trick-note">TRICK: If candidate says "sell to highest bidder" - immediate disqualification.</div>
                 </div>
                 
                 <div class="question-item">
                     <div class="question">Q3: "What is our stance on offensive security vs defensive security?"</div>
-                    <div class="correct-answer">CORRECT ANSWER: "Defense first. Offensive only with written authorization and strictly for improving defenses. We never attack without permission."</div>
-                    <div class="trick-note">TRICK: If candidate brags about illegal hacking or shows "cowboy mentality" - red flag.</div>
+                    <div class="correct-answer">CORRECT ANSWER: "Defense first. Offensive only with written authorization and strictly for improving defenses."</div>
+                    <div class="trick-note">TRICK: If candidate brags about illegal hacking - red flag.</div>
                 </div>
                 
                 <div class="question-item">
                     <div class="question">Q4: "How do we measure success in security implementations?"</div>
-                    <div class="correct-answer">CORRECT ANSWER: "Reduction in incident response time, compliance scores, client retention, and zero data breaches - not just technical metrics."</div>
-                    <div class="trick-note">TRICK: If candidate only talks about technical metrics without business impact - lacks business acumen.</div>
+                    <div class="correct-answer">CORRECT ANSWER: "Reduction in incident response time, compliance scores, client retention, and zero data breaches."</div>
+                    <div class="trick-note">TRICK: If candidate only talks about technical metrics - lacks business acumen.</div>
                 </div>
                 
                 <div class="question-item">
                     <div class="question">Q5: "What would you do if a client asked you to hide a security incident?"</div>
-                    <div class="correct-answer">CORRECT ANSWER: "Refuse immediately, explain legal obligations, escalate internally. If pressured - resign and report to authorities."</div>
-                    <div class="trick-note">TRICK: If candidate says "client is always right" or shows flexibility on ethics - disqualify.</div>
+                    <div class="correct-answer">CORRECT ANSWER: "Refuse immediately, explain legal obligations, escalate internally. If pressured - resign and report."</div>
+                    <div class="trick-note">TRICK: If candidate says "client is always right" - disqualify.</div>
                 </div>
             </div>
             
             <div class="verification-code">
                 <h3><i class="fas fa-code"></i> Candidate Verification Code</h3>
-                <p>Ask candidate to type this code in terminal: <strong id="verificationCode">CYBER-2024-TRUST</strong></p>
+                <p>Ask candidate to type this code in Pip-Boy terminal: <strong id="verificationCode">CYBER-2024-TRUST</strong></p>
                 <button id="regenerateCode"><i class="fas fa-sync-alt"></i> Generate New Code</button>
             </div>
         </div>
