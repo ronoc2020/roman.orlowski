@@ -50,90 +50,105 @@
             <div class="inventory-close" id="pipBoyClose"><i class="fas fa-times"></i></div>
         </div>
         
-        <!-- YouTube Music Player -->
-        <div class="music-player">
-            <h4><i class="fab fa-youtube"></i> PIP-BOY RADIO</h4>
-            <div id="yt-player"></div>
-            <div class="player-controls">
-                <button id="yt-play-btn"><i class="fas fa-play"></i></button>
-                <button id="yt-pause-btn" style="display:none;"><i class="fas fa-pause"></i></button>
-                <button id="yt-stop-btn"><i class="fas fa-stop"></i></button>
-                <button id="yt-mute-btn"><i class="fas fa-volume-up"></i></button>
-            </div>
-            <div class="track-info" id="track-info">
-                <i class="fas fa-music"></i> <span id="current-track">ROCyber Security Radio</span>
-            </div>
-            <div class="yt-url-input">
-                <input type="text" id="yt-url" placeholder="Wklej link z YouTube (lub ID filmu)" value="dQw4w9WgXcQ">
-                <button id="load-yt-btn"><i class="fas fa-sync-alt"></i> Załaduj</button>
-            </div>
-            <div class="playlist-buttons">
-                <button class="playlist-preset" data-id="dQw4w9WgXcQ">🎵 Track 1</button>
-                <button class="playlist-preset" data-id="JGwWNGJdvx8">🎵 Track 2</button>
-                <button class="playlist-preset" data-id="L_jWHffIx5E">🎵 Track 3</button>
-                <button class="playlist-preset" data-id="YOUR_VIDEO_ID_HERE">📀 TWÓJ UTWÓR</button>
-            </div>
+     <!-- YouTube Music Player - BEZ REKLAM -->
+<div class="music-player">
+    <h4><i class="fab fa-youtube"></i> PIP-BOY RADIO</h4>
+    
+    <!-- Alternatywny player YouTube (bez reklam) -->
+    <div id="yt-player-container">
+        <iframe id="yt-iframe" 
+            width="100%" 
+            height="180" 
+            src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=0&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&cc_load_policy=0&fs=0&loop=0&playlist=dQw4w9WgXcQ"
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    
+    <div class="player-controls">
+        <button id="yt-play-btn"><i class="fas fa-play"></i></button>
+        <button id="yt-pause-btn" style="display:none;"><i class="fas fa-pause"></i></button>
+        <button id="yt-stop-btn"><i class="fas fa-stop"></i></button>
+        <button id="yt-mute-btn"><i class="fas fa-volume-up"></i></button>
+    </div>
+    
+    <div class="track-info" id="track-info">
+        <i class="fas fa-music"></i> <span id="current-track">ROCyber Security Radio</span>
+    </div>
+    
+    <div class="yt-url-input">
+        <input type="text" id="yt-url" placeholder="Wklej link z YouTube (lub ID filmu)" value="dQw4w9WgXcQ">
+        <button id="load-yt-btn"><i class="fas fa-sync-alt"></i> Załaduj</button>
+    </div>
+    
+    <div class="playlist-buttons">
+        <button class="playlist-preset" data-id="dQw4w9WgXcQ">🎵 Track 1</button>
+        <button class="playlist-preset" data-id="JGwWNGJdvx8">🎵 Track 2</button>
+        <button class="playlist-preset" data-id="L_jWHffIx5E">🎵 Track 3</button>
+        <button class="playlist-preset" data-id="YOUR_VIDEO_ID_HERE">📀 TWÓJ UTWÓR</button>
+    </div>
+</div>
+
+<div class="inventory-tabs">
+    <div class="inventory-tab active" data-tab="items">ITEMS</div>
+    <div class="inventory-tab" data-tab="data">DATA</div>
+    <div class="inventory-tab" data-tab="stats">STATS</div>
+    <div class="inventory-tab" data-tab="terminal">TERMINAL</div>
+</div>
+
+<div id="items" class="inventory-content active">
+    <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-shield-alt"></i> Firewall+ v2.0</div><div class="inventory-item-desc">Enterprise-grade protection system</div></div>
+    <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-crosshairs"></i> IDS/IPS Module</div><div class="inventory-item-desc">Threat detection & prevention</div></div>
+    <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-chart-line"></i> SIEM Dashboard</div><div class="inventory-item-desc">Real-time security monitoring</div></div>
+</div>
+
+<div id="data" class="inventory-content">
+    <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-database"></i> Threat Intelligence</div><div class="inventory-item-desc">Latest CVE database - Updated daily</div></div>
+    <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-chart-pie"></i> Attack Patterns</div><div class="inventory-item-desc">MITRE ATT&CK Framework v13</div></div>
+</div>
+
+<div id="stats" class="inventory-content">
+    <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-charging-station"></i> Security Score: 98%</div><div class="inventory-item-desc">Protection level: Critical</div></div>
+    <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-certificate"></i> Certifications: 7</div><div class="inventory-item-desc">Active & Verified</div></div>
+</div>
+
+<div id="terminal" class="inventory-content">
+    <div class="pip-terminal">
+        <div class="pip-terminal-output" id="pipTerminalOutput">
+            <div class="terminal-line">> PIP-BOY OS v2.0.1</div>
+            <div class="terminal-line">> Type 'help' for commands</div>
+            <div class="terminal-line">> ---</div>
         </div>
-        
-        <div class="inventory-tabs">
-            <div class="inventory-tab active" data-tab="items">ITEMS</div>
-            <div class="inventory-tab" data-tab="data">DATA</div>
-            <div class="inventory-tab" data-tab="stats">STATS</div>
-            <div class="inventory-tab" data-tab="terminal">TERMINAL</div>
-        </div>
-        
-        <div id="items" class="inventory-content active">
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-shield-alt"></i> Firewall+ v2.0</div><div class="inventory-item-desc">Enterprise-grade protection system</div></div>
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-crosshairs"></i> IDS/IPS Module</div><div class="inventory-item-desc">Threat detection & prevention</div></div>
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-chart-line"></i> SIEM Dashboard</div><div class="inventory-item-desc">Real-time security monitoring</div></div>
-        </div>
-        
-        <div id="data" class="inventory-content">
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-database"></i> Threat Intelligence</div><div class="inventory-item-desc">Latest CVE database - Updated daily</div></div>
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-chart-pie"></i> Attack Patterns</div><div class="inventory-item-desc">MITRE ATT&CK Framework v13</div></div>
-        </div>
-        
-        <div id="stats" class="inventory-content">
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-charging-station"></i> Security Score: 98%</div><div class="inventory-item-desc">Protection level: Critical</div></div>
-            <div class="inventory-item"><div class="inventory-item-title"><i class="fas fa-certificate"></i> Certifications: 7</div><div class="inventory-item-desc">Active & Verified</div></div>
-        </div>
-        
-        <div id="terminal" class="inventory-content">
-            <div class="pip-terminal">
-                <div class="pip-terminal-output" id="pipTerminalOutput">
-                    <div class="terminal-line">> PIP-BOY OS v2.0.1</div>
-                    <div class="terminal-line">> Type 'help' for commands</div>
-                    <div class="terminal-line">> ---</div>
-                </div>
-                <div class="pip-terminal-input">
-                    <span class="terminal-prompt">$</span>
-                    <input type="text" id="pipTerminalCommand" placeholder="Enter command...">
-                </div>
-            </div>
+        <div class="pip-terminal-input">
+            <span class="terminal-prompt">$</span>
+            <input type="text" id="pipTerminalCommand" placeholder="Enter command...">
         </div>
     </div>
+</div>
+</div>
 
-    <div class="container">
-        <header class="header">
-            <h1>
-                <span class="letter">R</span><span class="letter">O</span><span class="letter">C</span><span class="letter">y</span><span class="letter">b</span><span class="letter">e</span><span class="letter">r</span>
-            </h1>
-            <div class="tagline">Cybersecurity Expert | Cloud Security Architect | Ethical Hacker</div>
-            <div class="status-badge">
-                <span class="status-dot pulse"></span>
-                <span>SECURITY CLEARANCE: LEVEL 5 // SYSTEM ONLINE</span>
-            </div>
-        </header>
+<div class="container">
+    <header class="header">
+        <h1>
+            <span class="letter">R</span><span class="letter">O</span><span class="letter">C</span><span class="letter">y</span><span class="letter">b</span><span class="letter">e</span><span class="letter">r</span>
+        </h1>
+        <div class="tagline">Cybersecurity Expert | Cloud Security Architect | Ethical Hacker</div>
+        <div class="status-badge">
+            <span class="status-dot pulse"></span>
+            <span>SECURITY CLEARANCE: LEVEL 5 // SYSTEM ONLINE</span>
+        </div>
+    </header>
 
-        <nav class="nav">
-            <div class="nav-item active" data-section="about"><i class="fas fa-user-secret"></i> ABOUT</div>
-            <div class="nav-item" data-section="skills"><i class="fas fa-code"></i> SKILLS</div>
-            <div class="nav-item" data-section="certifications"><i class="fas fa-certificate"></i> CERTS</div>
-            <div class="nav-item" data-section="experience"><i class="fas fa-timeline"></i> TIMELINE</div>
-            <div class="nav-item" data-section="tools"><i class="fas fa-toolbox"></i> TOOLS</div>
-            <div class="nav-item" data-section="quiz"><i class="fas fa-question-circle"></i> QUIZ</div>
-            <div class="nav-item" data-section="contact"><i class="fas fa-envelope"></i> CONTACT</div>
-        </nav>
+    <nav class="nav">
+        <div class="nav-item active" data-section="about"><i class="fas fa-user-secret"></i> ABOUT</div>
+        <div class="nav-item" data-section="skills"><i class="fas fa-code"></i> SKILLS</div>
+        <div class="nav-item" data-section="certifications"><i class="fas fa-certificate"></i> CERTS</div>
+        <div class="nav-item" data-section="experience"><i class="fas fa-timeline"></i> TIMELINE</div>
+        <div class="nav-item" data-section="tools"><i class="fas fa-toolbox"></i> TOOLS</div>
+        <div class="nav-item" data-section="quiz"><i class="fas fa-question-circle"></i> QUIZ</div>
+        <div class="nav-item" data-section="contact"><i class="fas fa-envelope"></i> CONTACT</div>
+    </nav>
 
         <main>
             <!-- About Section -->
