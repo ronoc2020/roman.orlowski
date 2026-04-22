@@ -2484,3 +2484,19 @@ body {
     opacity: 1;
     transform: translateX(-50%) translateY(-5px);
 }
+.cert-badge {
+    display: inline-block;
+    background: rgba(0, 255, 0, 0.15);
+    color: var(--pip-green);
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    margin-top: 0.8rem;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+}
+
+.cert-card h3 i {
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    color: var(--neon-orange);
+}
