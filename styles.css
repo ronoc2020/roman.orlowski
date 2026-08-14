@@ -2867,8 +2867,8 @@ body, .section, .section p, .timeline-desc, .inventory-item-desc, .skill-card p,
 
 /* === UX ENHANCEMENTS: CRT, AUDIO, BOOT, VAULT-BOY === */
 .pip-boy-inventory {
-  position: relative;
-  overflow: hidden;
+  position: fixed;
+  overflow-y: auto;
 }
 
 /* CRT Scanlines & Flicker Overlay */

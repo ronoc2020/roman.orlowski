@@ -211,6 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
       bootDiv.classList.add('fade-out');
       playVaultTecBeep(523.25, 0.15); // C5
+      setTimeout(() => bootDiv.remove(), 500);
     }, 1800);
   }
 
