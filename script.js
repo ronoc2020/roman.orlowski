@@ -163,7 +163,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const inventoryTabs = document.querySelectorAll('.inventory-tab');
   const inventoryContents = document.querySelectorAll('.inventory-content');
 
-  if (pipBoyTrigger) {
+  if (pipBoyTrigger && pipBoyInventory) {
+    // Universal state sync via MutationObserver
+    const observer = new MutationObserver(() => {
+      const isOpen = pipBoyInventory.classList.contains('active');
+      document.body.classList.toggle('pip-boy-open', isOpen);
+    });
+    observer.observe(pipBoyInventory, { attributes: true, attributeFilter: ['class'] });
+
     pipBoyTrigger.addEventListener('click', function(e) {
       e.stopPropagation();
       pipBoyInventory.classList.toggle('active');

@@ -359,50 +359,65 @@ body {
 }
 
 /* Pip-Boy Inventory Trigger - Enhanced Visibility & Size */
+/* Pip-Boy Inventory Trigger - Integrated Sidebar Latch */
 .pip-boy-trigger {
   position: fixed;
-  right: 25px;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 75px;
-  height: 75px;
-  z-index: 1000;
+  z-index: 1200;
   cursor: pointer;
-  background: rgba(26, 26, 46, 0.9);
+  background: rgba(14, 14, 28, 0.95);
   border: 2px solid var(--neon-yellow);
-  border-radius: 50%;
+  border-right: none;
+  border-radius: 10px 0 0 10px;
+  padding: 0.65rem 0.85rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 25px rgba(255, 255, 0, 0.6), inset 0 0 15px rgba(255, 255, 0, 0.3);
-  animation: triggerPulse 2s infinite;
-  transition: all 0.3s ease;
+  box-shadow: -5px 0 25px rgba(255, 255, 0, 0.5), inset 0 0 12px rgba(255, 255, 0, 0.2);
+  animation: triggerPulse 2.5s infinite;
+  transition: right 0.35s cubic-bezier(0.68, -0.55, 0.265, 1.55), transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease, opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.pip-boy-trigger-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--neon-yellow);
+  font-family: inherit;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-shadow: 0 0 8px var(--neon-yellow);
+}
+
+.pip-boy-trigger-inner i {
+  font-size: 1.25rem;
 }
 
 .pip-boy-trigger:hover {
-  transform: translateY(-50%) scale(1.1);
+  right: 6px;
+  background: rgba(28, 28, 56, 0.98);
   border-color: var(--neon-orange);
-  box-shadow: 0 0 35px rgba(255, 136, 0, 0.8), inset 0 0 20px rgba(255, 136, 0, 0.4);
+  box-shadow: -8px 0 35px rgba(255, 136, 0, 0.8), inset 0 0 18px rgba(255, 136, 0, 0.4);
+  transform: translateY(-50%) scale(1.05);
 }
 
-.trigger-triangle {
-  width: 0;
-  height: 0;
-  border-left: 18px solid transparent;
-  border-right: 18px solid transparent;
-  border-bottom: 30px solid var(--neon-yellow);
-  filter: drop-shadow(0 0 8px var(--neon-yellow));
-  transition: all 0.3s ease;
+.pip-boy-trigger:hover .pip-boy-trigger-inner {
+  color: var(--neon-orange);
+  text-shadow: 0 0 12px var(--neon-orange);
 }
 
-.pip-boy-trigger:hover .trigger-triangle {
-  border-bottom-color: var(--neon-orange);
-  filter: drop-shadow(0 0 15px var(--neon-orange));
-}
-
-.pip-boy-trigger:hover .trigger-triangle {
-  border-bottom-color: var(--neon-orange);
-  filter: drop-shadow(0 0 20px var(--neon-orange));
+/* Hide trigger when Pip-Boy inventory is active */
+body.pip-boy-open .pip-boy-trigger,
+.pip-boy-inventory.active ~ .pip-boy-trigger {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  right: -90px;
 }
 
 @keyframes triggerPulse {
@@ -2824,9 +2839,7 @@ body, .section, .section p, .timeline-desc, .inventory-item-desc, .skill-card p,
   letter-spacing: 0.02em;
 }
 .terminal, .terminal-body, .terminal-line, #terminal-command, #self-assessment-cmd { line-height: 1.55; letter-spacing: 0.01em; }
-.pip-boy-trigger { width: 84px; height: 84px; right: 22px; z-index: 1200; background: rgba(10, 10, 24, 0.96); border: 3px solid var(--neon-yellow); box-shadow: 0 0 0 4px rgba(10,10,24,.75), 0 0 30px rgba(255,255,0,.85), inset 0 0 18px rgba(255,255,0,.35); }
-.trigger-triangle { border-left-width: 22px; border-right-width: 22px; border-bottom-width: 38px; border-bottom-color: #ffff66; filter: drop-shadow(0 0 12px #ffff00); }
-.pip-boy-trigger:hover { transform: translateY(-50%) scale(1.08); }
+
 .pip-boy-module { position: relative; }
 .module-title { display: flex; align-items: center; justify-content: space-between; gap: .6rem; }
 .module-controls { display: inline-flex; gap: .25rem; margin-left: auto; }
@@ -2846,8 +2859,7 @@ body, .section, .section p, .timeline-desc, .inventory-item-desc, .skill-card p,
 .reference-links { display: flex; flex-wrap: wrap; gap: .45rem .8rem; }
 .reference-links .tech-link { line-height: 1.6; }
 @media (max-width: 768px) {
-  .pip-boy-trigger { width: 68px; height: 68px; right: 12px; }
-  .trigger-triangle { border-left-width: 18px; border-right-width: 18px; border-bottom-width: 31px; }
+
   .pip-boy-module.is-floating { left: 1rem !important; top: 1rem !important; width: calc(100vw - 2rem); max-height: calc(100dvh - 2rem); }
   .yt-url-input { flex-direction: column; }
   #load-yt-btn { width: 100%; }
