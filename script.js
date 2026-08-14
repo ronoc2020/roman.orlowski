@@ -1132,7 +1132,7 @@ if (document.readyState === 'loading') {
     iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: command, args: [] }), 'https://www.youtube.com');
   }
 
-  function loadYouTubeVideo(input, autoplay = true) {
+  function loadYouTubeVideo(input, autoplay = true, customTitle = null) {
     const videoId = extractYouTubeId(input);
     const iframe = document.getElementById('yt-iframe');
     const track = document.getElementById('current-track');
@@ -1142,9 +1142,9 @@ if (document.readyState === 'loading') {
       return false;
     }
     if (iframe) iframe.src = iframeUrl(videoId, autoplay);
-    if (track) track.textContent = `YouTube Track (${videoId})`;
+    if (track) track.textContent = customTitle ? `${customTitle} (${videoId})` : `YouTube Track (${videoId})`;
     if (urlInput) urlInput.value = videoId;
-    status(`Załadowano ${videoId}`);
+    status(`Załadowano: ${videoId}`);
     return true;
   }
 
@@ -1178,7 +1178,7 @@ if (document.readyState === 'loading') {
     if (playButton) playButton.addEventListener('click', () => { sendPlayerCommand('playVideo'); if (pauseButton) pauseButton.style.display = 'inline-flex'; });
     if (pauseButton) pauseButton.addEventListener('click', () => { sendPlayerCommand('pauseVideo'); pauseButton.style.display = 'none'; });
     if (stopButton) stopButton.addEventListener('click', stopYouTube);
-    document.querySelectorAll('.playlist-preset').forEach(button => button.addEventListener('click', () => loadYouTubeVideo(button.dataset.id, true)));
+    document.querySelectorAll('.playlist-preset').forEach(button => button.addEventListener('click', () => loadYouTubeVideo(button.dataset.id, true, button.dataset.title)));
     status('Gotowy — wklej link lub ID filmu.');
   });
 })();
