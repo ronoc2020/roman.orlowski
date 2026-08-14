@@ -2984,3 +2984,106 @@ body, .section, .section p, .timeline-desc, .inventory-item-desc, .skill-card p,
 @keyframes bootLineFade {
   to { opacity: 1; }
 }
+
+/* === ROCS PROMOTIONAL BANNER & HACKER TERMINAL UX === */
+.rocs-promo-banner {
+  display: block;
+  background: linear-gradient(90deg, rgba(255, 255, 0, 0.08), rgba(255, 136, 0, 0.12), rgba(221, 0, 255, 0.08));
+  border: 1px dashed var(--neon-yellow);
+  border-radius: 4px;
+  padding: 0.5rem 0.8rem;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.15);
+  animation: promoPulse 3s infinite;
+}
+
+.rocs-promo-banner:hover {
+  border-color: var(--neon-orange);
+  background: linear-gradient(90deg, rgba(255, 136, 0, 0.15), rgba(255, 255, 0, 0.2));
+  box-shadow: 0 0 18px rgba(255, 136, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.promo-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--light);
+  font-size: 0.78rem;
+  font-family: 'Cyber', sans-serif;
+}
+
+.promo-icon {
+  color: var(--neon-yellow);
+  font-size: 0.95rem;
+  text-shadow: 0 0 8px var(--neon-yellow);
+}
+
+.promo-text {
+  flex: 1;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.promo-text strong {
+  color: var(--neon-orange);
+  text-shadow: 0 0 6px var(--neon-orange);
+}
+
+.promo-ext {
+  color: var(--neon-purple);
+  font-size: 0.75rem;
+}
+
+@keyframes promoPulse {
+  0%, 100% { border-color: rgba(255, 255, 0, 0.4); }
+  50% { border-color: rgba(255, 136, 0, 0.8); }
+}
+
+/* Terminal Quick Actions Grid for Mobile-First Hacker UX */
+.terminal-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(0, 255, 0, 0.25);
+}
+
+.terminal-quick-btn {
+  background: rgba(0, 255, 0, 0.06);
+  border: 1px solid rgba(0, 255, 0, 0.35);
+  color: #00ff00;
+  padding: 0.25rem 0.55rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.72rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.4);
+}
+
+.terminal-quick-btn:hover, .terminal-quick-btn:focus-visible {
+  background: rgba(0, 255, 0, 0.22);
+  border-color: #00ff00;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  outline: none;
+}
+
+/* Mobile-First Adjustments for Pip-Boy & Terminal */
+@media (max-width: 768px) {
+  .pip-boy-inventory {
+    width: 100vw !important;
+    right: -100vw !important;
+    padding: 1rem 0.75rem;
+  }
+  .pip-boy-inventory.active {
+    right: 0 !important;
+  }
+  .terminal-input input {
+    font-size: 16px !important; /* Prevents iOS auto-zoom */
+  }
+}

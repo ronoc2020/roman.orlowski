@@ -228,24 +228,43 @@
       </div>
     </div>
 
-    <!-- === ORYGINALNY TERMINAL (dla komend) === -->
+    <!-- === HACKER TERMINAL (Enhanced with simulations, tools, and mobile-first UX) === -->
     <div id="terminal-tab" class="inventory-content">
-      <div class="terminal">
+      <!-- Minimalist Promotional ROCS Banner -->
+      <a href="https://rocybersolutions.com" target="_blank" rel="noopener noreferrer" class="rocs-promo-banner" title="Visit ROCyberSolutions Professional vCISO & Cybersecurity Services">
+        <div class="promo-banner-content">
+          <i class="fas fa-shield-halved promo-icon"></i>
+          <span class="promo-text">Need vCISO Advisory? <strong>Visit ROCyberSolutions.com</strong></span>
+          <i class="fas fa-external-link-alt promo-ext"></i>
+        </div>
+      </a>
+
+      <div class="terminal hacker-terminal">
         <div class="terminal-header">
           <div class="terminal-btn red"></div>
           <div class="terminal-btn yellow"></div>
           <div class="terminal-btn green"></div>
           <span style="margin-left: 1rem; color: #0f0; font-size: 0.8rem;">
-            <i class="fas fa-terminal"></i> PIP-BOY ROCS TERMINAL v1.0
+            <i class="fas fa-terminal"></i> PIP-BOY HACKER CLI v2.4 (SECURE)
           </span>
         </div>
         <div class="terminal-body" id="terminal-output">
-          <div class="terminal-line"><span class="terminal-prompt">$</span> Type 'help' for commands</div>
+          <div class="terminal-line"><span class="terminal-prompt">root@rocs-pipboy:~#</span> Vault-Tec Secure Shell Initialized.</div>
+          <div class="terminal-line"><span class="terminal-prompt">root@rocs-pipboy:~#</span> Type <span style="color:var(--neon-yellow)">'help'</span> for available exploit & recon commands.</div>
         </div>
         <div class="terminal-input">
-          <span class="terminal-prompt">$</span>
-          <input type="text" id="terminal-command" autocomplete="off" spellcheck="false" placeholder="Enter command...">
-          <button type="button" id="terminal-run" class="terminal-run" aria-label="Execute terminal command"><i class="fas fa-play"></i></button>
+          <span class="terminal-prompt">root@rocs-pipboy:~#</span>
+          <input type="text" id="terminal-command" autocomplete="off" spellcheck="false" placeholder="Type command (e.g. scan, matrix, exploit)..." enterkeyhint="send">
+          <button type="button" id="terminal-run" class="terminal-run" aria-label="Execute command"><i class="fas fa-bolt"></i></button>
+        </div>
+        <div class="terminal-quick-actions">
+          <button type="button" class="terminal-quick-btn" data-cmd="help">help</button>
+          <button type="button" class="terminal-quick-btn" data-cmd="scan">scan</button>
+          <button type="button" class="terminal-quick-btn" data-cmd="matrix">matrix</button>
+          <button type="button" class="terminal-quick-btn" data-cmd="exploit">exploit</button>
+          <button type="button" class="terminal-quick-btn" data-cmd="whoami">whoami</button>
+          <button type="button" class="terminal-quick-btn" data-cmd="skills">skills</button>
+          <button type="button" class="terminal-quick-btn" data-cmd="clear">clear</button>
         </div>
       </div>
     </div>

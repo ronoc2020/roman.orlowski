@@ -575,6 +575,40 @@ Tools: IDA Pro, Ghidra, Wireshark, Cuckoo Sandbox`
   • SOX: Financial reporting security
   • DORA: Digital Operational Resilience`
     },
+    scan: {
+      execute: () => `[+] Initiating deep network port scan on rocs-pipboy.local...
+[>] Target: 192.168.1.1 (Gateway) - PORT 22 (SSH) OPEN - OpenSSH 8.9p1
+[>] Target: 192.168.1.10 (vCISO Workstation) - PORT 443 (HTTPS) OPEN - Vault-Tec TLS
+[>] Target: 192.168.1.45 (SIEM Node) - PORT 9200 (ElasticSearch) OPEN
+[✓] Scan complete. 3 active hosts discovered. Zero critical misconfigurations.`
+    },
+    matrix: {
+      execute: () => `[01010011 01011001 01010011 01010100 01000101 01001101 00100000 01001111 01001110 01001110 01001001 01001110 01000101]
+[INITIALIZING MATRIX STREAM...]
+0x9A 0x4F 0xC2 0x11 | vCISO Security Neural Link Active
+0x7E 0x33 0xB1 0x55 | Encryption SHA-256 Verified
+[READY FOR COMMAND EXECUTION]`
+    },
+    exploit: {
+      execute: () => `[!] Running automated penetration test simulation...
+[+] Testing target: ROCyberSolutions Perimeter Defense...
+[+] Injecting payload into mock endpoint...
+[-] Firewall Blocked: Cloudflare WAF & Managed SIEM Active.
+[✓] Defense Test Result: System Secure. Attack Mitigated Successfully.`
+    },
+    whoami: {
+      execute: () => `operator: Roman Orłowski
+role: vCISO | Strategic Cybersecurity Leadership
+organization: ROCyberSolutions (Since Feb 2026)
+clearance: Level-5 Vault-Tec Security Administrator`
+    },
+    skills: {
+      execute: () => `Core Security Competencies:
+- Cloud Security (AWS, Azure, GCP)
+- Threat Analysis & SIEM (Splunk, Elastic, Sentinel)
+- Compliance & Frameworks (ISO 27001, NIS2, GDPR, NIST)
+- Zero-Trust Architectures & IAM / PAM`
+    },
     clear: {
       execute: () => {
         const terminalOutput = document.getElementById('terminal-output');
@@ -631,6 +665,14 @@ Tools: IDA Pro, Ghidra, Wireshark, Cuckoo Sandbox`
   if (terminalRun) {
     terminalRun.addEventListener('click', () => runTerminalCommand(terminalCommand ? terminalCommand.value : ''));
   }
+
+  // Quick Action Buttons in Terminal
+  document.querySelectorAll('.terminal-quick-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cmd = btn.getAttribute('data-cmd');
+      if (cmd) runTerminalCommand(cmd);
+    });
+  });
 
   // Music Player
   const audioPlayer = document.getElementById('audio-player');
