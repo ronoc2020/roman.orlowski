@@ -925,22 +925,22 @@ function copyVerdictToClipboard() {
 
 
 // ===== PIP-BOY FULLSCREEN CONTROLLER =====
-document.addEventListener('DOMContentLoaded', function() {
+const initializeFullscreenController = () => {
   const inventory = document.querySelector('.pip-boy-inventory');
   const toggle = document.getElementById('pipBoyFullscreenToggle');
   const close = document.getElementById('pipBoyClose');
-  if (!inventory) return;
+  if (!inventory || !toggle || toggle.dataset.fullscreenBound === 'true') return;
 
+  toggle.dataset.fullscreenBound = 'true';
   const setFullscreen = (enabled) => {
     inventory.classList.toggle('fullscreen', enabled);
-    if (toggle) {
-      toggle.setAttribute('aria-expanded', String(enabled));
-      toggle.innerHTML = enabled
-        ? '<i class="fas fa-compress"></i><span>COLLAPSE</span>'
-        : '<i class="fas fa-expand"></i><span>EXPAND</span>';
-    }
+    toggle.setAttribute('aria-expanded', String(enabled));
+    toggle.innerHTML = enabled
+      ? '<i class="fas fa-compress"></i><span>COLLAPSE</span>'
+      : '<i class="fas fa-expand"></i><span>EXPAND</span>';
   };
-  if (toggle) toggle.addEventListener('click', function(event) {
+
+  toggle.addEventListener('click', function(event) {
     event.stopPropagation();
     inventory.classList.add('active');
     setFullscreen(!inventory.classList.contains('fullscreen'));
@@ -953,7 +953,13 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') setFullscreen(false);
   });
-});
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeFullscreenController, { once: true });
+} else {
+  initializeFullscreenController();
+}
 
 
 
