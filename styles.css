@@ -429,26 +429,25 @@ body.pip-boy-open .pip-boy-trigger,
   }
 }
 
-/* Pip-Boy Inventory Panel */
+/* Pip-Boy Inventory Panel - Fixed Sidebar */
 .pip-boy-inventory {
-  position: fixed;
-  right: -400px;
-  top: 0;
-  width: 400px;
-  height: 100vh;
-  background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(30, 30, 50, 0.95) 100%);
+  position: fixed !important;
+  right: -480px;
+  top: 0 !important;
+  width: 480px;
+  height: 100vh !important;
+  background: linear-gradient(135deg, rgba(10, 10, 22, 0.98) 0%, rgba(20, 20, 40, 0.98) 100%);
   border-left: 3px solid var(--neon-yellow);
-  box-shadow: 
-    -10px 0 30px rgba(255, 255, 0, 0.3),
-    inset -10px 0 20px rgba(255, 255, 0, 0.1);
-  z-index: 99;
+  box-shadow: -15px 0 45px rgba(0, 0, 0, 0.8), -5px 0 25px rgba(255, 255, 0, 0.2);
+  z-index: 2000 !important;
   overflow-y: auto;
-  transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: right 0.45s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   padding: 2rem 1.5rem;
+  display: block;
 }
 
 .pip-boy-inventory.active {
-  right: 0;
+  right: 0 !important;
 }
 
 .inventory-header {
@@ -1754,14 +1753,14 @@ a.tech-link:hover {
 
   /* Pip-Boy Inventory */
   .pip-boy-inventory {
-    width: 100%;
-    right: -100%;
-    height: 100vh;
+    width: 100% !important;
+    right: -100% !important;
+    height: 100vh !important;
     padding: 1.5rem 1rem;
   }
 
   .pip-boy-inventory.active {
-    right: 0;
+    right: 0 !important;
   }
 
   .inventory-header {
@@ -2866,10 +2865,6 @@ body, .section, .section p, .timeline-desc, .inventory-item-desc, .skill-card p,
 }
 
 /* === UX ENHANCEMENTS: CRT, AUDIO, BOOT, VAULT-BOY === */
-.pip-boy-inventory {
-  position: fixed;
-  overflow-y: auto;
-}
 
 /* CRT Scanlines & Flicker Overlay */
 .crt-overlay {
