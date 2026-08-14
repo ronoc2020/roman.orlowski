@@ -79,22 +79,36 @@
       <button class="inventory-tab" data-tab="rocs-tab"><i class="fas fa-shield-virus"></i> ROCS</button>
     </div>
 
-    <!-- === MUSIC – YouTube Picture-in-Picture === -->
+    <!-- === MUSIC – YouTube Player === -->
     <div id="music-tab" class="inventory-content active">
       <div class="inventory-item" style="background: rgba(0,0,0,0.3); border-left-color: #ff0000;">
         <div class="inventory-item-title">
-          <i class="fab fa-youtube" style="color: #ff0000;"></i> Hacking Focus Mix
+          <i class="fab fa-youtube" style="color: #ff0000;"></i> PIP-BOY RADIO (YouTube Player)
         </div>
-        <div class="youtube-pip">
-          <iframe width="100%" height="200" 
+        <div class="youtube-pip" id="yt-player-container">
+          <iframe id="yt-iframe" width="100%" height="180" 
             src="https://www.youtube.com/embed/VwXHT8HwgIs?autoplay=0&modestbranding=1&rel=0"
             title="YouTube player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
             allowfullscreen>
           </iframe>
         </div>
-        <div style="margin-top: 0.8rem; color: #aaa;">
-          <i class="fas fa-info-circle"></i> Picture‑in‑picture ready – press <strong>[⛶]</strong> on player.
+        <div class="player-controls" style="margin-top: 0.8rem; display: flex; gap: 0.5rem; justify-content: center;">
+          <button id="yt-play-btn" class="cyber-button" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;"><i class="fas fa-play"></i> Play</button>
+          <button id="yt-pause-btn" class="cyber-button" style="padding: 0.3rem 0.8rem; font-size: 0.8rem; display:none;"><i class="fas fa-pause"></i> Pause</button>
+          <button id="yt-stop-btn" class="cyber-button" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;"><i class="fas fa-stop"></i> Stop</button>
+        </div>
+        <div class="track-info" id="track-info" style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--neon-yellow);">
+          <i class="fas fa-music"></i> <span id="current-track">Hacking Focus Mix (VwXHT8HwgIs)</span>
+        </div>
+        <div class="yt-url-input" style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+          <input type="text" id="yt-url" placeholder="Wklej link z YouTube (lub ID)" value="VwXHT8HwgIs" style="flex: 1; background: rgba(0,0,0,0.5); border: 1px solid var(--neon-yellow); color: #fff; padding: 0.4rem; font-size: 0.8rem; border-radius: 3px;">
+          <button id="load-yt-btn" class="cyber-button" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;"><i class="fas fa-sync-alt"></i> Załaduj</button>
+        </div>
+        <div class="playlist-buttons" style="margin-top: 0.8rem; display: flex; gap: 0.4rem; flex-wrap: wrap;">
+          <button class="playlist-preset cyber-button" data-id="VwXHT8HwgIs" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">🎵 Focus Mix</button>
+          <button class="playlist-preset cyber-button" data-id="dQw4w9WgXcQ" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">🎵 Cyber Wave</button>
+          <button class="playlist-preset cyber-button" data-id="jfKfPfyJRdk" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">🎵 Lofi Beats</button>
         </div>
       </div>
     </div>
@@ -399,9 +413,9 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
 
         <div class="timeline">
           <div class="timeline-item">
-            <div class="timeline-date">2024 – Present</div>
-            <div class="timeline-title">Cybersecurity & IT Operations Consultant</div>
-            <div class="timeline-desc"><strong>ROCYber Solutions</strong><br>Providing hands-on IT support and security audits for SMBs. Focus on implementing repeatable security processes and infrastructure hardening. Ensuring compliance with NIS2, ISO 27001, DORA and GDPR standards.</div>
+            <div class="timeline-date">Feb 2026 – Present</div>
+            <div class="timeline-title">vCISO | Strategic Cybersecurity Leadership</div>
+            <div class="timeline-desc"><strong><a href="https://rocybersolutions.com/services" target="_blank" class="tech-link">ROCyberSolutions</a></strong><br>Providing executive vCISO services, strategic cybersecurity leadership, risk management, and compliance advisory (NIS2, ISO 27001, DORA, GDPR). Delivering security assessments and incident response frameworks.</div>
           </div>
 
           <div class="timeline-item">

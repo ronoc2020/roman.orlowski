@@ -358,27 +358,46 @@ body {
   }
 }
 
-/* Pip-Boy Inventory Trigger */
+/* Pip-Boy Inventory Trigger - Enhanced Visibility & Size */
 .pip-boy-trigger {
   position: fixed;
-  right: 20px;
+  right: 25px;
   top: 50%;
   transform: translateY(-50%);
-  width: 60px;
-  height: 60px;
-  z-index: 100;
+  width: 75px;
+  height: 75px;
+  z-index: 1000;
   cursor: pointer;
+  background: rgba(26, 26, 46, 0.9);
+  border: 2px solid var(--neon-yellow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px rgba(255, 255, 0, 0.6), inset 0 0 15px rgba(255, 255, 0, 0.3);
   animation: triggerPulse 2s infinite;
+  transition: all 0.3s ease;
+}
+
+.pip-boy-trigger:hover {
+  transform: translateY(-50%) scale(1.1);
+  border-color: var(--neon-orange);
+  box-shadow: 0 0 35px rgba(255, 136, 0, 0.8), inset 0 0 20px rgba(255, 136, 0, 0.4);
 }
 
 .trigger-triangle {
   width: 0;
   height: 0;
-  border-left: 30px solid transparent;
-  border-right: 30px solid transparent;
-  border-bottom: 52px solid var(--neon-yellow);
-  filter: drop-shadow(0 0 10px var(--neon-yellow));
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-bottom: 30px solid var(--neon-yellow);
+  filter: drop-shadow(0 0 8px var(--neon-yellow));
   transition: all 0.3s ease;
+}
+
+.pip-boy-trigger:hover .trigger-triangle {
+  border-bottom-color: var(--neon-orange);
+  filter: drop-shadow(0 0 15px var(--neon-orange));
 }
 
 .pip-boy-trigger:hover .trigger-triangle {

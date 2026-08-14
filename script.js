@@ -947,3 +947,60 @@ document.addEventListener('DOMContentLoaded', function() {
     if (event.key === 'Escape') setFullscreen(false);
   });
 });
+
+
+// ===== YOUTUBE MUSIC PLAYER CONTROLLER =====
+function extractYouTubeId(input) {
+  if (!input) return 'VwXHT8HwgIs';
+  input = input.trim();
+  if (/^[a-zA-Z0-9_-]{11}$/.test(input)) {
+    return input;
+  }
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = input.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : 'VwXHT8HwgIs';
+}
+
+function loadYouTubeVideo(input) {
+  const videoId = extractYouTubeId(input);
+  const iframe = document.getElementById('yt-iframe');
+  const trackSpan = document.getElementById('current-track');
+  if (iframe) {
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`;
+  }
+  if (trackSpan) {
+    trackSpan.textContent = `YouTube Track (${videoId})`;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const loadBtn = document.getElementById('load-yt-btn');
+  const urlInput = document.getElementById('yt-url');
+  const stopBtn = document.getElementById('yt-stop-btn');
+  const iframe = document.getElementById('yt-iframe');
+
+  if (loadBtn && urlInput) {
+    loadBtn.addEventListener('click', () => {
+      loadYouTubeVideo(urlInput.value);
+    });
+    urlInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        loadYouTubeVideo(urlInput.value);
+      }
+    });
+  }
+
+  document.querySelectorAll('.playlist-preset').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const vidId = this.getAttribute('data-id');
+      if (urlInput) urlInput.value = vidId;
+      loadYouTubeVideo(vidId);
+    });
+  });
+
+  if (stopBtn && iframe) {
+    stopBtn.addEventListener('click', () => {
+      iframe.src = iframe.src.split('?')[0] + '?autoplay=0';
+    });
+  }
+});
