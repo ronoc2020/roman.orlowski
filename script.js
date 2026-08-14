@@ -1,1724 +1,949 @@
-// ============================================
-// DETECT MOBILE DEVICE
-// ============================================
+// Detect mobile device
 const isMobile = () => window.innerWidth <= 768;
-const isTablet = () => window.innerWidth > 768 && window.innerWidth <= 1024;
-const isDesktop = () => window.innerWidth > 1024;
+const isSmallPhone = () => window.innerWidth <= 480;
 
-// ============================================
-// PARTICLES.JS CONFIGURATION - OPTYMALNA WERSJA
-// ============================================
-const particleConfig = (() => {
-    if (isMobile()) {
-        return {
-            particles: {
-                number: { value: 15, density: { enable: true, value_area: 1500 } },
-                color: { value: ['#ffff00', '#ff8800', '#dd00ff'] },
-                shape: { type: 'circle' },
-                opacity: { value: 0.3, random: true, anim: { enable: false } },
-                size: { value: 2, random: true, anim: { enable: false } },
-                line_linked: { enable: true, distance: 100, color: '#ffff00', opacity: 0.15, width: 1 },
-                move: { enable: true, speed: 0.8, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
-            },
-            interactivity: { detect_on: 'canvas', events: { onhover: { enable: false }, onclick: { enable: false }, resize: true } },
-            retina_detect: true
-        };
-    } else {
-        return {
-            particles: {
-                number: { value: 35, density: { enable: true, value_area: 1200 } },
-                color: { value: ['#ffff00', '#ff8800', '#dd00ff', '#00ff00', '#00f7ff'] },
-                shape: { type: 'circle' },
-                opacity: { value: 0.4, random: true, anim: { enable: true, speed: 0.5, opacity_min: 0.1, sync: false } },
-                size: { value: 2.5, random: true, anim: { enable: true, speed: 1, size_min: 0.8, sync: false } },
-                line_linked: { enable: true, distance: 120, color: '#ffff00', opacity: 0.2, width: 1 },
-                move: { enable: true, speed: 1, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
-                modes: { grab: { distance: 140, line_linked: { opacity: 0.5 } }, push: { particles_nb: 2 } }
-            },
-            retina_detect: true
-        };
+// Particles.js Configuration - Optimized for mobile
+const particleConfig = isMobile() ? {
+  particles: {
+    number: {
+      value: 30,
+      density: {
+        enable: true,
+        value_area: 1000
+      }
+    },
+    color: {
+      value: ['#ffff00', '#ff8800', '#dd00ff']
+    },
+    shape: {
+      type: 'circle',
+      stroke: {
+        width: 0,
+        color: '#000000'
+      }
+    },
+    opacity: {
+      value: 0.3,
+      random: false,
+      anim: {
+        enable: false
+      }
+    },
+    size: {
+      value: 2,
+      random: true,
+      anim: {
+        enable: false
+      }
+    },
+    line_linked: {
+      enable: true,
+      distance: 100,
+      color: '#ffff00',
+      opacity: 0.2,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 1,
+      direction: 'none',
+      random: false,
+      straight: false,
+      out_mode: 'out',
+      bounce: false
     }
-})();
-
-// Initialize particles.js
-if (typeof particlesJS !== 'undefined') {
-    particlesJS('particles-js', particleConfig);
-    console.log('Particles.js initialized');
-}
-
-// ============================================
-// YOUTUBE PLAYER INTEGRATION - PEŁNA WERSJA
-// ============================================
-let ytPlayer = null;
-let isYtReady = false;
-let currentVideoId = 'dQw4w9WgXcQ';
-let ytVolume = 50;
-
-function loadYouTubeAPI() {
-    if (document.getElementById('youtube-api-script')) return;
-    const tag = document.createElement('script');
-    tag.id = 'youtube-api-script';
-    tag.src = 'https://www.youtube.com/iframe_api';
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-}
-
-function onYouTubeIframeAPIReady() {
-    const playerDiv = document.getElementById('yt-player');
-    if (!playerDiv) {
-        console.error('YouTube player div not found');
-        return;
+  },
+  interactivity: {
+    detect_on: 'canvas',
+    events: {
+      onhover: {
+        enable: false,
+        mode: 'grab'
+      },
+      onclick: {
+        enable: false,
+        mode: 'push'
+      },
+      resize: true
     }
-    
-    ytPlayer = new YT.Player('yt-player', {
-        height: '180',
-        width: '100%',
-        videoId: currentVideoId,
-        playerVars: {
-            'playsinline': 1,
-            'controls': 0,
-            'disablekb': 1,
-            'modestbranding': 1,
-            'rel': 0,
-            'showinfo': 0,
-            'autoplay': 0,
-            'loop': 0,
-            'fs': 0
-        },
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange,
-            'onError': onPlayerError
+  },
+  retina_detect: true
+} : {
+  particles: {
+    number: {
+      value: 60,
+      density: {
+        enable: true,
+        value_area: 800
+      }
+    },
+    color: {
+      value: ['#ffff00', '#ff8800', '#dd00ff']
+    },
+    shape: {
+      type: 'circle',
+      stroke: {
+        width: 0,
+        color: '#000000'
+      }
+    },
+    opacity: {
+      value: 0.5,
+      random: false,
+      anim: {
+        enable: false
+      }
+    },
+    size: {
+      value: 3,
+      random: true,
+      anim: {
+        enable: false
+      }
+    },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: '#ffff00',
+      opacity: 0.4,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 2,
+      direction: 'none',
+      random: false,
+      straight: false,
+      out_mode: 'out',
+      bounce: false
+    }
+  },
+  interactivity: {
+    detect_on: 'canvas',
+    events: {
+      onhover: {
+        enable: true,
+        mode: 'grab'
+      },
+      onclick: {
+        enable: true,
+        mode: 'push'
+      },
+      resize: true
+    },
+    modes: {
+      grab: {
+        distance: 140,
+        line_linked: {
+          opacity: 1
         }
-    });
-}
-
-function onPlayerReady(event) {
-    isYtReady = true;
-    ytPlayer.setVolume(ytVolume);
-    console.log('YouTube Player ready');
-    updateTrackInfo('Ready to play');
-    
-    const lastVideo = localStorage.getItem('lastYouTubeVideo');
-    if (lastVideo && lastVideo !== currentVideoId) {
-        loadYouTubeVideo(lastVideo);
-        const urlInput = document.getElementById('yt-url');
-        if (urlInput) urlInput.value = lastVideo;
+      },
+      push: {
+        particles_nb: 4
+      }
     }
-}
-
-function onPlayerStateChange(event) {
-    const playBtn = document.getElementById('yt-play-btn');
-    const pauseBtn = document.getElementById('yt-pause-btn');
-    
-    if (event.data === YT.PlayerState.PLAYING) {
-        if (playBtn) playBtn.style.display = 'none';
-        if (pauseBtn) pauseBtn.style.display = 'inline-flex';
-        updateTrackInfo('Playing');
-    } else if (event.data === YT.PlayerState.PAUSED) {
-        if (playBtn) playBtn.style.display = 'inline-flex';
-        if (pauseBtn) pauseBtn.style.display = 'none';
-        updateTrackInfo('Paused');
-    } else if (event.data === YT.PlayerState.ENDED) {
-        if (playBtn) playBtn.style.display = 'inline-flex';
-        if (pauseBtn) pauseBtn.style.display = 'none';
-        updateTrackInfo('Finished');
-    } else if (event.data === YT.PlayerState.BUFFERING) {
-        updateTrackInfo('Buffering...');
-    }
-}
-
-function onPlayerError(event) {
-    console.error('YouTube Player Error:', event.data);
-    updateTrackInfo('Error loading video');
-    
-    let errorMessage = '';
-    switch(event.data) {
-        case 2: errorMessage = 'Invalid video ID'; break;
-        case 5: errorMessage = 'HTML5 player error'; break;
-        case 100: errorMessage = 'Video not found'; break;
-        case 101: errorMessage = 'Embedding disabled'; break;
-        case 150: errorMessage = 'Embedding disabled'; break;
-        default: errorMessage = 'Unknown error';
-    }
-    updateTrackInfo(`Error: ${errorMessage}`);
-}
-
-function updateTrackInfo(message) {
-    const trackSpan = document.getElementById('current-track');
-    if (trackSpan) {
-        trackSpan.innerHTML = `<i class="fas fa-music"></i> ${message}`;
-    }
-}
-
-function extractVideoId(input) {
-    if (!input) return null;
-    
-    const patterns = [
-        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([a-zA-Z0-9_-]{11})/,
-        /^([a-zA-Z0-9_-]{11})$/
-    ];
-    
-    for (const pattern of patterns) {
-        const match = input.match(pattern);
-        if (match && match[1]) {
-            return match[1];
-        }
-    }
-    return null;
-}
-
-function loadYouTubeVideo(input) {
-    if (!ytPlayer || !isYtReady) {
-        console.log('Player not ready, loading queued');
-        setTimeout(() => loadYouTubeVideo(input), 500);
-        return;
-    }
-    
-    const videoId = extractVideoId(input);
-    if (!videoId) {
-        alert('Nieprawidłowy link YouTube. Użyj formatu:\nhttps://www.youtube.com/watch?v=XXXXXXXXXXX');
-        return;
-    }
-    
-    currentVideoId = videoId;
-    ytPlayer.loadVideoById(videoId);
-    localStorage.setItem('lastYouTubeVideo', videoId);
-    updateTrackInfo(`Loading: ${videoId}`);
-    
-    const urlInput = document.getElementById('yt-url');
-    if (urlInput) urlInput.value = videoId;
-}
-
-function playYouTube() {
-    if (ytPlayer && isYtReady) {
-        ytPlayer.playVideo();
-    }
-}
-
-function pauseYouTube() {
-    if (ytPlayer && isYtReady) {
-        ytPlayer.pauseVideo();
-    }
-}
-
-function stopYouTube() {
-    if (ytPlayer && isYtReady) {
-        ytPlayer.stopVideo();
-        ytPlayer.seekTo(0);
-        updateTrackInfo('Stopped');
-    }
-}
-
-function toggleMuteYouTube() {
-    if (!ytPlayer || !isYtReady) return;
-    
-    const muteBtn = document.getElementById('yt-mute-btn');
-    if (ytPlayer.isMuted()) {
-        ytPlayer.unMute();
-        if (muteBtn) muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-        ytVolume = ytPlayer.getVolume();
-    } else {
-        ytPlayer.mute();
-        if (muteBtn) muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-    }
-}
-
-function setYouTubeVolume(value) {
-    if (ytPlayer && isYtReady) {
-        ytVolume = Math.min(100, Math.max(0, value));
-        ytPlayer.setVolume(ytVolume);
-    }
-}
-
-// ============================================
-// PIP-BOY TERMINAL COMMANDS - ROZBUDOWANA
-// ============================================
-const pipCommands = {
-    help: () => {
-        return `=== PIP-BOY OS COMMANDS ===
-╔══════════════════════════════════════════════════╗
-║ help           - Show this help                  ║
-║ whoami         - Display system info             ║
-║ skills         - List loaded modules             ║
-║ verify [code]  - Verify candidate code           ║
-║ clear          - Clear terminal                  ║
-║ date           - Show system time                ║
-║ status         - Show security status            ║
-║ scan           - Run network scan                ║
-║ report         - Show weekly report              ║
-║ version        - Show OS version                 ║
-║ uptime         - Show system uptime              ║
-║ reboot         - Reboot terminal                 ║
-║ theme [color]  - Change terminal theme           ║
-║ credits        - Show credits                    ║
-║ analyze        - Analyze security logs           ║
-║ threats        - Show active threats             ║
-║ firewall       - Firewall status                 ║
-║ ids            - IDS/IPS status                  ║
-║ siem           - SIEM dashboard data             ║
-║ intel          - Threat intelligence             ║
-║ patterns       - Attack patterns                 ║
-║ score          - Security score                  ║
-║ certs          - List certifications             ║
-╚══════════════════════════════════════════════════╝`;
-    },
-    
-    whoami: () => {
-        return `╔════════════════════════════════════════╗
-║ ROCYBER SECURITY SYSTEM v2.0.1          ║
-╠════════════════════════════════════════╣
-║ User: Administrator                     ║
-║ Role: Security Operations               ║
-║ Access Level: FULL                      ║
-║ Session ID: ${Math.random().toString(36).substring(2, 10).toUpperCase()} ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    skills: () => {
-        return `=== LOADED MODULES ===
-┌─────────────────────────────────────────┐
-│ [ACTIVE] Threat Detection Engine v3.2   │
-│ [ACTIVE] SIEM Integration Module        │
-│ [ACTIVE] Zero Trust Enforcement         │
-│ [ACTIVE] Compliance Scanner             │
-│ [STANDBY] Incident Response             │
-│ [STANDBY] Forensic Analyzer             │
-│ [STANDBY] Malware Scanner               │
-└─────────────────────────────────────────┘`;
-    },
-    
-    verify: (code) => {
-        const storedCode = localStorage.getItem('verificationCode') || 'CYBER-2024-TRUST';
-        if (!code) {
-            return `╔════════════════════════════════════════╗
-║ VERIFICATION REQUIRED                   ║
-╠════════════════════════════════════════╣
-║ Type: verify [code]                     ║
-║ Contact your recruiter for the code.    ║
-╚════════════════════════════════════════╝`;
-        }
-        if (code.toUpperCase() === storedCode) {
-            return `╔════════════════════════════════════════╗
-║ ✓ ACCESS GRANTED ✓                      ║
-╠════════════════════════════════════════╣
-║ Welcome, verified candidate.            ║
-║ You have passed the security            ║
-║ verification. Proceed with interview.   ║
-╚════════════════════════════════════════╝`;
-        }
-        return `╔════════════════════════════════════════╗
-║ ✗ ACCESS DENIED ✗                       ║
-╠════════════════════════════════════════╣
-║ Invalid verification code.              ║
-║ Please contact your recruiter.          ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    clear: () => {
-        const output = document.getElementById('pipTerminalOutput');
-        if (output) {
-            output.innerHTML = '<div class="terminal-line">> Terminal cleared. Type "help" for commands.</div>';
-        }
-        return '';
-    },
-    
-    date: () => {
-        const now = new Date();
-        return `╔════════════════════════════════════════╗
-║ SYSTEM TIME                             ║
-╠════════════════════════════════════════╣
-║ Date: ${now.toLocaleDateString()}                  ║
-║ Time: ${now.toLocaleTimeString()}                  ║
-║ Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone} ║
-║ Timestamp: ${now.getTime()}              ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    status: () => {
-        return `╔════════════════════════════════════════╗
-║ SECURITY STATUS                         ║
-╠════════════════════════════════════════╣
-║ System Status: ACTIVE                   ║
-║ Threat Level: LOW                       ║
-║ Last Scan: ${new Date().toLocaleDateString()}    ║
-║ Firewall: ENABLED                       ║
-║ IDS/IPS: ACTIVE                         ║
-║ Encryption: AES-256                     ║
-║ Compliance: 100%                        ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    scan: () => {
-        return `╔════════════════════════════════════════╗
-║ NETWORK SCAN INITIATED                  ║
-╠════════════════════════════════════════╣
-║ Scanning network segments...            ║
-║ [OK] 192.168.1.0/24 - No threats        ║
-║ [OK] 10.0.0.0/8 - No threats            ║
-║ [OK] External perimeter - No threats    ║
-║ [WARN] 3 outdated signatures found      ║
-║ [INFO] Update recommended               ║
-║ Scan completed. System secure.          ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    report: () => {
-        const lastWeek = new Date(new Date().setDate(new Date().getDate() - 7));
-        return `╔════════════════════════════════════════╗
-║ WEEKLY SECURITY REPORT                  ║
-╠════════════════════════════════════════╣
-║ Period: ${lastWeek.toLocaleDateString()} - ${new Date().toLocaleDateString()} ║
-║ Incidents: 0                            ║
-║ Threats Blocked: 147                    ║
-║ Patches Applied: 3                      ║
-║ Compliance Score: 100%                  ║
-║ Recommendations: None                   ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    version: () => {
-        return `╔════════════════════════════════════════╗
-║ PIP-BOY OS v2.0.1 (Build 2026.001)     ║
-║ Kernel: ROCyber Secure Core 5.4         ║
-║ UI Version: Neon Genesis                ║
-║ API Version: 3.2.0                      ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    uptime: () => {
-        const uptime = Math.floor(Date.now() / 1000);
-        const days = Math.floor(uptime / 86400);
-        const hours = Math.floor((uptime % 86400) / 3600);
-        const minutes = Math.floor((uptime % 3600) / 60);
-        return `╔════════════════════════════════════════╗
-║ SYSTEM UPTIME                           ║
-╠════════════════════════════════════════╣
-║ Uptime: ${days}d ${hours}h ${minutes}m              ║
-║ Last Reboot: ${new Date().toLocaleString()} ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    reboot: () => {
-        setTimeout(() => {
-            const output = document.getElementById('pipTerminalOutput');
-            if (output) {
-                output.innerHTML = '<div class="terminal-line">> System rebooting...</div>';
-                setTimeout(() => {
-                    output.innerHTML = '<div class="terminal-line">> Terminal ready. Type "help" for commands.</div>';
-                }, 1000);
-            }
-        }, 100);
-        return 'Rebooting terminal...';
-    },
-    
-    theme: (color) => {
-        const colors = ['green', 'yellow', 'orange', 'purple', 'cyan'];
-        if (color && colors.includes(color.toLowerCase())) {
-            const terminal = document.querySelector('.pip-terminal');
-            if (terminal) {
-                const colorMap = {
-                    green: '#00ff00',
-                    yellow: '#ffff00',
-                    orange: '#ff8800',
-                    purple: '#dd00ff',
-                    cyan: '#00f7ff'
-                };
-                terminal.style.borderColor = colorMap[color.toLowerCase()];
-            }
-            return `Theme changed to: ${color}`;
-        }
-        return `Available themes: ${colors.join(', ')}`;
-    },
-    
-    credits: () => {
-        return `╔════════════════════════════════════════╗
-║ ROCYBER SOLUTIONS                       ║
-╠════════════════════════════════════════╣
-║ Security System designed by             ║
-║ Roman Orłowski                          ║
-║ Powered by Advanced Threat Intelligence ║
-║ © 2026 All Rights Reserved              ║
-║ https://rocybersolutions.com            ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    // ============ NOWE DODANE FUNKCJE ============
-    
-    analyze: () => {
-        return `╔════════════════════════════════════════╗
-║ SECURITY LOG ANALYSIS                    ║
-╠════════════════════════════════════════╣
-║ Firewall+ v2.0: ACTIVE                  ║
-║   - 0 threats blocked today             ║
-║ IDS/IPS Module: ACTIVE                  ║
-║   - 3 intrusion attempts detected       ║
-║ SIEM Dashboard: ONLINE                  ║
-║   - 127 events in last 24h              ║
-║ All systems operational.                ║
-║ No critical alerts.                     ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    threats: () => {
-        return `╔════════════════════════════════════════╗
-║ ACTIVE THREATS                          ║
-╠════════════════════════════════════════╣
-║ Threat Level: LOW                       ║
-║ Current threats detected: 0             ║
-║ Last incident: 3 days ago               ║
-║ (brute force attempt - blocked)         ║
-║ MITRE ATT&CK techniques observed:       ║
-║ T1110 (Brute Force)                     ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    firewall: () => {
-        return `╔════════════════════════════════════════╗
-║ FIREWALL+ v2.0 STATUS                   ║
-╠════════════════════════════════════════╣
-║ Status: ACTIVE                          ║
-║ Rules loaded: 147                       ║
-║ Blocked connections: 12,847             ║
-║ Last update: ${new Date().toLocaleDateString()}    ║
-║ Protection: Enterprise-grade            ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    ids: () => {
-        return `╔════════════════════════════════════════╗
-║ IDS/IPS MODULE STATUS                   ║
-╠════════════════════════════════════════╣
-║ Status: ACTIVE                          ║
-║ Detection mode: PREVENTION              ║
-║ Signatures: 15,234                      ║
-║ Last alert: ${new Date().toLocaleString()} ║
-║ Threats prevented: 147 this week        ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    siem: () => {
-        return `╔════════════════════════════════════════╗
-║ SIEM DASHBOARD                          ║
-╠════════════════════════════════════════╣
-║ Status: REAL-TIME MONITORING            ║
-║ Events (last 24h): 127                  ║
-║   • Authentication: 89                  ║
-║   • Network: 23                         ║
-║   • System: 15                          ║
-║ Alerts: 0 critical, 2 warning           ║
-║ Log retention: 90 days                  ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    intel: () => {
-        return `╔════════════════════════════════════════╗
-║ THREAT INTELLIGENCE                     ║
-╠════════════════════════════════════════╣
-║ CVE database: UPDATED DAILY             ║
-║ New vulnerabilities today: 3            ║
-║   • Critical: 0                         ║
-║   • High: 1                             ║
-║   • Medium: 2                           ║
-║ Last sync: ${new Date().toLocaleString()} ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    patterns: () => {
-        return `╔════════════════════════════════════════╗
-║ ATTACK PATTERNS                         ║
-╠════════════════════════════════════════╣
-║ MITRE ATT&CK Framework v13              ║
-║ Observed techniques:                    ║
-║   • T1110 - Brute Force (Blocked)       ║
-║   • T1078 - Valid Accounts (Monitoring) ║
-║   • T1190 - Exploit Public App (None)   ║
-║ Active kill chain phase: RECONNAISSANCE ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    score: () => {
-        return `╔════════════════════════════════════════╗
-║ SECURITY SCORE                          ║
-╠════════════════════════════════════════╣
-║ Current Score: 98/100 (CRITICAL)        ║
-║ Protection level: CRITICAL              ║
-║ Breakdown:                              ║
-║   • Network Security: 97%               ║
-║   • Endpoint Protection: 99%            ║
-║   • Cloud Security: 96%                 ║
-║   • Compliance: 100%                    ║
-║ Last assessment: ${new Date().toLocaleDateString()} ║
-╚════════════════════════════════════════╝`;
-    },
-    
-    certs: () => {
-        return `╔════════════════════════════════════════╗
-║ CERTIFICATIONS                          ║
-╠════════════════════════════════════════╣
-║ Active certifications: 7                ║
-║   • CEH - Certified Ethical Hacker v12  ║
-║   • Azure Security Engineer (AZ-500)    ║
-║   • ISO 27001 Lead Implementer          ║
-║   • Splunk Core Power User              ║
-║   • CompTIA Security+ (SY0-601)         ║
-║   • CCSP - (ISC)² Certified             ║
-║   • CISSP - In Progress                 ║
-║ All certifications: ACTIVE & VERIFIED   ║
-╚════════════════════════════════════════╝`;
-    }
+  },
+  retina_detect: true
 };
 
-// ============================================
-// MAIN TERMINAL COMMANDS - ROZBUDOWANE
-// ============================================
-const mainCommands = {
-    help: () => {
-        return `=== ROCYBER TERMINAL v2.0 ===
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-help              - Show this help
-whoami            - Display user info
-skills            - List cybersecurity skills
-nmap              - Run network scan simulation
-msfconsole        - Launch Metasploit console
-searchsploit      - Search exploit database
-ceh_phases        - Show CEH hacking phases
-privacy_tip       - Get privacy protection tip
-disclosure        - Responsible disclosure info
-analyze_log       - Analyze security log
-decrypt_hash      - Hash decryption tool
-check_vuln        - Check vulnerability DB
-owasp_top10       - Display OWASP Top 10
-azure_security    - Azure best practices
-incident_response - IR procedures
-threat_hunt       - Threat hunting techniques
-malware_analysis  - Malware analysis workflow
-forensics         - Digital forensics guide
-compliance_check  - Compliance frameworks
-clear             - Clear terminal
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Type any command to execute`;
-    },
-    
-    whoami: () => {
-        return `╔══════════════════════════════════════════════════════╗
-║                    USER PROFILE                              ║
-╠══════════════════════════════════════════════════════════╣
-║ Name: Roman Orłowski                                        ║
-║ Role: Cybersecurity Expert & Founder                        ║
-║ Company: ROCyber Solutions                                  ║
-║ Experience: 15+ years                                       ║
-║ Certifications: CEH, Azure Security, ISO 27001, CCSP       ║
-║ Specialization: Cloud Security, Threat Detection, Zero Trust║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    skills: () => {
-        return `╔═══════════════════════════════════════════════════════════════╗
-║                    CORE CYBERSECURITY SKILLS                          ║
-╠═══════════════════════════════════════════════════════════════════╣
-║ ┌─────────────────────────────────────────────────────────────┐   ║
-║ │ Cloud Security                                              │   ║
-║ │   • Azure Security Center                                   │   ║
-║ │   • AWS Shield                                              │   ║
-║ │   • GCP Security Command Center                             │   ║
-║ │   • Container Security (K8s)                                │   ║
-║ │   • Zero Trust Architecture                                 │   ║
-║ ├─────────────────────────────────────────────────────────────┤   ║
-║ │ Threat Detection & Response                                 │   ║
-║ │   • SIEM (Splunk, QRadar, Sentinel)                         │   ║
-║ │   • IDS/IPS                                                 │   ║
-║ │   • EDR                                                     │   ║
-║ │   • Threat Hunting                                          │   ║
-║ │   • MITRE ATT&CK                                            │   ║
-║ ├─────────────────────────────────────────────────────────────┤   ║
-║ │ Network Security                                            │   ║
-║ │   • Firewall (Palo Alto, Fortinet)                          │   ║
-║ │   • VPN                                                     │   ║
-║ │   • NAC                                                     │   ║
-║ │   • Micro-segmentation                                      │   ║
-║ ├─────────────────────────────────────────────────────────────┤   ║
-║ │ Compliance & Risk                                           │   ║
-║ │   • ISO 27001                                               │   ║
-║ │   • GDPR                                                    │   ║
-║ │   • NIST CSF                                                │   ║
-║ │   • PCI-DSS, SOX, DORA                                      │   ║
-║ ├─────────────────────────────────────────────────────────────┤   ║
-║ │ Offensive Security                                          │   ║
-║ │   • Penetration Testing                                     │   ║
-║ │   • Red Teaming                                             │   ║
-║ │   • Social Engineering                                      │   ║
-║ │   • Exploit Development                                     │   ║
-║ ├─────────────────────────────────────────────────────────────┤   ║
-║ │ Incident Response & Forensics                               │   ║
-║ │   • IR Planning & Execution                                 │   ║
-║ │   • Malware Analysis                                        │   ║
-║ │   • Digital Forensics                                       │   ║
-║ │   • Log Analysis                                            │   ║
-║ └─────────────────────────────────────────────────────────────┘   ║
-╚═══════════════════════════════════════════════════════════════════╝`;
-    },
-    
-    nmap: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║                    NMAP SCAN v7.92                              ║
-╠══════════════════════════════════════════════════════════╣
-║ Starting Nmap at ${new Date().toLocaleTimeString()}                         ║
-║ Initiating ARP Ping Scan...                                 ║
-║ Scanning 256 hosts [1 port/host]                            ║
-║ Completed ARP Ping Scan (0.5s)                              ║
-║                                                              ║
-║ Initiating SYN Stealth Scan...                              ║
-║ Scanning target 192.168.1.1 [1000 ports]                    ║
-║                                                              ║
-║ Discovered open ports:                                      ║
-║   22/tcp   open  ssh                                        ║
-║   80/tcp   open  http                                       ║
-║   443/tcp  open  https                                      ║
-║   3306/tcp open  mysql                                      ║
-║   8080/tcp open  http-alt                                   ║
-║                                                              ║
-║ Nmap done: 1 IP address (1 host up) scanned in 8.42s       ║
-║                                                              ║
-║ [RECOMMENDATION] Close unnecessary ports                    ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    msfconsole: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║              METASPLOIT FRAMEWORK v6.2.0                      ║
-╠══════════════════════════════════════════════════════════╣
-║       =[ metasploit v6.2.0-dev ]                           ║
-║ + -- --=[ 2298 exploits - 1189 auxiliary ]                ║
-║ + -- --=[ 404 post modules - 602 payloads ]               ║
-║ + -- --=[ 45 evasion modules ]                             ║
-║                                                              ║
-║ msf6 > use exploit/multi/http/example                       ║
-║ msf6 exploit(multi/http/example) > set RHOSTS target.com    ║
-║ RHOSTS => target.com                                        ║
-║ msf6 exploit(multi/http/example) > set RPORT 80             ║
-║ RPORT => 80                                                 ║
-║ msf6 exploit(multi/http/example) > check                    ║
-║ [*] The target appears to be vulnerable.                    ║
-║                                                              ║
-║ [WARNING] Use only with explicit authorization!             ║
-║ [ETHICS] Never attack systems without permission.          ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    searchsploit: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║                 EXPLOIT DATABASE SEARCH                        ║
-╠══════════════════════════════════════════════════════════╣
-║ Searching for: web application vulnerabilities            ║
-║                                                              ║
-║ ID          | Title                                         ║
-║ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   ║
-║ 50001 | WordPress Plugin XYZ 1.2 - RCE                      ║
-║ 50002 | Apache HTTP Server 2.4.x - Path Traversal           ║
-║ 50003 | MySQL 8.x - Privilege Escalation                    ║
-║ 50004 | PHP 7.4.x - Code Injection                          ║
-║ 50005 | Nginx 1.18 - Buffer Overflow                        ║
-║                                                              ║
-║ Total results: 5                                            ║
-║                                                              ║
-║ [NOTE] Always verify vulnerabilities before testing        ║
-║ [ETHICS] Responsible disclosure required                    ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    ceh_phases: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║              CEH ETHICAL HACKING PHASES                        ║
-╠══════════════════════════════════════════════════════════╣
-║ ┌────────────────────────────────────────────────────┐   ║
-║ │ 1. RECONNAISSANCE (Footprinting)                   │   ║
-║ │    • Passive information gathering                 │   ║
-║ │    • OSINT techniques                              │   ║
-║ │    • Social engineering                            │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 2. SCANNING & ENUMERATION                          │   ║
-║ │    • Network scanning (Nmap)                       │   ║
-║ │    • Port scanning                                 │   ║
-║ │    • Service enumeration                           │   ║
-║ │    • Vulnerability scanning                        │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 3. GAINING ACCESS (Exploitation)                   │   ║
-║ │    • Exploiting vulnerabilities                    │   ║
-║ │    • Password attacks                              │   ║
-║ │    • Social engineering                            │   ║
-║ │    • Web application attacks                       │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 4. MAINTAINING ACCESS                              │   ║
-║ │    • Backdoors                                     │   ║
-║ │    • Rootkits                                      │   ║
-║ │    • Persistence mechanisms                        │   ║
-║ │    • Privilege escalation                          │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 5. COVERING TRACKS                                 │   ║
-║ │    • Log cleaning                                  │   ║
-║ │    • Hiding files                                  │   ║
-║ │    • Tunneling                                     │   ║
-║ │    • Anti-forensics                                │   ║
-║ └────────────────────────────────────────────────────┘   ║
-║                                                              ║
-║ [ETHICS] Only perform with written authorization!          ║
-║ [LAW] Unauthorized hacking is illegal.                      ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    privacy_tip: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║                 PRIVACY PROTECTION TIPS                         ║
-╠══════════════════════════════════════════════════════════╣
-║ ┌────────────────────────────────────────────────────┐   ║
-║ │ 🔒 Use strong encryption                           │   ║
-║ │    • VPN for all connections                       │   ║
-║ │    • HTTPS everywhere                              │   ║
-║ │    • End-to-end encrypted messaging                │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 🔑 Enable Multi-Factor Authentication              │   ║
-║ │    • Use authenticator apps (not SMS)              │   ║
-║ │    • Hardware keys (YubiKey) recommended           │   ║
-║ │    • Backup codes stored securely                  │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 📊 Minimize data collection                        │   ║
-║ │    • GDPR compliance by design                     │   ║
-║ │    • Data retention policies                       │   ║
-║ │    • Regular data purging                          │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 🛡️ Use privacy-respecting tools                   │   ║
-║ │    • Signal for messaging                          │   ║
-║ │    • ProtonMail for email                          │   ║
-║ │    • Tor Browser for anonymity                     │   ║
-║ │    • DuckDuckGo for search                         │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 🧹 Regular privacy hygiene                         │   ║
-║ │    • Clear browsing data                           │   ║
-║ │    • Review app permissions                        │   ║
-║ │    • Opt out of data collection                    │   ║
-║ │    • Use ad/tracker blockers                       │   ║
-║ └────────────────────────────────────────────────────┘   ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    disclosure: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║           RESPONSIBLE DISCLOSURE BEST PRACTICES               ║
-╠══════════════════════════════════════════════════════════╣
-║ ┌────────────────────────────────────────────────────┐   ║
-║ │ 1. IDENTIFY                                         │   ║
-║ │    • Verify vulnerability                           │   ║
-║ │    • Document findings                             │   ║
-║ │    • Assess impact                                 │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 2. REPORT                                           │   ║
-║ │    • Contact vendor first                           │   ║
-║ │    • Use security@ email                           │   ║
-║ │    • Provide clear details                         │   ║
-║ │    • Include POC if possible                       │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 3. COORDINATE                                       │   ║
-║ │    • Allow 90 days for fix                         │   ║
-║ │    • Agree on disclosure date                      │   ║
-║ │    • Work with vendor team                         │   ║
-║ │    • Request CVE assignment                        │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 4. DISCLOSE                                         │   ║
-║ │    • Coordinate public release                     │   ║
-║ │    • Publish advisory                              │   ║
-║ │    • Credit researchers                            │   ║
-║ │    • Share IOCs                                    │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 5. FOLLOW UP                                        │   ║
-║ │    • Verify patch effectiveness                    │   ║
-║ │    • Update documentation                          │   ║
-║ │    • Share lessons learned                         │   ║
-║ └────────────────────────────────────────────────────┘   ║
-║                                                              ║
-║ [ETHICS] Never disclose before patch is ready              ║
-║ [LAW] Follow local regulations                              ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    analyze_log: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║                  SECURITY LOG ANALYSIS                          ║
-╠══════════════════════════════════════════════════════════╣
-║ Log file: /var/log/security/audit.log                        ║
-║ Analysis started: ${new Date().toLocaleString()}                    ║
-║                                                              ║
-║ === SUSPICIOUS EVENTS ===                                    ║
-║ [${new Date().toLocaleDateString()} 08:23:45] Failed login attempt     ║
-║ from 192.168.1.100 (user: admin)                            ║
-║ [${new Date().toLocaleDateString()} 08:23:47] Failed login attempt     ║
-║ from 192.168.1.100 (user: admin)                            ║
-║ [${new Date().toLocaleDateString()} 08:23:49] Failed login attempt     ║
-║ from 192.168.1.100 (user: admin)                            ║
-║ [${new Date().toLocaleDateString()} 08:23:51] Account locked: admin    ║
-║                                                              ║
-║ === ANALYSIS SUMMARY ===                                     ║
-║ • Brute force attempt detected (source: 192.168.1.100)      ║
-║ • Account lockout triggered                                  ║
-║ • No unauthorized access successful                         ║
-║                                                              ║
-║ === RECOMMENDATIONS ===                                      ║
-║ 1. Block IP 192.168.1.100 at firewall                       ║
-║ 2. Enable additional monitoring                             ║
-║ 3. Review authentication policies                           ║
-║                                                              ║
-║ Analysis complete.                                           ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    decrypt_hash: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║                   HASH DECRYPTION TOOL                          ║
-╠══════════════════════════════════════════════════════════╣
-║ Supported algorithms: MD5, SHA1, SHA256, NTLM                ║
-║                                                              ║
-║ Enter hash: 5d41402abc4b2a76b9719d911017c592                ║
-║ Hash type detected: MD5                                      ║
-║ Searching rainbow tables...                                  ║
-║                                                              ║
-║ ┌────────────────────────────────────────────────────────┐  ║
-║ │ RESULT FOUND!                                          │  ║
-║ │ Plaintext: hello                                       │  ║
-║ │ Algorithm: MD5                                         │  ║
-║ │ Confidence: 99.9%                                      │  ║
-║ └────────────────────────────────────────────────────────┘  ║
-║                                                              ║
-║ ⚠️ WARNING: MD5 is cryptographically broken                ║
-║ Recommend using SHA-256 or bcrypt for passwords            ║
-║                                                              ║
-║ Try another hash? (type new hash or 'exit')                 ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    check_vuln: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║              VULNERABILITY DATABASE CHECK                      ║
-╠══════════════════════════════════════════════════════════╣
-║ Checking known CVEs against current stack...                 ║
-║                                                              ║
-║ ┌────────────────────────────────────────────────────────┐  ║
-║ │ CRITICAL VULNERABILITIES FOUND                         │  ║
-║ ├────────────────────────────────────────────────────────┤  ║
-║ │ CVE-2024-1234 | CVSS: 9.8 | CRITICAL                   │  ║
-║ │ Description: Remote Code Execution                      │  ║
-║ │ Affected: Apache HTTP Server 2.4.49-2.4.51             │  ║
-║ │ Fix: Update to version 2.4.52+                         │  ║
-║ ├────────────────────────────────────────────────────────┤  ║
-║ │ CVE-2024-5678 | CVSS: 7.5 | HIGH                       │  ║
-║ │ Description: SQL Injection                              │  ║
-║ │ Affected: MySQL 8.0.0-8.0.28                           │  ║
-║ │ Fix: Update to version 8.0.29+                         │  ║
-║ ├────────────────────────────────────────────────────────┤  ║
-║ │ CVE-2024-9012 | CVSS: 6.1 | MEDIUM                     │  ║
-║ │ Description: Cross-Site Scripting (XSS)                 │  ║
-║ │ Affected: Multiple WordPress plugins                    │  ║
-║ │ Fix: Update plugins or remove vulnerable code           │  ║
-║ └────────────────────────────────────────────────────────┘  ║
-║                                                              ║
-║ === RECOMMENDATIONS ===                                      ║
-║ 1. IMMEDIATE: Patch CVE-2024-1234 (Critical)               ║
-║ 2. Schedule: Update MySQL to patched version               ║
-║ 3. Review: WordPress plugin security                        ║
-║                                                              ║
-║ Total vulnerable assets: 3                                  ║
-║ Estimated remediation time: 4 hours                         ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    owasp_top10: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║                   OWASP TOP 10 2021                            ║
-╠══════════════════════════════════════════════════════════╣
-║ ┌────┬────────────────────────────────────────────────┐   ║
-║ │ #  │ RISK                                           │   ║
-║ ├────┼────────────────────────────────────────────────┤   ║
-║ │ A01│ Broken Access Control                          │   ║
-║ │    │ • Missing restrictions on authenticated users  │   ║
-║ │    │ • IDOR vulnerabilities                         │   ║
-║ ├────┼────────────────────────────────────────────────┤   ║
-║ │ A02│ Cryptographic Failures                         │   ║
-║ │    │ • Weak encryption algorithms                   │   ║
-║ │    │ • Improper key management                      │   ║
-║ ├────┼────────────────────────────────────────────────┤   ║
-║ │ A03│ Injection                                      │   ║
-║ │    │ • SQL Injection                                │   ║
-║ │    │ • NoSQL Injection                              │   ║
-║ │    │ • OS Command Injection                         │   ║
-║ ├────┼────────────────────────────────────────────────┤   ║
-║ │ A04│ Insecure Design                                │   ║
-║ │    │ • Missing security controls                    │   ║
-║ │    │ • Flawed business logic                        │   ║
-║ ├────┼────────────────────────────────────────────────┤   ║
-║ │ A05│ Security Misconfiguration                      │   ║
-║ │    │ • Default configurations                       │   ║
-║ │    │ • Verbose error messages                       │   ║
-║ ├────┼────────────────────────────────────────────────┤   ║
-║ │ A06│ Vulnerable and Outdated Components             │   ║
-║ │    │ • Unpatched software                           │   ║
-║ │    │ • End-of-life components                       │   ║
-║ ├────┼────────────────────────────────────────────────┤   ║
-║ │ A07│ Identification and Authentication Failures     │   ║
-║ │    │ • Weak password policies                       │   ║
-║ │    │ • Missing MFA                                  │   ║
-║ ├────┼────────────────────────────────────────────────┤   ║
-║ │ A08│ Software and Data Integrity Failures           │   ║
-║ │    │ • Insecure CI/CD pipelines                     │   ║
-║ │    │ • Unsigned updates                             │   ║
-║ ├────┼────────────────────────────────────────────────┤   ║
-║ │ A09│ Security Logging and Monitoring Failures       │   ║
-║ │    │ • Insufficient logging                         │   ║
-║ │    │ • No alerting                                  │   ║
-║ ├────┼────────────────────────────────────────────────┤   ║
-║ │ A10│ Server-Side Request Forgery (SSRF)             │   ║
-║ │    │ • Internal network scanning                    │   ║
-║ │    │ • Cloud metadata access                        │   ║
-║ └────┴────────────────────────────────────────────────┘   ║
-║                                                              ║
-║ [RESOURCES] https://owasp.org/www-project-top-ten/          ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    azure_security: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║              AZURE SECURITY BEST PRACTICES                     ║
-╠══════════════════════════════════════════════════════════╣
-║ ┌────────────────────────────────────────────────────┐   ║
-║ │ 1. IDENTITY & ACCESS MANAGEMENT                    │   ║
-║ │    • Enable Azure AD MFA for all users             │   ║
-║ │    • Implement Conditional Access policies         │   ║
-║ │    • Use Privileged Identity Management (PIM)      │   ║
-║ │    • Regular access reviews                        │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 2. NETWORK SECURITY                                │   ║
-║ │    • Network Security Groups (NSGs)                │   ║
-║ │    • Azure Firewall                                │   ║
-║ │    • DDoS Protection                               │   ║
-║ │    • Web Application Firewall (WAF)                │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 3. DATA PROTECTION                                 │   ║
-║ │    • Azure Key Vault for secrets                   │   ║
-║ │    • Encryption at rest (SSE)                      │   ║
-║ │    • Encryption in transit (TLS)                   │   ║
-║ │    • Azure Information Protection                  │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 4. MONITORING & THREAT DETECTION                   │   ║
-║ │    • Azure Sentinel SIEM                           │   ║
-║ │    • Azure Security Center                         │   ║
-║ │    • Defender for Cloud                            │   ║
-║ │    • Log Analytics Workspaces                      │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 5. COMPLIANCE & GOVERNANCE                         │   ║
-║ │    • Azure Policy                                  │   ║
-║ │    • Azure Blueprints                              │   ║
-║ │    • Compliance Manager                            │   ║
-║ │    • Regulatory compliance reports                 │   ║
-║ └────────────────────────────────────────────────────┘   ║
-║                                                              ║
-║ [CHECKLIST] Regular security assessments required           ║
-║ [AUDIT] Enable diagnostic logging for all resources         ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    incident_response: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║              INCIDENT RESPONSE PROCEDURES                      ║
-╠══════════════════════════════════════════════════════════╣
-║ ┌────────────────────────────────────────────────────┐   ║
-║ │ PHASE 1: PREPARATION                               │   ║
-║ │    • Establish IR team                             │   ║
-║ │    • Define roles & responsibilities               │   ║
-║ │    • Create playbooks                              │   ║
-║ │    • Acquire tools & training                      │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ PHASE 2: DETECTION & ANALYSIS                      │   ║
-║ │    • Monitor alerts                                │   ║
-║ │    • Investigate anomalies                         │   ║
-║ │    • Determine scope & impact                      │   ║
-║ │    • Preserve evidence                             │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ PHASE 3: CONTAINMENT                               │   ║
-║ │    • Short-term containment (isolate)              │   ║
-║ │    • Long-term containment (patching)              │   ║
-║ │    • Backup critical data                          │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ PHASE 4: ERADICATION                               │   ║
-║ │    • Remove malware                                │   ║
-║ │    • Close attack vectors                          │   ║
-║ │    • Reset compromised credentials                 │   ║
-║ │    • Apply security patches                        │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ PHASE 5: RECOVERY                                  │   ║
-║ │    • Restore from clean backups                    │   ║
-║ │    • Monitor for re-infection                      │   ║
-║ │    • Gradual service restoration                   │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ PHASE 6: POST-INCIDENT                             │   ║
-║ │    • Lessons learned meeting                       │   ║
-║ │    • Update procedures                             │   ║
-║ │    • Legal & regulatory reporting                  │   ║
-║ │    • Improve security controls                     │   ║
-║ └────────────────────────────────────────────────────┘   ║
-║                                                              ║
-║ [TIMELINE] Response within 24 hours required                ║
-║ [ESCALATION] Notify management immediately                  ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    threat_hunt: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║                 THREAT HUNTING TECHNIQUES                      ║
-╠══════════════════════════════════════════════════════════╣
-║ ┌────────────────────────────────────────────────────┐   ║
-║ │ NETWORK ANALYSIS                                   │   ║
-║ │    • Wireshark packet inspection                   │   ║
-║ │    • Zeek (Bro) network monitoring                 │   ║
-║ │    • NetFlow analysis                              │   ║
-║ │    • DNS tunneling detection                       │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ ENDPOINT ANALYSIS                                  │   ║
-║ │    • Sysmon logs review                            │   ║
-║ │    • Windows Event Viewer                          │   ║
-║ │    • Process tree analysis                         │   ║
-║ │    • Registry changes                              │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ LATERAL MOVEMENT DETECTION                         │   ║
-║ │    • RDP/SSH logs                                  │   ║
-║ │    • PSExec usage                                  │   ║
-║ │    • Scheduled tasks                               │   ║
-║ │    • WMI activity                                  │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ C2 COMMUNICATION PATTERNS                          │   ║
-║ │    • Beaconing detection                           │   ║
-║ │    • Domain generation algorithm (DGA)             │   ║
-║ │    • Encrypted traffic analysis                    │   ║
-║ │    • Unusual port usage                            │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ USER BEHAVIOR ANALYTICS                            │   ║
-║ │    • Impossible travel                             │   ║
-║ │    • Unusual login times                           │   ║
-║ │    • Data exfiltration patterns                    │   ║
-║ │    • Privilege escalation attempts                 │   ║
-║ └────────────────────────────────────────────────────┘   ║
-║                                                              ║
-║ [FRAMEWORK] MITRE ATT&CK mapping recommended                ║
-║ [TOOLS] Use SIEM with UEBA capabilities                     ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    malware_analysis: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║                MALWARE ANALYSIS WORKFLOW                       ║
-╠══════════════════════════════════════════════════════════╣
-║ ┌────────────────────────────────────────────────────┐   ║
-║ │ 1. STATIC ANALYSIS                                 │   ║
-║ │    • File properties (hash, size, type)            │   ║
-║ │    • String extraction (strings command)           │   ║
-║ │    • PE/ELF header analysis                        │   ║
-║ │    • Import/export table review                    │   ║
-║ │    • Disassembly (IDA Pro, Ghidra)                 │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 2. DYNAMIC ANALYSIS                                │   ║
-║ │    • Sandbox execution (Cuckoo, CAPE)              │   ║
-║ │    • API monitoring                                │   ║
-║ │    • Registry/File system changes                  │   ║
-║ │    • Process behavior analysis                     │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 3. NETWORK ANALYSIS                                │   ║
-║ │    • Traffic capture (Wireshark)                   │   ║
-║ │    • DNS queries                                   │   ║
-║ │    • HTTP/HTTPS requests                           │   ║
-║ │    • C2 communication patterns                     │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 4. CODE ANALYSIS                                   │   ║
-║ │    • Reverse engineering                           │   ║
-║ │    • Decompilation                                 │   ║
-║ │    • Debugging (x64dbg, OllyDbg)                   │   ║
-║ │    • Anti-analysis bypass                          │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 5. REPORTING                                       │   ║
-║ │    • Indicators of Compromise (IOCs)               │   ║
-║ │    • YARA rules                                    │   ║
-║ │    • Mitigation recommendations                    │   ║
-║ │    • Family classification                         │   ║
-║ └────────────────────────────────────────────────────┘   ║
-║                                                              ║
-║ [TOOLS] Ghidra, IDA Pro, x64dbg, Cuckoo Sandbox             ║
-║ [OUTPUT] Generate IOCs for detection tools                  ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    forensics: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║                  DIGITAL FORENSICS GUIDE                       ║
-╠══════════════════════════════════════════════════════════╣
-║ ┌────────────────────────────────────────────────────┐   ║
-║ │ 1. PRESERVATION                                    │   ║
-║ │    • Chain of custody documentation                │   ║
-║ │    • Write-blockers for imaging                    │   ║
-║ │    • Cryptographic hash verification               │   ║
-║ │    • Evidence bags/labeling                        │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 2. ACQUISITION                                     │   ║
-║ │    • Disk imaging (dd, FTK Imager)                 │   ║
-║ │    • Memory capture (Volatility, LiME)             │   ║
-║ │    • Network logs preservation                     │   ║
-║ │    • Cloud forensics acquisition                   │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 3. ANALYSIS                                        │   ║
-║ │    • File system analysis (NTFS, ext4, APFS)       │   ║
-║ │    • Deleted file recovery                         │   ║
-║ │    • Timeline analysis                             │   ║
-║ │    • Registry analysis (Windows)                   │   ║
-║ │    • Log analysis                                  │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 4. MEMORY FORENSICS                                │   ║
-║ │    • Process analysis                              │   ║
-║ │    • Network connections                           │   ║
-║ │    • Rootkit detection                             │   ║
-║ │    • Malware extraction                            │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ 5. REPORTING                                       │   ║
-║ │    • Expert report writing                         │   ║
-║ │    • Visual timeline creation                      │   ║
-║ │    • Evidence presentation                         │   ║
-║ │    • Court testimony preparation                   │   ║
-║ └────────────────────────────────────────────────────┘   ║
-║                                                              ║
-║ [TOOLS] FTK, EnCase, Autopsy, Volatility, Wireshark         ║
-║ [CERTIFICATION] GCFE, GCFA, EnCE recommended                ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    compliance_check: () => {
-        return `╔══════════════════════════════════════════════════════════╗
-║                COMPLIANCE FRAMEWORK OVERVIEW                    ║
-╠══════════════════════════════════════════════════════════╣
-║ ┌────────────────────────────────────────────────────┐   ║
-║ │ ISO 27001                                          │   ║
-║ │    • Information Security Management System        │   ║
-║ │    • 114 controls across 14 clauses               │   ║
-║ │    • Risk-based approach                          │   ║
-║ │    • Continuous improvement                        │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ GDPR                                               │   ║
-║ │    • Data protection for EU citizens               │   ║
-║ │    • 7 key principles                             │   ║
-║ │    • Rights of data subjects                       │   ║
-║ │    • Breach notification (72 hours)                │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ NIST CSF                                           │   ║
-║ │    • 5 core functions                             │   ║
-║ │    • 23 categories                                │   ║
-║ │    • 108 subcategories                            │   ║
-║ │    • Tiered implementation                        │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ PCI-DSS                                            │   ║
-║ │    • Payment card data security                   │   ║
-║ │    • 12 requirements                              │   ║
-║ │    • 4 compliance levels                          │   ║
-║ │    • Quarterly scans required                     │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ SOX                                                │   ║
-║ │    • Financial reporting controls                  │   ║
-║ │    • Section 302 (certification)                  │   ║
-║ │    • Section 404 (internal controls)              │   ║
-║ │    • IT general controls                          │   ║
-║ ├────────────────────────────────────────────────────┤   ║
-║ │ DORA                                               │   ║
-║ │    • Digital Operational Resilience                │   ║
-║ │    • ICT risk management                          │   ║
-║ │    • Incident reporting                           │   ║
-║ │    • Resilience testing                           │   ║
-║ └────────────────────────────────────────────────────┘   ║
-║                                                              ║
-║ [AUDIT] Regular compliance assessments required             ║
-║ [UPDATE] Monitor regulatory changes                         ║
-╚══════════════════════════════════════════════════════════╝`;
-    },
-    
-    clear: () => {
-        const output = document.getElementById('terminal-output');
-        if (output) {
-            output.innerHTML = '<div class="terminal-line">Terminal cleared. Type "help" for commands.</div>';
-        }
-        return '';
-    }
-};
+particlesJS('particles-js', particleConfig);
 
-// ============================================
-// DOM CONTENT LOADED - MAIN INITIALIZATION
-// ============================================
+// Intro Sequence - Shorter on mobile
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('ROCyber System Initializing...');
-    
-    // ========================================
-    // INTRO SEQUENCE
-    // ========================================
-    const introSequence = document.getElementById('intro-sequence');
-    const introDelay = isMobile() ? 3000 : 5000;
-    setTimeout(() => {
-        if (introSequence) {
-            introSequence.style.display = 'none';
-        }
-    }, introDelay);
-    
-    // ========================================
-    // RECRUITMENT PANEL (Ctrl+Shift+A)
-    // ========================================
-    const recruitmentPanel = document.getElementById('recruitment-panel');
-    let ctrlPressed = false;
-    let shiftPressed = false;
-    let aPressed = false;
-    
+  const introSequence = document.getElementById('intro-sequence');
+  const introDelay = isMobile() ? 3000 : 5000;
+  
+  setTimeout(() => {
+    introSequence.style.display = 'none';
+  }, introDelay);
+
+  // Pip-Boy Inventory System
+  const pipBoyTrigger = document.querySelector('.pip-boy-trigger');
+  const pipBoyInventory = document.querySelector('.pip-boy-inventory');
+  const inventoryTabs = document.querySelectorAll('.inventory-tab');
+  const inventoryContents = document.querySelectorAll('.inventory-content');
+
+  if (pipBoyTrigger) {
+    pipBoyTrigger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      pipBoyInventory.classList.toggle('active');
+    });
+
+    // Close inventory when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!pipBoyTrigger.contains(e.target) && !pipBoyInventory.contains(e.target)) {
+        pipBoyInventory.classList.remove('active');
+      }
+    });
+
+    // Close on escape key
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Control') ctrlPressed = true;
-        if (e.key === 'Shift') shiftPressed = true;
-        if (e.key === 'a' || e.key === 'A') aPressed = true;
-        
-        if (ctrlPressed && shiftPressed && aPressed && recruitmentPanel) {
-            e.preventDefault();
-            recruitmentPanel.classList.toggle('active');
-        }
+      if (e.key === 'Escape') {
+        pipBoyInventory.classList.remove('active');
+      }
     });
-    
-    document.addEventListener('keyup', function(e) {
-        if (e.key === 'Control') ctrlPressed = false;
-        if (e.key === 'Shift') shiftPressed = false;
-        if (e.key === 'a' || e.key === 'A') aPressed = false;
+  }
+
+  // Inventory Tab Switching
+  inventoryTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      inventoryTabs.forEach(t => t.classList.remove('active'));
+      inventoryContents.forEach(c => c.classList.remove('active'));
+      
+      this.classList.add('active');
+      const tabName = this.getAttribute('data-tab');
+      document.getElementById(tabName).classList.add('active');
     });
-    
-    // Close recruitment panel
-    const closeRecruitment = document.getElementById('closeRecruitment');
-    if (closeRecruitment) {
-        closeRecruitment.addEventListener('click', () => {
-            if (recruitmentPanel) recruitmentPanel.classList.remove('active');
+  });
+
+  // Intersection Observer for sections
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.section').forEach(section => {
+    observer.observe(section);
+  });
+
+  // Navigation
+  const navItems = document.querySelectorAll('.nav-item');
+  const sections = document.querySelectorAll('.section');
+
+  navItems.forEach(item => {
+    item.addEventListener('click', function() {
+      navItems.forEach(nav => nav.classList.remove('active'));
+      this.classList.add('active');
+      
+      sections.forEach(section => {
+        section.classList.remove('visible');
+        section.style.display = 'none';
+      });
+      
+      const sectionId = this.getAttribute('data-section');
+      const targetSection = document.getElementById(sectionId);
+      targetSection.style.display = 'block';
+      setTimeout(() => {
+        targetSection.classList.add('visible');
+      }, 10);
+      
+      // Mobile: scroll with less delay
+      const scrollDelay = isMobile() ? 100 : 300;
+      setTimeout(() => {
+        targetSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
         });
+      }, scrollDelay);
+
+      pipBoyInventory.classList.remove('active');
+    });
+  });
+
+  // Dynamic gradient based on mouse movement (Desktop only)
+  const gradient = document.querySelector('.cyber-gradient');
+  if (!isMobile()) {
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      gradient.style.background = 
+        `linear-gradient(${135 + x * 45}deg, rgba(255, 255, 0, 0.05) 0%, transparent 50%),
+         linear-gradient(${-135 + y * 45}deg, rgba(221, 0, 255, 0.05) 0%, transparent 50%)`;
+    });
+
+    // Parallax effect for floating elements (Desktop only)
+    document.addEventListener('mousemove', (e) => {
+      const floatingElements = document.querySelectorAll('.floating-element');
+      const mouseX = e.clientX / window.innerWidth;
+      const mouseY = e.clientY / window.innerHeight;
+      
+      floatingElements.forEach((element, index) => {
+        const speed = (index + 1) * 0.05;
+        const x = (mouseX - 0.5) * 100 * speed;
+        const y = (mouseY - 0.5) * 100 * speed;
+        element.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+  }
+
+  // Enhanced Terminal Commands
+  const commands = {
+    help: {
+      execute: () => `Available commands:
+  help              - Show this help message
+  whoami            - Display current user
+  skills            - List cybersecurity skills
+  nmap              - Simulate network scan
+  msfconsole        - Launch Metasploit console
+  searchsploit      - Search exploit database
+  ceh_phases        - Display CEH hacking phases
+  privacy_tip       - Get privacy protection tip
+  disclosure        - Learn about responsible disclosure
+  analyze_log       - Analyze security log
+  decrypt_hash      - Hash decryption tool
+  check_vuln        - Check vulnerability database
+  owasp_top10       - Display OWASP Top 10
+  azure_security    - Azure security best practices
+  incident_response - Incident response procedures
+  threat_hunt       - Threat hunting techniques
+  malware_analysis  - Malware analysis workflow
+  forensics         - Digital forensics guide
+  compliance_check  - Compliance framework overview
+  clear             - Clear terminal output`
+    },
+    whoami: {
+      execute: () => 'Roman Orłowski - Cybersecurity Expert | ROCyber Solutions'
+    },
+    skills: {
+      execute: () => `Core Skills:
+  • Cloud Security (Azure, AWS, GCP)
+  • Threat Analysis & Detection (MITRE ATT&CK, SIEM)
+  • Network Security & Zero Trust Architecture
+  • Compliance (ISO 27001, GDPR, NIST, NIS2, SOX, DORA)
+  • Ethical Hacking (CEH, Penetration Testing)
+  • Privacy Protection & Data Security
+  • Incident Response & Crisis Management
+  • Kubernetes & Container Orchestration`
+    },
+    nmap: {
+      execute: () => `Starting Nmap 7.92 scan...
+Scanning target 192.168.1.1...
+Discovered open port 80/tcp http
+Discovered open port 443/tcp https
+Discovered open port 22/tcp ssh
+Nmap scan report complete.
+Security Assessment: Implement firewall rules and close unnecessary ports.`
+    },
+    msfconsole: {
+      execute: () => `Starting Metasploit Framework console...
+       =[ metasploit v6.2.0                  ]
++ -- --=[ 2200 exploits - 1171 auxiliary   ]
++ -- --=[ 400 post modules - 596 payloads  ]
+
+msf6 > use exploit/multi/http/example
+msf6 exploit(multi/http/example) > 
+Remember: Use ethically for testing only. Always obtain authorization.`
+    },
+    searchsploit: {
+      execute: () => `Searching Exploit-DB...
+Results:
+  [1] Windows - Remote Code Execution (CVE-2021-xxxxx)
+  [2] Linux - Privilege Escalation (CVE-2021-xxxxx)
+  [3] Apache - Directory Traversal (CVE-2020-xxxxx)
+Report vulnerabilities responsibly through coordinated disclosure.`
+    },
+    ceh_phases: {
+      execute: () => `CEH Ethical Hacking Phases:
+  1. Reconnaissance - Information gathering
+  2. Scanning - Port scanning and enumeration
+  3. Gaining Access - Exploiting vulnerabilities
+  4. Maintaining Access - Persistence mechanisms
+  5. Covering Tracks - Log cleaning and evasion
+Focus on defense and ethical use. Always obtain written authorization.`
+    },
+    privacy_tip: {
+      execute: () => `Privacy Protection Tip:
+Use encryption (e.g., VPNs, HTTPS) for all communications.
+Enable MFA (Multi-Factor Authentication) on all accounts.
+Comply with GDPR for privacy-by-design.
+Minimize data collection and implement data retention policies.
+Use privacy-respecting tools: Signal, ProtonMail, Tor Browser.`
+    },
+    disclosure: {
+      execute: () => `Responsible Disclosure Best Practices:
+  1. Report vulnerabilities to vendors first
+  2. Allow reasonable time for patches (90 days)
+  3. Avoid public disclosure before fixes
+  4. Coordinate with security teams
+  5. Follow CVE assignment process
+Align with CEH ethics and protect users.`
+    },
+    analyze_log: {
+      execute: () => `Analyzing security logs...
+[2024-02-05 14:32:15] Failed login attempt from 192.168.1.100
+[2024-02-05 14:33:22] Successful authentication for user: admin
+[2024-02-05 14:35:01] Suspicious file access detected
+[2024-02-05 14:36:45] Network anomaly: Unusual outbound traffic
+Analysis complete. Recommend immediate investigation of anomalies.`
+    },
+    decrypt_hash: {
+      execute: () => `Hash Decryption Tool
+Enter hash: 5d41402abc4b2a76b9719d911017c592
+Hash Type: MD5
+Status: Decrypted
+Result: hello
+Warning: MD5 is cryptographically broken. Use SHA-256 or better.`
+    },
+    check_vuln: {
+      execute: () => `Checking Vulnerability Database...
+Scanning for known CVEs...
+CVE-2024-1234: Critical - Remote Code Execution
+CVE-2024-5678: High - SQL Injection
+CVE-2024-9012: Medium - Cross-Site Scripting
+Total Vulnerabilities Found: 3
+Recommendation: Apply security patches immediately.`
+    },
+    owasp_top10: {
+      execute: () => `OWASP Top 10 2021:
+  1. Broken Access Control
+  2. Cryptographic Failures
+  3. Injection
+  4. Insecure Design
+  5. Security Misconfiguration
+  6. Vulnerable and Outdated Components
+  7. Authentication Failures
+  8. Software and Data Integrity Failures
+  9. Logging and Monitoring Failures
+  10. Server-Side Request Forgery (SSRF)`
+    },
+    azure_security: {
+      execute: () => `Azure Security Best Practices:
+  • Enable Azure Defender for comprehensive threat protection
+  • Implement Azure Policy for compliance enforcement
+  • Use Azure Key Vault for secrets management
+  • Enable MFA and Conditional Access
+  • Monitor with Azure Sentinel for threat detection
+  • Implement network segmentation with NSGs
+  • Regular security assessments and penetration testing`
+    },
+    incident_response: {
+      execute: () => `Incident Response Procedures:
+  1. PREPARATION: Establish IR team and tools
+  2. DETECTION & ANALYSIS: Identify and assess incident
+  3. CONTAINMENT: Stop the attack, prevent spread
+  4. ERADICATION: Remove attacker access and malware
+  5. RECOVERY: Restore systems to normal operations
+  6. POST-INCIDENT: Conduct lessons learned review
+Timeline: Follow 24-48 hour response protocol`
+    },
+    threat_hunt: {
+      execute: () => `Threat Hunting Techniques:
+  • Analyze network traffic patterns (Wireshark, Zeek)
+  • Review endpoint logs (Sysmon, Windows Event Viewer)
+  • Hunt for suspicious processes and registry changes
+  • Identify lateral movement indicators
+  • Search for C2 communication patterns
+  • Analyze user behavior anomalies
+  • Use MITRE ATT&CK framework for TTP mapping`
+    },
+    malware_analysis: {
+      execute: () => `Malware Analysis Workflow:
+  1. STATIC ANALYSIS: File properties, strings, imports
+  2. DYNAMIC ANALYSIS: Sandbox execution, behavior monitoring
+  3. NETWORK ANALYSIS: Traffic capture and protocol analysis
+  4. CODE ANALYSIS: Reverse engineering and disassembly
+  5. REPORTING: Document findings and IOCs
+Tools: IDA Pro, Ghidra, Wireshark, Cuckoo Sandbox`
+    },
+    forensics: {
+      execute: () => `Digital Forensics Guide:
+  • Preserve evidence chain of custody
+  • Image drives using forensic tools (FTK, EnCase)
+  • Analyze file systems (NTFS, ext4, APFS)
+  • Recover deleted files and unallocated space
+  • Timeline analysis of file system events
+  • Memory forensics for RAM analysis
+  • Report findings with expert testimony`
+    },
+    compliance_check: {
+      execute: () => `Compliance Framework Overview:
+  • ISO 27001: Information Security Management
+  • GDPR: Data Protection and Privacy
+  • NIST: Cybersecurity Framework
+  • PCI-DSS: Payment Card Industry Data Security
+  • HIPAA: Healthcare data protection
+  • SOX: Financial reporting security
+  • DORA: Digital Operational Resilience`
+    },
+    clear: {
+      execute: () => {
+        const terminalOutput = document.getElementById('terminal-output');
+        terminalOutput.innerHTML = '<div class="terminal-line">Terminal cleared.</div>';
+        return '';
+      }
     }
-    
-    // Regenerate verification code
-    const regenerateCode = document.getElementById('regenerateCode');
-    const verificationCodeSpan = document.getElementById('verificationCode');
-    if (regenerateCode && verificationCodeSpan) {
-        regenerateCode.addEventListener('click', () => {
-            const newCode = 'CYBER-' + Math.random().toString(36).substring(2, 10).toUpperCase();
-            verificationCodeSpan.textContent = newCode;
-            localStorage.setItem('verificationCode', newCode);
-        });
+  };
+
+  // Terminal Input Handler
+  const terminalCommand = document.getElementById('terminal-command');
+  const terminalOutput = document.getElementById('terminal-output');
+  
+  if (terminalCommand) {
+    terminalCommand.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const command = terminalCommand.value.trim().toLowerCase();
+        terminalCommand.value = '';
         
-        const storedCode = localStorage.getItem('verificationCode');
-        if (storedCode) verificationCodeSpan.textContent = storedCode;
-    }
-    
-    // ========================================
-    // PIP-BOY INVENTORY SYSTEM
-    // ========================================
-    const pipBoyTrigger = document.getElementById('pipBoyTrigger');
-    const pipBoyInventory = document.getElementById('pipBoyInventory');
-    const pipBoyClose = document.getElementById('pipBoyClose');
-    const inventoryTabs = document.querySelectorAll('.inventory-tab');
-    const inventoryContents = document.querySelectorAll('.inventory-content');
-    
-    if (pipBoyTrigger && pipBoyInventory) {
-        pipBoyTrigger.addEventListener('click', function(e) {
-            e.stopPropagation();
-            pipBoyInventory.classList.toggle('active');
-        });
+        if (!command) return;
         
-        if (pipBoyClose) {
-            pipBoyClose.addEventListener('click', function() {
-                pipBoyInventory.classList.remove('active');
-            });
+        // Display command
+        const commandLine = document.createElement('div');
+        commandLine.className = 'terminal-line';
+        commandLine.innerHTML = `<span class="terminal-prompt">$</span> ${command}`;
+        terminalOutput.appendChild(commandLine);
+        
+        // Execute command
+        let result;
+        if (commands[command]) {
+          result = commands[command].execute();
+        } else {
+          result = `Command not found: ${command}\nType 'help' for available commands`;
         }
         
-        document.addEventListener('click', function(e) {
-            if (!pipBoyTrigger.contains(e.target) && !pipBoyInventory.contains(e.target)) {
-                pipBoyInventory.classList.remove('active');
-            }
-        });
-        
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                pipBoyInventory.classList.remove('active');
-            }
-        });
-    }
-    
-    // Inventory tabs switching
-    if (inventoryTabs.length) {
-        inventoryTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                inventoryTabs.forEach(t => t.classList.remove('active'));
-                inventoryContents.forEach(c => c.classList.remove('active'));
-                this.classList.add('active');
-                const tabName = this.getAttribute('data-tab');
-                const targetContent = document.getElementById(tabName);
-                if (targetContent) targetContent.classList.add('active');
-            });
-        });
-    }
-    
-    // ========================================
-    // YOUTUBE PLAYER SETUP
-    // ========================================
-    loadYouTubeAPI();
-    
-    // Setup YouTube controls after API loads
-    setTimeout(() => {
-        const playBtn = document.getElementById('yt-play-btn');
-        const pauseBtn = document.getElementById('yt-pause-btn');
-        const stopBtn = document.getElementById('yt-stop-btn');
-        const muteBtn = document.getElementById('yt-mute-btn');
-        const loadBtn = document.getElementById('load-yt-btn');
-        const urlInput = document.getElementById('yt-url');
-        const presetBtns = document.querySelectorAll('.playlist-preset');
-        
-        if (playBtn) playBtn.addEventListener('click', playYouTube);
-        if (pauseBtn) pauseBtn.addEventListener('click', pauseYouTube);
-        if (stopBtn) stopBtn.addEventListener('click', stopYouTube);
-        if (muteBtn) muteBtn.addEventListener('click', toggleMuteYouTube);
-        
-        if (loadBtn && urlInput) {
-            loadBtn.addEventListener('click', () => loadYouTubeVideo(urlInput.value));
-            urlInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') loadYouTubeVideo(urlInput.value);
-            });
+        // Display result
+        if (result) {
+          const resultElement = document.createElement('div');
+          resultElement.className = 'terminal-line';
+          resultElement.style.whiteSpace = 'pre-wrap';
+          resultElement.textContent = result;
+          terminalOutput.appendChild(resultElement);
         }
         
-        presetBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const videoId = btn.getAttribute('data-id');
-                if (videoId && videoId !== 'YOUR_VIDEO_ID_HERE') {
-                    loadYouTubeVideo(videoId);
-                    if (urlInput) urlInput.value = videoId;
-                } else if (videoId === 'YOUR_VIDEO_ID_HERE') {
-                    alert('🔧 KONFIGURACJA: Zamień "YOUR_VIDEO_ID_HERE" na ID swojego filmu z YouTube!\n\nID filmu znajdziesz w linku:\nhttps://www.youtube.com/watch?v=XXXXXXXXXXX');
-                }
-            });
-        });
-        
-        const lastVideo = localStorage.getItem('lastYouTubeVideo');
-        if (lastVideo && urlInput) urlInput.value = lastVideo;
-    }, 1000);
-    
-    // ========================================
-    // PIP-BOY TERMINAL
-    // ========================================
-    const pipTerminalCommand = document.getElementById('pipTerminalCommand');
-    const pipTerminalOutput = document.getElementById('pipTerminalOutput');
-    
-    if (pipTerminalCommand && pipTerminalOutput) {
-        pipTerminalCommand.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const fullCommand = this.value.trim();
-                this.value = '';
-                if (!fullCommand) return;
-                
-                // Display command
-                const commandLine = document.createElement('div');
-                commandLine.className = 'terminal-line';
-                commandLine.innerHTML = `<span class="terminal-prompt">$</span> ${fullCommand}`;
-                pipTerminalOutput.appendChild(commandLine);
-                
-                // Parse command and argument
-                const parts = fullCommand.toLowerCase().split(' ');
-                const command = parts[0];
-                const argument = parts.slice(1).join(' ');
-                
-                let result;
-                if (pipCommands[command]) {
-                    result = pipCommands[command](argument);
-                } else {
-                    result = `Command not found: ${command}\nType 'help' for available commands`;
-                }
-                
-                if (result) {
-                    const resultElement = document.createElement('div');
-                    resultElement.className = 'terminal-line';
-                    resultElement.style.whiteSpace = 'pre-wrap';
-                    resultElement.textContent = result;
-                    pipTerminalOutput.appendChild(resultElement);
-                }
-                
-                pipTerminalOutput.scrollTop = pipTerminalOutput.scrollHeight;
-            }
-        });
-    }
-    
-    // ========================================
-    // MAIN NAVIGATION
-    // ========================================
-    const navItems = document.querySelectorAll('.nav-item');
-    const sections = document.querySelectorAll('.section');
-    
-    if (navItems.length && sections.length) {
-        // Hide all sections except about
-        sections.forEach(section => {
-            if (section.id !== 'about') {
-                section.style.display = 'none';
-                section.classList.remove('visible');
-            }
-        });
-        
-        navItems.forEach(item => {
-            item.addEventListener('click', function() {
-                // Update active nav
-                navItems.forEach(nav => nav.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Hide all sections
-                sections.forEach(section => {
-                    section.style.display = 'none';
-                    section.classList.remove('visible');
-                });
-                
-                // Show selected section
-                const sectionId = this.getAttribute('data-section');
-                const targetSection = document.getElementById(sectionId);
-                if (targetSection) {
-                    targetSection.style.display = 'block';
-                    setTimeout(() => targetSection.classList.add('visible'), 10);
-                    
-                    const scrollDelay = isMobile() ? 100 : 300;
-                    setTimeout(() => {
-                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, scrollDelay);
-                }
-                
-                // Close pip-boy inventory
-                if (pipBoyInventory) pipBoyInventory.classList.remove('active');
-            });
-        });
-    }
-    
-    // ========================================
-    // MAIN TERMINAL
-    // ========================================
-    const terminalCommand = document.getElementById('terminal-command');
-    const terminalOutput = document.getElementById('terminal-output');
-    
-    if (terminalCommand && terminalOutput) {
-        terminalCommand.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const command = this.value.trim().toLowerCase();
-                this.value = '';
-                if (!command) return;
-                
-                // Display command
-                const commandLine = document.createElement('div');
-                commandLine.className = 'terminal-line';
-                commandLine.innerHTML = `<span class="terminal-prompt">$</span> ${command}`;
-                terminalOutput.appendChild(commandLine);
-                
-                let result;
-                if (mainCommands[command]) {
-                    result = mainCommands[command]();
-                } else {
-                    result = `Command not found: ${command}\nType 'help' for available commands`;
-                }
-                
-                if (result) {
-                    const resultElement = document.createElement('div');
-                    resultElement.className = 'terminal-line';
-                    resultElement.style.whiteSpace = 'pre-wrap';
-                    resultElement.textContent = result;
-                    terminalOutput.appendChild(resultElement);
-                }
-                
-                terminalOutput.scrollTop = terminalOutput.scrollHeight;
-            }
-        });
-    }
-    
-    // ========================================
-    // QUIZ FUNCTIONALITY
-    // ========================================
-    const quizOptions = document.querySelectorAll('.quiz-option');
-    let quizScore = 0;
-    let quizAnswered = 0;
-    const totalQuizQuestions = document.querySelectorAll('.quiz-question').length;
-    
-    quizOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            const question = this.closest('.quiz-question');
-            const feedback = question.querySelector('.quiz-feedback');
-            const isCorrect = this.dataset.correct === 'true';
-            
-            if (question.classList.contains('answered')) return;
-            question.classList.add('answered');
-            quizAnswered++;
-            
-            // Disable all options in this question
-            question.querySelectorAll('.quiz-option').forEach(opt => {
-                opt.style.background = 'rgba(20, 20, 30, 0.5)';
-                opt.style.borderColor = 'rgba(0, 247, 255, 0.1)';
-                opt.style.cursor = 'default';
-                opt.style.pointerEvents = 'none';
-            });
-            
-            if (isCorrect) {
-                this.style.background = 'rgba(85, 255, 85, 0.2)';
-                this.style.borderColor = '#55ff55';
-                feedback.textContent = '✓ Correct! Great job!';
-                feedback.className = 'quiz-feedback correct';
-                quizScore++;
-            } else {
-                this.style.background = 'rgba(255, 85, 85, 0.2)';
-                this.style.borderColor = '#ff5555';
-                feedback.textContent = '✗ Incorrect. The correct answer is highlighted.';
-                feedback.className = 'quiz-feedback incorrect';
-                
-                // Highlight correct answer
-                question.querySelectorAll('.quiz-option').forEach(opt => {
-                    if (opt.dataset.correct === 'true') {
-                        opt.style.background = 'rgba(85, 255, 85, 0.15)';
-                        opt.style.borderColor = '#55ff55';
-                    }
-                });
-            }
-            
-            // Show final score when all questions answered
-            if (quizAnswered === totalQuizQuestions) {
-                const scorePercentage = Math.round((quizScore / totalQuizQuestions) * 100);
-                const quizContainer = document.querySelector('.quiz-container');
-                const existingScore = quizContainer.querySelector('.final-score');
-                
-                if (!existingScore) {
-                    const scoreMessage = document.createElement('div');
-                    scoreMessage.className = 'final-score';
-                    scoreMessage.innerHTML = `
-                        <i class="fas fa-chart-line"></i> 
-                        Quiz Complete! Score: ${quizScore}/${totalQuizQuestions} (${scorePercentage}%)
-                        <br>
-                        <small>${scorePercentage >= 75 ? 'Excellent! You know your security!' : 'Review the materials and try again.'}</small>
-                    `;
-                    quizContainer.appendChild(scoreMessage);
-                }
-            }
-        });
+        // Scroll to bottom
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+      }
     });
-    
-    // ========================================
-    // DYNAMIC GRADIENT (DESKTOP ONLY)
-    // ========================================
-    const gradient = document.querySelector('.cyber-gradient');
-    if (gradient && !isMobile()) {
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            gradient.style.background = `
-                linear-gradient(${135 + x * 45}deg, rgba(255, 255, 0, 0.08) 0%, transparent 50%),
-                linear-gradient(${-135 + y * 45}deg, rgba(221, 0, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(0, 247, 255, 0.05) 0%, transparent 70%)
-            `;
-        });
-    }
-    
-    // ========================================
-    // PARALLAX EFFECT (DESKTOP ONLY)
-    // ========================================
-    if (!isMobile()) {
-        const floatingElements = document.querySelectorAll('.floating-element');
-        document.addEventListener('mousemove', (e) => {
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-            
-            floatingElements.forEach((element, index) => {
-                const speed = (index + 1) * 0.04;
-                const x = (mouseX - 0.5) * 120 * speed;
-                const y = (mouseY - 0.5) * 120 * speed;
-                element.style.transform = `translate(${x}px, ${y}px)`;
-            });
-        });
-    }
-    
-    // ========================================
-    // SMOOTH SCROLL FOR ANCHOR LINKS
-    // ========================================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
+  }
+
+  // Music Player
+  const audioPlayer = document.getElementById('audio-player');
+  const playBtn = document.getElementById('play-btn');
+  const pauseBtn = document.getElementById('pause-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const closeBtn = document.getElementById('close-btn');
+
+  if (playBtn && audioPlayer) {
+    playBtn.addEventListener('click', () => {
+      audioPlayer.play();
+      playBtn.style.display = 'none';
+      pauseBtn.style.display = 'inline-block';
     });
-    
-    // ========================================
-    // WINDOW RESIZE HANDLER
-    // ========================================
-    window.addEventListener('resize', () => {
-        if (isMobile() && pipBoyInventory && pipBoyInventory.classList.contains('active')) {
-            pipBoyInventory.style.width = '100%';
-        }
+
+    pauseBtn.addEventListener('click', () => {
+      audioPlayer.pause();
+      pauseBtn.style.display = 'none';
+      playBtn.style.display = 'inline-block';
     });
-    
-    // ========================================
-    // PREVENT ZOOM ON DOUBLE TAP (MOBILE)
-    // ========================================
-    let lastTouchEnd = 0;
-    document.addEventListener('touchend', function(event) {
-        const now = Date.now();
-        if (now - lastTouchEnd <= 300) {
-            event.preventDefault();
-        }
-        lastTouchEnd = now;
-    }, false);
-    
-    // ========================================
-    // FULL SCREEN MODE FOR PIP-BOY
-    // ========================================
-    const fullscreenToggle = document.getElementById('fullscreen-toggle');
-    if (fullscreenToggle && pipBoyInventory) {
-        fullscreenToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            pipBoyInventory.classList.toggle('fullscreen');
-            fullscreenToggle.innerHTML = pipBoyInventory.classList.contains('fullscreen') 
-                ? '<i class="fas fa-compress"></i> COLLAPSE' 
-                : '<i class="fas fa-expand"></i> EXPAND';
-            console.log('Pip-Boy Fullscreen Mode:', pipBoyInventory.classList.contains('fullscreen') ? 'ON' : 'OFF');
-        });
-        
-        // Close fullscreen on Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && pipBoyInventory.classList.contains('fullscreen')) {
-                pipBoyInventory.classList.remove('fullscreen');
-                fullscreenToggle.innerHTML = '<i class="fas fa-expand"></i> EXPAND';
-            }
-        });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+        playBtn.style.display = 'inline-block';
+        pauseBtn.style.display = 'none';
+      });
     }
-    
-    // ========================================
-    // CONSOLE WELCOME MESSAGE
-    // ========================================
-    console.log('%c🔐 ROCyber Security System Online', 'color: #00ff00; font-size: 18px; font-weight: bold;');
-    console.log('%c┌─────────────────────────────────────────────────────────┐', 'color: #ffff00');
-    console.log('%c│           Welcome to ROCyber Solutions Portfolio        │', 'color: #ffff00');
-    console.log('%c│                                                         │', 'color: #ffff00');
-    console.log('%c│  🔑 Tip: Press Ctrl+Shift+A for Recruitment Panel       │', 'color: #ff8800');
-    console.log('%c│                                                         │', 'color: #ffff00');
-    console.log('%c│  🎵 Tip: Use Pip-Boy (right side) for YouTube player    │', 'color: #dd00ff');
-    console.log('%c│         and security terminal                           │', 'color: #dd00ff');
-    console.log('%c│                                                         │', 'color: #ffff00');
-    console.log('%c│  💻 Available commands: help, whoami, skills, nmap...   │', 'color: #00f7ff');
-    console.log('%c└─────────────────────────────────────────────────────────┘', 'color: #ffff00');
-    
-    console.log('%c🚀 System fully operational. Enjoy the experience!', 'color: #00f7ff; font-size: 14px;');
+  }
+
+  // Enhanced Quiz Functionality
+  const quizOptions = document.querySelectorAll('.quiz-option');
+  let quizScore = 0;
+  let quizTotal = 0;
+
+  quizOptions.forEach(option => {
+    option.addEventListener('click', function() {
+      const question = this.closest('.quiz-question');
+      const feedback = question.querySelector('.quiz-feedback');
+      const isCorrect = this.dataset.correct === 'true';
+      
+      // Prevent multiple answers per question
+      if (question.classList.contains('answered')) {
+        return;
+      }
+      
+      question.classList.add('answered');
+      quizTotal++;
+      
+      // Remove previous selections
+      question.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.style.background = 'rgba(20, 20, 30, 0.5)';
+        opt.style.borderColor = 'rgba(0, 247, 255, 0.1)';
+        opt.style.cursor = 'default';
+      });
+      
+      // Highlight selected option
+      if (isCorrect) {
+        this.style.background = 'rgba(85, 255, 85, 0.2)';
+        this.style.borderColor = 'var(--low)';
+        feedback.textContent = '✓ Correct! Great job!';
+        feedback.className = 'quiz-feedback correct';
+        quizScore++;
+      } else {
+        this.style.background = 'rgba(255, 85, 85, 0.2)';
+        this.style.borderColor = 'var(--critical)';
+        feedback.textContent = '✗ Incorrect. Try again!';
+        feedback.className = 'quiz-feedback incorrect';
+      }
+      
+      // Display score if all questions answered
+      if (quizTotal === quizOptions.length / 4) {
+        const scorePercentage = Math.round((quizScore / (quizTotal)) * 100);
+        const scoreMessage = document.createElement('div');
+        scoreMessage.className = 'terminal-line';
+        scoreMessage.style.marginTop = '1rem';
+        scoreMessage.style.padding = '1rem';
+        scoreMessage.style.background = 'rgba(0, 255, 0, 0.1)';
+        scoreMessage.style.border = '1px solid #00ff00';
+        scoreMessage.textContent = `Quiz Complete! Score: ${quizScore}/${quizTotal} (${scorePercentage}%)`;
+        question.parentElement.appendChild(scoreMessage);
+      }
+    });
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Add typing effect to header
+  const headerTitle = document.querySelector('.header h1');
+  if (headerTitle) {
+    const letters = headerTitle.querySelectorAll('.letter');
+    letters.forEach((letter, index) => {
+      letter.style.animationDelay = `${index * 0.05}s`;
+    });
+  }
+
+  // Handle window resize for responsive adjustments
+  window.addEventListener('resize', () => {
+    // Adjust layout on resize if needed
+    if (isMobile() && pipBoyInventory.classList.contains('active')) {
+      // Ensure inventory is properly positioned on resize
+      pipBoyInventory.style.width = '100%';
+    }
+  });
+
+  // Prevent zoom on double-tap (mobile)
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', function(event) {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, false);
 });
 
-// Expose functions globally for debugging
-window.pipCommands = pipCommands;
-window.mainCommands = mainCommands;
-window.playYouTube = playYouTube;
-window.pauseYouTube = pauseYouTube;
-window.stopYouTube = stopYouTube;
-window.loadYouTubeVideo = loadYouTubeVideo;
+
+/* Legacy assessment handler retained for reference.
+// ===== PIP-BOY 3000 SELF ASSESSMENT FUNCTIONALITY =====
+document.addEventListener('DOMContentLoaded', function() {
+  const assessmentOptions = document.querySelectorAll('.assessment-option');
+  const assessmentResults = document.querySelector('.assessment-results');
+  let scores = { ethical: 0, unethical: 0, neutral: 0, manipulative: 0 };
+  let answeredQuestions = 0;
+  const totalQuestions = 15;
+
+  assessmentOptions.forEach(option => {
+    option.addEventListener('click', function() {
+      const question = this.closest('.assessment-question');
+      const alreadyAnswered = question.querySelector('.assessment-option.selected');
+      
+      if (!alreadyAnswered) {
+        answeredQuestions++;
+      }
+
+      // Remove previous selection
+      question.querySelectorAll('.assessment-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+
+      // Mark current selection
+      this.classList.add('selected');
+      const value = this.getAttribute('data-value');
+      scores[value]++;
+
+      // Show results when all questions are answered
+      if (answeredQuestions === totalQuestions) {
+        displayAssessmentResults();
+      }
+    });
+  });
+
+  function displayAssessmentResults() {
+    const ethicalScore = Math.round((scores.ethical / totalQuestions) * 100);
+    const culturalFit = Math.round(((scores.ethical + (totalQuestions - scores.unethical - scores.manipulative)) / totalQuestions) * 100);
+    const redFlags = scores.unethical + scores.manipulative;
+
+    document.getElementById('ethical-score').textContent = ethicalScore;
+    document.getElementById('cultural-score').textContent = culturalFit;
+    document.getElementById('red-flags').textContent = redFlags;
+
+    let message = '';
+    if (ethicalScore >= 80) {
+      message = '<i class="fas fa-check-circle"></i> Excellent ethical alignment. You demonstrate strong integrity and cultural fit.';
+    } else if (ethicalScore >= 60) {
+      message = '<i class="fas fa-star"></i> Good ethical foundation. Some areas for improvement in consistency.';
+    } else if (ethicalScore >= 40) {
+      message = '<i class="fas fa-exclamation-triangle"></i> Moderate concerns. Consider reflecting on your values and decision-making.';
+    } else {
+      message = '<i class="fas fa-times-circle"></i> Significant red flags detected. This role may not be a good fit.';
+    }
+
+    document.querySelector('.results-message').innerHTML = message;
+    assessmentResults.style.display = 'block';
+    assessmentResults.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+
+*/
+
+// ===== DRAGGABLE MUSIC PLAYER =====
+(function() {
+  const player = document.querySelector('.draggable-player');
+  if (!player) return;
+
+  let isDragging = false;
+  let currentX;
+  let currentY;
+  let initialX;
+  let initialY;
+
+  player.addEventListener('mousedown', dragStart);
+  player.addEventListener('touchstart', dragStart);
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('touchmove', drag);
+  document.addEventListener('mouseup', dragEnd);
+  document.addEventListener('touchend', dragEnd);
+
+  function dragStart(e) {
+    if (e.target.closest('.player-btn') || e.target.closest('.player-close') || e.target.closest('.player-volume')) {
+      return;
+    }
+
+    isDragging = true;
+    initialX = e.clientX ? e.clientX : e.touches[0].clientX;
+    initialY = e.clientY ? e.clientY : e.touches[0].clientY;
+
+    const rect = player.getBoundingClientRect();
+    currentX = rect.left;
+    currentY = rect.top;
+  }
+
+  function drag(e) {
+    if (!isDragging) return;
+
+    e.preventDefault();
+    const clientX = e.clientX ? e.clientX : e.touches[0].clientX;
+    const clientY = e.clientY ? e.clientY : e.touches[0].clientY;
+
+    const moveX = clientX - initialX;
+    const moveY = clientY - initialY;
+
+    player.style.position = 'fixed';
+    player.style.left = (currentX + moveX) + 'px';
+    player.style.top = (currentY + moveY) + 'px';
+    player.style.right = 'auto';
+    player.style.bottom = 'auto';
+  }
+
+  function dragEnd() {
+    isDragging = false;
+  }
+
+  // Close button functionality
+  const closeBtn = player.querySelector('.player-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      player.style.display = 'none';
+    });
+  }
+
+  // Player controls
+  const playBtn = player.querySelector('[data-action="play"]');
+  const pauseBtn = player.querySelector('[data-action="pause"]');
+  const stopBtn = player.querySelector('[data-action="stop"]');
+  const volumeSlider = player.querySelector('.player-volume input');
+  const progressBar = player.querySelector('.player-progress-bar');
+  const audio = player.querySelector('audio');
+
+  if (playBtn && audio) {
+    playBtn.addEventListener('click', function() {
+      audio.play();
+      playBtn.classList.add('active');
+      pauseBtn.classList.remove('active');
+    });
+  }
+
+  if (pauseBtn && audio) {
+    pauseBtn.addEventListener('click', function() {
+      audio.pause();
+      pauseBtn.classList.add('active');
+      playBtn.classList.remove('active');
+    });
+  }
+
+  if (stopBtn && audio) {
+    stopBtn.addEventListener('click', function() {
+      audio.pause();
+      audio.currentTime = 0;
+      playBtn.classList.remove('active');
+      pauseBtn.classList.remove('active');
+      stopBtn.classList.add('active');
+    });
+  }
+
+  if (volumeSlider && audio) {
+    volumeSlider.addEventListener('input', function() {
+      audio.volume = this.value / 100;
+    });
+  }
+
+  if (audio) {
+    audio.addEventListener('timeupdate', function() {
+      if (this.duration) {
+        const progress = (this.currentTime / this.duration) * 100;
+        if (progressBar) progressBar.style.width = progress + '%';
+      }
+    });
+
+    audio.addEventListener('ended', function() {
+      playBtn.classList.remove('active');
+      pauseBtn.classList.remove('active');
+      stopBtn.classList.add('active');
+    });
+  }
+})();
+
+
+// ===== PIP-BOY 3000 SELF ASSESSMENT FUNCTIONALITY =====
+
+// Initialize only the live recruiter assessment.
+document.addEventListener('DOMContentLoaded', function() {
+  initializeAssessment();
+});
+
+function initializeAssessment() {
+  const root = document.getElementById('assessment-section');
+  if (!root) return;
+  const options = root.querySelectorAll('.assessment-option');
+  const questions = root.querySelectorAll('.assessment-question');
+  const totalQuestions = questions.length;
+  const scores = { ethical: 0, unethical: 0, neutral: 0, manipulative: 0 };
+  let answeredCount = 0;
+
+  options.forEach(option => {
+    option.addEventListener('click', function() {
+      const question = this.closest('.assessment-question');
+      if (!question) return;
+      const previous = question.querySelector('.assessment-option.selected');
+      if (previous === this) return;
+      if (previous) {
+        const previousValue = previous.getAttribute('data-value');
+        if (Object.prototype.hasOwnProperty.call(scores, previousValue)) scores[previousValue]--;
+      } else {
+        answeredCount++;
+      }
+      question.querySelectorAll('.assessment-option').forEach(opt => opt.classList.remove('selected'));
+      this.classList.add('selected');
+      const value = this.getAttribute('data-value');
+      if (Object.prototype.hasOwnProperty.call(scores, value)) scores[value]++;
+      if (answeredCount === totalQuestions) displayAssessmentResults(scores, totalQuestions);
+    });
+  });
+}
+
+function displayAssessmentResults(scores, totalQuestions) {
+  const ethicalScore = Math.round((scores.ethical / totalQuestions) * 100);
+  const redFlags = scores.unethical + scores.manipulative;
+  const culturalFit = Math.round(((scores.ethical + (totalQuestions - redFlags)) / totalQuestions) * 100);
+
+  document.getElementById('ethical-score').textContent = ethicalScore + '%';
+  document.getElementById('cultural-score').textContent = culturalFit + '%';
+  document.getElementById('red-flags').textContent = redFlags;
+
+  let verdict = '';
+  let verdictClass = '';
+
+  if (ethicalScore >= 80) {
+    verdict = '<i class="fas fa-check-circle"></i> <strong>SAFE TO JOIN</strong> – Excellent ethical alignment. This organization demonstrates strong integrity and cultural fit for a vCISO.';
+    verdictClass = 'verdict-safe';
+  } else if (ethicalScore >= 60) {
+    verdict = '<i class="fas fa-exclamation-circle"></i> <strong>PROCEED WITH CAUTION</strong> – Good ethical foundation with some areas of concern. Recommend further investigation.';
+    verdictClass = 'verdict-caution';
+  } else if (ethicalScore >= 40) {
+    verdict = '<i class="fas fa-exclamation-triangle"></i> <strong>INVESTIGATE FURTHER</strong> – Significant red flags detected. Consider declining or negotiating major changes.';
+    verdictClass = 'verdict-warning';
+  } else {
+    verdict = '<i class="fas fa-times-circle"></i> <strong>DO NOT JOIN</strong> – Toxic, unethical, or deceptive environment. This role is not a good fit.';
+    verdictClass = 'verdict-danger';
+  }
+
+  const verdictElement = document.getElementById('results-verdict');
+  verdictElement.className = 'results-verdict ' + verdictClass;
+  verdictElement.innerHTML = verdict;
+
+  // Generate encrypted verdict (SHA-256)
+  const verdictText = `ROCS Assessment - Ethical: ${ethicalScore}% | Cultural Fit: ${culturalFit}% | Red Flags: ${redFlags} | Verdict: ${verdict.replace(/<[^>]*>/g, '')}`;
+  const encryptedVerdictText = CryptoJS.SHA256(verdictText).toString();
+  const encryptedTextarea = document.getElementById('encrypted-verdict');
+  encryptedTextarea.value = encryptedVerdictText;
+
+  // Show results section
+  document.getElementById('assessment-results').style.display = 'block';
+  document.getElementById('assessment-results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function copyVerdictToClipboard() {
+  const textarea = document.getElementById('encrypted-verdict');
+  textarea.select();
+  document.execCommand('copy');
+  
+  const btn = document.getElementById('copy-verdict');
+  const originalText = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-check"></i> COPIED!';
+  
+  setTimeout(() => {
+    btn.innerHTML = originalText;
+  }, 2000);
+}
+
+
+// ===== PIP-BOY FULLSCREEN CONTROLLER =====
+document.addEventListener('DOMContentLoaded', function() {
+  const inventory = document.querySelector('.pip-boy-inventory');
+  const toggle = document.getElementById('pipBoyFullscreenToggle');
+  const close = document.getElementById('pipBoyClose');
+  if (!inventory) return;
+
+  const setFullscreen = (enabled) => {
+    inventory.classList.toggle('fullscreen', enabled);
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', String(enabled));
+      toggle.innerHTML = enabled
+        ? '<i class="fas fa-compress"></i><span>COLLAPSE</span>'
+        : '<i class="fas fa-expand"></i><span>EXPAND</span>';
+    }
+  };
+  if (toggle) toggle.addEventListener('click', function(event) {
+    event.stopPropagation();
+    inventory.classList.add('active');
+    setFullscreen(!inventory.classList.contains('fullscreen'));
+  });
+  if (close) close.addEventListener('click', function(event) {
+    event.stopPropagation();
+    setFullscreen(false);
+    inventory.classList.remove('active');
+  });
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') setFullscreen(false);
+  });
+});
