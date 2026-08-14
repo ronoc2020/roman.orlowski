@@ -1303,3 +1303,50 @@ document.addEventListener('DOMContentLoaded', () => {
     if (detachButton) detachButton.innerHTML = enable ? '<i class="fas fa-thumbtack-slash"></i>' : '<i class="fas fa-thumbtack"></i>';
   });
 });
+
+/* === 3D TILT & PARALLAX CONTROLLER WITH BULLET TIME INERTIA === */
+document.addEventListener('DOMContentLoaded', () => {
+  const inventory = document.querySelector('.pip-boy-inventory');
+  if (!inventory) return;
+
+  const header = inventory.querySelector('.inventory-header');
+  const tabs = inventory.querySelector('.inventory-tabs');
+  const content = inventory.querySelector('.inventory-content');
+
+  let bounds = inventory.getBoundingClientRect();
+  window.addEventListener('resize', () => {
+    bounds = inventory.getBoundingClientRect();
+  });
+
+  inventory.addEventListener('mousemove', (e) => {
+    if (!inventory.classList.contains('active')) return;
+    const rect = inventory.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    const rotateX = (-y / (rect.height / 2)) * 6; // Max 6 deg tilt
+    const rotateY = (x / (rect.width / 2)) * 6;
+
+    inventory.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(10px)`;
+
+    if (header) header.style.transform = `translateZ(40px) translateX(${rotateY * 0.5}px) translateY(${rotateX * 0.5}px)`;
+    if (tabs) tabs.style.transform = `translateZ(30px) translateX(${rotateY * 0.3}px)`;
+    if (content) content.style.transform = `translateZ(20px)`;
+  });
+
+  inventory.addEventListener('mouseleave', () => {
+    inventory.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+    inventory.style.transition = 'transform 0.6s cubic-bezier(0.15, 0.85, 0.25, 1.15)';
+    if (header) header.style.transform = 'translateZ(35px)';
+    if (tabs) tabs.style.transform = 'translateZ(25px)';
+    if (content) content.style.transform = 'translateZ(15px)';
+
+    setTimeout(() => {
+      inventory.style.transition = '';
+    }, 600);
+  });
+
+  inventory.addEventListener('mouseenter', () => {
+    inventory.style.transition = 'transform 0.1s ease-out';
+  });
+});
