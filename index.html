@@ -55,14 +55,25 @@
 
   <!-- ========== PIP-BOY 3000 INVENTORY ========== -->
   <div class="pip-boy-inventory" data-modular="true" aria-label="Modular ROCS Pip-Boy inventory">
+    <!-- CRT Scanline & Flicker Overlay -->
+    <div class="crt-overlay"></div>
+
     <div class="inventory-header">
-      <div class="inventory-title">
-        <i class="fas fa-microchip"></i> ROCS PIP-BOY 3000
+      <div class="inventory-title-area">
+        <div class="vault-boy-status" id="vaultBoyStatus" title="Vault-Boy Status: System Optimal">
+          <i class="fas fa-user-astronaut" id="vaultBoyIcon"></i>
+        </div>
+        <div class="inventory-title">
+          <i class="fas fa-microchip"></i> ROCS PIP-BOY 3000
+        </div>
       </div>
       <div class="inventory-header-actions">
         <div class="inventory-subtitle">
           <i class="fas fa-fingerprint"></i> ROCS SELF‑ASSESSMENT TERMINAL v2.0
         </div>
+        <button type="button" id="pipBoyAudioToggle" class="pipboy-control pipboy-audio" aria-label="Toggle Vault-Tec Audio" title="Toggle Vault-Tec Audio SFX">
+          <i class="fas fa-volume-high" id="audioToggleIcon"></i><span>SFX: ON</span>
+        </button>
         <button type="button" id="pipBoyFullscreenToggle" class="pipboy-control" aria-expanded="false" aria-label="Expand Pip-Boy">
           <i class="fas fa-expand"></i><span>EXPAND</span>
         </button>

@@ -2864,3 +2864,128 @@ body, .section, .section p, .timeline-desc, .inventory-item-desc, .skill-card p,
   .yt-url-input { flex-direction: column; }
   #load-yt-btn { width: 100%; }
 }
+
+/* === UX ENHANCEMENTS: CRT, AUDIO, BOOT, VAULT-BOY === */
+.pip-boy-inventory {
+  position: relative;
+  overflow: hidden;
+}
+
+/* CRT Scanlines & Flicker Overlay */
+.crt-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1500;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 3px, 6px 100%;
+  opacity: 0.85;
+}
+
+.crt-overlay::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: rgba(18, 16, 16, 0.05);
+  opacity: 0;
+  pointer-events: none;
+  animation: crtFlicker 0.15s infinite;
+}
+
+@keyframes crtFlicker {
+  0% { opacity: 0.02; }
+  50% { opacity: 0.08; }
+  100% { opacity: 0.03; }
+}
+
+/* Inventory Title Area & Vault-Boy Status */
+.inventory-title-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.vault-boy-status {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 0, 0.12);
+  border: 2px solid var(--neon-yellow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--neon-yellow);
+  font-size: 1.1rem;
+  box-shadow: 0 0 12px rgba(255, 255, 0, 0.4), inset 0 0 8px rgba(255, 255, 0, 0.2);
+  transition: all 0.3s ease;
+  animation: triggerPulse 2s infinite;
+}
+
+.vault-boy-status:hover {
+  transform: scale(1.08);
+  border-color: var(--neon-orange);
+  color: var(--neon-orange);
+  box-shadow: 0 0 18px rgba(255, 136, 0, 0.6);
+}
+
+.pipboy-audio {
+  border-color: var(--neon-yellow);
+  color: var(--neon-yellow);
+}
+
+/* Boot-up Terminal Splash */
+.pipboy-boot-sequence {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 22, 0.98);
+  z-index: 1600;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem;
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--neon-yellow);
+  text-shadow: 0 0 8px var(--neon-yellow);
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.pipboy-boot-sequence.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.boot-logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--neon-orange);
+  text-shadow: 0 0 15px var(--neon-orange);
+}
+
+.boot-log-line {
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  color: #aaffaa;
+  opacity: 0;
+  animation: bootLineFade 0.2s forwards;
+}
+
+@keyframes bootLineFade {
+  to { opacity: 1; }
+}

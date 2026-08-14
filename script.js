@@ -157,6 +157,63 @@ document.addEventListener('DOMContentLoaded', function() {
     introSequence.style.display = 'none';
   }, introDelay);
 
+  // ===== VAULT-TEC AUDIO SYNTHESIS & SFX =====
+  let sfxEnabled = true;
+  const audioToggleBtn = document.getElementById('pipBoyAudioToggle');
+  const audioToggleIcon = document.getElementById('audioToggleIcon');
+
+  if (audioToggleBtn) {
+    audioToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sfxEnabled = !sfxEnabled;
+      audioToggleIcon.className = sfxEnabled ? 'fas fa-volume-high' : 'fas fa-volume-xmark';
+      audioToggleBtn.querySelector('span').textContent = sfxEnabled ? 'SFX: ON' : 'SFX: OFF';
+      playVaultTecBeep(880, 0.05);
+    });
+  }
+
+  function playVaultTecBeep(frequency = 440, duration = 0.04, type = 'sine') {
+    if (!sfxEnabled) return;
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+      const ctx = new AudioContext();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(frequency, ctx.currentTime);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + duration);
+    } catch (err) {
+      // Audio context restricted or unsupported
+    }
+  }
+
+  // ===== BOOT-UP SEQUENCE =====
+  const inventory = document.querySelector('.pip-boy-inventory');
+  if (inventory) {
+    const bootDiv = document.createElement('div');
+    bootDiv.className = 'pipboy-boot-sequence';
+    bootDiv.innerHTML = `
+      <div class="boot-logo"><i class="fas fa-microchip"></i> VAULT-TEC PIP-BOY 3000 Mk IV</div>
+      <div class="boot-log-line">> BOOT SEQUENCE INITIATED...</div>
+      <div class="boot-log-line" style="animation-delay:0.1s">> LOADING KERNEL... OK</div>
+      <div class="boot-log-line" style="animation-delay:0.2s">> MOUNTING ROCS FILE SYSTEM... OK</div>
+      <div class="boot-log-line" style="animation-delay:0.3s">> CALIBRATING CRT DISPLAY & SCANLINES... OK</div>
+      <div class="boot-log-line" style="animation-delay:0.4s">> BIOMETRIC SYNC: OPERATOR ROMAN ORŁOWSKI (vCISO)... VERIFIED</div>
+      <div class="boot-log-line" style="animation-delay:0.5s; color: var(--neon-orange);">> SYSTEM READY. PRESS [TAB] TO TOGGLE.</div>
+    `;
+    inventory.appendChild(bootDiv);
+    setTimeout(() => {
+      bootDiv.classList.add('fade-out');
+      playVaultTecBeep(523.25, 0.15); // C5
+    }, 1800);
+  }
+
   // Pip-Boy Inventory System
   const pipBoyTrigger = document.querySelector('.pip-boy-trigger');
   const pipBoyInventory = document.querySelector('.pip-boy-inventory');
@@ -168,12 +225,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const observer = new MutationObserver(() => {
       const isOpen = pipBoyInventory.classList.contains('active');
       document.body.classList.toggle('pip-boy-open', isOpen);
+      if (isOpen) playVaultTecBeep(659.25, 0.08); // E5 open beep
     });
     observer.observe(pipBoyInventory, { attributes: true, attributeFilter: ['class'] });
 
     pipBoyTrigger.addEventListener('click', function(e) {
       e.stopPropagation();
       pipBoyInventory.classList.toggle('active');
+      playVaultTecBeep(784, 0.06);
     });
 
     // Close inventory when clicking outside
@@ -191,16 +250,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Dynamic Vault-Boy Status Icon Mapping per Tab
+  const vaultBoyIcon = document.getElementById('vaultBoyIcon');
+  const vaultBoyStatus = document.getElementById('vaultBoyStatus');
+  const tabIconMap = {
+    'music-tab': { icon: 'fas fa-headphones', title: 'Vault-Boy Status: Radio DJ / Audio Wave' },
+    'tools-tab': { icon: 'fas fa-screwdriver-wrench', title: 'Vault-Boy Status: Repair & Engineering' },
+    'owasp-tab': { icon: 'fas fa-shield-halved', title: 'Vault-Boy Status: Defensive Shield & Security' },
+    'hacking-tab': { icon: 'fas fa-skull-crossbones', title: 'Vault-Boy Status: Offensive Cyber Operations' },
+    'terminal-tab': { icon: 'fas fa-terminal', title: 'Vault-Boy Status: CLI Hacker & Terminal' },
+    'recruiter-tab': { icon: 'fas fa-user-tie', title: 'Vault-Boy Status: Psychological Assessor' },
+    'rocs-tab': { icon: 'fas fa-shield-virus', title: 'Vault-Boy Status: vCISO Command Center' }
+  };
+
+  function switchTab(tabElement) {
+    inventoryTabs.forEach(t => t.classList.remove('active'));
+    inventoryContents.forEach(c => c.classList.remove('active'));
+    
+    tabElement.classList.add('active');
+    const tabName = tabElement.getAttribute('data-tab');
+    const targetContent = document.getElementById(tabName);
+    if (targetContent) targetContent.classList.add('active');
+
+    // Update Vault-Boy icon
+    if (vaultBoyIcon && vaultBoyStatus && tabIconMap[tabName]) {
+      vaultBoyIcon.className = tabIconMap[tabName].icon;
+      vaultBoyStatus.setAttribute('title', tabIconMap[tabName].title);
+    }
+
+    playVaultTecBeep(987.77, 0.05); // B5 tab switch
+  }
+
   // Inventory Tab Switching
   inventoryTabs.forEach(tab => {
     tab.addEventListener('click', function() {
-      inventoryTabs.forEach(t => t.classList.remove('active'));
-      inventoryContents.forEach(c => c.classList.remove('active'));
-      
-      this.classList.add('active');
-      const tabName = this.getAttribute('data-tab');
-      document.getElementById(tabName).classList.add('active');
+      switchTab(this);
     });
+  });
+
+  // ===== KEYBOARD SHORTCUTS (TAB, 1-7, ESC) =====
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    // Toggle Pip-Boy on Tab key
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      pipBoyInventory.classList.toggle('active');
+    }
+
+    // Number keys 1-7 for switching tabs when Pip-Boy is open
+    if (pipBoyInventory.classList.contains('active') && e.key >= '1' && e.key <= '7') {
+      const index = parseInt(e.key, 10) - 1;
+      if (inventoryTabs[index]) {
+        switchTab(inventoryTabs[index]);
+      }
+    }
   });
 
   // Intersection Observer for sections
