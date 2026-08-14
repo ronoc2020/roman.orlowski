@@ -1183,7 +1183,13 @@ if (document.readyState === 'loading') {
       status('Nie znaleziono poprawnego ID filmu (11 znaków).', true);
       return false;
     }
-    if (iframe) iframe.src = iframeUrl(videoId, autoplay);
+    if (iframe) {
+      // Force reload iframe to guarantee playback reset
+      iframe.src = 'about:blank';
+      setTimeout(() => {
+        iframe.src = iframeUrl(videoId, autoplay);
+      }, 50);
+    }
     if (track) track.textContent = customTitle ? `${customTitle} (${videoId})` : `YouTube Track (${videoId})`;
     if (urlInput) urlInput.value = videoId;
     status(`Załadowano: ${videoId}`);
