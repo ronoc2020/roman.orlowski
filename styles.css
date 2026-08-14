@@ -2816,3 +2816,39 @@ a.tech-link:hover {
 .pip-boy-inventory.fullscreen { right: 15vw !important; left: 15vw; width: 70vw; max-width: none; height: 96vh; top: 2vh; border-left: 3px solid var(--neon-yellow); border-right: 3px solid var(--neon-yellow); border-radius: 6px; box-shadow: 0 0 45px rgba(255, 255, 0, 0.34), inset 0 0 30px rgba(255, 255, 0, 0.08); transition: left 0.35s ease, right 0.35s ease, width 0.35s ease, height 0.35s ease; }
 @media (max-width: 1024px) { .pip-boy-inventory.fullscreen { right: 5vw !important; left: 5vw; width: 90vw; } }
 @media (max-width: 768px) { .inventory-header { align-items: flex-start; flex-direction: column; } .inventory-header-actions { width: 100%; justify-content: space-between; } .inventory-subtitle { max-width: 100%; overflow-wrap: anywhere; } .pip-boy-inventory.fullscreen { top: 0; left: 0; right: 0 !important; width: 100vw; height: 100dvh; border-radius: 0; border-left-width: 2px; border-right-width: 2px; } .pipboy-control span { display: none; } }
+
+
+/* === REQUIREMENTS OVERRIDES: MODULAR PIP-BOY === */
+body, .section, .section p, .timeline-desc, .inventory-item-desc, .skill-card p, .qualification-card p, .monitoring-tool p, .framework-card li, .footer-column li {
+  line-height: 1.85;
+  letter-spacing: 0.02em;
+}
+.terminal, .terminal-body, .terminal-line, #terminal-command, #self-assessment-cmd { line-height: 1.55; letter-spacing: 0.01em; }
+.pip-boy-trigger { width: 84px; height: 84px; right: 22px; z-index: 1200; background: rgba(10, 10, 24, 0.96); border: 3px solid var(--neon-yellow); box-shadow: 0 0 0 4px rgba(10,10,24,.75), 0 0 30px rgba(255,255,0,.85), inset 0 0 18px rgba(255,255,0,.35); }
+.trigger-triangle { border-left-width: 22px; border-right-width: 22px; border-bottom-width: 38px; border-bottom-color: #ffff66; filter: drop-shadow(0 0 12px #ffff00); }
+.pip-boy-trigger:hover { transform: translateY(-50%) scale(1.08); }
+.pip-boy-module { position: relative; }
+.module-title { display: flex; align-items: center; justify-content: space-between; gap: .6rem; }
+.module-controls { display: inline-flex; gap: .25rem; margin-left: auto; }
+.module-action { width: 28px; height: 26px; display: inline-grid; place-items: center; padding: 0; border: 1px solid rgba(255,255,0,.55); border-radius: 3px; color: var(--neon-yellow); background: rgba(0,0,0,.35); cursor: pointer; }
+.module-action:hover, .module-action:focus-visible { color: #fff; border-color: var(--neon-orange); box-shadow: 0 0 10px rgba(255,136,0,.6); outline: none; }
+.pip-boy-module.is-dragging { opacity: .45; outline: 2px dashed var(--neon-orange); }
+.pip-boy-module.is-floating { position: fixed !important; z-index: 1400; width: min(440px, calc(100vw - 2rem)); max-height: min(82vh, 720px); overflow: auto; margin: 0; border: 2px solid var(--neon-yellow); box-shadow: 0 0 35px rgba(255,255,0,.58), inset 0 0 18px rgba(255,255,0,.12); background: rgba(8,8,20,.98); }
+.youtube-module.is-floating { cursor: default; }
+.youtube-module .youtube-pip { min-height: 180px; background: #000; }
+.yt-url-input { align-items: stretch; }
+#yt-url { min-width: 0; }
+#yt-status { display: inline-block; color: rgba(255,255,255,.72); font-size: .78rem; }
+#yt-status.status-error { color: #ff6969; }
+.terminal-input { display: flex; align-items: center; gap: .4rem; }
+.terminal-run { border: 1px solid var(--pip-green); background: rgba(0,255,0,.08); color: var(--pip-green); min-width: 34px; min-height: 30px; cursor: pointer; }
+.terminal-run:hover, .terminal-run:focus-visible { background: rgba(0,255,0,.22); box-shadow: 0 0 12px rgba(0,255,0,.45); outline: none; }
+.reference-links { display: flex; flex-wrap: wrap; gap: .45rem .8rem; }
+.reference-links .tech-link { line-height: 1.6; }
+@media (max-width: 768px) {
+  .pip-boy-trigger { width: 68px; height: 68px; right: 12px; }
+  .trigger-triangle { border-left-width: 18px; border-right-width: 18px; border-bottom-width: 31px; }
+  .pip-boy-module.is-floating { left: 1rem !important; top: 1rem !important; width: calc(100vw - 2rem); max-height: calc(100dvh - 2rem); }
+  .yt-url-input { flex-direction: column; }
+  #load-yt-btn { width: 100%; }
+}

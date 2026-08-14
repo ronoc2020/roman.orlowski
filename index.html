@@ -51,7 +51,7 @@
   </div>
 
   <!-- ========== PIP-BOY 3000 INVENTORY ========== -->
-  <div class="pip-boy-inventory">
+  <div class="pip-boy-inventory" data-modular="true" aria-label="Modular ROCS Pip-Boy inventory">
     <div class="inventory-header">
       <div class="inventory-title">
         <i class="fas fa-microchip"></i> ROCS PIP-BOY 3000
@@ -80,14 +80,14 @@
     </div>
 
     <!-- === MUSIC – YouTube Player === -->
-    <div id="music-tab" class="inventory-content active">
-      <div class="inventory-item" style="background: rgba(0,0,0,0.3); border-left-color: #ff0000;">
-        <div class="inventory-item-title">
+    <div id="music-tab" class="inventory-content active" data-module-zone="music">
+      <div id="yt-module" class="inventory-item pip-boy-module youtube-module" data-module="youtube" style="background: rgba(0,0,0,0.3); border-left-color: #ff0000;">
+        <div class="inventory-item-title module-title">
           <i class="fab fa-youtube" style="color: #ff0000;"></i> PIP-BOY RADIO (YouTube Player)
         </div>
         <div class="youtube-pip" id="yt-player-container">
           <iframe id="yt-iframe" width="100%" height="180" 
-            src="https://www.youtube.com/embed/VwXHT8HwgIs?autoplay=0&modestbranding=1&rel=0"
+            src="https://www.youtube.com/embed/VwXHT8HwgIs?autoplay=0&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1"
             title="YouTube player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
             allowfullscreen>
@@ -97,9 +97,10 @@
           <button id="yt-play-btn" class="cyber-button" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;"><i class="fas fa-play"></i> Play</button>
           <button id="yt-pause-btn" class="cyber-button" style="padding: 0.3rem 0.8rem; font-size: 0.8rem; display:none;"><i class="fas fa-pause"></i> Pause</button>
           <button id="yt-stop-btn" class="cyber-button" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;"><i class="fas fa-stop"></i> Stop</button>
+          <button id="yt-pip-toggle" class="cyber-button" type="button" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;"><i class="fas fa-up-right-and-down-left-from-center"></i> PiP</button>
         </div>
         <div class="track-info" id="track-info" style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--neon-yellow);">
-          <i class="fas fa-music"></i> <span id="current-track">Hacking Focus Mix (VwXHT8HwgIs)</span>
+          <i class="fas fa-music"></i> <span id="current-track">Hacking Focus Mix (VwXHT8HwgIs)</span> <span id="yt-status" role="status" aria-live="polite"></span>
         </div>
         <div class="yt-url-input" style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
           <input type="text" id="yt-url" placeholder="Wklej link z YouTube (lub ID)" value="VwXHT8HwgIs" style="flex: 1; background: rgba(0,0,0,0.5); border: 1px solid var(--neon-yellow); color: #fff; padding: 0.4rem; font-size: 0.8rem; border-radius: 3px;">
@@ -228,7 +229,8 @@
         </div>
         <div class="terminal-input">
           <span class="terminal-prompt">$</span>
-          <input type="text" id="terminal-command" placeholder="Enter command...">
+          <input type="text" id="terminal-command" autocomplete="off" spellcheck="false" placeholder="Enter command...">
+          <button type="button" id="terminal-run" class="terminal-run" aria-label="Execute terminal command"><i class="fas fa-play"></i></button>
         </div>
       </div>
     </div>
@@ -291,6 +293,20 @@
         <div class="inventory-item-desc">Cybersecurity consulting and cloud security solutions</div>
         <a href="https://rocybersolutions.com" target="_blank" class="cyber-button">MAIN SITE</a>
       </div>
+      <div class="inventory-item technical-reference-module">
+        <div class="inventory-item-title"><i class="fas fa-book-open"></i> Technical Reference Index</div>
+        <div class="inventory-item-desc">Quick reference links for the technical terms used across this portfolio.</div>
+        <div class="reference-links">
+          <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank" rel="noopener" class="tech-link">Cybersecurity</a>
+          <a href="https://www.geeksforgeeks.org/network-security/" target="_blank" rel="noopener" class="tech-link">Network Security</a>
+          <a href="https://www.geeksforgeeks.org/cloud-security/" target="_blank" rel="noopener" class="tech-link">Cloud Security</a>
+          <a href="https://www.geeksforgeeks.org/zero-trust-architecture/" target="_blank" rel="noopener" class="tech-link">Zero Trust</a>
+          <a href="https://www.geeksforgeeks.org/incident-response/" target="_blank" rel="noopener" class="tech-link">Incident Response</a>
+          <a href="https://www.geeksforgeeks.org/owasp-top-10/" target="_blank" rel="noopener" class="tech-link">OWASP Top 10</a>
+          <a href="https://www.geeksforgeeks.org/kubernetes/" target="_blank" rel="noopener" class="tech-link">Kubernetes</a>
+          <a href="https://www.geeksforgeeks.org/siem-security-information-and-event-management/" target="_blank" rel="noopener" class="tech-link">SIEM</a>
+        </div>
+      </div>
     </div>
   </div>
   <!-- ========== KONIEC PIP-BOY ========== -->
@@ -331,7 +347,7 @@
       <section id="profile-section" class="section visible">
         <h2><i class="fas fa-user-circle"></i> Professional Profile</h2>
         
-        <p>Experienced <a href="https://www.geeksforgeeks.org/cybersecurity/" target="_blank" class="tech-link">cybersecurity</a> professional with 15+ years of IT operations and infrastructure management expertise. Specialized in <a href="https://www.geeksforgeeks.org/cloud-security/" target="_blank" class="tech-link">cloud security</a>, <a href="https://www.geeksforgeeks.org/threat-modeling/" target="_blank" class="tech-link">threat analysis</a>, and compliance frameworks (ISO 27001, GDPR, NIST, NIS2). Proven track record in designing secure architectures, implementing <a href="https://www.geeksforgeeks.org/zero-trust-architecture/" target="_blank" class="tech-link">zero-trust architectures</a>, and leading incident response initiatives.</p>
+        <p>Experienced <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank" class="tech-link">cybersecurity</a> professional with 15+ years of IT operations and infrastructure management expertise. Specialized in <a href="https://www.geeksforgeeks.org/cloud-security/" target="_blank" class="tech-link">cloud security</a>, <a href="https://www.geeksforgeeks.org/threat-modeling/" target="_blank" class="tech-link">threat analysis</a>, and compliance frameworks (ISO 27001, GDPR, NIST, NIS2). Proven track record in designing secure architectures, implementing <a href="https://www.geeksforgeeks.org/zero-trust-architecture/" target="_blank" class="tech-link">zero-trust architectures</a>, and leading incident response initiatives.</p>
 
         <h3>Key Qualifications</h3>
         <div class="qualifications-grid">
@@ -414,26 +430,26 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
         <div class="timeline">
           <div class="timeline-item">
             <div class="timeline-date">Feb 2026 – Present</div>
-            <div class="timeline-title">vCISO | Strategic Cybersecurity Leadership</div>
-            <div class="timeline-desc"><strong><a href="https://rocybersolutions.com/services" target="_blank" class="tech-link">ROCyberSolutions</a></strong><br>Providing executive vCISO services, strategic cybersecurity leadership, risk management, and compliance advisory (NIS2, ISO 27001, DORA, GDPR). Delivering security assessments and incident response frameworks.</div>
+            <div class="timeline-title"><a href="https://www.geeksforgeeks.org/software-engineering/virtual-ciso-vciso/" target="_blank" class="tech-link">vCISO</a> | <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank" class="tech-link">Strategic Cybersecurity Leadership</a></div>
+            <div class="timeline-desc"><strong><a href="https://rocybersolutions.com/services" target="_blank" class="tech-link">ROCyberSolutions</a></strong><br>Providing executive <a href="https://www.geeksforgeeks.org/software-engineering/virtual-ciso-vciso/" target="_blank" class="tech-link">vCISO</a> services, <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank" class="tech-link">strategic cybersecurity leadership</a>, <a href="https://www.geeksforgeeks.org/computer-networks/risk-management-for-information-security-set-2/" target="_blank" class="tech-link">risk management</a>, and compliance advisory (<a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cybersecurity-framework/" target="_blank" class="tech-link">NIS2</a>, <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cybersecurity-framework/" target="_blank" class="tech-link">ISO 27001</a>, <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cybersecurity-framework/" target="_blank" class="tech-link">DORA</a>, <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cybersecurity-framework/" target="_blank" class="tech-link">GDPR</a>). Delivering <a href="https://www.geeksforgeeks.org/software-engineering/risk-assessment/" target="_blank" class="tech-link">security assessments</a> and <a href="https://www.geeksforgeeks.org/cybersecurity/incident-management-in-cyber-security/" target="_blank" class="tech-link">incident response frameworks</a>.</div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-date">2023 – 2024</div>
             <div class="timeline-title">Senior Engineer – Cloud & Infrastructure</div>
-            <div class="timeline-desc"><strong>LTIMindtree</strong><br>Coordinated team tasks and supported the deployment of Microsoft Defender and Sentinel. Acted as a bridge between technical requirements and operational execution.</div>
+            <div class="timeline-desc"><strong>LTIMindtree</strong><br>Coordinated team tasks and supported the deployment of <a href="https://www.geeksforgeeks.org/devops/microsoft-azure-protecting-hybrid-cloud-workloads-using-azure-defender/" target="_blank" class="tech-link">Microsoft Defender</a> and <a href="https://www.geeksforgeeks.org/devops/microsoft-azure-introduction-to-azure-sentinel/" target="_blank" class="tech-link">Sentinel</a>. Acted as a bridge between technical requirements and operational execution.</div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-date">2022 – 2023</div>
             <div class="timeline-title">Support Engineer</div>
-            <div class="timeline-desc"><strong>Intellias</strong><br>Supported cloud migrations across 5 EU regions, ensuring stability and adherence to SLAs.</div>
+            <div class="timeline-desc"><strong>Intellias</strong><br>Supported <a href="https://www.geeksforgeeks.org/cloud-computing/cloud-migration/" target="_blank" class="tech-link">cloud migrations</a> across 5 EU regions, ensuring stability and adherence to <a href="https://www.geeksforgeeks.org/cloud-computing/service-level-agreements-in-cloud-computing/" target="_blank" class="tech-link">SLAs</a>.</div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-date">2020</div>
             <div class="timeline-title">NOC Engineer</div>
-            <div class="timeline-desc"><strong>Sperasoft (Project: Amazon "New World")</strong><br>Monitored global AWS infrastructure for one of the largest gaming launches. Created detailed incident management run-books to standardize response procedures.</div>
+            <div class="timeline-desc"><strong>Sperasoft (Project: Amazon "New World")</strong><br>Monitored global <a href="https://www.geeksforgeeks.org/devops/aws-tutorial/" target="_blank" class="tech-link">AWS infrastructure</a> for one of the largest gaming launches. Created detailed <a href="https://www.geeksforgeeks.org/cybersecurity/incident-management-in-cyber-security/" target="_blank" class="tech-link">incident management</a> run-books to standardize response procedures.</div>
           </div>
 
           <div class="timeline-item">
@@ -445,19 +461,19 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
           <div class="timeline-item">
             <div class="timeline-date">2018 – 2019</div>
             <div class="timeline-title">Junior Network Specialist</div>
-            <div class="timeline-desc"><strong>Emitel SA</strong><br>Maintained critical national transmission infrastructure; coordinated onsite troubleshooting teams.</div>
+            <div class="timeline-desc"><strong>Emitel SA</strong><br>Maintained critical national <a href="https://www.geeksforgeeks.org/computer-networks/basics-computer-networking/" target="_blank" class="tech-link">transmission infrastructure</a>; coordinated onsite troubleshooting teams.</div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-date">2015 – 2017</div>
             <div class="timeline-title">Service Specialist NOC</div>
-            <div class="timeline-desc"><strong>Horsebridge Network Systems</strong><br>Monitored meshed network systems for vessels and ISPs using advanced monitoring suites.</div>
+            <div class="timeline-desc"><strong>Horsebridge Network Systems</strong><br>Monitored meshed <a href="https://www.geeksforgeeks.org/computer-networks/types-of-network-topology/" target="_blank" class="tech-link">network systems</a> for vessels and ISPs using advanced monitoring suites.</div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-date">2011 – 2014</div>
             <div class="timeline-title">Telecommunication Engineer</div>
-            <div class="timeline-desc"><strong>BT Openreach (UK)</strong><br>Hands-on installation and repair of large-scale broadband networks; expertise in signal integrity.</div>
+            <div class="timeline-desc"><strong>BT Openreach (UK)</strong><br>Hands-on installation and repair of large-scale <a href="https://www.geeksforgeeks.org/computer-networks/computer-network-tutorials/" target="_blank" class="tech-link">broadband networks</a>; expertise in signal integrity.</div>
           </div>
         </div>
 
@@ -473,11 +489,11 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
           </div>
           <div class="monitoring-tool">
             <h4><i class="fas fa-tachometer-alt"></i> Performance Optimization</h4>
-            <p>Performed performance tuning and capacity planning of critical infrastructure. Optimized cloud resource utilization, reducing costs while improving performance.</p>
+            <p>Performed performance tuning and capacity planning of critical infrastructure. Optimized <a href="https://www.geeksforgeeks.org/cloud-computing/cloud-computing/" target="_blank" class="tech-link">cloud resource utilization</a>, reducing costs while improving performance.</p>
           </div>
           <div class="monitoring-tool">
             <h4><i class="fas fa-check-double"></i> Compliance Management</h4>
-            <p>Ensured regulatory compliance through regular audits and assessments. Maintained adherence to SLA agreements and ISO 9001 standards for operational excellence.</p>
+            <p>Ensured regulatory compliance through regular audits and assessments. Maintained adherence to <a href="https://www.geeksforgeeks.org/cloud-computing/service-level-agreements-in-cloud-computing/" target="_blank" class="tech-link">SLA agreements</a> and ISO 9001 standards for operational excellence.</p>
           </div>
         </div>
       </section>
@@ -490,7 +506,7 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
         <div class="skills-grid">
           <div class="skill-card">
             <h3><i class="fas fa-shield"></i> Threat Detection</h3>
-            <p><a href="https://www.geeksforgeeks.org/darktrace/" target="_blank" class="tech-link">Darktrace</a>, CyOps, <a href="https://www.geeksforgeeks.org/metasploit/" target="_blank" class="tech-link">Metasploit</a>, <a href="https://www.geeksforgeeks.org/hashcat/" target="_blank" class="tech-link">Hashcat</a> for threat detection, penetration testing, and cryptography.</p>
+            <p><a href="https://www.geeksforgeeks.org/darktrace/" target="_blank" class="tech-link">Darktrace</a>, <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank" class="tech-link">CyOps</a>, <a href="https://www.geeksforgeeks.org/metasploit/" target="_blank" class="tech-link">Metasploit</a>, <a href="https://www.geeksforgeeks.org/hashcat/" target="_blank" class="tech-link">Hashcat</a> for <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank" class="tech-link">threat detection</a>, <a href="https://www.geeksforgeeks.org/penetration-testing-software-engineering/" target="_blank" class="tech-link">penetration testing</a>, and <a href="https://www.geeksforgeeks.org/computer-networks/cryptography-tutorial/" target="_blank" class="tech-link">cryptography</a>.</p>
           </div>
           <div class="skill-card">
             <h3><i class="fas fa-search"></i> Vulnerability Assessment</h3>
@@ -506,15 +522,15 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
         <div class="skills-grid">
           <div class="skill-card">
             <h3><i class="fas fa-aws"></i> AWS Security</h3>
-            <p><a href="https://www.geeksforgeeks.org/aws-security-hub/" target="_blank" class="tech-link">AWS Security Hub</a>, <a href="https://www.geeksforgeeks.org/aws-guardduty/" target="_blank" class="tech-link">AWS GuardDuty</a>, AWS CloudTrail for threat detection and compliance monitoring.</p>
+            <p><a href="https://www.geeksforgeeks.org/aws-security-hub/" target="_blank" class="tech-link">AWS Security Hub</a>, <a href="https://www.geeksforgeeks.org/aws-guardduty/" target="_blank" class="tech-link">AWS GuardDuty</a>, <a href="https://www.geeksforgeeks.org/cloud-computing/aws-cloudtrail/" target="_blank" class="tech-link">AWS CloudTrail</a> for <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank" class="tech-link">threat detection</a> and compliance monitoring.</p>
           </div>
           <div class="skill-card">
             <h3><i class="fab fa-microsoft"></i> Azure Security</h3>
-            <p><a href="https://www.geeksforgeeks.org/azure-sentinel/" target="_blank" class="tech-link">Azure Sentinel</a>, Defender for Endpoint, Intune for cloud security monitoring and endpoint detection.</p>
+            <p><a href="https://www.geeksforgeeks.org/devops/microsoft-azure-introduction-to-azure-sentinel/" target="_blank" class="tech-link">Azure Sentinel</a>, <a href="https://www.geeksforgeeks.org/devops/microsoft-azure-protecting-hybrid-cloud-workloads-using-azure-defender/" target="_blank" class="tech-link">Defender for Endpoint</a>, <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank" class="tech-link">Intune</a> for <a href="https://www.geeksforgeeks.org/cloud-computing/cloud-computing/" target="_blank" class="tech-link">cloud security monitoring</a> and endpoint detection.</p>
           </div>
           <div class="skill-card">
             <h3><i class="fas fa-docker"></i> Container Security</h3>
-            <p><a href="https://www.geeksforgeeks.org/kubernetes/" target="_blank" class="tech-link">Kubernetes</a>, <a href="https://www.geeksforgeeks.org/cloudflare/" target="_blank" class="tech-link">Cloudflare</a>, CrowdStrike for cloud security and endpoint protection.</p>
+            <p><a href="https://www.geeksforgeeks.org/kubernetes/" target="_blank" class="tech-link">Kubernetes</a>, <a href="https://www.geeksforgeeks.org/cloudflare/" target="_blank" class="tech-link">Cloudflare</a>, <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank" class="tech-link">CrowdStrike</a> for <a href="https://www.geeksforgeeks.org/cloud-computing/cloud-computing/" target="_blank" class="tech-link">cloud security</a> and endpoint protection.</p>
           </div>
         </div>
 
@@ -522,11 +538,11 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
         <div class="skills-grid">
           <div class="skill-card">
             <h3><i class="fas fa-eye"></i> Intelligence Gathering</h3>
-            <p><a href="https://www.geeksforgeeks.org/osint/" target="_blank" class="tech-link">OSINT</a>, Google Hacking Database, <a href="https://www.geeksforgeeks.org/shodan/" target="_blank" class="tech-link">Shodan</a>, <a href="https://www.geeksforgeeks.org/censys/" target="_blank" class="tech-link">Censys Search</a> for network reconnaissance.</p>
+            <p><a href="https://www.geeksforgeeks.org/osint/" target="_blank" class="tech-link">OSINT</a>, <a href="https://www.geeksforgeeks.org/ethical-hacking/what-is-google-dorking/" target="_blank" class="tech-link">Google Hacking Database</a>, <a href="https://www.geeksforgeeks.org/shodan/" target="_blank" class="tech-link">Shodan</a>, <a href="https://www.geeksforgeeks.org/censys/" target="_blank" class="tech-link">Censys Search</a> for <a href="https://www.geeksforgeeks.org/computer-networks/network-security/" target="_blank" class="tech-link">network reconnaissance</a>.</p>
           </div>
           <div class="skill-card">
             <h3><i class="fas fa-crosshairs"></i> Reconnaissance Tools</h3>
-            <p><a href="https://www.geeksforgeeks.org/maltego/" target="_blank" class="tech-link">Maltego</a>, The Harvester for gathering information from public sources.</p>
+            <p><a href="https://www.geeksforgeeks.org/maltego/" target="_blank" class="tech-link">Maltego</a>, <a href="https://www.geeksforgeeks.org/ethical-hacking/osnit-techniques/" target="_blank" class="tech-link">The Harvester</a> for gathering information from public sources.</p>
           </div>
         </div>
 
@@ -534,15 +550,15 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
         <div class="skills-grid">
           <div class="skill-card">
             <h3><i class="fas fa-chart-bar"></i> SIEM Platforms</h3>
-            <p><a href="https://www.geeksforgeeks.org/splunk/" target="_blank" class="tech-link">Splunk</a>, Tribe, Snow, Cribl, Cloudlock, Elastic Search for security information and event management.</p>
+            <p><a href="https://www.geeksforgeeks.org/splunk/" target="_blank" class="tech-link">Splunk</a>, Tribe, Snow, Cribl, Cloudlock, <a href="https://www.geeksforgeeks.org/elasticsearch/what-is-elastic-search-and-why-is-it-used/" target="_blank" class="tech-link">Elastic Search</a> for <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank" class="tech-link">security information and event management</a>.</p>
           </div>
           <div class="skill-card">
             <h3><i class="fas fa-wifi"></i> Network Monitoring</h3>
-            <p>Cube Data Miner, Deva, <a href="https://www.geeksforgeeks.org/prtg/" target="_blank" class="tech-link">PRTG</a>, Espy, <a href="https://www.geeksforgeeks.org/cacti/" target="_blank" class="tech-link">Cacti</a>, <a href="https://www.geeksforgeeks.org/zabbix/" target="_blank" class="tech-link">Zabbix</a>, Grafana, SolarWinds for monitoring and alerting.</p>
+            <p>Cube Data Miner, Deva, <a href="https://www.geeksforgeeks.org/prtg/" target="_blank" class="tech-link">PRTG</a>, Espy, <a href="https://www.geeksforgeeks.org/cacti/" target="_blank" class="tech-link">Cacti</a>, <a href="https://www.geeksforgeeks.org/zabbix/" target="_blank" class="tech-link">Zabbix</a>, <a href="https://www.geeksforgeeks.org/blogs/what-is-grafana/" target="_blank" class="tech-link">Grafana</a>, SolarWinds for <a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank" class="tech-link">monitoring and alerting</a>.</p>
           </div>
           <div class="skill-card">
             <h3><i class="fas fa-broadcast-tower"></i> Wireless Management</h3>
-            <p>BlueSocket, Radwin for wireless network management and monitoring.</p>
+            <p>BlueSocket, Radwin for <a href="https://www.geeksforgeeks.org/computer-networks/network-security/" target="_blank" class="tech-link">wireless network management</a> and monitoring.</p>
           </div>
         </div>
 
@@ -550,7 +566,7 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
         <div class="skills-grid">
           <div class="skill-card">
             <h3><i class="fas fa-ticket-alt"></i> Incident Management</h3>
-            <p><a href="https://www.geeksforgeeks.org/jira/" target="_blank" class="tech-link">Jira</a>, <a href="https://www.geeksforgeeks.org/servicenow/" target="_blank" class="tech-link">ServiceNow</a>, PagerDuty, Rundeck for incident management and service operations automation.</p>
+            <p><a href="https://www.geeksforgeeks.org/jira/" target="_blank" class="tech-link">Jira</a>, <a href="https://www.geeksforgeeks.org/servicenow/" target="_blank" class="tech-link">ServiceNow</a>, <a href="https://www.geeksforgeeks.org/cybersecurity/incident-management-in-cyber-security/" target="_blank" class="tech-link">PagerDuty</a>, <a href="https://www.geeksforgeeks.org/cybersecurity/incident-management-in-cyber-security/" target="_blank" class="tech-link">Rundeck</a> for <a href="https://www.geeksforgeeks.org/cybersecurity/incident-management-in-cyber-security/" target="_blank" class="tech-link">incident management</a> and service operations automation.</p>
           </div>
           <div class="skill-card">
             <h3><i class="fab fa-github"></i> Version Control</h3>
@@ -562,11 +578,11 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
         <div class="skills-grid">
           <div class="skill-card">
             <h3><i class="fas fa-laptop"></i> Operating Systems</h3>
-            <p>Windows Family, <a href="https://www.geeksforgeeks.org/linux/" target="_blank" class="tech-link">Linux</a> (Gentoo, Ubuntu, Debian, Kali, Tails, Whonix), MacOS, Android, iOS.</p>
+            <p><a href="https://www.geeksforgeeks.org/operating-systems/" target="_blank" class="tech-link">Windows Family</a>, <a href="https://www.geeksforgeeks.org/linux/" target="_blank" class="tech-link">Linux</a> (Gentoo, Ubuntu, Debian, Kali, Tails, Whonix), <a href="https://www.geeksforgeeks.org/operating-systems/" target="_blank" class="tech-link">MacOS</a>, <a href="https://www.geeksforgeeks.org/operating-systems/" target="_blank" class="tech-link">Android</a>, <a href="https://www.geeksforgeeks.org/operating-systems/" target="_blank" class="tech-link">iOS</a>.</p>
           </div>
           <div class="skill-card">
             <h3><i class="fas fa-database"></i> Databases</h3>
-            <p><a href="https://www.geeksforgeeks.org/mysql/" target="_blank" class="tech-link">MySQL</a>, MariaDb, Oracle Discoverer, Azure SQL Database.</p>
+            <p><a href="https://www.geeksforgeeks.org/mysql/" target="_blank" class="tech-link">MySQL</a>, <a href="https://www.geeksforgeeks.org/mysql/" target="_blank" class="tech-link">MariaDb</a>, <a href="https://www.geeksforgeeks.org/dbms/" target="_blank" class="tech-link">Oracle Discoverer</a>, <a href="https://www.geeksforgeeks.org/devops/microsoft-azure-introduction-to-azure-sql-database/" target="_blank" class="tech-link">Azure SQL Database</a>.</p>
           </div>
         </div>
 
@@ -1527,7 +1543,7 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
         <div class="footer-column">
           <h3>Resources</h3>
           <ul class="footer-links">
-            <li><a href="https://www.geeksforgeeks.org/cybersecurity/" target="_blank"><i class="fas fa-external-link-alt"></i> GeeksforGeeks Cybersecurity</a></li>
+            <li><a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank"><i class="fas fa-external-link-alt"></i> GeeksforGeeks Cybersecurity</a></li>
             <li><a href="https://owasp.org/" target="_blank"><i class="fas fa-external-link-alt"></i> OWASP</a></li>
             <li><a href="https://attack.mitre.org/" target="_blank"><i class="fas fa-external-link-alt"></i> MITRE ATT&CK</a></li>
             <li><a href="https://www.nist.gov/" target="_blank"><i class="fas fa-external-link-alt"></i> NIST</a></li>
@@ -1550,6 +1566,6 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script src="script_new.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

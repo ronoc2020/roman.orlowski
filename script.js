@@ -472,45 +472,52 @@ Tools: IDA Pro, Ghidra, Wireshark, Cuckoo Sandbox`
     }
   };
 
-  // Terminal Input Handler
+  // Terminal Input Handler — keyboard and explicit button execution
   const terminalCommand = document.getElementById('terminal-command');
   const terminalOutput = document.getElementById('terminal-output');
-  
+  const terminalRun = document.getElementById('terminal-run');
+
+  function runTerminalCommand(rawCommand) {
+    if (!terminalCommand || !terminalOutput) return;
+    const command = String(rawCommand || '').trim().toLowerCase().replace(/\s+/g, '_');
+    terminalCommand.value = '';
+    if (!command) return;
+
+    const commandLine = document.createElement('div');
+    commandLine.className = 'terminal-line';
+    commandLine.innerHTML = `<span class="terminal-prompt">$</span> ${command.replace(/</g, '&lt;')}`;
+    terminalOutput.appendChild(commandLine);
+
+    let result;
+    if (commands[command]) {
+      result = commands[command].execute();
+    } else if (command === 'clear') {
+      terminalOutput.innerHTML = '<div class="terminal-line">Terminal cleared.</div>';
+      return;
+    } else {
+      result = `Command not found: ${command}\nType 'help' for available commands`;
+    }
+
+    if (result) {
+      const resultElement = document.createElement('div');
+      resultElement.className = 'terminal-line terminal-response';
+      resultElement.style.whiteSpace = 'pre-wrap';
+      resultElement.textContent = result;
+      terminalOutput.appendChild(resultElement);
+    }
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }
+
   if (terminalCommand) {
-    terminalCommand.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        const command = terminalCommand.value.trim().toLowerCase();
-        terminalCommand.value = '';
-        
-        if (!command) return;
-        
-        // Display command
-        const commandLine = document.createElement('div');
-        commandLine.className = 'terminal-line';
-        commandLine.innerHTML = `<span class="terminal-prompt">$</span> ${command}`;
-        terminalOutput.appendChild(commandLine);
-        
-        // Execute command
-        let result;
-        if (commands[command]) {
-          result = commands[command].execute();
-        } else {
-          result = `Command not found: ${command}\nType 'help' for available commands`;
-        }
-        
-        // Display result
-        if (result) {
-          const resultElement = document.createElement('div');
-          resultElement.className = 'terminal-line';
-          resultElement.style.whiteSpace = 'pre-wrap';
-          resultElement.textContent = result;
-          terminalOutput.appendChild(resultElement);
-        }
-        
-        // Scroll to bottom
-        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    terminalCommand.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        runTerminalCommand(terminalCommand.value);
       }
     });
+  }
+  if (terminalRun) {
+    terminalRun.addEventListener('click', () => runTerminalCommand(terminalCommand ? terminalCommand.value : ''));
   }
 
   // Music Player
@@ -949,58 +956,184 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
 // ===== YOUTUBE MUSIC PLAYER CONTROLLER =====
-function extractYouTubeId(input) {
-  if (!input) return 'VwXHT8HwgIs';
-  input = input.trim();
-  if (/^[a-zA-Z0-9_-]{11}$/.test(input)) {
-    return input;
-  }
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-  const match = input.match(regExp);
-  return (match && match[2].length === 11) ? match[2] : 'VwXHT8HwgIs';
-}
+(function setupYouTubePlayer() {
+  const DEFAULT_VIDEO_ID = 'VwXHT8HwgIs';
 
-function loadYouTubeVideo(input) {
-  const videoId = extractYouTubeId(input);
-  const iframe = document.getElementById('yt-iframe');
-  const trackSpan = document.getElementById('current-track');
-  if (iframe) {
-    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`;
-  }
-  if (trackSpan) {
-    trackSpan.textContent = `YouTube Track (${videoId})`;
-  }
-}
+  function extractYouTubeId(input) {
+    const value = String(input || '').trim();
+    if (!value) return null;
+    if (/^[A-Za-z0-9_-]{11}$/.test(value)) return value;
 
-document.addEventListener('DOMContentLoaded', function() {
-  const loadBtn = document.getElementById('load-yt-btn');
-  const urlInput = document.getElementById('yt-url');
-  const stopBtn = document.getElementById('yt-stop-btn');
-  const iframe = document.getElementById('yt-iframe');
+    try {
+      const url = new URL(value, window.location.href);
+      const host = url.hostname.toLowerCase();
+      if (host === 'youtu.be' || host.endsWith('.youtu.be')) {
+        const id = url.pathname.split('/').filter(Boolean)[0];
+        if (id && /^[A-Za-z0-9_-]{11}$/.test(id)) return id;
+      }
+      if (host.includes('youtube.com') || host.includes('youtube-nocookie.com')) {
+        const queryId = url.searchParams.get('v');
+        const pathParts = url.pathname.split('/').filter(Boolean);
+        const pathId = ['embed', 'shorts', 'live', 'v'].includes(pathParts[0]) ? pathParts[1] : null;
+        const id = queryId || pathId;
+        if (id && /^[A-Za-z0-9_-]{11}$/.test(id)) return id;
+      }
+    } catch (error) {
+      // Fall through to a strict ID search for pasted text.
+    }
 
-  if (loadBtn && urlInput) {
-    loadBtn.addEventListener('click', () => {
-      loadYouTubeVideo(urlInput.value);
+    const match = value.match(/(?:v=|youtu\.be\/|embed\/|shorts\/|live\/)([A-Za-z0-9_-]{11})/i);
+    return match ? match[1] : null;
+  }
+
+  function status(message, isError = false) {
+    const node = document.getElementById('yt-status');
+    if (!node) return;
+    node.textContent = ` ${message}`;
+    node.classList.toggle('status-error', isError);
+  }
+
+  function iframeUrl(videoId, autoplay = false) {
+    const params = new URLSearchParams({
+      autoplay: autoplay ? '1' : '0',
+      controls: '1',
+      modestbranding: '1',
+      rel: '0',
+      playsinline: '1',
+      enablejsapi: '1',
+      origin: window.location.origin
     });
-    urlInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        loadYouTubeVideo(urlInput.value);
+    return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+  }
+
+  function sendPlayerCommand(command) {
+    const iframe = document.getElementById('yt-iframe');
+    if (!iframe || !iframe.contentWindow) return;
+    iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: command, args: [] }), 'https://www.youtube.com');
+  }
+
+  function loadYouTubeVideo(input, autoplay = true) {
+    const videoId = extractYouTubeId(input);
+    const iframe = document.getElementById('yt-iframe');
+    const track = document.getElementById('current-track');
+    const urlInput = document.getElementById('yt-url');
+    if (!videoId) {
+      status('Nie znaleziono poprawnego ID filmu (11 znaków).', true);
+      return false;
+    }
+    if (iframe) iframe.src = iframeUrl(videoId, autoplay);
+    if (track) track.textContent = `YouTube Track (${videoId})`;
+    if (urlInput) urlInput.value = videoId;
+    status(`Załadowano ${videoId}`);
+    return true;
+  }
+
+  function stopYouTube() {
+    sendPlayerCommand('stopVideo');
+    const iframe = document.getElementById('yt-iframe');
+    if (iframe) iframe.src = iframeUrl(DEFAULT_VIDEO_ID, false);
+    status('Odtwarzanie zatrzymane.');
+  }
+
+  window.extractYouTubeId = extractYouTubeId;
+  window.loadYouTubeVideo = loadYouTubeVideo;
+  window.playYouTube = () => sendPlayerCommand('playVideo');
+  window.pauseYouTube = () => sendPlayerCommand('pauseVideo');
+  window.stopYouTube = stopYouTube;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const loadButton = document.getElementById('load-yt-btn');
+    const input = document.getElementById('yt-url');
+    const playButton = document.getElementById('yt-play-btn');
+    const pauseButton = document.getElementById('yt-pause-btn');
+    const stopButton = document.getElementById('yt-stop-btn');
+
+    if (loadButton && input) loadButton.addEventListener('click', () => loadYouTubeVideo(input.value, true));
+    if (input) input.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        loadYouTubeVideo(input.value, true);
       }
     });
-  }
+    if (playButton) playButton.addEventListener('click', () => { sendPlayerCommand('playVideo'); if (pauseButton) pauseButton.style.display = 'inline-flex'; });
+    if (pauseButton) pauseButton.addEventListener('click', () => { sendPlayerCommand('pauseVideo'); pauseButton.style.display = 'none'; });
+    if (stopButton) stopButton.addEventListener('click', stopYouTube);
+    document.querySelectorAll('.playlist-preset').forEach(button => button.addEventListener('click', () => loadYouTubeVideo(button.dataset.id, true)));
+    status('Gotowy — wklej link lub ID filmu.');
+  });
+})();
 
-  document.querySelectorAll('.playlist-preset').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const vidId = this.getAttribute('data-id');
-      if (urlInput) urlInput.value = vidId;
-      loadYouTubeVideo(vidId);
+// ===== MODULAR PIP-BOY MODULES + PORTABLE PIP PLAYER =====
+document.addEventListener('DOMContentLoaded', () => {
+  const inventory = document.querySelector('.pip-boy-inventory');
+  if (!inventory) return;
+
+  const modules = Array.from(inventory.querySelectorAll('.inventory-item'));
+  modules.forEach((module, index) => {
+    module.classList.add('pip-boy-module');
+    module.dataset.moduleIndex = String(index);
+    module.setAttribute('draggable', 'true');
+
+    const title = module.querySelector('.inventory-item-title, .module-title');
+    if (title && !title.querySelector('.module-controls')) {
+      const controls = document.createElement('span');
+      controls.className = 'module-controls';
+      controls.innerHTML = '<button type="button" class="module-action module-drag-handle" title="Przeciągnij moduł" aria-label="Przeciągnij moduł"><i class="fas fa-grip-lines"></i></button><button type="button" class="module-action module-detach" title="Odłącz moduł" aria-label="Odłącz moduł"><i class="fas fa-thumbtack"></i></button>';
+      title.appendChild(controls);
+    }
+
+    module.addEventListener('dragstart', event => {
+      if (!event.target.closest('.module-drag-handle')) {
+        event.preventDefault();
+        return;
+      }
+      module.classList.add('is-dragging');
+      event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.setData('text/plain', module.dataset.moduleIndex);
+    });
+    module.addEventListener('dragend', () => module.classList.remove('is-dragging'));
+    module.addEventListener('dragover', event => {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = 'move';
+    });
+    module.addEventListener('drop', event => {
+      event.preventDefault();
+      const sourceIndex = event.dataTransfer.getData('text/plain');
+      const source = modules.find(item => item.dataset.moduleIndex === sourceIndex);
+      if (!source || source === module || source.parentElement !== module.parentElement) return;
+      const rect = module.getBoundingClientRect();
+      module.parentElement.insertBefore(source, event.clientY < rect.top + rect.height / 2 ? module : module.nextSibling);
+    });
+
+    const detach = module.querySelector('.module-detach');
+    if (detach) detach.addEventListener('click', event => {
+      event.stopPropagation();
+      const detached = module.classList.toggle('is-detached');
+      module.classList.toggle('is-floating', detached);
+      detach.innerHTML = detached ? '<i class="fas fa-thumbtack-slash"></i>' : '<i class="fas fa-thumbtack"></i>';
+      if (detached) {
+        module.style.left = module.style.left || '10vw';
+        module.style.top = module.style.top || '15vh';
+      } else {
+        module.style.left = '';
+        module.style.top = '';
+      }
     });
   });
 
-  if (stopBtn && iframe) {
-    stopBtn.addEventListener('click', () => {
-      iframe.src = iframe.src.split('?')[0] + '?autoplay=0';
-    });
-  }
+  const ytModule = document.getElementById('yt-module');
+  const pipButton = document.getElementById('yt-pip-toggle');
+  const detachButton = ytModule ? ytModule.querySelector('.module-detach') : null;
+  if (pipButton && ytModule) pipButton.addEventListener('click', event => {
+    event.stopPropagation();
+    const enable = !ytModule.classList.contains('is-floating');
+    ytModule.classList.toggle('is-floating', enable);
+    ytModule.classList.toggle('is-detached', enable);
+    pipButton.innerHTML = enable ? '<i class="fas fa-down-left-and-up-right-to-center"></i> Dock' : '<i class="fas fa-up-right-and-down-left-from-center"></i> PiP';
+    if (enable) { ytModule.style.left = '8vw'; ytModule.style.top = '12vh'; }
+    else { ytModule.style.left = ''; ytModule.style.top = ''; }
+    if (detachButton) detachButton.innerHTML = enable ? '<i class="fas fa-thumbtack-slash"></i>' : '<i class="fas fa-thumbtack"></i>';
+  });
 });
