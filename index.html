@@ -69,7 +69,7 @@
       </div>
       <div class="inventory-header-actions">
         <div class="inventory-subtitle">
-          <i class="fas fa-fingerprint"></i> ROCS SELF‑ASSESSMENT TERMINAL v2.0
+          <i class="fas fa-fingerprint"></i> ROCS RECRUITER INTERVIEW TERMINAL v2.0
         </div>
         <button type="button" id="pipBoyAudioToggle" class="pipboy-control pipboy-audio" aria-label="Toggle Vault-Tec Audio" title="Toggle Vault-Tec Audio SFX">
           <i class="fas fa-volume-high" id="audioToggleIcon"></i><span>SFX: ON</span>
@@ -269,32 +269,52 @@
       </div>
     </div>
 
-    <!-- === RECRUITER TERMINAL – 15 PYTAŃ SELF ASSESSMENT === -->
+    <!-- === RECRUITER TERMINAL – QUESTIONS & RESPONSE ARCHIVE === -->
     <div id="recruiter-tab" class="inventory-content">
-      <div class="terminal self-assessment-terminal">
+      <div class="terminal recruiter-questionnaire-terminal">
         <div class="terminal-header">
           <div class="terminal-btn red"></div>
           <div class="terminal-btn yellow"></div>
           <div class="terminal-btn green"></div>
-          <span style="margin-left: 1rem; color: #0f0; font-size: 0.8rem;">
-            <i class="fas fa-user-secret"></i> Are we Match | SYNC Self-Assesment for Recruiters  
-          </span>
+          <span class="recruiter-terminal-title"><i class="fas fa-user-tie"></i> Recruiter Interview Console | Questions for the Recruiter</span>
         </div>
-        
-        <div class="terminal-body" id="self-assessment-questions" style="max-height: 380px; overflow-y: auto; padding-right: 5px;">
+        <div class="recruiter-console-intro">
+          <strong>Ask the questions that matter.</strong> Write the recruiter's answers below. Answers are saved locally in this browser and can be downloaded as a plain-text interview record.
         </div>
-
-        <div id="self-assessment-result" style="display: none; padding: 1rem; background: #0a2a0a; border-top: 2px solid #0f0; margin-top: 0.5rem;">
-          <pre id="result-cipher" style="display: none;"></pre>
-        </div>
-
-        <div class="terminal-input">
-          <span class="terminal-prompt"><i class="fas fa-chevron-right"></i></span>
-          <input type="text" id="self-assessment-cmd" placeholder="Type 'help' for commands / 'results' to encrypt assessment">
-        </div>
-        <div style="padding: 0.3rem 1rem; background: #0a1a0a; color: #ada; font-size: 0.75rem;">
-          <i class="fas fa-lock"></i> Results encrypted – only operator can decrypt.
-        </div>
+        <form class="recruiter-questionnaire" data-recruiter-questionnaire="pipboy">
+          <label class="recruiter-question" data-question-key="role-context">
+            <span><b>Q1.</b> What are the main priorities and expected outcomes for this role during the first 90 days?</span>
+            <textarea data-answer-key="role-context" placeholder="Record the recruiter's answer..." rows="3"></textarea>
+          </label>
+          <label class="recruiter-question" data-question-key="security-mandate">
+            <span><b>Q2.</b> How is cybersecurity positioned in executive decision-making and business strategy?</span>
+            <textarea data-answer-key="security-mandate" placeholder="Record the recruiter's answer..." rows="3"></textarea>
+          </label>
+          <label class="recruiter-question" data-question-key="team-resources">
+            <span><b>Q3.</b> What team, budget and authority will be available to deliver the security roadmap?</span>
+            <textarea data-answer-key="team-resources" placeholder="Record the recruiter's answer..." rows="3"></textarea>
+          </label>
+          <label class="recruiter-question" data-question-key="risk-ownership">
+            <span><b>Q4.</b> How are security risks accepted, escalated and owned when business priorities conflict?</span>
+            <textarea data-answer-key="risk-ownership" placeholder="Record the recruiter's answer..." rows="3"></textarea>
+          </label>
+          <label class="recruiter-question" data-question-key="culture">
+            <span><b>Q5.</b> How would you describe the organisation's culture around transparency, challenge and learning from incidents?</span>
+            <textarea data-answer-key="culture" placeholder="Record the recruiter's answer..." rows="3"></textarea>
+          </label>
+          <label class="recruiter-question" data-question-key="success">
+            <span><b>Q6.</b> How will success be measured, and what does the reporting relationship with leadership look like?</span>
+            <textarea data-answer-key="success" placeholder="Record the recruiter's answer..." rows="3"></textarea>
+          </label>
+          <div class="recruiter-form-actions">
+            <button type="button" class="cyber-button recruiter-save"><i class="fas fa-floppy-disk"></i> SAVE ANSWERS</button>
+            <button type="button" class="cyber-button recruiter-download"><i class="fas fa-download"></i> DOWNLOAD RECORD</button>
+            <button type="button" class="cyber-button recruiter-copy"><i class="fas fa-copy"></i> COPY RECORD</button>
+            <button type="button" class="cyber-button recruiter-clear"><i class="fas fa-trash"></i> CLEAR</button>
+          </div>
+          <p class="recruiter-save-status" role="status" aria-live="polite"><i class="fas fa-database"></i> No answers saved yet.</p>
+        </form>
+        <div class="recruiter-privacy-note"><i class="fas fa-lock"></i> Local-only storage: answers stay in this browser unless you download or copy them.</div>
       </div>
     </div>
 
@@ -360,6 +380,7 @@
         <div class="status-dot pulse"></div>
         <i class="fas fa-shield"></i> SYSTEM ONLINE
       </div>
+      <p class="system-manifesto">Pip-Boy terminal, live SIEM/OSINT toolkit, recruiter interview workspace, and a live CLI. This résumé is just the entry point — the rest of the system is waiting on the other side.</p>
     </header>
 
     <!-- Navigation -->
@@ -370,7 +391,7 @@
       <div class="nav-item" data-section="frameworks-section"><i class="fas fa-shield-alt"></i> Frameworks</div>
       <div class="nav-item" data-section="monitoring-section"><i class="fas fa-chart-line"></i> Monitoring</div>
       <div class="nav-item" data-section="certifications-section"><i class="fas fa-certificate"></i> Certifications</div>
-      <div class="nav-item" data-section="assessment-section"><i class="fas fa-user-secret"></i> Assessment</div>
+      <div class="nav-item" data-section="assessment-section"><i class="fas fa-user-tie"></i> Recruiter Questions</div>
       <div class="nav-item" data-section="quiz-section"><i class="fas fa-question-circle"></i> Quiz</div>
       <div class="nav-item" data-section="contact-section"><i class="fas fa-envelope"></i> Contact</div>
     </nav>
@@ -860,628 +881,97 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
         </div>
       </section>
 
-      <!-- Certifications Section - POPRAWIONA Z DODANYMI POZYCJAMI -->
+      <!-- Certifications & Training Section -->
       <section id="certifications-section" class="section">
-        <h2><i class="fas fa-certificate"></i> Certifications & Training</h2>
-
-        <h3>Professional Certifications</h3>
-        <div class="certifications-grid">
-          <div class="cert-card">
-            <h3><i class="fas fa-shield"></i> Security Certifications</h3>
-            <p><strong>L100, L200:</strong> Security Training Levels<br>Ethical Hacking & Penetration Testing</p>
+        <div class="section-heading-row">
+          <div>
+            <p class="section-kicker"><i class="fas fa-folder-open"></i> Credential archive</p>
+            <h2><i class="fas fa-certificate"></i> Certifications &amp; Training</h2>
           </div>
-          <div class="cert-card">
-            <h3><i class="fas fa-check-circle"></i> Compliance & Standards</h3>
-            <p><strong>ISO 9001:2015</strong> - Quality Management<br><strong>ISO 27001</strong> - Information Security</p>
-          </div>
+          <span class="completion-badge"><i class="fas fa-check"></i> Completed</span>
         </div>
-
-        <h3>Professional Licenses & Accreditations</h3>
-        <ul class="resources-list">
-          <!-- Leadership & Management -->
-          <li><i class="fas fa-chart-line"></i> Digital Leadership in Business</li>
-          <li><i class="fas fa-users"></i> Agile Scrum Master</li>
-          <li><i class="fas fa-tasks"></i> ISO 9001:2015</li>
-
-          <!-- Security & Intelligence -->
-          <li><i class="fas fa-shield-alt"></i> Counterintelligence Awareness and Reporting Course for DOD</li>
-          <li><i class="fas fa-lock"></i> Introduction to CISSP – Security Assessment & Testing and Security</li>
-          <li><i class="fas fa-crosshairs"></i> Cyber Kill Chain</li>
-          <li><i class="fas fa-user-secret"></i> OpSec Awareness</li>
-          <li><i class="fas fa-search"></i> OSINT Basics</li>
-
-          <!-- Technical & Operational -->
-          <li><i class="fas fa-bolt"></i> SEP – supervision and operation up to 1 kV</li>
-          <li><i class="fas fa-certificate"></i> MDF Accreditation License (Frame Basic)</li>
-          <li><i class="fas fa-crane"></i> Crane Operations Basic Slinging Course</li>
-          <li><i class="fas fa-car"></i> Driving License cat. D</li>
-          <li><i class="fas fa-headset"></i> Professional Customer Phone Support</li>
+        <p class="section-intro">A verified overview of completed certificates, courses and operational training. The catalogue follows the certificate archive shown in the supplied reference and consolidates the completed qualifications listed on GitHub.</p>
+        <h3 class="subsection-title"><i class="fas fa-shield-halved"></i> Cybersecurity certificates</h3>
+        <div class="certifications-grid certificate-catalogue">
+          <article class="cert-card cert-card--security"><div class="cert-card-topline"><span class="cert-icon"><i class="fas fa-user-secret"></i></span><span class="cert-status"><i class="fas fa-check-circle"></i> Completed</span></div><h3>OpSec Awareness</h3><p>Operational security awareness focused on protecting sensitive information and reducing exposure.</p><span class="cert-source">Archive: OpSec Certifikat</span></article>
+          <article class="cert-card cert-card--security"><div class="cert-card-topline"><span class="cert-icon"><i class="fas fa-magnifying-glass"></i></span><span class="cert-status"><i class="fas fa-check-circle"></i> Completed</span></div><h3>OSINT</h3><p>Open-source intelligence foundations, collection methods and structured analysis of public information.</p><span class="cert-source">Archive: cybrary-cert-osint</span></article>
+          <article class="cert-card cert-card--security"><div class="cert-card-topline"><span class="cert-icon"><i class="fas fa-link"></i></span><span class="cert-status"><i class="fas fa-check-circle"></i> Completed</span></div><h3>Cyber Kill Chain</h3><p>Threat lifecycle analysis supporting detection, response and prevention.</p><span class="cert-source">Archive: cybrary-cert-the-cyber-kill-chain</span></article>
+          <article class="cert-card cert-card--security"><div class="cert-card-topline"><span class="cert-icon"><i class="fas fa-user-shield"></i></span><span class="cert-status"><i class="fas fa-check-circle"></i> Completed</span></div><h3>Certified Ethical Hacking</h3><p>Ethical hacking and penetration-testing foundations documented in the CEH certificate archive.</p><span class="cert-source">Archive: Roman_Orlowski_CEh Certificate</span></article>
+          <article class="cert-card cert-card--security"><div class="cert-card-topline"><span class="cert-icon"><i class="fas fa-file-shield"></i></span><span class="cert-status"><i class="fas fa-check-circle"></i> Completed</span></div><h3>Introduction to CISSP Security Assessment &amp; Testing</h3><p>Security assessment, testing and security concepts aligned with CISSP learning objectives.</p><span class="cert-source">Archive: Introduction to CISSP Security Assessment &amp; Testing and Security</span></article>
+          <article class="cert-card cert-card--security"><div class="cert-card-topline"><span class="cert-icon"><i class="fas fa-biohazard"></i></span><span class="cert-status"><i class="fas fa-check-circle"></i> Completed</span></div><h3>Ransomware Awareness</h3><p>Ransomware-focused learning covering attack awareness, resilience and response considerations.</p><span class="cert-source">Archive: roman-orlowski-ransomware-2</span></article>
+        </div>
+        <h3 class="subsection-title"><i class="fas fa-people-arrows"></i> Leadership, governance &amp; intelligence</h3>
+        <div class="certifications-grid certificate-catalogue">
+          <article class="cert-card cert-card--leadership"><div class="cert-card-topline"><span class="cert-icon"><i class="fas fa-chart-line"></i></span><span class="cert-status"><i class="fas fa-check-circle"></i> Completed</span></div><h3>Digital Leadership in Business</h3><p>Leadership, transformation and business-oriented decision-making in a digital environment.</p><span class="cert-source">Archive: Digital Leadership in Business</span></article>
+          <article class="cert-card cert-card--leadership"><div class="cert-card-topline"><span class="cert-icon"><i class="fas fa-people-group"></i></span><span class="cert-status"><i class="fas fa-check-circle"></i> Completed</span></div><h3>Agile Scrum Master</h3><p>Agile delivery practices, Scrum ceremonies and team facilitation.</p><span class="cert-source">Archive: Agile Scrum Master</span></article>
+          <article class="cert-card cert-card--leadership"><div class="cert-card-topline"><span class="cert-icon"><i class="fas fa-user-secret"></i></span><span class="cert-status"><i class="fas fa-check-circle"></i> Completed</span></div><h3>Counterintelligence Awareness &amp; Reporting — DOD</h3><p>Counterintelligence awareness, reporting responsibilities and security-conscious behaviour.</p><span class="cert-source">Archive: Counterintelligence Awareness and Reporting Course for DOD</span></article>
+          <article class="cert-card cert-card--leadership"><div class="cert-card-topline"><span class="cert-icon"><i class="fas fa-file-circle-check"></i></span><span class="cert-status"><i class="fas fa-check-circle"></i> Completed</span></div><h3>ISO 9001:2015</h3><p>Quality-management principles and process-focused operational improvement.</p><span class="cert-source">Completed qualification</span></article>
+        </div>
+        <h3 class="subsection-title"><i class="fas fa-toolbox"></i> Additional completed training &amp; qualifications</h3>
+        <ul class="resources-list completed-training-list">
+          <li><i class="fas fa-bolt"></i><span><strong>SEP — supervision and operation up to 1 kV</strong><small>Technical and electrical safety qualification</small></span><span class="cert-status">Completed</span></li>
+          <li><i class="fas fa-certificate"></i><span><strong>MDF Accreditation License — Frame Basic</strong><small>Operational accreditation</small></span><span class="cert-status">Completed</span></li>
+          <li><i class="fas fa-crane"></i><span><strong>Crane Operations Basic Slinging Course</strong><small>Workplace and lifting-operations training</small></span><span class="cert-status">Completed</span></li>
+          <li><i class="fas fa-car"></i><span><strong>Driving License — category D</strong><small>Professional driving qualification</small></span><span class="cert-status">Completed</span></li>
+          <li><i class="fas fa-headset"></i><span><strong>Professional Customer Phone Support</strong><small>Customer communication and service training</small></span><span class="cert-status">Completed</span></li>
         </ul>
-
-        <h3>Hands-On Learning Platforms</h3>
+        <h3 class="subsection-title"><i class="fas fa-laptop-code"></i> Hands-on learning platforms</h3>
         <div class="tools-grid">
-          <div class="tool-card">
-            <h3><i class="fas fa-gamepad"></i> Hack the Box</h3>
-            <p>Capture the flag (CTF) platform for hands-on security training and penetration testing practice.</p>
-            <a href="https://www.hackthebox.com/" target="_blank" class="cyber-button"><i class="fas fa-external-link-alt"></i> VISIT</a>
-          </div>
-          <div class="tool-card">
-            <h3><i class="fas fa-target"></i> Try Hack Me</h3>
-            <p>Interactive cybersecurity training platform with guided labs and challenges.</p>
-            <a href="https://tryhackme.com/" target="_blank" class="cyber-button"><i class="fas fa-external-link-alt"></i> VISIT</a>
-          </div>
-          <div class="tool-card">
-            <h3><i class="fas fa-trophy"></i> HackerOne</h3>
-            <p>Bug bounty and vulnerability coordination platform for responsible disclosure.</p>
-            <a href="https://www.hackerone.com/" target="_blank" class="cyber-button"><i class="fas fa-external-link-alt"></i> VISIT</a>
-          </div>
+          <div class="tool-card"><h3><i class="fas fa-gamepad"></i> Hack The Box</h3><p>Hands-on labs, capture-the-flag challenges and practical penetration-testing exercises.</p><a href="https://www.hackthebox.com/" target="_blank" rel="noopener noreferrer" class="cyber-button"><i class="fas fa-external-link-alt"></i> VISIT</a></div>
+          <div class="tool-card"><h3><i class="fas fa-bullseye"></i> TryHackMe</h3><p>Guided cybersecurity learning paths, interactive labs and practical challenges.</p><a href="https://tryhackme.com/" target="_blank" rel="noopener noreferrer" class="cyber-button"><i class="fas fa-external-link-alt"></i> VISIT</a></div>
+          <div class="tool-card"><h3><i class="fas fa-bug"></i> HackerOne</h3><p>Responsible disclosure and vulnerability research ecosystem for applied security practice.</p><a href="https://www.hackerone.com/" target="_blank" rel="noopener noreferrer" class="cyber-button"><i class="fas fa-external-link-alt"></i> VISIT</a></div>
         </div>
       </section>
 
-      <!-- Legacy ethical-scenario assessment retained for reference. -->
-      <template id="legacy-assessment-template">
-      <!-- PIP-BOY 3000 SELF ASSESSMENT Section -->
-      <section id="legacy-assessment-section" class="section">
-        <h2><i class="fas fa-robot"></i> PIP-BOY 3000 SELF ASSESSMENT</h2>
-        <p class="assessment-intro">A recruitment screening tool to evaluate cultural fit, ethical standards, and professional integrity. Answer honestly.</p>
-
-        <div class="assessment-container">
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 1. A colleague takes credit for your work in front of leadership. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Address it privately with the colleague first, then escalate if unresolved</div>
-              <div class="assessment-option" data-value="unethical">Publicly call them out in the next meeting to embarrass them</div>
-              <div class="assessment-option" data-value="neutral">Say nothing and document everything for future reference</div>
-              <div class="assessment-option" data-value="manipulative">Befriend them to gather dirt for leverage later</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 2. You discover a security vulnerability in your company's system. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Report it immediately through proper channels to protect users</div>
-              <div class="assessment-option" data-value="manipulative">Sell the information to competitors for personal gain</div>
-              <div class="assessment-option" data-value="neutral">Keep quiet to avoid looking incompetent for not catching it earlier</div>
-              <div class="assessment-option" data-value="unethical">Use it to blackmail the company for a raise</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 3. Your manager asks you to manipulate data to meet quarterly targets. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Refuse and suggest legitimate strategies to improve performance</div>
-              <div class="assessment-option" data-value="unethical">Comply to please your manager and secure your position</div>
-              <div class="assessment-option" data-value="manipulative">Agree, then leak the request to HR to make the manager look bad</div>
-              <div class="assessment-option" data-value="neutral">Comply but document it to protect yourself later</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 4. A team member struggles with their workload. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Offer support and help them find solutions or resources</div>
-              <div class="assessment-option" data-value="manipulative">Subtly suggest to leadership that they're underperforming</div>
-              <div class="assessment-option" data-value="neutral">Ignore it; it's not your responsibility</div>
-              <div class="assessment-option" data-value="unethical">Increase their workload to make yourself look better</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 5. You witness unethical behavior from a high-ranking executive. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Report it to HR or compliance, even though they're powerful</div>
-              <div class="assessment-option" data-value="neutral">Ignore it; speaking up could harm your career</div>
-              <div class="assessment-option" data-value="manipulative">Use it as leverage to gain favor or promotions</div>
-              <div class="assessment-option" data-value="unethical">Participate to gain their trust and benefits</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 6. A client asks you to do something outside your expertise. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Honestly admit your limitations and recommend qualified resources</div>
-              <div class="assessment-option" data-value="unethical">Pretend to have expertise and deliver subpar results</div>
-              <div class="assessment-option" data-value="manipulative">Agree, then blame external factors when it fails</div>
-              <div class="assessment-option" data-value="neutral">Charge extra fees for learning on the job</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 7. You're offered a lucrative opportunity that requires compromising your values. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Decline and seek opportunities aligned with your principles</div>
-              <div class="assessment-option" data-value="unethical">Accept without hesitation; money is everything</div>
-              <div class="assessment-option" data-value="manipulative">Accept, then find a way to reverse the decision later</div>
-              <div class="assessment-option" data-value="neutral">Consider it, but ultimately prioritize stability</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 8. A team member confides a personal struggle. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Listen with empathy and offer support or resources</div>
-              <div class="assessment-option" data-value="manipulative">Share their secret with others to gain social currency</div>
-              <div class="assessment-option" data-value="neutral">Politely change the subject; it's not work-related</div>
-              <div class="assessment-option" data-value="unethical">Use this information against them if needed</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 9. You make a significant mistake that affects the team. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Own it immediately, apologize, and work on solutions</div>
-              <div class="assessment-option" data-value="unethical">Blame someone else to protect your reputation</div>
-              <div class="assessment-option" data-value="manipulative">Admit it, but frame it as a learning opportunity for everyone</div>
-              <div class="assessment-option" data-value="neutral">Quietly fix it and hope no one notices</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 10. A competitor offers you insider information about your company. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Refuse and report the attempt to your company</div>
-              <div class="assessment-option" data-value="unethical">Accept and use it for personal advantage</div>
-              <div class="assessment-option" data-value="manipulative">Accept but don't use it; just gather leverage</div>
-              <div class="assessment-option" data-value="neutral">Politely decline but don't report it</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 11. You disagree with a company policy. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Voice concerns professionally and propose alternatives</div>
-              <div class="assessment-option" data-value="unethical">Ignore the policy and do what you think is right</div>
-              <div class="assessment-option" data-value="manipulative">Publicly criticize it to gain support for undermining it</div>
-              <div class="assessment-option" data-value="neutral">Follow it silently while complaining to colleagues</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 12. A junior employee asks for mentorship. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Invest time to help them grow and develop their skills</div>
-              <div class="assessment-option" data-value="manipulative">Mentor them only if it benefits your career advancement</div>
-              <div class="assessment-option" data-value="neutral">Provide minimal help; they should figure it out</div>
-              <div class="assessment-option" data-value="unethical">Deliberately mislead them to keep them behind</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 13. You notice your company is harming vulnerable populations. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Escalate concerns through proper channels and seek change</div>
-              <div class="assessment-option" data-value="neutral">Ignore it; it's not your department's responsibility</div>
-              <div class="assessment-option" data-value="unethical">Participate to secure your position and paycheck</div>
-              <div class="assessment-option" data-value="manipulative">Leak it to media for personal recognition</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 14. A colleague is being bullied by management. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Stand with them, document incidents, and report to HR</div>
-              <div class="assessment-option" data-value="neutral">Stay silent to avoid becoming a target yourself</div>
-              <div class="assessment-option" data-value="manipulative">Publicly support them, then privately distance yourself</div>
-              <div class="assessment-option" data-value="unethical">Join in to gain favor with management</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-question">
-            <h4><i class="fas fa-question-circle"></i> 15. You're asked to sign off on work you didn't fully review. You:</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">Refuse and request time to properly review it</div>
-              <div class="assessment-option" data-value="unethical">Sign off anyway to meet deadlines</div>
-              <div class="assessment-option" data-value="manipulative">Sign off but document your concerns privately</div>
-              <div class="assessment-option" data-value="neutral">Ask someone else to take responsibility</div>
-            </div>
-            <div class="assessment-feedback"></div>
-          </div>
-
-          <div class="assessment-results">
-            <h4><i class="fas fa-chart-bar"></i> Assessment Results</h4>
-            <div class="results-summary">
-              <p>Ethical Alignment: <span id="legacy-ethical-score">0</span>%</p>
-              <p>Cultural Fit: <span id="legacy-cultural-score">0</span>%</p>
-              <p>Red Flags: <span id="legacy-red-flags">0</span></p>
-            </div>
-            <div class="results-message"></div>
-          </div>
-        </div>
-      </section>
-      </template>
-
-      <!-- PIP-BOY 3000 SELF ASSESSMENT SECTION -->
+      <!-- Recruiter Questions Section -->
       <section id="assessment-section" class="section">
-        <h2><i class="fas fa-user-secret"></i> PIP-BOY 3000 SELF ASSESSMENT</h2>
-        <p class="section-subtitle">Advanced Psychological Recruiter Investigation Protocol</p>
-        
-        <div class="assessment-container">
-          <!-- Question 1 -->
-          <div class="assessment-question" data-question="1">
-            <h4><i class="fas fa-circle-question"></i> Q1: Your company faced a critical security breach last year. How was it handled?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>We disclosed it immediately to all stakeholders and took full responsibility. Transparency is our core value.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>We handled it internally first, then informed relevant parties when necessary. Discretion is important.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>We consulted with legal before any communication. They advised us on the best approach.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>We haven't had any breaches. Our security is flawless.</span>
-              </div>
-            </div>
+        <div class="section-heading-row">
+          <div>
+            <p class="section-kicker"><i class="fas fa-comments"></i> Recruiter interview workspace</p>
+            <h2><i class="fas fa-user-tie"></i> Questions for the Recruiter</h2>
           </div>
-
-          <!-- Question 2 -->
-          <div class="assessment-question" data-question="2">
-            <h4><i class="fas fa-circle-question"></i> Q2: How does your organization handle disagreement between senior management and junior staff?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>Junior staff are encouraged to challenge decisions with data. The best idea wins, regardless of rank.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>We have a formal escalation process, but ultimately leadership decides what's best.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>Disagreement is discouraged. We need unity and trust in leadership.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>Junior staff are expected to implement decisions without questioning them.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 3 -->
-          <div class="assessment-question" data-question="3">
-            <h4><i class="fas fa-circle-question"></i> Q3: Tell me about a time when someone admitted a significant mistake at work.</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>We treated it as a learning opportunity. The person was supported, and we improved processes.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>The person was reprimanded, but we learned from it and moved forward.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>Mistakes like that rarely happen because we have strict controls.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>People don't usually admit mistakes openly. They're afraid of consequences.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 4 -->
-          <div class="assessment-question" data-question="4">
-            <h4><i class="fas fa-circle-question"></i> Q4: What is the real reason this vCISO position is open?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>We're scaling security operations and need expert leadership at the executive level.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>Our previous CISO left, and we need someone to fill the gap quickly.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>We're facing regulatory pressure and need someone to handle compliance.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>We're not entirely sure. HR posted the position, and we're hoping to find the right fit.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 5 -->
-          <div class="assessment-question" data-question="5">
-            <h4><i class="fas fa-circle-question"></i> Q5: If I discovered a C-level executive bypassing security controls, how would you expect me to handle it?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>Report it immediately through our ethics channel. No exceptions, regardless of rank.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>Approach the executive privately first. We handle things diplomatically.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>Inform your direct manager and let them decide the best course of action.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>Document it quietly and wait for the right moment to address it.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 6 -->
-          <div class="assessment-question" data-question="6">
-            <h4><i class="fas fa-circle-question"></i> Q6: What is the average tenure of security professionals in your organization?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>3-5+ years. We invest in career development and work-life balance.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>2-3 years. It's a demanding field, and people move on naturally.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>1-2 years. We have high turnover, but we're always hiring.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>I'm not sure. HR handles that.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 7 -->
-          <div class="assessment-question" data-question="7">
-            <h4><i class="fas fa-circle-question"></i> Q7: What are the three biggest challenges your organization faces in security right now?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>Legacy systems, skill gaps, and executive alignment on risk. We're actively addressing each.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>Budget constraints, compliance deadlines, and talent acquisition.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>We're doing pretty well. Our main challenge is keeping up with new threats.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>I don't really know. That's more of a technical question.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 8 -->
-          <div class="assessment-question" data-question="8">
-            <h4><i class="fas fa-circle-question"></i> Q8: How does your company define 'success' for a security leader?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>Reducing risk while enabling business growth. Security and business are partners.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>Meeting compliance requirements and preventing breaches.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>Implementing the latest security tools and technologies.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>Keeping the executive team happy and out of the news.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 9 -->
-          <div class="assessment-question" data-question="9">
-            <h4><i class="fas fa-circle-question"></i> Q9: If your company's practices conflicted with industry best practices, how would you handle it?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>I'd present the data, recommend changes, and escalate if necessary. Integrity comes first.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>I'd try to align practices gradually without rocking the boat.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>I'd follow company policy. That's what I'm hired to do.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>I'd keep quiet. It's not my job to question leadership.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 10 -->
-          <div class="assessment-question" data-question="10">
-            <h4><i class="fas fa-circle-question"></i> Q10: How diverse is your security leadership team?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>We actively recruit diverse talent and have diverse leadership. It's a strategic priority.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>We hire the best people regardless of background. Diversity happens naturally.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>We're working on it. It's a challenge in the tech industry.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>We focus on skills and experience. Diversity isn't a primary concern.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 11 -->
-          <div class="assessment-question" data-question="11">
-            <h4><i class="fas fa-circle-question"></i> Q11: Has your organization ever asked you to compromise on security for a deadline?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>Never. We've delayed projects to maintain security standards.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>Occasionally, but we mitigate the risks and document the decision.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>Yes, frequently. Business always comes first.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>It's happened, but I don't think it's appropriate to discuss.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 12 -->
-          <div class="assessment-question" data-question="12">
-            <h4><i class="fas fa-circle-question"></i> Q12: How does your organization handle emerging threats and new security paradigms?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>We invest in continuous learning and adapt quickly. We see change as an opportunity.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>We monitor trends and update our strategy annually.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>We stick with proven methods. New trends come and go.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>We react when something happens. Proactive planning isn't really our style.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 13 -->
-          <div class="assessment-question" data-question="13">
-            <h4><i class="fas fa-circle-question"></i> Q13: If a security incident occurred due to a decision I made, how would your organization handle it?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>We'd conduct a blameless post-mortem, focus on learning, and improve systems.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>We'd investigate, document it, and use it to improve processes.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>You'd be held responsible, but we'd work together to fix it.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>You'd likely face consequences. We can't afford mistakes at this level.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 14 -->
-          <div class="assessment-question" data-question="14">
-            <h4><i class="fas fa-circle-question"></i> Q14: How does your organization value security professionals?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>Security is seen as a strategic asset. Compensation is competitive and reflects that.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>We pay market rate. Security is important, but so are other functions.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>We pay less than market because security is a cost center, not revenue-generating.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>I'm not sure. That's an HR question.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 15 -->
-          <div class="assessment-question" data-question="15">
-            <h4><i class="fas fa-circle-question"></i> Q15: What would you say if I told you I'm considering declining this offer?</h4>
-            <div class="assessment-options">
-              <div class="assessment-option" data-value="ethical">
-                <span class="option-letter">A</span>
-                <span>I'd respect your decision and ask what concerns I can address. Your fit matters.</span>
-              </div>
-              <div class="assessment-option" data-value="neutral">
-                <span class="option-letter">B</span>
-                <span>I'd be disappointed and try to convince you of the opportunity.</span>
-              </div>
-              <div class="assessment-option" data-value="unethical">
-                <span class="option-letter">C</span>
-                <span>I'd be surprised and want to know what's wrong with our offer.</span>
-              </div>
-              <div class="assessment-option" data-value="manipulative">
-                <span class="option-letter">D</span>
-                <span>I'd tell you you're making a mistake. This is a great opportunity.</span>
-              </div>
-            </div>
-          </div>
+          <span class="completion-badge"><i class="fas fa-save"></i> Local save</span>
         </div>
-
-        <!-- Assessment Results -->
-        <div id="assessment-results" class="assessment-results" style="display: none;">
-          <h3><i class="fas fa-chart-pie"></i> Your Assessment Results</h3>
-          <div class="results-summary">
-            <div class="result-item">
-              <span class="result-label">Ethical Alignment:</span>
-              <span class="result-value" id="ethical-score">0%</span>
-            </div>
-            <div class="result-item">
-              <span class="result-label">Cultural Fit:</span>
-              <span class="result-value" id="cultural-score">0%</span>
-            </div>
-            <div class="result-item">
-              <span class="result-label">Red Flags:</span>
-              <span class="result-value" id="red-flags">0</span>
-            </div>
-          </div>
-          <div class="results-verdict" id="results-verdict"></div>
-          <div class="results-encrypted">
-            <p><i class="fas fa-lock"></i> <strong>ENCRYPTED VERDICT (SHA-256)</strong></p>
-            <textarea id="encrypted-verdict" readonly></textarea>
-            <button class="cyber-button" id="copy-verdict" onclick="copyVerdictToClipboard()">
-              <i class="fas fa-copy"></i> COPY ENCRYPTED VERDICT
-            </button>
-          </div>
+        <p class="section-intro">This is an interview workspace for questions to the recruiter. Record the recruiter's answers and download a clean copy for your notes. The same response archive is also available inside the Pip-Boy <strong>RECRUITER</strong> module.</p>
+        <div class="recruiter-overview-grid">
+          <div class="recruiter-overview-card"><i class="fas fa-list-check"></i><strong>Ask</strong><span>Structured questions about role, mandate, resources and culture.</span></div>
+          <div class="recruiter-overview-card"><i class="fas fa-hard-drive"></i><strong>Save</strong><span>Answers persist in local browser storage while you work.</span></div>
+          <div class="recruiter-overview-card"><i class="fas fa-file-arrow-down"></i><strong>Download</strong><span>Export a readable TXT interview record whenever you need it.</span></div>
         </div>
+        <form class="recruiter-questionnaire recruiter-questionnaire-main" data-recruiter-questionnaire="main">
+          <label class="recruiter-question" data-question-key="role-context">
+            <span><b>Q1.</b> What are the main priorities and expected outcomes for this role during the first 90 days?</span>
+            <textarea data-answer-key="role-context" placeholder="Write the recruiter's answer..." rows="4"></textarea>
+          </label>
+          <label class="recruiter-question" data-question-key="security-mandate">
+            <span><b>Q2.</b> How is cybersecurity positioned in executive decision-making and business strategy?</span>
+            <textarea data-answer-key="security-mandate" placeholder="Write the recruiter's answer..." rows="4"></textarea>
+          </label>
+          <label class="recruiter-question" data-question-key="team-resources">
+            <span><b>Q3.</b> What team, budget and authority will be available to deliver the security roadmap?</span>
+            <textarea data-answer-key="team-resources" placeholder="Write the recruiter's answer..." rows="4"></textarea>
+          </label>
+          <label class="recruiter-question" data-question-key="risk-ownership">
+            <span><b>Q4.</b> How are security risks accepted, escalated and owned when business priorities conflict?</span>
+            <textarea data-answer-key="risk-ownership" placeholder="Write the recruiter's answer..." rows="4"></textarea>
+          </label>
+          <label class="recruiter-question" data-question-key="culture">
+            <span><b>Q5.</b> How would you describe the organisation's culture around transparency, challenge and learning from incidents?</span>
+            <textarea data-answer-key="culture" placeholder="Write the recruiter's answer..." rows="4"></textarea>
+          </label>
+          <label class="recruiter-question" data-question-key="success">
+            <span><b>Q6.</b> How will success be measured, and what does the reporting relationship with leadership look like?</span>
+            <textarea data-answer-key="success" placeholder="Write the recruiter's answer..." rows="4"></textarea>
+          </label>
+          <div class="recruiter-form-actions">
+            <button type="button" class="cyber-button recruiter-save"><i class="fas fa-floppy-disk"></i> SAVE ANSWERS</button>
+            <button type="button" class="cyber-button recruiter-download"><i class="fas fa-download"></i> DOWNLOAD RECORD</button>
+            <button type="button" class="cyber-button recruiter-copy"><i class="fas fa-copy"></i> COPY RECORD</button>
+            <button type="button" class="cyber-button recruiter-clear"><i class="fas fa-trash"></i> CLEAR</button>
+          </div>
+          <p class="recruiter-save-status" role="status" aria-live="polite"><i class="fas fa-database"></i> No answers saved yet.</p>
+        </form>
+        <div class="recruiter-privacy-note"><i class="fas fa-lock"></i> Local-only storage: answers stay in this browser unless you download or copy them.</div>
       </section>
       <section id="quiz-section" class="section">
         <h2><i class="fas fa-question-circle"></i> Cybersecurity Quiz</h2>
@@ -1508,19 +998,19 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
         <div class="contact-info">
           <div class="contact-item">
             <i class="fas fa-envelope"></i>
-            <a href="mailto:roman@rocyber.solutions">roman@rocyber.solutions</a>
+            <a href="mailto:roman@rocyber.solutions?subject=Portfolio%20contact">roman@rocyber.solutions</a>
           </div>
           <div class="contact-item">
             <i class="fas fa-globe"></i>
-            <a href="https://rocyber.solutions" target="_blank">rocyber.solutions</a>
+            <a href="https://rocybersolutions.com/" target="_blank" rel="noopener noreferrer">ROCyberSolutions.com</a>
           </div>
           <div class="contact-item">
             <i class="fas fa-globe"></i>
-            <a href="https://rocyberopsolutions.com" target="_blank">rocyberopsolutions.com</a>
+            <a href="https://rocybersolutions.com/" target="_blank" rel="noopener noreferrer">ROCyberSolutions.com</a>
           </div>
           <div class="contact-item">
             <i class="fab fa-linkedin"></i>
-            <a href="https://linkedin.com/in/roman-orlowski" target="_blank">LinkedIn Profile</a>
+            <a href="https://www.linkedin.com/in/roman-orlowski/" target="_blank">LinkedIn Profile</a>
           </div>
           <div class="contact-item">
             <i class="fab fa-github"></i>
@@ -1554,47 +1044,23 @@ Assessment & Testing and Security, Cyber Kill Chain, OpSec Awareness, SEP (up to
       </section>
     </main>
 
-    <!-- Footer - BEZ ZMIAN -->
+    <!-- Footer -->
     <footer class="footer">
       <div class="footer-content">
-        <div class="footer-column">
-          <h3>About ROCyber Solutions SP ZOO</h3>
-          <p>Specialized cybersecurity consulting and cloud security solutions for enterprises. Focused on threat detection, compliance, and infrastructure protection.</p>
+        <div class="footer-column footer-column--about">
+          <p class="footer-kicker">ROCyber Solutions</p>
+          <h3>Cybersecurity leadership &amp; infrastructure resilience</h3>
+          <p>Specialized cybersecurity consulting and cloud security solutions for enterprises. Focused on threat detection, compliance, secure infrastructure and practical risk reduction.</p>
+          <a class="footer-company-link" href="https://rocybersolutions.com/" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i> Visit ROCyberSolutions.com</a>
         </div>
-        <div class="footer-column">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="#profile-section"><i class="fas fa-arrow-right"></i> Profile</a></li>
-            <li><a href="#experience-section"><i class="fas fa-arrow-right"></i> Experience</a></li>
-            <li><a href="#skills-section"><i class="fas fa-arrow-right"></i> Skills</a></li>
-            <li><a href="#frameworks-section"><i class="fas fa-arrow-right"></i> Frameworks</a></li>
-            <li><a href="#monitoring-section"><i class="fas fa-arrow-right"></i> Monitoring</a></li>
-            <li><a href="#certifications-section"><i class="fas fa-arrow-right"></i> Certifications</a></li>
-            <li><a href="#quiz-section"><i class="fas fa-arrow-right"></i> Quiz</a></li>
-            <li><a href="#contact-section"><i class="fas fa-arrow-right"></i> Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h3>Resources</h3>
-          <ul class="footer-links">
-            <li><a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank"><i class="fas fa-external-link-alt"></i> GeeksforGeeks Cybersecurity</a></li>
-            <li><a href="https://owasp.org/" target="_blank"><i class="fas fa-external-link-alt"></i> OWASP</a></li>
-            <li><a href="https://attack.mitre.org/" target="_blank"><i class="fas fa-external-link-alt"></i> MITRE ATT&CK</a></li>
-            <li><a href="https://www.nist.gov/" target="_blank"><i class="fas fa-external-link-alt"></i> NIST</a></li>
-            <li><a href="https://www.iso.org/isoiec-27001-information-security.html" target="_blank"><i class="fas fa-external-link-alt"></i> ISO 27001</a></li>
-            <li><a href="https://gdpr.eu/" target="_blank"><i class="fas fa-external-link-alt"></i> GDPR</a></li>
-          </ul>
-        </div>
+        <div class="footer-column"><h3>Quick Links</h3><ul class="footer-links">
+          <li><a href="#profile-section"><i class="fas fa-arrow-right"></i> Profile</a></li><li><a href="#experience-section"><i class="fas fa-arrow-right"></i> Experience</a></li><li><a href="#skills-section"><i class="fas fa-arrow-right"></i> Skills</a></li><li><a href="#frameworks-section"><i class="fas fa-arrow-right"></i> Frameworks</a></li><li><a href="#monitoring-section"><i class="fas fa-arrow-right"></i> Monitoring</a></li><li><a href="#certifications-section"><i class="fas fa-arrow-right"></i> Certifications &amp; Training</a></li><li><a href="#assessment-section"><i class="fas fa-arrow-right"></i> Recruiter Questions</a></li><li><a href="#quiz-section"><i class="fas fa-arrow-right"></i> Quiz</a></li><li><a href="#contact-section"><i class="fas fa-arrow-right"></i> Contact</a></li>
+        </ul></div>
+        <div class="footer-column"><h3>Resources</h3><ul class="footer-links">
+          <li><a href="https://www.geeksforgeeks.org/cybersecurity/what-is-cyber-security/" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> GeeksforGeeks Cybersecurity</a></li><li><a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> OWASP Top 10</a></li><li><a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> MITRE ATT&amp;CK</a></li><li><a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> NIST Cybersecurity Framework</a></li><li><a href="https://www.iso.org/standard/27001.html" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> ISO/IEC 27001</a></li><li><a href="https://gdpr.eu/" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> GDPR</a></li>
+        </ul></div>
       </div>
-
-      <div class="footer-bottom">
-        <div class="footer-social">
-          <a href="https://github.com/ronoc2020" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-          <a href="https://linkedin.com/in/roman-orlowski" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-          <a href="mailto:roman@rocyber.solutions" title="Email"><i class="fas fa-envelope"></i></a>
-        </div>
-        <p class="copyright">&copy; 2026 Roman Orłowski - ROCyber Solutions. All rights reserved.</p>
-      </div>
+      <div class="footer-bottom"><div class="footer-social"><a href="https://github.com/ronoc2020" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub"><i class="fab fa-github"></i></a><a href="https://www.linkedin.com/in/roman-orlowski/" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a><a href="mailto:roman@rocyber.solutions?subject=Portfolio%20contact" title="Email" aria-label="Email Roman Orłowski"><i class="fas fa-envelope"></i></a></div><p class="copyright">&copy; 2026 Roman Orłowski - ROCyber Solutions. All rights reserved.</p></div>
     </footer>
   </div>
 

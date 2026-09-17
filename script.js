@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
     'owasp-tab': { icon: 'fas fa-shield-halved', title: 'Vault-Boy Status: Defensive Shield & Security' },
     'hacking-tab': { icon: 'fas fa-skull-crossbones', title: 'Vault-Boy Status: Offensive Cyber Operations' },
     'terminal-tab': { icon: 'fas fa-terminal', title: 'Vault-Boy Status: CLI Hacker & Terminal' },
-    'recruiter-tab': { icon: 'fas fa-user-tie', title: 'Vault-Boy Status: Psychological Assessor' },
+    'recruiter-tab': { icon: 'fas fa-user-tie', title: 'Vault-Boy Status: Recruiter Interview Console' },
     'rocs-tab': { icon: 'fas fa-shield-virus', title: 'Vault-Boy Status: vCISO Command Center' }
   };
 
@@ -803,70 +803,6 @@ clearance: Level-5 Vault-Tec Security Administrator`
 });
 
 
-/* Legacy assessment handler retained for reference.
-// ===== PIP-BOY 3000 SELF ASSESSMENT FUNCTIONALITY =====
-document.addEventListener('DOMContentLoaded', function() {
-  const assessmentOptions = document.querySelectorAll('.assessment-option');
-  const assessmentResults = document.querySelector('.assessment-results');
-  let scores = { ethical: 0, unethical: 0, neutral: 0, manipulative: 0 };
-  let answeredQuestions = 0;
-  const totalQuestions = 15;
-
-  assessmentOptions.forEach(option => {
-    option.addEventListener('click', function() {
-      const question = this.closest('.assessment-question');
-      const alreadyAnswered = question.querySelector('.assessment-option.selected');
-      
-      if (!alreadyAnswered) {
-        answeredQuestions++;
-      }
-
-      // Remove previous selection
-      question.querySelectorAll('.assessment-option').forEach(opt => {
-        opt.classList.remove('selected');
-      });
-
-      // Mark current selection
-      this.classList.add('selected');
-      const value = this.getAttribute('data-value');
-      scores[value]++;
-
-      // Show results when all questions are answered
-      if (answeredQuestions === totalQuestions) {
-        displayAssessmentResults();
-      }
-    });
-  });
-
-  function displayAssessmentResults() {
-    const ethicalScore = Math.round((scores.ethical / totalQuestions) * 100);
-    const culturalFit = Math.round(((scores.ethical + (totalQuestions - scores.unethical - scores.manipulative)) / totalQuestions) * 100);
-    const redFlags = scores.unethical + scores.manipulative;
-
-    document.getElementById('ethical-score').textContent = ethicalScore;
-    document.getElementById('cultural-score').textContent = culturalFit;
-    document.getElementById('red-flags').textContent = redFlags;
-
-    let message = '';
-    if (ethicalScore >= 80) {
-      message = '<i class="fas fa-check-circle"></i> Excellent ethical alignment. You demonstrate strong integrity and cultural fit.';
-    } else if (ethicalScore >= 60) {
-      message = '<i class="fas fa-star"></i> Good ethical foundation. Some areas for improvement in consistency.';
-    } else if (ethicalScore >= 40) {
-      message = '<i class="fas fa-exclamation-triangle"></i> Moderate concerns. Consider reflecting on your values and decision-making.';
-    } else {
-      message = '<i class="fas fa-times-circle"></i> Significant red flags detected. This role may not be a good fit.';
-    }
-
-    document.querySelector('.results-message').innerHTML = message;
-    assessmentResults.style.display = 'block';
-    assessmentResults.scrollIntoView({ behavior: 'smooth' });
-  }
-});
-
-
-*/
-
 // ===== DRAGGABLE MUSIC PLAYER =====
 (function() {
   const player = document.querySelector('.draggable-player');
@@ -985,97 +921,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 
 
-// ===== PIP-BOY 3000 SELF ASSESSMENT FUNCTIONALITY =====
-
-// Initialize only the live recruiter assessment.
-document.addEventListener('DOMContentLoaded', function() {
-  initializeAssessment();
-});
-
-function initializeAssessment() {
-  const root = document.getElementById('assessment-section');
-  if (!root) return;
-  const options = root.querySelectorAll('.assessment-option');
-  const questions = root.querySelectorAll('.assessment-question');
-  const totalQuestions = questions.length;
-  const scores = { ethical: 0, unethical: 0, neutral: 0, manipulative: 0 };
-  let answeredCount = 0;
-
-  options.forEach(option => {
-    option.addEventListener('click', function() {
-      const question = this.closest('.assessment-question');
-      if (!question) return;
-      const previous = question.querySelector('.assessment-option.selected');
-      if (previous === this) return;
-      if (previous) {
-        const previousValue = previous.getAttribute('data-value');
-        if (Object.prototype.hasOwnProperty.call(scores, previousValue)) scores[previousValue]--;
-      } else {
-        answeredCount++;
-      }
-      question.querySelectorAll('.assessment-option').forEach(opt => opt.classList.remove('selected'));
-      this.classList.add('selected');
-      const value = this.getAttribute('data-value');
-      if (Object.prototype.hasOwnProperty.call(scores, value)) scores[value]++;
-      if (answeredCount === totalQuestions) displayAssessmentResults(scores, totalQuestions);
-    });
-  });
-}
-
-function displayAssessmentResults(scores, totalQuestions) {
-  const ethicalScore = Math.round((scores.ethical / totalQuestions) * 100);
-  const redFlags = scores.unethical + scores.manipulative;
-  const culturalFit = Math.round(((scores.ethical + (totalQuestions - redFlags)) / totalQuestions) * 100);
-
-  document.getElementById('ethical-score').textContent = ethicalScore + '%';
-  document.getElementById('cultural-score').textContent = culturalFit + '%';
-  document.getElementById('red-flags').textContent = redFlags;
-
-  let verdict = '';
-  let verdictClass = '';
-
-  if (ethicalScore >= 80) {
-    verdict = '<i class="fas fa-check-circle"></i> <strong>SAFE TO JOIN</strong> – Excellent ethical alignment. This organization demonstrates strong integrity and cultural fit for a vCISO.';
-    verdictClass = 'verdict-safe';
-  } else if (ethicalScore >= 60) {
-    verdict = '<i class="fas fa-exclamation-circle"></i> <strong>PROCEED WITH CAUTION</strong> – Good ethical foundation with some areas of concern. Recommend further investigation.';
-    verdictClass = 'verdict-caution';
-  } else if (ethicalScore >= 40) {
-    verdict = '<i class="fas fa-exclamation-triangle"></i> <strong>INVESTIGATE FURTHER</strong> – Significant red flags detected. Consider declining or negotiating major changes.';
-    verdictClass = 'verdict-warning';
-  } else {
-    verdict = '<i class="fas fa-times-circle"></i> <strong>DO NOT JOIN</strong> – Toxic, unethical, or deceptive environment. This role is not a good fit.';
-    verdictClass = 'verdict-danger';
-  }
-
-  const verdictElement = document.getElementById('results-verdict');
-  verdictElement.className = 'results-verdict ' + verdictClass;
-  verdictElement.innerHTML = verdict;
-
-  // Generate encrypted verdict (SHA-256)
-  const verdictText = `ROCS Assessment - Ethical: ${ethicalScore}% | Cultural Fit: ${culturalFit}% | Red Flags: ${redFlags} | Verdict: ${verdict.replace(/<[^>]*>/g, '')}`;
-  const encryptedVerdictText = CryptoJS.SHA256(verdictText).toString();
-  const encryptedTextarea = document.getElementById('encrypted-verdict');
-  encryptedTextarea.value = encryptedVerdictText;
-
-  // Show results section
-  document.getElementById('assessment-results').style.display = 'block';
-  document.getElementById('assessment-results').scrollIntoView({ behavior: 'smooth' });
-}
-
-function copyVerdictToClipboard() {
-  const textarea = document.getElementById('encrypted-verdict');
-  textarea.select();
-  document.execCommand('copy');
-  
-  const btn = document.getElementById('copy-verdict');
-  const originalText = btn.innerHTML;
-  btn.innerHTML = '<i class="fas fa-check"></i> COPIED!';
-  
-  setTimeout(() => {
-    btn.innerHTML = originalText;
-  }, 2000);
-}
+// Recruiter responses are handled by the local-save questionnaire below.
 
 
 // ===== PIP-BOY FULLSCREEN CONTROLLER =====
@@ -1350,3 +1196,162 @@ document.addEventListener('DOMContentLoaded', () => {
     inventory.style.transition = 'transform 0.1s ease-out';
   });
 });
+
+
+/* === RECRUITER QUESTIONS: LOCAL SAVE, COPY & DOWNLOAD === */
+(function() {
+  const STORAGE_KEY = 'rocs-recruiter-responses-v1';
+  const formsSelector = '[data-recruiter-questionnaire]';
+
+  function readResponses() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function writeResponses(responses) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      ...responses,
+      updatedAt: new Date().toISOString()
+    }));
+  }
+
+  function getTextareas() {
+    return Array.from(document.querySelectorAll(`${formsSelector} textarea[data-answer-key]`));
+  }
+
+  function collectResponses(preferredTextarea = null) {
+    const responses = {};
+    getTextareas().forEach(textarea => {
+      const key = textarea.dataset.answerKey;
+      const value = textarea.value.trim();
+      if (preferredTextarea && textarea === preferredTextarea) {
+        responses[key] = value;
+      } else if (!(key in responses) || value) {
+        responses[key] = value;
+      }
+    });
+    return responses;
+  }
+
+  function answeredCount(responses) {
+    return Object.values(responses).filter(value => value).length;
+  }
+
+  function updateStatus(message) {
+    document.querySelectorAll('.recruiter-save-status').forEach(status => {
+      status.innerHTML = `<i class="fas fa-database"></i> ${message}`;
+    });
+  }
+
+  function syncFields(responses) {
+    getTextareas().forEach(textarea => {
+      textarea.value = responses[textarea.dataset.answerKey] || '';
+    });
+  }
+
+  function buildRecord() {
+    const responses = readResponses();
+    const sourceForm = document.querySelector(`${formsSelector} .recruiter-question`);
+    const questions = Array.from(document.querySelectorAll(`${formsSelector}[data-recruiter-questionnaire="main"] .recruiter-question`));
+    const lines = [
+      'ROCS RECRUITER INTERVIEW RECORD',
+      'Roman Orłowski | Questions for the Recruiter',
+      `Last saved: ${responses.updatedAt ? new Date(responses.updatedAt).toLocaleString() : 'Not saved yet'}`,
+      ''
+    ];
+    questions.forEach((question, index) => {
+      const key = question.dataset.questionKey;
+      const prompt = question.querySelector('span')?.textContent.trim() || `Question ${index + 1}`;
+      lines.push(prompt);
+      lines.push(responses[key] || '[No answer recorded]');
+      lines.push('');
+    });
+    if (!sourceForm && questions.length === 0) return 'No recruiter questions available.';
+    return lines.join('\n');
+  }
+
+  function downloadRecord() {
+    const blob = new Blob([buildRecord()], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    const date = new Date().toISOString().slice(0, 10);
+    link.href = url;
+    link.download = `rocs-recruiter-interview-${date}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    updateStatus(`Record downloaded • ${answeredCount(readResponses())} answers saved`);
+  }
+
+  async function copyRecord() {
+    const record = buildRecord();
+    try {
+      await navigator.clipboard.writeText(record);
+      updateStatus('Record copied to clipboard');
+    } catch (error) {
+      const helper = document.createElement('textarea');
+      helper.value = record;
+      helper.style.position = 'fixed';
+      helper.style.opacity = '0';
+      document.body.appendChild(helper);
+      helper.select();
+      document.execCommand('copy');
+      helper.remove();
+      updateStatus('Record copied to clipboard');
+    }
+  }
+
+  function initializeRecruiterQuestionnaire() {
+    const forms = document.querySelectorAll(formsSelector);
+    if (!forms.length || document.body.dataset.recruiterInitialized === 'true') return;
+    document.body.dataset.recruiterInitialized = 'true';
+    const saved = readResponses();
+    syncFields(saved);
+    updateStatus(saved.updatedAt ? `${answeredCount(saved)} answers restored from local save` : 'No answers saved yet');
+
+    getTextareas().forEach(textarea => {
+      textarea.addEventListener('input', () => {
+        const responses = collectResponses(textarea);
+        writeResponses(responses);
+        syncFields(responses);
+        updateStatus(`${answeredCount(responses)} answers saved locally`);
+      });
+    });
+
+    document.querySelectorAll('.recruiter-save').forEach(button => {
+      button.addEventListener('click', () => {
+        const responses = collectResponses();
+        writeResponses(responses);
+        syncFields(responses);
+        updateStatus(`${answeredCount(responses)} answers saved locally`);
+      });
+    });
+
+    document.querySelectorAll('.recruiter-download').forEach(button => {
+      button.addEventListener('click', downloadRecord);
+    });
+
+    document.querySelectorAll('.recruiter-copy').forEach(button => {
+      button.addEventListener('click', copyRecord);
+    });
+
+    document.querySelectorAll('.recruiter-clear').forEach(button => {
+      button.addEventListener('click', () => {
+        if (!window.confirm('Clear all locally saved recruiter answers?')) return;
+        localStorage.removeItem(STORAGE_KEY);
+        syncFields({});
+        updateStatus('Answers cleared');
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeRecruiterQuestionnaire, { once: true });
+  } else {
+    initializeRecruiterQuestionnaire();
+  }
+})();

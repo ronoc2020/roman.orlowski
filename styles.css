@@ -3136,3 +3136,52 @@ body, .section, .section p, .timeline-desc, .inventory-item-desc, .skill-card p,
     box-shadow: -25px 0 65px rgba(255, 255, 0, 0.35), -10px 0 35px rgba(255, 136, 0, 0.3);
   }
 }
+
+
+/* === Recruiter interview workspace === */
+.section-heading-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: .35rem; }
+.section-kicker, .footer-kicker { margin: 0 0 .35rem; color: var(--neon-cyan, #00f7ff); font-family: 'Courier New', monospace; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; }
+.section-intro { max-width: 900px; color: rgba(240,240,255,.78); line-height: 1.7; }
+.completion-badge, .cert-status { display: inline-flex; align-items: center; gap: .35rem; color: #0f1a09; background: #b8ff3d; border: 1px solid #d9ff8a; border-radius: 999px; box-shadow: 0 0 12px rgba(184,255,61,.28); font-family: 'Courier New', monospace; font-size: .68rem; font-weight: 700; letter-spacing: .04em; padding: .32rem .62rem; text-transform: uppercase; white-space: nowrap; }
+.completion-badge { margin-top: 1.55rem; }
+.subsection-title { align-items: center; display: flex; gap: .55rem; margin-top: 2.1rem; }
+.subsection-title i { color: var(--neon-cyan, #00f7ff); }
+.recruiter-overview-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.recruiter-overview-card { display: flex; flex-direction: column; gap: .35rem; padding: 1.1rem; border: 1px solid rgba(0,247,255,.34); border-radius: 5px; background: rgba(0,247,255,.055); }
+.recruiter-overview-card i { color: var(--neon-cyan, #00f7ff); font-size: 1.3rem; }
+.recruiter-overview-card strong { color: var(--neon-yellow); }
+.recruiter-overview-card span { color: rgba(240,240,255,.72); font-size: .86rem; line-height: 1.5; }
+.recruiter-questionnaire { display: grid; gap: 1rem; margin-top: 1rem; }
+.recruiter-question { display: grid; gap: .65rem; padding: 1rem; border-left: 3px solid var(--neon-cyan, #00f7ff); border-radius: 3px; background: rgba(0,247,255,.045); color: rgba(240,240,255,.9); line-height: 1.55; }
+.recruiter-question:hover { background: rgba(0,247,255,.085); }
+.recruiter-question b { color: var(--neon-yellow); }
+.recruiter-question textarea { width: 100%; min-height: 4.7rem; resize: vertical; padding: .75rem; border: 1px solid rgba(0,247,255,.5); border-radius: 3px; background: rgba(0,0,0,.42); color: #d8ffe0; font: .9rem/1.55 'Courier New', monospace; }
+.recruiter-question textarea:focus { outline: 2px solid rgba(184,255,61,.7); outline-offset: 2px; border-color: #b8ff3d; }
+.recruiter-form-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+.recruiter-form-actions .cyber-button { font-size: .75rem; }
+.recruiter-save-status { margin: 0; color: #b8ff3d; font: .76rem/1.5 'Courier New', monospace; }
+.recruiter-privacy-note, .recruiter-console-intro { padding: .8rem 1rem; color: rgba(220,255,220,.75); background: rgba(0,40,0,.38); font-size: .8rem; line-height: 1.55; }
+.recruiter-privacy-note i, .recruiter-console-intro strong { color: #b8ff3d; }
+.recruiter-terminal-title { margin-left: 1rem; color: #0f0; font-size: .8rem; }
+.certificate-catalogue { align-items: stretch; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.certificate-catalogue .cert-card { display: flex; flex-direction: column; min-height: 215px; text-align: left; }
+.cert-card--security { border-color: rgba(0,247,255,.65); background: linear-gradient(145deg, rgba(0,247,255,.08), rgba(221,0,255,.04)); }
+.cert-card--leadership { border-color: rgba(255,136,0,.72); background: linear-gradient(145deg, rgba(255,136,0,.09), rgba(255,255,0,.035)); }
+.cert-card-topline { align-items: center; display: flex; justify-content: space-between; margin-bottom: .95rem; }
+.cert-icon { align-items: center; background: rgba(0,247,255,.1); border: 1px solid rgba(0,247,255,.55); border-radius: 50%; color: var(--neon-cyan,#00f7ff); display: inline-flex; height: 2.35rem; justify-content: center; width: 2.35rem; }
+.cert-card--leadership .cert-icon { background: rgba(255,136,0,.12); border-color: rgba(255,136,0,.62); color: var(--neon-orange); }
+.certificate-catalogue .cert-card h3 { color: var(--neon-yellow); font-size: 1rem; line-height: 1.35; margin-bottom: .6rem; }
+.certificate-catalogue .cert-card p { flex: 1; line-height: 1.65; margin-bottom: 1rem; }
+.cert-source { border-top: 1px solid rgba(255,255,255,.13); color: rgba(240,240,255,.56); display: block; font: .68rem/1.4 'Courier New', monospace; padding-top: .75rem; overflow-wrap: anywhere; }
+.completed-training-list li { align-items: center; display: grid; gap: .85rem; grid-template-columns: auto 1fr auto; }
+.completed-training-list li > i { color: var(--neon-cyan,#00f7ff); min-width: 1.25rem; text-align: center; }
+.completed-training-list li > span:nth-child(2) { display: flex; flex-direction: column; gap: .18rem; }
+.completed-training-list strong { color: rgba(255,255,255,.94); font-size: .92rem; }
+.completed-training-list small { color: rgba(240,240,255,.58); font-size: .78rem; }
+.completed-training-list .cert-status { background: transparent; border: 1px solid rgba(184,255,61,.6); box-shadow: none; color: #b8ff3d; }
+.footer-column--about h3 { color: var(--neon-cyan,#00f7ff); line-height: 1.35; }
+.footer-company-link { align-items: center; color: var(--neon-yellow); display: inline-flex; gap: .45rem; margin-top: .65rem; text-decoration: none; transition: color 180ms ease, transform 180ms ease; }
+.footer-company-link:hover { color: var(--neon-orange); transform: translateX(4px); }
+@media (max-width: 700px) { .section-heading-row { flex-direction: column; } .completion-badge { margin-top: 0; } .recruiter-overview-grid { grid-template-columns: 1fr; } .completed-training-list li { align-items: start; grid-template-columns: auto 1fr; } .completed-training-list .cert-status { grid-column: 2; justify-self: start; } }
+
+.system-manifesto { max-width: 860px; margin: 1rem auto 0; color: rgba(210,255,220,.78); font: .82rem/1.6 'Courier New', monospace; letter-spacing: .02em; text-align: center; }
