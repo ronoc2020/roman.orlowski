@@ -640,7 +640,734 @@ clearance: Level-5 Vault-Tec Security Administrator`
 
     const commandLine = document.createElement('div');
     commandLine.className = 'terminal-line';
-    commandLine.innerHTML = `<span class="terminal-prompt">$</span> ${command.replace(/</g, '&lt;')}`;
+    const prompt = document.createElement('span');
+    prompt.className = 'terminal-prompt';
+    prompt.textContent = '
+    terminalOutput.appendChild(commandLine);
+
+    let result;
+    if (commands[command]) {
+      result = commands[command].execute();
+    } else if (command === 'clear') {
+      terminalOutput.innerHTML = '<div class="terminal-line">Terminal cleared.</div>';
+      return;
+    } else {
+      result = `Command not found: ${command}\nType 'help' for available commands`;
+    }
+
+    if (result) {
+      const resultElement = document.createElement('div');
+      resultElement.className = 'terminal-line terminal-response';
+      resultElement.style.whiteSpace = 'pre-wrap';
+      resultElement.textContent = result;
+      terminalOutput.appendChild(resultElement);
+    }
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }
+
+  if (terminalCommand) {
+    terminalCommand.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        runTerminalCommand(terminalCommand.value);
+      }
+    });
+  }
+  if (terminalRun) {
+    terminalRun.addEventListener('click', () => runTerminalCommand(terminalCommand ? terminalCommand.value : ''));
+  }
+
+  // Quick Action Buttons in Terminal
+  document.querySelectorAll('.terminal-quick-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cmd = btn.getAttribute('data-cmd');
+      if (cmd) runTerminalCommand(cmd);
+    });
+  });
+
+  // Music Player
+  const audioPlayer = document.getElementById('audio-player');
+  const playBtn = document.getElementById('play-btn');
+  const pauseBtn = document.getElementById('pause-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const closeBtn = document.getElementById('close-btn');
+
+  if (playBtn && audioPlayer) {
+    playBtn.addEventListener('click', () => {
+      audioPlayer.play();
+      playBtn.style.display = 'none';
+      pauseBtn.style.display = 'inline-block';
+    });
+
+    pauseBtn.addEventListener('click', () => {
+      audioPlayer.pause();
+      pauseBtn.style.display = 'none';
+      playBtn.style.display = 'inline-block';
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+        playBtn.style.display = 'inline-block';
+        pauseBtn.style.display = 'none';
+      });
+    }
+  }
+
+  // Enhanced Quiz Functionality
+  const quizOptions = document.querySelectorAll('.quiz-option');
+  let quizScore = 0;
+  let quizTotal = 0;
+
+  quizOptions.forEach(option => {
+    option.addEventListener('click', function() {
+      const question = this.closest('.quiz-question');
+      const feedback = question.querySelector('.quiz-feedback');
+      const isCorrect = this.dataset.correct === 'true';
+      
+      // Prevent multiple answers per question
+      if (question.classList.contains('answered')) {
+        return;
+      }
+      
+      question.classList.add('answered');
+      quizTotal++;
+      
+      // Remove previous selections
+      question.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.style.background = 'rgba(20, 20, 30, 0.5)';
+        opt.style.borderColor = 'rgba(0, 247, 255, 0.1)';
+        opt.style.cursor = 'default';
+      });
+      
+      // Highlight selected option
+      if (isCorrect) {
+        this.style.background = 'rgba(85, 255, 85, 0.2)';
+        this.style.borderColor = 'var(--low)';
+        feedback.textContent = '✓ Correct! Great job!';
+        feedback.className = 'quiz-feedback correct';
+        quizScore++;
+      } else {
+        this.style.background = 'rgba(255, 85, 85, 0.2)';
+        this.style.borderColor = 'var(--critical)';
+        feedback.textContent = '✗ Incorrect. Try again!';
+        feedback.className = 'quiz-feedback incorrect';
+      }
+      
+      // Display score if all questions answered
+      if (quizTotal === quizOptions.length / 4) {
+        const scorePercentage = Math.round((quizScore / (quizTotal)) * 100);
+        const scoreMessage = document.createElement('div');
+        scoreMessage.className = 'terminal-line';
+        scoreMessage.style.marginTop = '1rem';
+        scoreMessage.style.padding = '1rem';
+        scoreMessage.style.background = 'rgba(0, 255, 0, 0.1)';
+        scoreMessage.style.border = '1px solid #00ff00';
+        scoreMessage.textContent = `Quiz Complete! Score: ${quizScore}/${quizTotal} (${scorePercentage}%)`;
+        question.parentElement.appendChild(scoreMessage);
+      }
+    });
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Add typing effect to header
+  const headerTitle = document.querySelector('.header h1');
+  if (headerTitle) {
+    const letters = headerTitle.querySelectorAll('.letter');
+    letters.forEach((letter, index) => {
+      letter.style.animationDelay = `${index * 0.05}s`;
+    });
+  }
+
+  // Handle window resize for responsive adjustments
+  window.addEventListener('resize', () => {
+    // Adjust layout on resize if needed
+    if (isMobile() && pipBoyInventory.classList.contains('active')) {
+      // Ensure inventory is properly positioned on resize
+      pipBoyInventory.style.width = '100%';
+    }
+  });
+
+  // Prevent zoom on double-tap (mobile)
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', function(event) {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, false);
+});
+
+
+// ===== DRAGGABLE MUSIC PLAYER =====
+(function() {
+  const player = document.querySelector('.draggable-player');
+  if (!player) return;
+
+  let isDragging = false;
+  let currentX;
+  let currentY;
+  let initialX;
+  let initialY;
+
+  player.addEventListener('mousedown', dragStart);
+  player.addEventListener('touchstart', dragStart);
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('touchmove', drag);
+  document.addEventListener('mouseup', dragEnd);
+  document.addEventListener('touchend', dragEnd);
+
+  function dragStart(e) {
+    if (e.target.closest('.player-btn') || e.target.closest('.player-close') || e.target.closest('.player-volume')) {
+      return;
+    }
+
+    isDragging = true;
+    initialX = e.clientX ? e.clientX : e.touches[0].clientX;
+    initialY = e.clientY ? e.clientY : e.touches[0].clientY;
+
+    const rect = player.getBoundingClientRect();
+    currentX = rect.left;
+    currentY = rect.top;
+  }
+
+  function drag(e) {
+    if (!isDragging) return;
+
+    e.preventDefault();
+    const clientX = e.clientX ? e.clientX : e.touches[0].clientX;
+    const clientY = e.clientY ? e.clientY : e.touches[0].clientY;
+
+    const moveX = clientX - initialX;
+    const moveY = clientY - initialY;
+
+    player.style.position = 'fixed';
+    player.style.left = (currentX + moveX) + 'px';
+    player.style.top = (currentY + moveY) + 'px';
+    player.style.right = 'auto';
+    player.style.bottom = 'auto';
+  }
+
+  function dragEnd() {
+    isDragging = false;
+  }
+
+  // Close button functionality
+  const closeBtn = player.querySelector('.player-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      player.style.display = 'none';
+    });
+  }
+
+  // Player controls
+  const playBtn = player.querySelector('[data-action="play"]');
+  const pauseBtn = player.querySelector('[data-action="pause"]');
+  const stopBtn = player.querySelector('[data-action="stop"]');
+  const volumeSlider = player.querySelector('.player-volume input');
+  const progressBar = player.querySelector('.player-progress-bar');
+  const audio = player.querySelector('audio');
+
+  if (playBtn && audio) {
+    playBtn.addEventListener('click', function() {
+      audio.play();
+      playBtn.classList.add('active');
+      pauseBtn.classList.remove('active');
+    });
+  }
+
+  if (pauseBtn && audio) {
+    pauseBtn.addEventListener('click', function() {
+      audio.pause();
+      pauseBtn.classList.add('active');
+      playBtn.classList.remove('active');
+    });
+  }
+
+  if (stopBtn && audio) {
+    stopBtn.addEventListener('click', function() {
+      audio.pause();
+      audio.currentTime = 0;
+      playBtn.classList.remove('active');
+      pauseBtn.classList.remove('active');
+      stopBtn.classList.add('active');
+    });
+  }
+
+  if (volumeSlider && audio) {
+    volumeSlider.addEventListener('input', function() {
+      audio.volume = this.value / 100;
+    });
+  }
+
+  if (audio) {
+    audio.addEventListener('timeupdate', function() {
+      if (this.duration) {
+        const progress = (this.currentTime / this.duration) * 100;
+        if (progressBar) progressBar.style.width = progress + '%';
+      }
+    });
+
+    audio.addEventListener('ended', function() {
+      playBtn.classList.remove('active');
+      pauseBtn.classList.remove('active');
+      stopBtn.classList.add('active');
+    });
+  }
+})();
+
+
+// Recruiter responses are handled by the local-save questionnaire below.
+
+
+// ===== PIP-BOY FULLSCREEN CONTROLLER =====
+const initializeFullscreenController = () => {
+  const inventory = document.querySelector('.pip-boy-inventory');
+  const toggle = document.getElementById('pipBoyFullscreenToggle');
+  const close = document.getElementById('pipBoyClose');
+  if (!inventory || !toggle || toggle.dataset.fullscreenBound === 'true') return;
+
+  toggle.dataset.fullscreenBound = 'true';
+  const setFullscreen = (enabled) => {
+    inventory.classList.toggle('fullscreen', enabled);
+    toggle.setAttribute('aria-expanded', String(enabled));
+    toggle.innerHTML = enabled
+      ? '<i class="fas fa-compress"></i><span>COLLAPSE</span>'
+      : '<i class="fas fa-expand"></i><span>EXPAND</span>';
+  };
+
+  toggle.addEventListener('click', function(event) {
+    event.stopPropagation();
+    inventory.classList.add('active');
+    setFullscreen(!inventory.classList.contains('fullscreen'));
+  });
+  if (close) close.addEventListener('click', function(event) {
+    event.stopPropagation();
+    setFullscreen(false);
+    inventory.classList.remove('active');
+  });
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') setFullscreen(false);
+  });
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeFullscreenController, { once: true });
+} else {
+  initializeFullscreenController();
+}
+
+
+
+// ===== YOUTUBE MUSIC PLAYER CONTROLLER =====
+(function setupYouTubePlayer() {
+  const DEFAULT_VIDEO_ID = 'VwXHT8HwgIs';
+
+  function extractYouTubeId(input) {
+    const value = String(input || '').trim();
+    if (!value) return null;
+    if (/^[A-Za-z0-9_-]{11}$/.test(value)) return value;
+
+    try {
+      const url = new URL(value, window.location.href);
+      const host = url.hostname.toLowerCase();
+      if (host === 'youtu.be' || host.endsWith('.youtu.be')) {
+        const id = url.pathname.split('/').filter(Boolean)[0];
+        if (id && /^[A-Za-z0-9_-]{11}$/.test(id)) return id;
+      }
+      if (host.includes('youtube.com') || host.includes('youtube-nocookie.com')) {
+        const queryId = url.searchParams.get('v');
+        const pathParts = url.pathname.split('/').filter(Boolean);
+        const pathId = ['embed', 'shorts', 'live', 'v'].includes(pathParts[0]) ? pathParts[1] : null;
+        const id = queryId || pathId;
+        if (id && /^[A-Za-z0-9_-]{11}$/.test(id)) return id;
+      }
+    } catch (error) {
+      // Fall through to a strict ID search for pasted text.
+    }
+
+    const match = value.match(/(?:v=|youtu\.be\/|embed\/|shorts\/|live\/)([A-Za-z0-9_-]{11})/i);
+    return match ? match[1] : null;
+  }
+
+  function status(message, isError = false) {
+    const node = document.getElementById('yt-status');
+    if (!node) return;
+    node.textContent = ` ${message}`;
+    node.classList.toggle('status-error', isError);
+  }
+
+  function iframeUrl(videoId, autoplay = false) {
+    const params = new URLSearchParams({
+      autoplay: autoplay ? '1' : '0',
+      controls: '1',
+      modestbranding: '1',
+      rel: '0',
+      playsinline: '1',
+      enablejsapi: '1',
+      origin: window.location.origin
+    });
+    return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+  }
+
+  function sendPlayerCommand(command) {
+    const iframe = document.getElementById('yt-iframe');
+    if (!iframe || !iframe.contentWindow) return;
+    iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: command, args: [] }), 'https://www.youtube.com');
+  }
+
+  function loadYouTubeVideo(input, autoplay = true, customTitle = null) {
+    const videoId = extractYouTubeId(input);
+    const iframe = document.getElementById('yt-iframe');
+    const track = document.getElementById('current-track');
+    const urlInput = document.getElementById('yt-url');
+    if (!videoId) {
+      status('Nie znaleziono poprawnego ID filmu (11 znaków).', true);
+      return false;
+    }
+    if (iframe) {
+      // Force reload iframe to guarantee playback reset
+      iframe.src = 'about:blank';
+      setTimeout(() => {
+        iframe.src = iframeUrl(videoId, autoplay);
+      }, 50);
+    }
+    if (track) track.textContent = customTitle ? `${customTitle} (${videoId})` : `YouTube Track (${videoId})`;
+    if (urlInput) urlInput.value = videoId;
+    status(`Załadowano: ${videoId}`);
+    return true;
+  }
+
+  function stopYouTube() {
+    sendPlayerCommand('stopVideo');
+    const iframe = document.getElementById('yt-iframe');
+    if (iframe) iframe.src = iframeUrl(DEFAULT_VIDEO_ID, false);
+    status('Odtwarzanie zatrzymane.');
+  }
+
+  window.extractYouTubeId = extractYouTubeId;
+  window.loadYouTubeVideo = loadYouTubeVideo;
+  window.playYouTube = () => sendPlayerCommand('playVideo');
+  window.pauseYouTube = () => sendPlayerCommand('pauseVideo');
+  window.stopYouTube = stopYouTube;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const loadButton = document.getElementById('load-yt-btn');
+    const input = document.getElementById('yt-url');
+    const playButton = document.getElementById('yt-play-btn');
+    const pauseButton = document.getElementById('yt-pause-btn');
+    const stopButton = document.getElementById('yt-stop-btn');
+
+    if (loadButton && input) loadButton.addEventListener('click', () => loadYouTubeVideo(input.value, true));
+    if (input) input.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        loadYouTubeVideo(input.value, true);
+      }
+    });
+    if (playButton) playButton.addEventListener('click', () => { sendPlayerCommand('playVideo'); if (pauseButton) pauseButton.style.display = 'inline-flex'; });
+    if (pauseButton) pauseButton.addEventListener('click', () => { sendPlayerCommand('pauseVideo'); pauseButton.style.display = 'none'; });
+    if (stopButton) stopButton.addEventListener('click', stopYouTube);
+    document.querySelectorAll('.playlist-preset').forEach(button => button.addEventListener('click', () => loadYouTubeVideo(button.dataset.id, true, button.dataset.title)));
+    status('Gotowy — wklej link lub ID filmu.');
+  });
+})();
+
+// ===== MODULAR PIP-BOY MODULES + PORTABLE PIP PLAYER =====
+document.addEventListener('DOMContentLoaded', () => {
+  const inventory = document.querySelector('.pip-boy-inventory');
+  if (!inventory) return;
+
+  const modules = Array.from(inventory.querySelectorAll('.inventory-item'));
+  modules.forEach((module, index) => {
+    module.classList.add('pip-boy-module');
+    module.dataset.moduleIndex = String(index);
+    module.setAttribute('draggable', 'true');
+
+    const title = module.querySelector('.inventory-item-title, .module-title');
+    if (title && !title.querySelector('.module-controls')) {
+      const controls = document.createElement('span');
+      controls.className = 'module-controls';
+      controls.innerHTML = '<button type="button" class="module-action module-drag-handle" title="Przeciągnij moduł" aria-label="Przeciągnij moduł"><i class="fas fa-grip-lines"></i></button><button type="button" class="module-action module-detach" title="Odłącz moduł" aria-label="Odłącz moduł"><i class="fas fa-thumbtack"></i></button>';
+      title.appendChild(controls);
+    }
+
+    module.addEventListener('dragstart', event => {
+      if (!event.target.closest('.module-drag-handle')) {
+        event.preventDefault();
+        return;
+      }
+      module.classList.add('is-dragging');
+      event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.setData('text/plain', module.dataset.moduleIndex);
+    });
+    module.addEventListener('dragend', () => module.classList.remove('is-dragging'));
+    module.addEventListener('dragover', event => {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = 'move';
+    });
+    module.addEventListener('drop', event => {
+      event.preventDefault();
+      const sourceIndex = event.dataTransfer.getData('text/plain');
+      const source = modules.find(item => item.dataset.moduleIndex === sourceIndex);
+      if (!source || source === module || source.parentElement !== module.parentElement) return;
+      const rect = module.getBoundingClientRect();
+      module.parentElement.insertBefore(source, event.clientY < rect.top + rect.height / 2 ? module : module.nextSibling);
+    });
+
+    const detach = module.querySelector('.module-detach');
+    if (detach) detach.addEventListener('click', event => {
+      event.stopPropagation();
+      const detached = module.classList.toggle('is-detached');
+      module.classList.toggle('is-floating', detached);
+      detach.innerHTML = detached ? '<i class="fas fa-thumbtack-slash"></i>' : '<i class="fas fa-thumbtack"></i>';
+      if (detached) {
+        module.style.left = module.style.left || '10vw';
+        module.style.top = module.style.top || '15vh';
+      } else {
+        module.style.left = '';
+        module.style.top = '';
+      }
+    });
+  });
+
+  const ytModule = document.getElementById('yt-module');
+  const pipButton = document.getElementById('yt-pip-toggle');
+  const detachButton = ytModule ? ytModule.querySelector('.module-detach') : null;
+  if (pipButton && ytModule) pipButton.addEventListener('click', event => {
+    event.stopPropagation();
+    const enable = !ytModule.classList.contains('is-floating');
+    ytModule.classList.toggle('is-floating', enable);
+    ytModule.classList.toggle('is-detached', enable);
+    pipButton.innerHTML = enable ? '<i class="fas fa-down-left-and-up-right-to-center"></i> Dock' : '<i class="fas fa-up-right-and-down-left-from-center"></i> PiP';
+    if (enable) { ytModule.style.left = '8vw'; ytModule.style.top = '12vh'; }
+    else { ytModule.style.left = ''; ytModule.style.top = ''; }
+    if (detachButton) detachButton.innerHTML = enable ? '<i class="fas fa-thumbtack-slash"></i>' : '<i class="fas fa-thumbtack"></i>';
+  });
+});
+
+/* === 3D TILT & PARALLAX CONTROLLER WITH BULLET TIME INERTIA === */
+document.addEventListener('DOMContentLoaded', () => {
+  const inventory = document.querySelector('.pip-boy-inventory');
+  if (!inventory) return;
+
+  const header = inventory.querySelector('.inventory-header');
+  const tabs = inventory.querySelector('.inventory-tabs');
+  const content = inventory.querySelector('.inventory-content');
+
+  let bounds = inventory.getBoundingClientRect();
+  window.addEventListener('resize', () => {
+    bounds = inventory.getBoundingClientRect();
+  });
+
+  inventory.addEventListener('mousemove', (e) => {
+    if (!inventory.classList.contains('active')) return;
+    const rect = inventory.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    const rotateX = (-y / (rect.height / 2)) * 6; // Max 6 deg tilt
+    const rotateY = (x / (rect.width / 2)) * 6;
+
+    inventory.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(10px)`;
+
+    if (header) header.style.transform = `translateZ(40px) translateX(${rotateY * 0.5}px) translateY(${rotateX * 0.5}px)`;
+    if (tabs) tabs.style.transform = `translateZ(30px) translateX(${rotateY * 0.3}px)`;
+    if (content) content.style.transform = `translateZ(20px)`;
+  });
+
+  inventory.addEventListener('mouseleave', () => {
+    inventory.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+    inventory.style.transition = 'transform 0.6s cubic-bezier(0.15, 0.85, 0.25, 1.15)';
+    if (header) header.style.transform = 'translateZ(35px)';
+    if (tabs) tabs.style.transform = 'translateZ(25px)';
+    if (content) content.style.transform = 'translateZ(15px)';
+
+    setTimeout(() => {
+      inventory.style.transition = '';
+    }, 600);
+  });
+
+  inventory.addEventListener('mouseenter', () => {
+    inventory.style.transition = 'transform 0.1s ease-out';
+  });
+});
+
+
+/* === RECRUITER QUESTIONS: LOCAL SAVE, COPY & DOWNLOAD === */
+(function() {
+  const STORAGE_KEY = 'rocs-recruiter-responses-v1';
+  const formsSelector = '[data-recruiter-questionnaire]';
+
+  function readResponses() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function writeResponses(responses) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      ...responses,
+      updatedAt: new Date().toISOString()
+    }));
+  }
+
+  function getTextareas() {
+    return Array.from(document.querySelectorAll(`${formsSelector} textarea[data-answer-key]`));
+  }
+
+  function collectResponses(preferredTextarea = null) {
+    const responses = {};
+    getTextareas().forEach(textarea => {
+      const key = textarea.dataset.answerKey;
+      const value = textarea.value.trim();
+      if (preferredTextarea && textarea === preferredTextarea) {
+        responses[key] = value;
+      } else if (!(key in responses) || value) {
+        responses[key] = value;
+      }
+    });
+    return responses;
+  }
+
+  function answeredCount(responses) {
+    return Object.values(responses).filter(value => value).length;
+  }
+
+  function updateStatus(message) {
+    document.querySelectorAll('.recruiter-save-status').forEach(status => {
+      status.innerHTML = `<i class="fas fa-database"></i> ${message}`;
+    });
+  }
+
+  function syncFields(responses) {
+    getTextareas().forEach(textarea => {
+      textarea.value = responses[textarea.dataset.answerKey] || '';
+    });
+  }
+
+  function buildRecord() {
+    const responses = readResponses();
+    const sourceForm = document.querySelector(`${formsSelector} .recruiter-question`);
+    const questions = Array.from(document.querySelectorAll(`${formsSelector}[data-recruiter-questionnaire="main"] .recruiter-question`));
+    const lines = [
+      'ROCS RECRUITER INTERVIEW RECORD',
+      'Roman Orłowski | Questions for the Recruiter',
+      `Last saved: ${responses.updatedAt ? new Date(responses.updatedAt).toLocaleString() : 'Not saved yet'}`,
+      ''
+    ];
+    questions.forEach((question, index) => {
+      const key = question.dataset.questionKey;
+      const prompt = question.querySelector('span')?.textContent.trim() || `Question ${index + 1}`;
+      lines.push(prompt);
+      lines.push(responses[key] || '[No answer recorded]');
+      lines.push('');
+    });
+    if (!sourceForm && questions.length === 0) return 'No recruiter questions available.';
+    return lines.join('\n');
+  }
+
+  function downloadRecord() {
+    const blob = new Blob([buildRecord()], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    const date = new Date().toISOString().slice(0, 10);
+    link.href = url;
+    link.download = `rocs-recruiter-interview-${date}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    updateStatus(`Record downloaded • ${answeredCount(readResponses())} answers saved`);
+  }
+
+  async function copyRecord() {
+    const record = buildRecord();
+    try {
+      await navigator.clipboard.writeText(record);
+      updateStatus('Record copied to clipboard');
+    } catch (error) {
+      const helper = document.createElement('textarea');
+      helper.value = record;
+      helper.style.position = 'fixed';
+      helper.style.opacity = '0';
+      document.body.appendChild(helper);
+      helper.select();
+      document.execCommand('copy');
+      helper.remove();
+      updateStatus('Record copied to clipboard');
+    }
+  }
+
+  function initializeRecruiterQuestionnaire() {
+    const forms = document.querySelectorAll(formsSelector);
+    if (!forms.length || document.body.dataset.recruiterInitialized === 'true') return;
+    document.body.dataset.recruiterInitialized = 'true';
+    const saved = readResponses();
+    syncFields(saved);
+    updateStatus(saved.updatedAt ? `${answeredCount(saved)} answers restored from local save` : 'No answers saved yet');
+
+    getTextareas().forEach(textarea => {
+      textarea.addEventListener('input', () => {
+        const responses = collectResponses(textarea);
+        writeResponses(responses);
+        syncFields(responses);
+        updateStatus(`${answeredCount(responses)} answers saved locally`);
+      });
+    });
+
+    document.querySelectorAll('.recruiter-save').forEach(button => {
+      button.addEventListener('click', () => {
+        const responses = collectResponses();
+        writeResponses(responses);
+        syncFields(responses);
+        updateStatus(`${answeredCount(responses)} answers saved locally`);
+      });
+    });
+
+    document.querySelectorAll('.recruiter-download').forEach(button => {
+      button.addEventListener('click', downloadRecord);
+    });
+
+    document.querySelectorAll('.recruiter-copy').forEach(button => {
+      button.addEventListener('click', copyRecord);
+    });
+
+    document.querySelectorAll('.recruiter-clear').forEach(button => {
+      button.addEventListener('click', () => {
+        if (!window.confirm('Clear all locally saved recruiter answers?')) return;
+        localStorage.removeItem(STORAGE_KEY);
+        syncFields({});
+        updateStatus('Answers cleared');
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeRecruiterQuestionnaire, { once: true });
+  } else {
+    initializeRecruiterQuestionnaire();
+  }
+})();
+;
+    commandLine.append(prompt, document.createTextNode(' ' + command));
     terminalOutput.appendChild(commandLine);
 
     let result;
