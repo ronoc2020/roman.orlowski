@@ -146,7 +146,16 @@ const particleConfig = isMobile() ? {
   retina_detect: true
 };
 
-particlesJS('particles-js', particleConfig);
+// CDN failure and reduced-motion preferences must not break the portfolio.
+if (typeof particlesJS === 'function' &&
+    document.getElementById('particles-js') &&
+    !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+  try {
+    particlesJS('particles-js', particleConfig);
+  } catch (error) {
+    console.warn('Optional particle effect unavailable:', error);
+  }
+}
 
 // Intro Sequence - Shorter on mobile
 document.addEventListener('DOMContentLoaded', function() {
